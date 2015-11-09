@@ -1,0 +1,345 @@
+/* Compass */
+/* Variables and Mixins */
+/*
+========================================================================== 
+	Base Colors
+========================================================================== 
+*/
+/*
+========================================================================== 
+	Element Colors
+========================================================================== 
+*/
+/* Text */
+/* Links */
+/* Background */
+/*
+========================================================================== 
+	Fonts
+========================================================================== 
+*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800);
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400,700,300);
+/*
+========================================================================== 
+	Animations
+========================================================================== 
+*/
+/*
+========================================================================== 
+	Box
+========================================================================== 
+*/
+/*
+========================================================================== 
+	Buttons
+========================================================================== 
+*/
+/* This file will hold styles for all layouts using the alpha grid (i.e. not the mobile layout). */
+/* Zone User - Full Width */
+/* line 8, ../scss/ting-alpha-default.scss */
+#zone-user-wrapper #zone-user {
+  width: 100%;
+}
+/* line 10, ../scss/ting-alpha-default.scss */
+#zone-user-wrapper #zone-user .region-user-first {
+  display: block;
+  width: 50%;
+  text-align: left;
+  margin: 0;
+}
+/* line 15, ../scss/ting-alpha-default.scss */
+#zone-user-wrapper #zone-user .region-user-first .region-inner {
+  margin-left: 40px;
+}
+/* line 19, ../scss/ting-alpha-default.scss */
+#zone-user-wrapper #zone-user .region-user-second {
+  width: 50%;
+  text-align: right;
+  margin: 0;
+}
+/* line 23, ../scss/ting-alpha-default.scss */
+#zone-user-wrapper #zone-user .region-user-second .region-inner {
+  margin-right: 40px;
+}
+
+/* Menu - Header alignment */
+/* line 30, ../scss/ting-alpha-default.scss */
+#zone-menu-wrapper #zone-menu {
+  width: 100%;
+  min-height: 90px;
+}
+/* line 33, ../scss/ting-alpha-default.scss */
+#zone-menu-wrapper #zone-menu .block-superfish {
+  max-width: 840px;
+  min-width: 650px;
+  width: 82%;
+  float: left;
+}
+
+/* line 40, ../scss/ting-alpha-default.scss */
+#region-branding {
+  margin: 0;
+  width: auto;
+}
+/* line 43, ../scss/ting-alpha-default.scss */
+#region-branding .region-inner {
+  padding: 0 40px;
+}
+
+/* line 47, ../scss/ting-alpha-default.scss */
+#region-menu {
+  width: 75%;
+  margin: 0;
+  position: initial;
+  float: left;
+}
+
+/*
+========================================================================== 
+	Main Menu
+========================================================================== 
+*/
+/* line 59, ../scss/ting-alpha-default.scss */
+#superfish-1 {
+  /* Level 1 */
+}
+/* line 61, ../scss/ting-alpha-default.scss */
+#superfish-1 li.sf-depth-1 {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 16%;
+  font-weight: 600;
+  /* Level 2 */
+}
+/* line 68, ../scss/ting-alpha-default.scss */
+#superfish-1 li.sf-depth-1 a.sf-depth-1 {
+  color: #211e1f;
+  text-decoration: none;
+  display: inline-block;
+  height: 90px;
+  line-height: 90px;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+}
+/* line 81, ../scss/ting-alpha-default.scss */
+#superfish-1 li.sf-depth-1 a.sf-depth-1.active:after {
+  position: absolute;
+  bottom: 0px;
+  left: 18px;
+  right: 18px;
+  content: '';
+  display: block;
+  height: 3px;
+  background-color: #9fb600;
+}
+/* line 92, ../scss/ting-alpha-default.scss */
+#superfish-1 li.sf-depth-1 > ul {
+  background: white;
+  top: 90px;
+  width: 18em !important;
+  font-size: 0.83333em;
+  display: none;
+  -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+}
+/* line 100, ../scss/ting-alpha-default.scss */
+#superfish-1 li.sf-depth-1 > ul li a {
+  padding: 20px 25px;
+  text-decoration: none;
+  color: #211e1f;
+  border-top: 1px solid #f8f8f8;
+}
+/* line 107, ../scss/ting-alpha-default.scss */
+#superfish-1 li.sf-depth-1 > ul li a:hover {
+  background: #f8f8f8;
+}
+/* line 114, ../scss/ting-alpha-default.scss */
+#superfish-1 li.sfHover > a {
+  background: white;
+}
+
+/*
+========================================================================== 
+	Views
+========================================================================== 
+*/
+/* Slideshow - Front Page */
+/* line 128, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider {
+  height: 500px;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* line 134, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider .slides .views-field-field-slide-image img {
+  height: 500px;
+  width: 1920px;
+  margin-left: -960px;
+}
+/* line 141, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider .full {
+  width: 100%;
+}
+/* line 144, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider .half {
+  width: 50%;
+}
+/* line 147, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider .views-field-nothing {
+  height: 500px;
+  line-height: 500px;
+}
+/* line 150, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider .views-field-nothing > .field-content {
+  width: 720px;
+}
+/* line 153, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider .views-field-nothing .slide-title {
+  font-size: 3.33em;
+  line-height: 1.3em;
+  margin: 0 0 25px 0;
+  padding: 0;
+  text-align: left;
+}
+/* line 160, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider .views-field-nothing .slide-body {
+  text-align: left;
+  display: block;
+  font-size: 1.83em;
+  line-height: 1.3em;
+  font-weight: lighter;
+  margin: 0 0 35px 0;
+  position: relative;
+  top: 0;
+  -moz-transition-property: top, opacity;
+  -o-transition-property: top, opacity;
+  -webkit-transition-property: top, opacity;
+  transition-property: top, opacity;
+  -moz-transition-duration: 250ms;
+  -o-transition-duration: 250ms;
+  -webkit-transition-duration: 250ms;
+  transition-duration: 250ms;
+  -moz-transition-timing-function: "easeinout";
+  -o-transition-timing-function: "easeinout";
+  -webkit-transition-timing-function: "easeinout";
+  transition-timing-function: "easeinout";
+  -moz-transition-delay: 250ms;
+  -o-transition-delay: 250ms;
+  -webkit-transition-delay: 250ms;
+  transition-delay: 250ms;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+/* line 177, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider .views-field-nothing .item-list li {
+  float: left;
+}
+/* line 179, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider .views-field-nothing .item-list li a {
+  padding: 16px 8px;
+  min-width: 115px;
+  padding: 1em 2.75em;
+}
+/* line 187, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider .extra-image {
+  width: 940px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+  top: -10px;
+}
+/* line 193, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider .extra-image img {
+  float: right;
+  max-width: 100%;
+  height: auto;
+}
+/* line 199, ../scss/ting-alpha-default.scss */
+.front #flexslider-1.flexslider .flex-control-nav {
+  bottom: 35px;
+}
+
+/*
+========================================================================== 
+	Blocks
+========================================================================== 
+*/
+/* Postscript Second - Front Page */
+/* line 212, ../scss/ting-alpha-default.scss */
+#block-bean-forside-signup-partner {
+  padding: 45px 25px;
+}
+/* line 215, ../scss/ting-alpha-default.scss */
+#block-bean-forside-signup-partner .field-name-field-signup-body p {
+  width: 65%;
+}
+/* line 219, ../scss/ting-alpha-default.scss */
+#block-bean-forside-signup-partner .col-first {
+  float: left;
+  width: 50%;
+  padding: 0 50px;
+  border-right: 1px solid #d1d1d1;
+  margin-bottom: 0;
+}
+/* line 226, ../scss/ting-alpha-default.scss */
+#block-bean-forside-signup-partner .col-second {
+  float: left;
+  width: 50%;
+  padding: 0 50px;
+  border-right: 0;
+}
+
+/* Postscript Third - Front Page */
+/* line 237, ../scss/ting-alpha-default.scss */
+#block-bean-forside-signup-partner-0 .field-name-field-signup-body p {
+  width: 65%;
+}
+/* line 241, ../scss/ting-alpha-default.scss */
+#block-bean-forside-signup-partner-0 .col-first {
+  float: left;
+  width: 60%;
+  padding: 0 35px 0 0;
+  border-right: 1px solid #d1d1d1;
+  min-height: 220px;
+  margin-bottom: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 250, ../scss/ting-alpha-default.scss */
+#block-bean-forside-signup-partner-0 .col-second {
+  float: left;
+  width: 40%;
+  padding: 0 0 0 35px;
+  min-height: 220px;
+  margin-bottom: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/*
+========================================================================== 
+	User Profile
+========================================================================== 
+*/
+/* line 266, ../scss/ting-alpha-default.scss */
+.profile .col-first {
+  float: left;
+  width: 42%;
+}
+/* line 270, ../scss/ting-alpha-default.scss */
+.profile .col-second {
+  float: left;
+  width: 58%;
+}

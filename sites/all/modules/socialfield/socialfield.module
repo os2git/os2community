@@ -1,0 +1,750 @@
+<?php
+
+/**
+ * @file
+ * Provides a field for adding social services links.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function socialfield_menu() {
+  $items['admin/config/media/socialfield'] = array(
+    'title' => 'Social field',
+    'description' => 'Social field settings',
+    'page callback' => 'socialfield_settings',
+    'access arguments' => array('view services'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/config/media/socialfield/add'] = array(
+    'title' => 'Add new service',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('socialfield_add_service'),
+    'access arguments' => array('create new service'),
+    'type' => MENU_LOCAL_ACTION,
+  );
+  $items['admin/config/media/socialfield/%/edit'] = array(
+    'title' => 'Edit service',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('socialfield_edit_service', 4),
+    'access arguments' => array('edit any service'),
+  );
+  $items['admin/config/media/socialfield/%/delete'] = array(
+    'title' => 'Delete service',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('socialfield_delete_service', 4),
+    'access arguments' => array('delete any service'),
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function socialfield_permission() {
+  return array(
+    'view services' => array(
+      'title' => t('View services'),
+    ),
+    'create new service' => array(
+      'title' => t('Create new service'),
+    ),
+    'edit any service' => array(
+      'title' => t('Edit any service'),
+    ),
+    'delete any service' => array(
+      'title' => t('Delete any service'),
+    ),
+  );
+}
+
+/**
+ * Table that displays all available services.
+ */
+function socialfield_settings() {
+  $header = array(
+    t('Name'),
+    t('Service'),
+    t('Icon class'),
+    t('Validation pattern'),
+    t('Actions'),
+  );
+
+  $rows = array();
+  $services = variable_get('socialfield_services');
+  foreach ($services as $name => $service) {
+    $edit = l(
+      t('edit'),
+      'admin/config/media/socialfield/' . $name . '/edit'
+    );
+    $delete = l(
+      t('delete'),
+      'admin/config/media/socialfield/' . $name . '/delete'
+    );
+
+    $rows[] = array(
+      $service['name'],
+      $name,
+      $service['icon'],
+      str_replace("\n", '<br />', $service['validation_pattern']),
+      $edit . ' ' . $delete
+    );
+  }
+
+  $page = array();
+  $page['services'] = array(
+    '#markup' => theme('table', array(
+      'header' => $header,
+      'rows' => $rows,
+    ))
+  );
+
+  return $page;
+}
+
+/**
+ * Form for adding a new service.
+ */
+function socialfield_add_service($form, $form_state) {
+  $form['service'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Service machine name'),
+  );
+  $form['service_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Service name'),
+  );
+  $form['service_icon'] = array(
+    '#type' => 'textfield',
+    '#description' => t('Example: icon-facebook'),
+    '#title' => t('Service icon class'),
+  );
+  $form['service_validation_pattern'] = array(
+    '#type' => 'textarea',
+    '#description' => t('Enter the list of allowed urls separated by new line.<br />Leave empty to allow user input any urls.<br />The "*" character is a wildcard.<br />Example: facebook.com/* for any page on Facebook site.'),
+    '#title' => t('Url validation pattern'),
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Add'),
+  );
+
+  return $form;
+}
+
+/**
+ * Validates form when adding a new service.
+ */
+function socialfield_add_service_validate($form, &$form_state) {
+  $services = variable_get('socialfield_services');
+  if (isset($services[$form_state['values']['service']])) {
+    form_set_error('service', t('This service already exist.'));
+  }
+}
+
+/**
+ * Form submit for adding a new service.
+ */
+function socialfield_add_service_submit($form, $form_state) {
+  $values = &$form_state['values'];
+  $services = variable_get('socialfield_services');
+
+  $service = array(
+    'name' => $values['service_name'],
+    'icon' => $values['service_icon'],
+    'validation_pattern' => $values['service_validation_pattern'],
+  );
+
+  $services[$values['service']] = $service;
+
+  variable_set('socialfield_services', $services);
+  drupal_goto('admin/config/media/socialfield');
+}
+
+/**
+ * Form for editing a service.
+ */
+function socialfield_edit_service($form, $form_state, $service = NULL) {
+  if (!isset($service)) {
+    drupal_set_message(t('No service specified.'), 'error');
+    drupal_goto('admin/config/media/socialfield');
+  }
+
+  $services = variable_get('socialfield_services');
+
+  if (!isset($services[$service])) {
+    drupal_set_message(t('The specified service does not exist.'), 'error');
+    drupal_goto('admin/config/media/socialfield');
+  }
+
+  $form['service'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Service machine name'),
+    '#value' => $service,
+    '#disabled' => TRUE,
+  );
+  $form['service_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Service name'),
+    '#default_value' => $services[$service]['name'],
+  );
+  $form['service_icon'] = array(
+    '#type' => 'textfield',
+    '#description' => t('Example: icon-facebook'),
+    '#title' => t('Service fonticon class'),
+    '#default_value' => $services[$service]['icon'],
+  );
+  $form['service_validation_pattern'] = array(
+    '#type' => 'textarea',
+    '#description' => t('Enter the list of allowed urls separated by new line.<br />Leave empty to allow user input any urls.<br />The "*" character is a wildcard.<br />Example: facebook.com/* for any page on Facebook site.'),
+    '#title' => t('Url validation pattern'),
+    '#default_value' => $services[$service]['validation_pattern'],
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+  );
+
+  return $form;
+}
+
+/**
+ * Form submit for editing a service.
+ */
+function socialfield_edit_service_submit($form, $form_state) {
+  $values = &$form_state['values'];
+  $services = variable_get('socialfield_services');
+
+  $service = array(
+    'name' => $values['service_name'],
+    'icon' => $values['service_icon'],
+    'validation_pattern' => $values['service_validation_pattern'],
+  );
+
+  $services[$values['service']] = $service;
+
+  variable_set('socialfield_services', $services);
+  drupal_goto('admin/config/media/socialfield');
+}
+
+/**
+ * Form for deleting a service.
+ */
+function socialfield_delete_service($form, $form_state, $service = NULL) {
+  if (!isset($service)) {
+    drupal_set_message(t('No service specified.'), 'error');
+    drupal_goto('admin/config/media/socialfield');
+  }
+
+  $services = variable_get('socialfield_services');
+
+  if (!isset($services[$service])) {
+    drupal_set_message(t('The specified service does not exist.'), 'error');
+    drupal_goto('admin/config/media/socialfield');
+  }
+
+  $form['service'] = array(
+    '#type' => 'hidden',
+    '#value' => $service,
+  );
+
+  $question = t('Are you sure you want to delete @service service?', array('@service' => $service));
+  $path = 'admin/config/media/socialfield';
+  return confirm_form($form, $question, $path);
+}
+
+/**
+ * Form submit for deleting a service.
+ */
+function socialfield_delete_service_submit($form, $form_state) {
+  $values = &$form_state['values'];
+  $services = variable_get('socialfield_services');
+
+  unset($services[$values['service']]);
+
+  variable_set('socialfield_services', $services);
+  drupal_set_message(t('@service service was successfully deleted.', array('@service' => $values['service'])));
+  drupal_goto('admin/config/media/socialfield');
+}
+
+/**
+ * Implements hook_field_info().
+ */
+function socialfield_field_info() {
+  return array(
+    'social_links_field' => array(
+      'label' => t('Social links'),
+      'description' => t('Social links'),
+      'default_widget' => 'socialfield_widget',
+      'default_formatter' => 'socialfield_formatter',
+      'instance_settings' => array(
+        'services' => array('twitter', 'googleplus', 'facebook'),
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_instance_settings_form().
+ */
+function socialfield_field_instance_settings_form($field, $instance) {
+  $social_services = variable_get('socialfield_services');
+  $options = array();
+  foreach ($social_services as $name => $service) {
+    $options[$name] = $service['name'];
+  }
+
+  $form['services'] = array(
+    '#title' => t('Social services'),
+    '#type' => 'select',
+    '#multiple' => TRUE,
+    '#size' => 10,
+    '#options' => $options,
+    '#default_value' => $instance['settings']['services'],
+    '#required' => TRUE,
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function socialfield_field_is_empty($item, $field) {
+  return empty($item['service']) || $item['url'] === '';
+}
+
+/**
+ * Implements hook_field_validate().
+ */
+function socialfield_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+  // Clicked remove button. No validation needed.
+  if (!isset($items['validate_link']) || !$items['validate_link']) {
+    return;
+  }
+
+  $services = variable_get('socialfield_services');
+  $form_elements = array($field['field_name'], $langcode, 'social_buttons');
+  foreach ($items as $delta => &$item) {
+    if (!$item['url']) {
+      // No url inserted. Nothing to validate here.
+      continue;
+    }
+
+    if (!valid_url($item['url'], TRUE)) {
+      // Checking if the url is valid.
+      $form_element = array_merge($form_elements, array('element_' . $delta, 'url'));
+      form_set_error(implode('][', $form_element), t('Not a valid URL.'));
+    }
+    else {
+      // Checking if the url matches the pattern.
+      $match = drupal_match_path($item['url'], $services[$item['service']]['validation_pattern']);
+      if (!$match) {
+        $form_element = array_merge($form_elements, array('element_' . $delta, 'url'));
+        form_set_error(implode('][', $form_element), t("You can't use such URLs."));
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function socialfield_field_widget_info() {
+  return array(
+    'socialfield_widget' => array(
+      'label' => 'Social links',
+      'field types' => array('social_links_field'),
+      'behaviors' => array(
+        'multiple values' => FIELD_BEHAVIOR_CUSTOM,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function socialfield_theme($existing, $type, $theme, $path) {
+  $themes = array(
+    'socialfield_drag_components' => array(
+      'render element' => 'element',
+    ),
+    'socialfield_formatter' => array(
+      'variables' => array(
+        'items' => NULL,
+        'field' => NULL,
+        'label' => NULL,
+      )
+    ),
+  );
+
+  return $themes;
+}
+
+/**
+ * Custom theme output for widget.
+ */
+function theme_socialfield_drag_components($vars) {
+  $element = $vars['element'];
+  drupal_add_tabledrag('socialfield-table', 'order', 'sibling', 'item-row-weight');
+
+  $services = variable_get('socialfield_services');
+
+  $header = array(t('Social links'), '', '', '');
+  $rows = array();
+  $index = 0;
+  for ($i=0; $i<$element['#num_elements']; $i++) {
+    while (!isset($element['element_' . $index])) {
+      // There is no element with this index. Moving on to the next possible element.
+      $index++;
+    }
+    $current_element = $element['element_' . $index];
+    $index++;
+
+    $rows[] = array(
+      'data' => array(
+        '<div class="social-links">' .
+          '<span class="service-' . $current_element['#service'] . '">' .
+            '<i class="icon ' . $services[$current_element['#service']]['icon'] . '"></i>' .
+          '</span>' .
+        '</div>',
+        drupal_render($current_element['url']),
+        drupal_render($current_element['weight']),
+        drupal_render($current_element['operation']),
+      ),
+      'class' => array('draggable'),
+      'weight' => $current_element['weight']['#value'],
+    );
+  }
+
+  // Sorting elements by their weight.
+  uasort($rows, 'drupal_sort_weight');
+
+  return theme('table', array(
+    'header' => $header,
+    'rows' => $rows,
+    'attributes' => array(
+      'id' => 'socialfield-table'
+    ),
+  )) . drupal_render($element['add_one_social']);
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function socialfield_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  $value_key = key($field['columns']);
+
+  // Settings to be accessed from ajax callback.
+  $form_state['socialfield']['field_data'] = array(
+    'field_name' => $field['field_name'],
+    'langcode' => $langcode,
+  );
+
+  // Getting default services from field instance setting.
+  $services = array_values($instance['settings']['services']);
+
+  // A service (option) from select list was accessed.
+  if (isset($form_state['triggering_element']['#value']) && isset($form_state['triggering_element']['#socialfield_add'])) {
+    if ($form_state['triggering_element']['#value'] != '_none') {
+      $form_state['services'][] = $form_state['triggering_element']['#value'];
+    }
+  }
+
+  // Remove button was pressed.
+  if (isset($form_state['clicked_button']['#name']) && isset($form_state['clicked_button']['#socialfield_delete'])) {
+    $remove_element = (int)end(explode('_', $form_state['clicked_button']['#name']));
+    unset($form_state['values'][$field['field_name']][$langcode][$remove_element]);
+    unset($form_state['services'][$remove_element]);
+  }
+
+  // Setting number of form elements.
+  if (!isset($form_state['services'])) {
+    if (count($items)) {
+      // Edit page. Showing all saved elements, not only the default ones.
+      $form_state['num_elements'] = count($items) - 1;
+      $form_state['services'] = array();
+      foreach ($items as $item) {
+        $form_state['services'][] = $item['service'];
+      }
+    }
+    else {
+      // Create page. Showing only default elements (aplying instance settings).
+      $form_state['num_elements'] = count($instance['settings']['services']) - 1;
+      $form_state['services'] = array_values($instance['settings']['services']);
+    }
+  }
+
+  $element['#num_elements'] = $form_state['num_elements'] = count($form_state['services']);
+
+  // Creating wrapper and setting theme (table) on it.
+  $element['social_buttons'] = array(
+    '#prefix' => '<div id="social-field-wrapper">',
+    '#suffix' => '</div>',
+    '#tree' => TRUE,
+    '#theme' => 'socialfield_drag_components',
+    '#num_elements' => $form_state['num_elements'],
+  );
+
+  $weights = array(-11);
+  // If there are items saved in database, get the maximum weight.
+  if (!empty($items)) {
+    foreach ($items as $item) {
+      $weights[] = $item['weight'];
+    }
+  }
+  $weight = max($weights);
+  unset($weights);
+
+  // Creating form.
+  foreach ($form_state['services'] as $i => $service) {
+    $element['social_buttons']['element_' . $i] = array(
+      'url' => array(
+        '#type' => 'textfield',
+        '#default_value' => (isset($items[$i]) && $service == $items[$i]['service']) ? $items[$i]['url'] : '',
+        '#value_key' => $value_key,
+      ),
+      'weight' => array(
+        '#type' => 'weight',
+        '#title' => t('Weight'),
+        '#title_display' => 'invisible',
+        '#default_value' => isset($items[$i]['weight']) ? $items[$i]['weight'] : ++$weight,
+        '#attributes' => array('class' => array('item-row-weight')),
+      ),
+      '#service' => $service,
+      'operation' => array(
+        '#type' => 'button',
+        '#value' => t('Remove'),
+        '#name' => 'element_ ' . $i,
+        '#socialfield_delete' => TRUE,
+        '#validate' => array(),
+        '#limit_validation_errors' => array(),
+        '#ajax' => array(
+          'callback' => 'socialfield_remove_one_element_callback',
+          'wrapper' => 'social-field-wrapper',
+        ),
+      ),
+    );
+  }
+
+  // Validate on elements.
+  $element['#element_validate'] = array('socialfield_service_validate');
+
+  // Getting all services.
+  $social_services = variable_get('socialfield_services');
+
+  // Selecting services for the select list.
+  $options = array();
+  foreach ($social_services as $name => $service) {
+    if (!in_array($name, $form_state['services'])) {
+      $options[$name] = $service['name'];
+    }
+  }
+
+  // Select for adding new element (service and url) to form. Done with Ajax Forms.
+  $element['social_buttons']['add_one_social'] = array(
+    '#type' => 'select',
+    '#options' => array('_none' => t('Add more')) + $options,
+    '#socialfield_add' => TRUE,
+    '#validate' => array(),
+    '#limit_validation_errors' => array(),
+    '#attributes' => array('class' => array('add_one_social_service')),
+    '#ajax' => array(
+      'callback' => 'socialfield_add_one_element_callback',
+      'wrapper' => 'social-field-wrapper',
+    ),
+  );
+
+  // Attaching css and js files.
+  $path = drupal_get_path('module', 'socialfield');
+  $element['#attached']['js'][] = $path . '/js/socialfield.js';
+  $element['#attached']['css'][] = $path . '/css/socialfield.css';
+
+  return $element;
+}
+
+/**
+ * Ajax callback for removing one element from widget.
+ */
+function socialfield_remove_one_element_callback($form, $form_state) {
+  $field_name = $form_state['socialfield']['field_data']['field_name'];
+  $langcode = $form_state['socialfield']['field_data']['langcode'];
+
+  return $form[$field_name][$langcode]['social_buttons'];
+}
+
+/**
+ * Ajax callback for adding one element to widget.
+ */
+function socialfield_add_one_element_callback($form, $form_state) {
+  if ($form_state['triggering_element']['#value'] === '_none') {
+    return;
+  }
+  $field_name = $form_state['socialfield']['field_data']['field_name'];
+  $langcode = $form_state['socialfield']['field_data']['langcode'];
+
+  return $form[$field_name][$langcode]['social_buttons'];
+}
+
+/**
+ * Validates widget elements.
+ */
+function socialfield_service_validate($element, &$form_state) {
+  $index = 0;
+  $items = array();
+
+  // If remove button was pressed error validation is not necessary.
+  $items['validate_link'] = TRUE;
+  if (isset($form_state['clicked_button']['#socialfield_delete']) ) {
+    $items['validate_link'] = FALSE;
+  }
+
+  for ($i=0; $i<$element['#num_elements']; $i++) {
+    while (!isset($element['social_buttons']['element_' . $index])) {
+      // There is no element with this index. Moving on to the next possible element.
+      $index++;
+    }
+    $current_element = $element['social_buttons']['element_' . $index];
+    $index++;
+
+    // If url doesn`t contain 'http' we concatenate it to url value.
+    if ($current_element['url']['#value']) {
+      $parsed_url = parse_url($current_element['url']['#value']);
+      if (empty($parsed_url['scheme'])) {
+        $current_element['url']['#value'] = 'http://' . ltrim($current_element['url']['#value'], '/');
+      }
+    }
+
+    $items[] = array(
+      'service' => $current_element['#service'],
+      'url' => $current_element['url']['#value'],
+      'weight' => $current_element['weight']['#value'],
+    );
+  }
+
+  // Changing submitted form values during form validation.
+  form_set_value($element, $items, $form_state);
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function socialfield_field_formatter_info() {
+  return array(
+    'socialfield_formatter' => array(
+      'label' => t('Icons'),
+      'field types' => array('social_links_field'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function socialfield_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  if (!$items) {
+    return;
+  }
+
+  $list_items = array();
+
+  switch ($display['type']) {
+    case 'socialfield_formatter':
+      uasort($items, 'drupal_sort_weight');
+      $servicess = variable_get('socialfield_services');
+      foreach ($items as $item) {
+        // Social link.
+        $link = l(
+          '<i class="icon ' . $servicess[$item['service']]['icon'] . '"></i>',
+          $item['url'],
+          array(
+            'html' => TRUE,
+            'attributes' => array(
+              'target' => '_blank',
+            )
+          )
+        );
+
+        $list_items[] = array(
+          'data'  => $link,
+          'class' => array('field-item', 'service-' . $item['service']),
+        );
+      }
+
+      // Label.
+      $label = array(
+        'label' => $instance['label'],
+        'mode' => $display['label'],
+      );
+
+      // Make list from items.
+      $element = array(
+        '#theme' => 'socialfield_formatter',
+        '#items' => $list_items,
+        '#field' => $field,
+        '#label' => $label,
+      );
+
+      $element['#attached']['css'][] = drupal_get_path('module', 'socialfield') . '/css/socialfield.css';
+      break;
+  }
+
+  return $element;
+}
+
+/**
+ * Custom theme output for the formatter.
+ */
+function theme_socialfield_formatter($variables) {
+  $label = array();
+  $label_class = '';
+  if (isset($variables['label']['mode']) && $variables['label']['mode'] != 'hidden') {
+    $label = array(
+      '#markup' => $variables['label']['label'],
+      '#prefix' => '<div class="field-label">',
+      '#suffix' => '</div>',
+    );
+
+    switch ($variables['label']['mode']) {
+      case 'above':
+        $label_class = 'field-label-above';
+        break;
+      case 'inline':
+        $label_class = 'field-label-inline';
+        break;
+      case 'hidden':
+        $label_class = 'field-label-hidden';
+        break;
+    }
+  }
+
+  $label = drupal_render($label);
+
+  $list = theme('item_list', array(
+    'items' => $variables['items'],
+    'attributes' => array('class' => array('field-items')),
+  ));
+
+  $field_classes = array(
+    'field',
+    'field-name-' . str_replace('_', '-', $variables['field']['field_name']),
+    'field-type-' . str_replace('_', '-', $variables['field']['type']),
+    $label_class,
+    'social-links',
+  );
+
+  return '<div class="' . implode(' ', $field_classes) . '">' . $label . $list . '</div>';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function socialfield_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
+  if ($form['#field']['type'] == 'social_links_field') {
+    // Hide the cardinality setting on the field settings for social_links_field fields.
+    $form['field']['cardinality']['#default_value'] = FIELD_CARDINALITY_UNLIMITED;
+    $form['field']['cardinality']['#disabled'] = TRUE;
+  }
+}

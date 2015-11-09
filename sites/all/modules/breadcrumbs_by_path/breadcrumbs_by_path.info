@@ -1,0 +1,12 @@
+name = Breadcrumbs by path
+description = Generate Breadcrumbs for specified pages based on the current URL Path Alias
+package = Other
+core = 7.x
+configure = admin/config/user-interface/breadcrumbs-by-path
+
+; Information added by Drupal.org packaging script on 2014-09-24
+version = "7.x-1.0-alpha12"
+core = "7.x"
+project = "breadcrumbs_by_path"
+datestamp = "1411549796"
+

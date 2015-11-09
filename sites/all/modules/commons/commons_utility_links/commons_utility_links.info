@@ -1,0 +1,13 @@
+name = Commons Utility Links
+description = Provides a block which displays a list of useful links.
+package = Commons - Building blocks
+core = 7.x
+
+dependencies[] = block
+
+; Information added by Drupal.org packaging script on 2014-10-16
+version = "7.x-3.18"
+core = "7.x"
+project = "commons"
+datestamp = "1413481866"
+

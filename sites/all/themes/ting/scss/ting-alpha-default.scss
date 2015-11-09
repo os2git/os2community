@@ -1,0 +1,274 @@
+@import "base";
+
+/* This file will hold styles for all layouts using the alpha grid (i.e. not the mobile layout). */
+
+
+
+/* Zone User - Full Width */
+#zone-user-wrapper #zone-user {
+	width: 100%;
+	.region-user-first {
+		display: block;
+		width: 50%;
+		text-align: left;
+		margin: 0;
+		.region-inner {
+			margin-left: 40px;
+		}
+	}
+	.region-user-second {
+		width: 50%;
+		text-align: right;
+		margin: 0;
+		.region-inner {
+			margin-right: 40px;
+		}
+	}
+}
+
+/* Menu - Header alignment */
+#zone-menu-wrapper #zone-menu {
+	width: 100%;
+	min-height: 90px;
+	.block-superfish {
+		max-width: 840px;
+		min-width: 650px;
+		width: 82%;
+		float: left;
+	}
+}
+#region-branding {
+	margin: 0;
+	width: auto;
+	.region-inner {
+		padding: 0 40px;
+	}
+}
+#region-menu {
+	width: 75%;
+	margin: 0;
+	position: initial;
+	float: left;
+}
+
+/*
+========================================================================== 
+	Main Menu
+========================================================================== 
+*/
+#superfish-1 {
+	/* Level 1 */
+	li.sf-depth-1 {
+		font-size: 14px;
+		margin: 0;
+		padding: 0;
+		display: inline-block;
+		width: 16%;
+		font-weight: $font-weight-semibold;
+		a.sf-depth-1 {
+			color: $text-color-std;
+			text-decoration: none;
+			display: inline-block;
+			height: 90px;
+			line-height: 90px;
+			vertical-align: middle;
+			text-align: center;
+			width: 100%;
+		}
+		a.sf-depth-1.active {
+			
+		}
+		a.sf-depth-1.active:after {
+			position: absolute;
+			bottom: 0px;
+			left: 18px;
+			right: 18px;
+			content: '';
+			display: block;
+			height: 3px;
+			background-color: $green;
+		}
+		/* Level 2 */
+		> ul {
+			background: white;
+			top: 90px;
+			width: 18em !important;
+			font-size: $font-size-small;
+			display: none;
+			@include box-shadow(0 2px 2px rgba(0,0,0,0.15));
+			li {
+				a {
+					padding: 20px 25px;
+					text-decoration: none;
+					color: $text-color-std;
+					border-top: 1px solid #f8f8f8;
+					
+				}
+				a:hover {
+					background: #f8f8f8;
+				}
+			}
+		}
+	}
+	li.sfHover {
+		> a {
+			background: white;
+		}
+	}
+}
+
+/*
+========================================================================== 
+	Views
+========================================================================== 
+*/
+
+/* Slideshow - Front Page */
+.front {
+	#flexslider-1.flexslider {
+		height: 500px;
+		@include border-radius(0);
+		@include box-shadow(none);
+		.slides {
+			.views-field-field-slide-image {
+				img {
+					height: 500px;
+					width: 1920px;
+					margin-left: -960px;
+				}
+			}
+		}
+		.full {
+			width: 100%;
+		}
+		.half {
+			width: 50%;
+		}
+		.views-field-nothing {
+			height: 500px;
+			line-height: 500px;
+			> .field-content {
+				width: 720px;
+			}
+			.slide-title {
+				font-size: 3.33em;
+				line-height: $line-height-std;
+				margin: 0 0 25px 0;
+				padding: 0;
+				text-align: left;
+			}
+			.slide-body {
+				text-align: left;
+				display: block;
+				font-size: 1.83em;
+				line-height: $line-height-std;
+				font-weight: lighter;
+				margin: 0 0 35px 0;
+				position: relative;
+				top: 0;	
+				@include transition-property(top,opacity);
+				@include transition-duration($anim-speed);
+				@include transition-timing-function($anim-ease-type);	
+				@include transition-delay($anim-speed);	
+				@include opacity(0);
+				@include text-shadow(2px 2px 0 rgba(0,0,0,0.20));
+			}
+			.item-list {
+				li {
+					float: left;
+					a {
+						padding: 16px 8px;
+						min-width: 115px;
+						padding: 1em 2.75em;
+					}
+				}
+			}
+		}
+		.extra-image {
+			width: 940px;
+			margin: auto;
+			position: relative;
+			z-index: 1;
+			top: -10px;
+			img {
+				float: right;
+				max-width: 100%;
+				height: auto;
+			}
+		}
+		.flex-control-nav {
+			bottom: 35px;
+		}
+	}
+}
+
+/*
+========================================================================== 
+	Blocks
+========================================================================== 
+*/
+
+/* Postscript Second - Front Page */
+#block-bean-forside-signup-partner {
+	padding: 45px 25px;
+	.field-name-field-signup-body {
+		p {
+			width: 65%;
+		}
+	}
+	.col-first {
+		float: left;
+		width: 50%;
+		padding: 0 50px;
+		border-right: 1px solid #d1d1d1;
+		margin-bottom: 0;
+	}
+	.col-second {
+		float: left;
+		width: 50%;
+		padding: 0 50px;
+		border-right: 0;
+	}
+}
+
+/* Postscript Third - Front Page */
+#block-bean-forside-signup-partner-0 {
+	.field-name-field-signup-body {
+		p {
+			width: 65%;
+		}
+	}
+	.col-first {
+		float: left;
+		width: 60%;
+		padding: 0 35px 0 0;
+		border-right: 1px solid #d1d1d1;	
+		min-height: 220px;
+		margin-bottom: 0;
+		@include box-sizing(border-box);
+	}
+	.col-second {
+		float: left;
+		width: 40%;
+		padding: 0 0 0 35px;
+		min-height: 220px;
+		margin-bottom: 0;
+		@include box-sizing(border-box);
+	}
+}
+
+/*
+========================================================================== 
+	User Profile
+========================================================================== 
+*/
+.profile {
+	.col-first {
+		float: left;
+		width: 42%;
+	}
+	.col-second {
+		float: left;
+		width: 58%;
+	}
+}

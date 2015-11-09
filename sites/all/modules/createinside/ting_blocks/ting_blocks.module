@@ -1,0 +1,149 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+function ting_blocks_block_info() {
+  $blocks = array();
+  $blocks['community_stats'] = array(
+    'info' => t('Community statistics'),
+  );
+  $blocks['newsletter_signup'] = array(
+    'info' => t('Newsletter signup'),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function ting_blocks_block_view($delta='') {
+  $block = array();
+ 
+  switch($delta) {
+    case 'community_stats' :
+      $block['content'] = ting_blocks_community_stats_view();
+    break;
+    case 'newsletter_signup' :
+      $block['content'] = ting_blocks_newsletter_signup_view();
+    break;
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function ting_blocks_block_configure($delta='') {
+  $form = array();
+ 
+  switch($delta) {
+    case 'community_stats' :
+      // Text field form element
+      $form['text'] = array(
+        '#type' => 'textarea',
+        '#title' => t('Text'),
+        '#default_value' => variable_get('community_stats_text', ''),
+      ); 
+		break;
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function ting_blocks_block_save($delta = '', $edit = array()) {
+  switch($delta) {
+    case 'community_stats' :
+      variable_set('community_stats_text', $edit['text']);
+    break;
+	}
+}
+
+function ting_blocks_newsletter_signup_view() {
+	$output = '<!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+<form action="//ting.us4.list-manage.com/subscribe/post?u=52a9a5652d5e4b2f6da5c264c&amp;id=049c28bdb7" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">	
+<div class="mc-field-group">
+	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Indtast din e-mail">
+	<span class="ting-icon-plane"><input type="submit" value="Tilmeld" name="subscribe" id="mc-embedded-subscribe" class="button"></span>
+</div>
+	<div id="mce-responses" class="clear">
+		<div class="response" id="mce-error-response" style="display:none"></div>
+		<div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_52a9a5652d5e4b2f6da5c264c_049c28bdb7" tabindex="-1" value=""></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->';
+	return $output;
+}
+
+/**
+ * Community stats - block view
+ */
+function ting_blocks_community_stats_view() {
+	
+	$output = "";
+	$output .= "<div class='image'><img src='".drupal_get_path("theme","ting")."/img/danmarkskort.png' /></div>";
+	$output .= "<div class='text'><div>".variable_get('community_stats_text', '')."</div></div>";
+	$output .= "<div class='stats'>";
+	$output .= "<div><strong>".ting_blocks_get_community_stats("partners")."</strong><span>Off. partnere</span></div>";
+	$output .= "<div><strong>".ting_blocks_get_community_stats("suppliers")."</strong><span>Leverandører</span></div>";
+	$output .= "<div><strong>".ting_blocks_get_community_stats("members")."</strong><span>Medlemmer</span></div>";
+	$output .= "<div><strong>".ting_blocks_get_community_stats("projects")."</strong><span>Projekter</span></div>";
+	$output .= "<div><strong>".ting_blocks_get_community_stats("events")."</strong><span>Events</span></div>";
+	$output .= "</div>";
+	
+	return $output;
+}
+
+function ting_blocks_get_community_stats($type) {
+	
+	switch($type) {
+		case "members":
+			$query = new EntityFieldQuery();
+			$query
+				->entityCondition('entity_type', 'user')
+			  ->propertyCondition('status', 1);
+			$result = $query->count()->execute();
+		break;
+		case "projects": 
+			$query = new EntityFieldQuery();
+			$query
+				->entityCondition('entity_type', 'node')
+				->entityCondition('bundle', 'project')
+			  ->propertyCondition('status', 1);
+			$result = $query->count()->execute();
+		break;
+		case "events": 
+			$query = new EntityFieldQuery();
+			$query
+				->entityCondition('entity_type', 'node')
+				->entityCondition('bundle', 'event')
+			  ->propertyCondition('status', 1);
+			$result = $query->count()->execute();
+		break;
+		case "suppliers":
+			$query = new EntityFieldQuery();
+			$query
+				->entityCondition('entity_type', 'node')
+				->entityCondition('bundle', 'supplier')
+			  ->propertyCondition('status', 1);
+			$result = $query->count()->execute();	
+		break;
+		case "partners":
+			$query = new EntityFieldQuery();
+			$query
+				->entityCondition('entity_type', 'node')
+				->entityCondition('bundle', 'public_partner')
+			  ->propertyCondition('status', 1);
+			$result = $query->count()->execute();	
+		break;
+	}
+	return (isset($result) ? $result : FALSE);
+}

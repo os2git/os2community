@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * New Content
+ *
+ * Implements hook_node_insert().
+ */
+function ting_message_events_node_insert($node) {
+	
+	$message = message_create('activity_node_insert', array('uid' => $node->uid));
+  $wrapper = entity_metadata_wrapper('message', $message);
+  $wrapper->field_target_node->set($node);
+
+  if (module_exists('message_subscribe')) {
+    message_subscribe_send_message('node', $node, $message);
+  }
+}
+
+/**
+ * New User
+ *
+ * Implements hook_user_insert().
+ */
+function ting_message_events_user_insert(&$edit, $account, $category) {
+ 
+  $message = message_create('activity_user_insert', array('uid' => $account->uid));
+  $wrapper = entity_metadata_wrapper('message', $message);
+	$wrapper->save();
+}
+
+/**
+ * New Comment
+ *
+ * Implements hook_comment_insert().
+ */
+function ting_message_events_comment_insert($comment) {
+ 
+  $message = message_create('activity_comment_insert', array('uid' => $comment->uid));
+  $wrapper = entity_metadata_wrapper('message', $message);
+  $wrapper->field_target_comment->set($comment);
+  $wrapper->field_target_node->set($comment->nid);
+		
+	$node = node_load($comment->nid);
+
+  if (module_exists('message_subscribe')) {
+    message_subscribe_send_message('node', $node, $message);
+  }		
+}
+
+/**
+ * New Flag
+ *
+ * Implements hook_flag().
+ */
+function ting_message_events_flag_flag($flag, $entity_id, $account, $flagging) {
+
+	// Follow Node
+  if ($flag->name == 'subscribe_node') {
+    if (ting_message_events_node_followed_before($account->uid, array($entity_id))) {
+      // If this user previously followed the target node, don't generate a duplicate message.
+      return;
+    }
+    $message = message_create('activity_user_follows_node', array('uid' => $account->uid));
+    $wrapper = entity_metadata_wrapper('message', $message);
+    $wrapper->field_target_node->set($entity_id);
+    $wrapper->save();
+  }
+  
+	// Follow User
+  if ($flag->name == 'subscribe_user') {
+    if (ting_message_events_user_followed_before($account->uid, array($entity_id))) {
+      // If this user previously followed the target user, don't generate a duplicate message.
+      return;
+    }
+    $message = message_create('activity_user_follows_user', array('uid' => $account->uid));
+    $wrapper = entity_metadata_wrapper('message', $message);
+    $wrapper->field_target_user->set($entity_id);
+    $wrapper->save();
+  }
+}
+
+/**
+ * Indicate whether there is an existing message about a given user following a target node.
+ */
+function ting_message_events_node_followed_before($acting_uid, $target_nids) {
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'message', '=')
+   ->propertyCondition('uid', $acting_uid)
+   ->propertyCondition('type', 'activity_user_follows_node', '=')
+   ->fieldCondition('field_target_node', 'target_id', $target_nids, 'IN')
+   ->execute();
+
+   return !empty($query->ordered_results);
+}
+
+/**
+ * Indicate whether there is an existing message about a given user following a target user.
+ */
+function ting_message_events_user_followed_before($acting_uid, $target_uids) {
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'message', '=')
+   ->propertyCondition('uid', $acting_uid)
+   ->propertyCondition('type', 'activity_user_follows_user', '=')
+   ->fieldCondition('field_target_user', 'target_id', $target_uids, 'IN')
+   ->execute();
+
+   return !empty($query->ordered_results);
+}

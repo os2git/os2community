@@ -1,0 +1,90 @@
+/*
+========================================================================== 
+	General Elements
+========================================================================== 
+*/
+.logo-img {
+	height: 90px;
+	line-height: 90px;
+	text-align: center;
+	a {
+		vertical-align: middle;
+		line-height: 1;
+		display: inline-block;
+	}
+}
+#page-title {
+	font-size: $font-size-larger;
+	line-height: $line-height-std;
+	font-weight: bold;
+	margin: 0;
+	padding: 0 0 30px;
+}
+.page-type {
+	color: #c9c9c9;
+	display: block;
+	margin-bottom: 3px;
+	text-transform: uppercase;
+}
+.contextual-links-region {
+	width: 100%;	
+	float: left;
+}
+table {
+	width: 100%;
+	tr {
+		th {
+			padding: 10px 10px;
+			font-size: $font-size-medium;
+			font-weight: bold;
+		}
+		td {
+			padding: 10px 10px;
+		}
+	}
+}
+dl {
+	dt {
+		margin-bottom: 5px;
+		a {
+			color: $link-color-std;
+			font-size: $font-size-large;
+		}
+	}
+	dd {
+		margin-bottom: 15px;
+	}
+}
+
+
+/*
+========================================================================== 
+	Messages
+========================================================================== 
+*/
+div.messages {
+	margin: 15px 0;
+	padding: 16px 16px 16px 50px;
+	background-position: 15px 50%;
+	line-height: $line-height-std;
+}
+
+/*
+========================================================================== 
+	Flags
+========================================================================== 
+*/
+.flag-wrapper {
+	a.flag {
+		@include btn-link($link-color-std);
+	}
+	a.flag:hover {
+		text-decoration: none;
+	}
+	a.unflag-action {
+		background: $link-color-alt;
+	}
+	.flag-message {
+		top: 3.25em;
+	}
+}

@@ -1,0 +1,12 @@
+name = Simple Crop
+description = Adds functional to crop selected area for image fields.
+core = 7.x
+
+dependencies[] = image (>=7.8)
+
+; Information added by Drupal.org packaging script on 2014-11-14
+version = "7.x-1.1"
+core = "7.x"
+project = "simplecrop"
+datestamp = "1415969281"
+

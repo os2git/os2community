@@ -1,0 +1,5 @@
+name = Ting Message Events
+package = Ting
+description = Creates message instances on defined events.
+core = 7.x
+version = 7.x-1.0

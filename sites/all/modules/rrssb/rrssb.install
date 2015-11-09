@@ -1,0 +1,39 @@
+<?php
+/**
+ * @file
+ * Sets up the basics for the RRSSB project.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function rrssb_schema() {
+
+}
+/**
+ * Implements hook_install().
+ */
+function rrssb_install() {
+
+}
+
+/**
+ * Implements hook_enable().
+ */
+function rrssb_enable() {
+
+}
+
+/**
+ * Implements hook_disable().
+ */
+function rrssb_disable() {
+
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function rrssb_uninstall() {
+
+}

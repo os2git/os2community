@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * Alter label on node create links
+ */
+function ting_og_config_entityreference_prepopulate_create_node_links_alter($names) {
+	foreach($names as $type => $label) {
+		$names[$type] = "+ ".t("Create"). " " . $label;
+	}
+}
+
+/**
+ * Solves validation problem with OG content not attached to a group
+ *
+ * Implements hook_form_alter()
+ */
+function ting_og_config_form_alter(&$form, &$form_state, $form_id) {
+	
+	// Hide addressfield components on user profile
+	if($form_id == "user_profile_form") {
+		hide($form['field_user_location']['und'][0]['street_block']['thoroughfare']);
+		hide($form['field_user_location']['und'][0]['street_block']['premise']);
+	}
+	
+  $field = field_info_instance('node', 'og_group_ref', "event");
+  // If it is required, don't unset the validator.
+  if ($field['required']) {
+    return;
+  }
+  
+  foreach ($form['#validate'] as $index => $method) {
+    if ($method == 'og_form_group_reference_validate') {
+      unset($form['#validate'][$index]);
+    }
+  }
+}
+
+function ting_og_config_form_node_form_alter(&$form, &$form_state) {
+  $node = $form_state['node'];
+
+	// New Node
+  if (!isset($node->nid) || isset($node->is_new)) {
+  	if($node->type=="event") {
+	  	
+	  	// Workflow optimizations for event creation
+	  	drupal_set_message('Udfyld venligst felterne i nedenstående formular. Når du gemmer begivenheden, bliver du omdirigeret til en side, hvor du har mulighed for at indstille begivenheden yderligere, hvis du ønsker det.', 'warning');
+	  	
+	  	$form['actions']['submit']['#value'] = "Gem og fortsæt til indstillinger";
+  	} 
+  }
+  
+  // Existing Node
+  else {
+   
+  }
+}

@@ -1,0 +1,5 @@
+name = Ting OG Config
+package = Ting
+description = Configuration and adjustments for Organic Groups.
+core = 7.x
+version = 7.x-1.0

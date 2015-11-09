@@ -1,0 +1,47 @@
+/*
+========================================================================== 
+	Box
+========================================================================== 
+*/
+@mixin box($color) {
+	background: $color;
+	@include box-sizing(border-box);
+	/* @include box-shadow(#d6d6d6 2px 2px 0 0); */
+}
+
+/*
+========================================================================== 
+	Buttons
+========================================================================== 
+*/
+@mixin btn($color) {
+	background: $color;
+	color: white;
+	text-align: center;
+	padding: 0.75em 4em;
+	text-transform: uppercase;
+	font-size: $font-size-large;
+	font-weight: $font-weight-semibold;
+	border: none;
+	cursor: pointer;
+	font-family: $font-fam-pri;
+	@include box-sizing(border-box);
+	@include border-radius(3px);
+}
+
+@mixin btn-link($color) {
+	background: $color;
+	color: white;
+	text-align: center;
+	padding: 1em 2em;
+	text-transform: uppercase;
+	font-size: $font-size-large;
+	cursor: pointer;
+	text-decoration: none;
+	display: inline-block;
+	font-size: $font-size-std;
+	font-weight: $font-weight-semibold;
+	font-family: $font-fam-pri;
+	@include box-sizing(border-box);
+	@include border-radius(3px);
+}

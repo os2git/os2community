@@ -1,0 +1,343 @@
+/*
+========================================================================== 
+	Main Content
+========================================================================== 
+*/
+.panel-left {
+	.panel-pane {
+		margin: 0 0 30px 0;
+		float: left;
+		width: 100%;
+	}
+	.pane-title {
+		font-size: $font-size-large;
+		padding: 30px 0;
+		border-top: 1px solid $beige;
+	}
+}
+
+/*
+========================================================================== 
+	Sidebar
+========================================================================== 
+*/
+.panel-right {
+	.panel-pane {
+		padding: 25px 15px;
+		margin: 0 0 20px 0;
+		overflow: hidden;
+		@include box($bg-color-beige);
+		.pane-title {
+			font-size: $font-size-large;
+			padding: 0;
+			margin: 0 0 1.25em 0;
+		}
+		.pane-content {
+			line-height: $line-height-std;
+			p {
+				margin: 0 0 1.5em;
+				line-height: $line-height-std;
+			}
+			p:last-child {
+				margin: 0;
+			}
+			a {
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+/* Project status */
+.panel-right {	
+	.pane-ting-project-status-panel-pane-1 {
+		background: $green;
+		color: white;
+		a {
+			display: block;
+			text-decoration: none;
+			color: white;
+		}
+		div.status-wrapper {
+			padding-left: 70px;
+			position: relative;
+		}
+		div.status-wrapper:before {
+			@include icon-prepare();
+			content: "\e60e";
+			font-size: 5em;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		strong {
+			color: $green-dark;
+			text-transform: uppercase;
+			font-weight: $font-weight-normal;
+			display: block;
+			margin-bottom: 2px;
+		}
+		p {
+			font-size: 1.66em;
+			margin-bottom: 2px !important;
+			padding-bottom: 0;
+			font-weight: $font-weight-bold;
+		}
+	}
+}
+/* Membership */
+.panel-right {
+	.pane-node-group-group {
+		a {
+			width: 100%;
+			@include btn-link($link-color-std);
+		}
+		a:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+/* Node Create Links */
+.panel-right {
+	.pane-node-create-links,
+	.pane-node-prepopulate {
+		padding: 0;
+		border: none;
+		background: none;
+		@include box-shadow(none);
+		ul {
+			margin: 0;
+			padding: 0;
+			li {
+				margin: 0;
+				padding: 0;
+				a {
+					width: 100%;
+					@include btn-link($blue-light);
+				}
+			}
+		}
+	}
+}
+
+/* Project Ressources */
+.view.proejct-ressources {
+	.files {
+		margin: 0 0 10px 0;
+		table {
+			tr {
+				background: white;
+				border-bottom: 5px solid $beige;
+				th {
+					display: none;
+				}
+			}
+		}
+		a {
+			color: $text-color-std;
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+	.github {
+		a {
+			@include btn-link($green);
+			width: 100%;
+			font-weight: normal;
+			text-transform: none;
+			padding-top: 3.5em;
+			position: relative;
+		}
+		a:before {
+			@include icon-prepare();
+			content: "\e615";
+			font-size: 2.5em;
+			position: absolute;
+			top: 15px;
+			left: 72px;
+		}
+		a:after {
+			@include icon-prepare();
+			content: "\e60f";
+			display: block;
+			font-size: 2.25em;
+			position: absolute;
+			top: 12px;
+			right: 77px;
+		}
+	}
+}
+
+/* Event Metadata */
+.view.event-metadata {
+	.date,
+	.organizer,
+	.contact,
+	.price,
+	.spots,
+	.spots-used,
+	.address, {
+		margin-bottom: 15px;
+	}
+	span.label {
+		font-weight: bold;
+		display: inline-block;
+		width: 40%;
+		line-height: $line-height-std;
+		vertical-align: top;
+	}
+	span.content {
+		display: inline-block;
+		width: 55%;
+		line-height: $line-height-std;
+		a {
+			color: $link-color-std;
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+	.register {
+		a {
+			width: 100%;
+			@include btn-link($green);
+		}
+	}
+	.unregister {
+		margin-top: 10px;
+		.field-content {
+			a {
+				width: 100%;
+				@include btn-link($link-color-alt);
+			}
+		}
+	}
+}
+
+/*
+========================================================================== 
+	User Profile
+========================================================================== 
+*/
+.profile {
+	margin: 0;
+	.user-picture {
+		float: none;
+	}
+	.col-first {
+		
+	}
+	.col-second {
+		> h3 {
+			display: none;
+		}
+	}
+	.field {
+		display: block;
+		margin: 0 0 3px 0;
+		line-height: $line-height-std;
+		overflow: hidden;
+		.field-label {
+			width: 33%;
+			float: left;
+		}
+		.field-items {
+			width: 66%;
+			float: left;
+		}
+		a {
+			color: $link-color-std;
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+	.field:after {
+		clear: none;
+		height: auto;
+		font-size: $font-size-std;
+	}
+	.field-name-field-user-employer {
+		margin-bottom: 3px;
+	}
+	.field-name-field-user-location {
+		margin-bottom: 20px;
+	}
+	.field-name-field-user-phone {
+		margin-bottom: 3px;
+		margin-top: 20px;
+	}
+	.field-email {
+		margin-bottom: 20px;
+	}
+	.field-name-field-user-job-title {
+		font-size: $font-size-large;
+		font-weight: bold;
+		margin-bottom: 0;
+	}
+	.field-name-field-user-bio {
+		margin-bottom: 20px;
+		.field-items {
+			width: 100%;
+		}
+	}
+	.user-profile-category {
+		font-style: italic;
+		margin-top: 5px;
+		margin-bottom: 20px;
+		dt {
+			margin: 0;
+			display: inline-block;
+			font-weight: normal;
+		}
+		dd {
+			margin: 0;
+			display: inline-block;			
+		}
+	}
+	.field-name-field-user-bio {
+		p {
+			margin: 0 0 1em 0;
+		}
+	}
+	.social-links {
+		margin-top: 15px;
+		overflow: hidden;
+		.field-items {
+			width: 100%;
+		}
+		li {
+			margin: 0 10px 0 0 !important;
+		}
+		a {
+			display: inline-block;
+		}
+		.icon {
+			margin: 0;
+			font-size: 14px;
+			padding: 0.65em .75em;
+			display: inline-block;
+			width: 12px;
+			text-align: center;
+			@include border-radius(2px);
+			&:before {
+				margin: 0;
+				padding: 0;
+				width: auto;
+				height: auto;
+			}	
+		}
+	}
+	.flag-outer {
+		float: left;
+		width: 100%;
+		a {
+/* 			float: right; */
+		}
+	}
+}
