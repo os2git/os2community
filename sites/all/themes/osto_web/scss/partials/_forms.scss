@@ -1,0 +1,359 @@
+form {
+	input[type=text],
+	input[type=email],
+	input[type=search],
+	input[type=password],
+	textarea {
+		font-family: $font-fam-pri;
+		font-size: $font-size-large;
+		line-height: $line-height-std;
+		padding: .75em 1em;
+		color: $text-color-std;
+		border: 1px solid #dedede;
+		background: white;
+		margin: 0;		
+		max-width: 100%;
+		@include box-sizing(border-box);
+	}
+	/* Buttons */
+	input[type=submit],
+	button {
+		@include btn($green);
+	}
+	#edit-preview {
+		@include btn($link-color-alt);
+		margin-left: 10px;
+	}
+	/* Fieldsets */
+	fieldset {
+		border-top: 1px solid #c9c9c9;
+		display: block;
+		float: left;
+		width: 100%;
+		max-width: 100%;
+		padding: 0;
+		margin: 0 0 20px;
+		@include box-sizing(border-box);
+		legend {
+			font-size: $font-size-std;
+			text-transform: uppercase;
+			font-weight: bold;
+			display: block;
+			float: left;
+			width: 100%;
+			color: #c9c9c9;
+			padding: 0;
+			margin: 20px 0;
+			a {
+				color: #c9c9c9;
+				text-decoration: none;
+			}
+		}
+	}
+	fieldset:first-child {
+		border-top: 0;
+	}
+	/* Form Items */
+	.form-item {
+		margin: 0 0 15px;
+		label {
+			display: block;
+			padding: 0 0 8px 0;
+			font-size: $font-size-large;
+			font-weight: bold;
+		}
+		.description {
+			display: block;
+			font-style: italic;
+			padding: 8px 0 0 0;
+			line-height: $line-height-std;
+			a {
+				color: $link-color-std;
+				text-decoration: none;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+	.form-type-radios,
+	.form-type-checkbox {
+		label {
+			display: inline-block;
+		}
+	}
+	.form-actions {
+		display: block;
+		float: left;
+		width: 100%;
+		input {
+			margin-right: 15px;
+		}
+		a {
+			margin-right: 15px;
+			color: $link-color-std;
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+	a {
+		color: $link-color-std;
+		text-decoration: none;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+}
+html.js {
+	fieldset.collapsed {
+		height: auto;
+	}
+}
+
+/* Filters */
+.filter-wrapper {
+	padding: 0;
+}
+.filter-guidelines {
+	line-height: $line-height-std;
+}
+.filter-help {
+	display: none;
+}
+.filter-guidelines-plain_text {
+	display: none;
+}
+
+/* User Account Form */
+#edit-picture {
+	.user-picture {
+		display: inline-block;
+		margin: 0 10px 25px 0;
+	}
+	.form-type-checkbox {
+		display: inline-block;
+		label {
+			margin: 0;
+			padding: 0;
+		}
+	}
+}
+
+/* Smaller Buttons */
+table,
+.file-widget,
+.image-widget-data,
+.field-type-entityreference,
+#edit-field-product-features {
+	input[type=submit],
+	button {
+		padding: 0.75em 2em;
+		font-size: $font-size-std;
+		background: $link-color-alt;
+		background-image: none;
+	}
+}
+
+/* Token Tables */
+.token-tree {
+	margin: 15px 0;
+	tr {
+		th, td {
+			padding: 10px;
+		}
+	}
+}
+
+/* Registration Tables */
+.page-node-registrations {
+	table {
+		caption {
+			margin-bottom: 1.5em;
+		}
+		th {
+			a {
+				color: $text-color-std;
+			}
+		}
+		td {
+			a {
+				color: $link-color-std;
+			}
+		}
+	}
+}
+
+/* Select Boxes */
+div.fancy-select {
+	position: relative;
+}
+
+div.fancy-select.disabled {
+	opacity: 0.5;
+}
+
+div.fancy-select div.trigger {
+	font-family: $font-fam-pri;
+	font-size: $font-size-std;
+	line-height: $line-height-std;
+	padding: .35em 2.5em .35em 1em;
+	color: $text-color-std;
+	border: 1px solid #dedede;
+	background: white;
+	margin: 0;		
+	max-width: 100%;
+	position: relative;
+	cursor: pointer;
+	outline: none;
+	font-style: italic;
+	min-width: 225px;
+	@include box-sizing(border-box);
+}
+
+div.fancy-select div.trigger:after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 5px solid transparent;
+	border-top-color: #4B5468;
+	top: 9px;
+	right: 10px;
+}
+div.fancy-select ul.options {
+	list-style: none;
+	margin: 0;
+	position: absolute;
+	top: 24px;
+	left: 0;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 50;
+	max-height: 200px;
+	overflow: auto;
+	background: white;
+	min-width: 225px;
+	border-left: 1px solid #dedede;
+	border-right: 1px solid #dedede;
+	@include box-shadow(0 2px 2px rgba(0,0,0,0.15));
+	@include box-sizing(border-box);
+	transition: opacity 250px ease-out, top 250px ease-out, visibility 250px ease-out;
+	-webkit-transition: opacity 250px ease-out, top 250px ease-out, visibility 250px ease-out;
+	-moz-transition: opacity 250px ease-out, top 250px ease-out, visibility 250px ease-out;
+	-ms-transition: opacity 250px ease-out, top 250px ease-out, visibility 250px ease-out;
+	-o-transition: opacity 250px ease-out, top 250px ease-out, visibility 250px ease-out;
+}
+
+div.fancy-select ul.options.open {
+	visibility: visible;
+	top: 24px;
+	opacity: 1;
+
+	/* have to use a non-visibility transition to prevent this iOS issue (bug?): */
+	/*http://stackoverflow.com/questions/10736478/css-animation-visibility-visible-works-on-chrome-and-safari-but-not-on-ios*/
+	transition: opacity 250px ease-out, top 250px ease-out;
+	-webkit-transition: opacity 250px ease-out, top 250px ease-out;
+	-moz-transition: opacity 250px ease-out, top 250px ease-out;
+	-ms-transition: opacity 250px ease-out, top 250px ease-out;
+	-o-transition: opacity 250px ease-out, top 250px ease-out;
+}
+
+div.fancy-select ul.options.overflowing {
+	top: auto;
+	bottom: 40px;
+
+	transition: opacity 250px ease-out, bottom 250px ease-out, visibility 250px ease-out;
+	-webkit-transition: opacity 250px ease-out, bottom 250px ease-out, visibility 250px ease-out;
+	-moz-transition: opacity 250px ease-out, bottom 250px ease-out, visibility 250px ease-out;
+	-ms-transition: opacity 250px ease-out, bottom 250px ease-out, visibility 250px ease-out;
+	-o-transition: opacity 250px ease-out, bottom 250px ease-out, visibility 250px ease-out;
+}
+
+div.fancy-select ul.options.overflowing.open {
+	top: auto;
+	bottom: 50px;
+
+	transition: opacity 250px ease-out, bottom 250px ease-out;
+	-webkit-transition: opacity 250px ease-out, bottom 250px ease-out;
+	-moz-transition: opacity 250px ease-out, bottom 250px ease-out;
+	-ms-transition: opacity 250px ease-out, bottom 250px ease-out;
+	-o-transition: opacity 250px ease-out, bottom 250px ease-out;
+}
+
+div.fancy-select ul.options li {
+	padding: 1em 1.35em;
+	color: $text-color-std;
+	cursor: pointer;
+	white-space: nowrap;
+	font-size: $font-size-small;
+	border-top: 1px solid #f8f8f8;
+	transition: all 150ms ease-out;
+	-webkit-transition: all 150ms ease-out;
+	-moz-transition: all 150ms ease-out;
+	-ms-transition: all 150ms ease-out;
+	-o-transition: all 150ms ease-out;
+}
+
+div.fancy-select ul.options li.selected {
+	font-weight: bold;
+}
+
+div.fancy-select ul.options li.hover {
+	background: #f8f8f8;
+}
+
+/*
+========================================================================== 
+	User: Subscriptions
+========================================================================== 
+*/
+.view-subscribe-node-email,
+.view-subscribe-user-email {
+	.views-field-title,
+	.views-field-name {
+		width: 50%;
+		a {
+			text-decoration: none;
+			color: $text-color-std;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+	td.views-field-ops-1 {
+		width: 25%;
+		font-size: 10px;
+	}
+	td.views-field-ops {
+		width: 25%;
+		font-size: 10px;
+	}
+}
+
+/*
+========================================================================== 
+	Search API page results
+========================================================================== 
+*/
+.search-api-page-results {
+	margin: 2em 0;
+	h2 {
+		font-size: $font-size-larger;
+		margin-bottom: 1em;
+	}
+	.search-result {
+		a {
+			text-decoration: none;
+			color: $green;
+			margin-bottom: 0.5em;
+			display: block;
+		}
+		p.search-info {
+			margin-top: 0.5em;
+			font-weight: bold;
+		}
+	}
+}

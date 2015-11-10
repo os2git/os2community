@@ -1,0 +1,256 @@
+/* Compass */
+/* Variables and Mixins */
+/*
+========================================================================== 
+	Base Colors
+========================================================================== 
+*/
+/*
+========================================================================== 
+	Element Colors
+========================================================================== 
+*/
+/* Text */
+/* Links */
+/* Background */
+/*
+========================================================================== 
+	Fonts
+========================================================================== 
+*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800);
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400,700,300);
+/*
+========================================================================== 
+	Animations
+========================================================================== 
+*/
+/*
+========================================================================== 
+	Box
+========================================================================== 
+*/
+/*
+========================================================================== 
+	Buttons
+========================================================================== 
+*/
+/* This file will hold styles that are loaded using the same media query as the narrow grid. */
+/* If you are using the default media queries provided by Omega, these styles will also
+ *  apply to the normal and widescreen layouts. You may override these styles in the normal 
+ *  and widescreen CSS files as appropriate. */
+ /*
+========================================================================== 
+	Specific Pages
+========================================================================== 
+*/
+/* line 13, ../scss/ting-alpha-default-narrow.scss */
+.page-community {
+  /* Latest activity blocks */
+  /* Signup blocks */
+}
+/* line 14, ../scss/ting-alpha-default-narrow.scss */
+.page-community #zone-postface-wrapper {
+  background: #35362e url("../img/post-first-bg.png") no-repeat center center;
+}
+/* line 18, ../scss/ting-alpha-default-narrow.scss */
+.page-community .region-content-inner {
+  width: 103%;
+}
+/* line 20, ../scss/ting-alpha-default-narrow.scss */
+.page-community .region-content-inner .block {
+  float: left;
+  width: 31%;
+  margin: 0 2% 0 0;
+}
+/* line 26, ../scss/ting-alpha-default-narrow.scss */
+.page-community .region-postscript-first-inner {
+  width: 103%;
+}
+/* line 28, ../scss/ting-alpha-default-narrow.scss */
+.page-community .region-postscript-first-inner .block {
+  float: left;
+  width: 31%;
+  margin: 0 2% 0 0;
+}
+/* line 36, ../scss/ting-alpha-default-narrow.scss */
+.page-community #block-bean-community-forside-signup .field-name-field-signup-columns {
+  width: 103%;
+}
+/* line 38, ../scss/ting-alpha-default-narrow.scss */
+.page-community #block-bean-community-forside-signup .field-name-field-signup-columns .field-item {
+  width: 31%;
+  margin: 0 2% 0 0;
+}
+
+/*
+========================================================================== 
+	Views
+========================================================================== 
+*/
+/* Projects + Products */
+/* line 58, ../scss/ting-alpha-default-narrow.scss */
+.project-overview .view-content,
+.product-overview .view-content,
+.team-overview .view-content,
+.partner-overview .view-content,
+.supplier-overview .view-content {
+  width: 103%;
+}
+/* line 61, ../scss/ting-alpha-default-narrow.scss */
+.project-overview .views-row,
+.product-overview .views-row,
+.team-overview .views-row,
+.partner-overview .views-row,
+.supplier-overview .views-row {
+  width: 31%;
+  margin: 0 2% 15px 0;
+}
+/* line 64, ../scss/ting-alpha-default-narrow.scss */
+.project-overview .views-row .image,
+.product-overview .views-row .image,
+.team-overview .views-row .image,
+.partner-overview .views-row .image,
+.supplier-overview .views-row .image {
+  height: 150px;
+  line-height: 150px;
+}
+/* line 67, ../scss/ting-alpha-default-narrow.scss */
+.project-overview .views-row .image > div,
+.product-overview .views-row .image > div,
+.team-overview .views-row .image > div,
+.partner-overview .views-row .image > div,
+.supplier-overview .views-row .image > div {
+  vertical-align: middle;
+  display: inline-block;
+  line-height: 1;
+  max-width: 100%;
+}
+
+/* line 78, ../scss/ting-alpha-default-narrow.scss */
+.page-community .project-overview .views-row {
+  min-height: inherit;
+  margin-bottom: 0;
+}
+/* line 81, ../scss/ting-alpha-default-narrow.scss */
+.page-community .project-overview .views-row .image {
+  height: 150px;
+}
+
+/* Members */
+/* line 90, ../scss/ting-alpha-default-narrow.scss */
+.view-ting-members .view-content {
+  width: 103%;
+}
+/* line 93, ../scss/ting-alpha-default-narrow.scss */
+.view-ting-members .views-row {
+  width: 14%;
+  margin: 0 19px 19px 0;
+}
+
+/* Community Entrances */
+/* line 100, ../scss/ting-alpha-default-narrow.scss */
+.community-entrances {
+  width: 103%;
+  padding: 40px 0 20px 0;
+  overflow: hidden;
+}
+/* line 104, ../scss/ting-alpha-default-narrow.scss */
+.community-entrances .views-row {
+  width: 49%;
+  margin: 0 0 20px 0;
+  height: 125px;
+}
+/* line 109, ../scss/ting-alpha-default-narrow.scss */
+.community-entrances .views-row-odd {
+  margin-right: 2%;
+}
+
+/* Slideshow - Front Page */
+/* line 117, ../scss/ting-alpha-default-narrow.scss */
+.front #flexslider-1.flexslider .extra-image {
+  display: none;
+}
+
+/* Slideshow - Community */
+/* line 126, ../scss/ting-alpha-default-narrow.scss */
+.page-community #flexslider-1.flexslider .title {
+  font-size: 2.5em;
+}
+
+/* Sidebar - User Blocks */
+/* line 136, ../scss/ting-alpha-default-narrow.scss */
+.user-followers .views-row .user-name,
+.user-followers .views-row .name,
+.event-attendees .views-row .user-name,
+.event-attendees .views-row .name {
+  width: 135px;
+  float: left;
+}
+
+/* line 145, ../scss/ting-alpha-default-narrow.scss */
+.group-members .views-row .user-name {
+  width: 135px;
+  float: left;
+}
+
+/*
+========================================================================== 
+	Blocks
+========================================================================== 
+*/
+/* Statistics */
+/* line 159, ../scss/ting-alpha-default-narrow.scss */
+.block-community-stats {
+  position: relative;
+  overflow: visible;
+}
+/* line 162, ../scss/ting-alpha-default-narrow.scss */
+.block-community-stats div.image {
+  position: absolute;
+  left: -35px;
+  top: 0;
+  z-index: 1;
+}
+/* line 168, ../scss/ting-alpha-default-narrow.scss */
+.block-community-stats div.text {
+  float: left;
+  width: 30%;
+  text-align: left;
+  margin-bottom: 0;
+  height: 95px;
+  line-height: 95px;
+  font-size: 14px;
+  position: relative;
+  z-index: 2;
+}
+/* line 178, ../scss/ting-alpha-default-narrow.scss */
+.block-community-stats div.text > div {
+  vertical-align: middle;
+  line-height: 1.3em;
+  display: inline-block;
+}
+/* line 184, ../scss/ting-alpha-default-narrow.scss */
+.block-community-stats div.stats {
+  float: left;
+  width: 70%;
+  height: 95px;
+  line-height: 95px;
+}
+/* line 189, ../scss/ting-alpha-default-narrow.scss */
+.block-community-stats div.stats > div {
+  vertical-align: middle;
+  line-height: 1;
+  width: 20%;
+  margin-bottom: 0;
+}
+
+/*
+========================================================================== 
+	Nodes
+========================================================================== 
+*/
+/* line 204, ../scss/ting-alpha-default-narrow.scss */
+.node-type-page .region-content {
+  max-width: 620px;
+}

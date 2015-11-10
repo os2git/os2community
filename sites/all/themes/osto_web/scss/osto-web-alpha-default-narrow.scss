@@ -1,0 +1,207 @@
+@import "base";
+
+/* This file will hold styles that are loaded using the same media query as the narrow grid. */
+/* If you are using the default media queries provided by Omega, these styles will also
+ *  apply to the normal and widescreen layouts. You may override these styles in the normal 
+ *  and widescreen CSS files as appropriate. */
+ 
+ /*
+========================================================================== 
+	Specific Pages
+========================================================================== 
+*/
+.page-community {
+	#zone-postface-wrapper {
+		background: $bg-color-dark url("../img/post-first-bg.png") no-repeat center center;
+	}
+	/* Latest activity blocks */
+	.region-content-inner {
+		width: 103%;
+		.block {
+			float: left;
+			width: 31%;
+			margin: 0 2% 0 0;
+		}
+	}
+	.region-postscript-first-inner {
+		width: 103%;
+		.block {
+			float: left;
+			width: 31%;
+			margin: 0 2% 0 0;
+		}
+	}
+	/* Signup blocks */
+	#block-bean-community-forside-signup {
+		.field-name-field-signup-columns {
+			width: 103%;
+			.field-item {
+				width: 31%;
+				margin: 0 2% 0 0;
+			}
+		}
+	}
+}
+ 
+/*
+========================================================================== 
+	Views
+========================================================================== 
+*/
+
+/* Projects + Products */
+.project-overview,
+.product-overview,
+.team-overview,
+.partner-overview,
+.supplier-overview {
+	.view-content {
+		width: 103%;
+	}
+	.views-row {
+		width: 31%;
+		margin: 0 2% 15px 0;
+		.image {
+			height: 150px;
+			line-height: 150px;
+			> div {
+				vertical-align: middle;
+				display: inline-block;
+				line-height: 1;
+				max-width: 100%;
+			}
+		}
+	}
+}
+.page-community {
+	.project-overview {
+		.views-row {
+			min-height: inherit;
+			margin-bottom: 0;
+			.image {
+				height: 150px;
+			}
+		}	
+	}
+}
+
+/* Members */
+.view-ting-members {
+	.view-content {
+		width: 103%;
+	}
+	.views-row {
+		width: 14%;
+		margin: 0 19px 19px 0;
+	}
+}
+
+/* Community Entrances */
+.community-entrances {
+	width: 103%;
+	padding: 40px 0 20px 0;
+	overflow: hidden;	
+	.views-row {
+		width: 49%;
+		margin: 0 0 20px 0;		
+		height: 125px;
+	}
+	.views-row-odd {
+		margin-right: 2%;
+	}
+}
+
+/* Slideshow - Front Page */
+.front {
+	#flexslider-1.flexslider {
+		.extra-image {
+			display: none;
+		}
+	}
+}
+
+/* Slideshow - Community */
+.page-community {
+	#flexslider-1.flexslider {
+		.title {
+			font-size: 2.5em;
+		}
+	}
+}
+
+/* Sidebar - User Blocks */
+.user-followers,
+.event-attendees {
+	.views-row {
+		.user-name,
+		.name {
+			width: 135px;
+			float: left;
+		}
+	}
+}
+.group-members {
+	.views-row {
+		.user-name {
+			width: 135px;
+			float: left;
+		}
+	}
+}
+
+/*
+========================================================================== 
+	Blocks
+========================================================================== 
+*/
+
+/* Statistics */
+.block-community-stats {
+	position: relative;
+	overflow: visible;
+	div.image {
+		position: absolute;
+		left: -35px;
+		top: 0;
+		z-index: 1;
+	}
+	div.text {
+		float: left;
+		width: 30%;
+		text-align: left;
+		margin-bottom: 0;
+		height: 95px;
+		line-height: 95px;
+		font-size: 14px;
+		position: relative;
+		z-index: 2;
+		> div {
+			vertical-align: middle;
+			line-height: $line-height-std;
+			display: inline-block;
+		}
+	}
+	div.stats {
+		float: left;
+		width: 70%;
+		height: 95px;
+		line-height: 95px;
+		> div {
+			vertical-align: middle;
+			line-height: 1;
+			width: 20%;
+			margin-bottom: 0;
+		}
+	}
+}
+
+/*
+========================================================================== 
+	Nodes
+========================================================================== 
+*/
+.node-type-page {
+	.region-content {
+		max-width: 620px;
+	}
+}

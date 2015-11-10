@@ -1,0 +1,121 @@
+@font-face {
+	font-family: 'Ting';
+	src:url('../fonts/Ting.eot?-p4n84o');
+	src:url('../fonts/Ting.eot?#iefix-p4n84o') format('embedded-opentype'),
+		url('../fonts/Ting.woff?-p4n84o') format('woff'),
+		url('../fonts/Ting.ttf?-p4n84o') format('truetype'),
+		url('../fonts/Ting.svg?-p4n84o#Ting') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@mixin icon-prepare() {
+	font-family: 'Ting';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+[class^="ting-icon-"], [class*=" ting-icon-"] {
+	@include icon-prepare();
+}
+
+.ting-icon-star:before {
+	content: "\e614";
+}
+.icon-github:before {
+	content: "\e615";
+}
+.ting-icon-like:before {
+	content: "\e613";
+}
+.ting-icon-search:before {
+	content: "\e612";
+}
+.ting-icon-help:before {
+	content: "\e611";
+}
+.ting-icon-plane:before {
+	content: "\e60d";
+}
+.ting-icon-mail:before {
+	content: "\e600";
+}
+.ting-icon-heart:before {
+	content: "\e610";
+}
+.ting-icon-news:before {
+	content: "\e601";
+}
+.ting-icon-calendar:before {
+	content: "\e602";
+}
+.ting-icon-pencil:before {
+	content: "\e603";
+}
+.ting-icon-file:before {
+	content: "\e604";
+}
+.ting-icon-file2:before {
+	content: "\e605";
+}
+.ting-icon-copy:before {
+	content: "\e606";
+}
+.ting-icon-tags:before {
+	content: "\e607";
+}
+.ting-icon-clock:before {
+	content: "\e608";
+}
+.ting-icon-bubble:before {
+	content: "\e609";
+}
+.ting-icon-bubbles:before {
+	content: "\e60a";
+}
+.ting-icon-bubbles2:before {
+	content: "\e60b";
+}
+.ting-icon-user:before {
+	content: "\e60c";
+}
+.ting-icon-download:before {
+	content: "\e60f";
+}
+.ting-icon-file-xml:before {
+	content: "\e60e";
+}
+
+/**
+ * Message Feed
+ */
+.message-icon {
+	div:before {
+		@include icon-prepare();
+		color: $green;
+		font-size: 2.3em;
+		position: relative;
+		top: 2px;
+	}
+	.activity_node_insert:before {
+		content: "\e604";
+	}
+	.activity_comment_insert:before {
+		content: "\e60b";
+	}
+	.activity_user_follows_node:before,
+	.activity_user_follows_user:before {
+		content: "\e614";
+	}
+	.activity_user_insert:before {
+		content: "\e60c";
+	}
+}

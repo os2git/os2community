@@ -1,0 +1,1126 @@
+/*
+========================================================================== 
+	Pagination
+========================================================================== 
+*/
+.item-list {
+	ul.pager {
+		margin: 20px 0;
+		li {
+			margin: 0 5px;
+			a {
+				color: $text-color-std;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+/*
+========================================================================== 
+	Group Content
+========================================================================== 
+*/
+.group-content {
+	@include box(white);
+	.views-row {
+		padding: 25px 0;
+		border-bottom: 1px solid #c9c9c9;
+		.title {
+			font-weight: bold;
+			font-size: $font-size-large;
+			a {
+				text-decoration: none;
+				color: $text-color-std;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+		}
+		.created {
+			padding: 5px 0;
+		}
+		.resume {
+			margin-top: 10px;
+			line-height: $line-height-std;
+		}
+	}
+	.views-row-first {
+		padding: 0 0 25px 0;
+	}
+	.views-row-last {
+		border-bottom: 0;
+		padding: 25px 0 0 0;
+	}
+	.views-row-first.views-row-last {
+		padding: 0;
+	}
+}
+
+/*
+========================================================================== 
+	Group Members
+========================================================================== 
+*/
+.group-members {
+	.views-row {
+		overflow: hidden;
+		margin: 0 0 15px 0;
+		.picture {
+			height: 45px;
+			float: left;
+			margin: 0 10px 0 0;
+			img {
+				@include border-radius(45px);
+			}
+		}
+		.user-name {
+			height: 45px;
+			line-height: 45px;
+			span {
+				line-height: 1;
+				vertical-align: middle;
+				display: inline-block;
+			}
+			a {
+				text-decoration: none;
+				color: $text-color-std;
+				font-weight: bold;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+			.employer {
+				display: block;
+				margin-top: 3px;
+			}
+		}
+	}
+	.views-row-last {
+		margin: 0;
+	}
+}
+
+/*
+========================================================================== 
+	Projects + Products
+========================================================================== 
+*/
+.block-ting-projects-block-1 {
+	.block-title {
+		font-size: $font-size-larger;
+		margin-bottom: 30px;
+	}
+	.view-content {
+		overflow: hidden;
+	}
+	.view-footer {
+		margin-top: 25px;
+		text-align: center;
+		line-height: 1.4em;
+		p {
+			width: 60%;
+			margin: auto;
+			margin-bottom: 20px;
+		}
+		p:last-child {
+			margin-bottom: 0;
+		}
+		a {
+			@include btn-link($green);
+		}
+	}
+	.item-list {
+		.pager-previous,
+		.pager-next {
+			position: absolute;
+			top: 170px;
+			width: 48px;
+			height: 90px;
+			display: block;
+			a {
+				display: block;
+				width: 48px;
+				height: 90px;
+				text-indent: -9999px;
+			}
+		}
+		.pager-previous {
+			left: -125px;
+			background: url("../img/pager-prev-inactive.png") no-repeat center center;
+			a {
+				background: url("../img/pager-prev.png") no-repeat center center;
+			}
+		}
+		.pager-next {
+			right: -125px;
+			background: url("../img/pager-next-inactive.png") no-repeat center center;
+			a {
+				background: url("../img/pager-next.png") no-repeat center center;
+			}
+		}
+		.pager-current {
+			display: none;
+		}
+	}
+}
+.project-overview,
+.product-overview,
+.team-overview,
+.partner-overview,
+.supplier-overview,
+.members-overview {
+	float: left;
+	width: 100%;
+	position: relative;
+	.views-row {
+		float: left;
+		width: 100%;
+		margin: 0 0 15px 0;
+		position: relative;
+		@include box(white);
+		.title {
+			font-size: $font-size-large;
+			line-height: $line-height-std;
+			font-weight: bold;
+			padding: 15px;
+			/* line-height: 38px; */
+			height: 33px;
+			a {
+				color: $text-color-std;
+				text-decoration: none;
+				display: block;
+				padding-left: 35px;
+				position: relative;
+				span.ting-icon-file-xml {
+					position: absolute;
+					left: 0;
+					top: 3px;
+					font-size: 1.9em;
+					color: $green;
+				}
+				span.text {
+					display: inline-block;
+					line-height: $line-height-std;
+					vertical-align: middle;
+				}
+			}
+		}
+		.partners,
+		.owner {
+			color: #a8a8a8;
+			font-style: italic;
+			position: relative;
+			left: 50px;
+			position: absolute;
+			top: 36px;
+			font-size: 11px;
+		}
+		.image {
+			text-align: center;
+			img {
+				/*
+				@include opacity(1);
+				@include transition-property(opacity);
+				@include transition-duration(250ms);
+				*/
+			}
+			img:hover {
+				/* @include opacity(0.85); */
+			}
+		}
+		.organisation,
+		.address {
+			font-size: $font-size-std;
+			line-height: $line-height-std;
+			padding: 0 15px 15px;
+		}
+		.address {
+			min-height: 65px;
+		}
+		.resume {
+			font-size: $font-size-std;
+			line-height: $line-height-std;
+			padding: 20px 15px;
+			height: 75px;
+		}
+		.meta {
+			padding-top: 10px;
+			margin: 0 15px 10px 15px;
+			height: 30px;
+			line-height: 30px;
+			vertical-align: middle;
+			color: $text-color-light;
+			border-top: 1px solid $beige;
+			> span {
+				display: block;
+			}
+			.members {
+				width: 60%;
+				line-height: 1em;
+				display: inline-block;
+				span {
+					font-size: 1.5em;
+					position: relative;
+					top: 2px;
+					margin: 0 1px 0 0;
+				}
+			}
+			div.flag {
+				width: 40%;
+				display: inline-block;
+				text-align: right;
+				float: right;
+				line-height: 30px;
+				a {
+					padding: 0;
+					background: transparent;
+					color: $link-color-std;
+					text-transform: none;
+				}
+				a.unflag-action {
+					color: $link-color-alt;
+				}
+			}
+		}
+	}
+	.view-header {
+		a {
+			position: absolute;
+			top: -62px;
+			right: 0;
+			@include btn-link($blue-light);
+		}
+	}
+	#views-exposed-form-ting-projects-page,
+	#views-exposed-form-ting-products-page,
+	#views-exposed-form-ting-teams-page,
+	#views-exposed-form-ting-public-partners-page,
+	#views-exposed-form-ting-suppliers-page,
+	#views-exposed-form-ting-members-page  {
+		border-bottom: 1px solid #d8d8d8;
+		margin-bottom: 25px;
+		.views-exposed-widgets {
+			margin-bottom: 0;
+			padding-bottom: 6px;
+		}
+		.views-exposed-widget {
+			padding: 0 10px 0 0;
+			margin: 0 10px 0 0;
+			border-right: 1px solid #d8d8d8;
+			label {
+				float: left;
+				font-size: $font-size-std;
+				text-transform: uppercase;
+				height: 25px;
+				line-height: 25px;
+				margin: 0 10px 0 0;
+			}
+			.views-widget {
+				float: left;
+				height: 25px;
+				input {
+					height: 25px;
+					font-size: 12px;
+					width: 225px;
+					font-style: italic;
+				}
+			}
+			.form-submit {
+				margin: 0;
+				height: 25px;
+				font-size: 12px;
+				padding: 0 1.5em;
+				font-size: 10px;
+				background: #bfbfbd;
+			}
+		}
+		.views-submit-button {
+			border-right: 0;
+		}
+	}	
+}
+
+.page-community {
+	.block-ting-projects-block-2 {
+		.block-title {
+			color: white;
+			font-size: 1.5em;
+			margin-bottom: 25px;
+		}
+	}
+	.project-overview {
+		position: relative;
+		.views-row {
+			margin-bottom: 20px;
+			@include box(transparent);
+			.title {
+				font-size: $font-size-std;
+				font-weight: bold;
+				padding:  0 0 5px 0;
+				line-height: $font-size-std;
+				height: $font-size-std;
+				a {
+					color: white;
+					text-decoration: none;
+					display: block;
+					padding-left: 0;
+					position: relative;
+					span.ting-icon-file-xml {
+						position: absolute;
+						left: 0;
+						top: 7px;
+						font-size: 1.75em;
+						color: $green;
+					}
+					span.text {
+						display: inline-block;
+						line-height: $line-height-std;
+						vertical-align: middle;
+					}
+				}
+			}		
+			.partners-sec,
+			.owner-sec {
+				margin-bottom: 10px;
+				color: white;
+				font-style: italic;
+			}	
+			.image {
+				background: white;
+				height: 200px;
+				line-height: inherit;
+			}
+			.resume {
+				font-size: $font-size-std;
+				line-height: $line-height-std;
+				padding: 20px 15px;
+				background: white;
+				height: 45px;
+			}
+			.meta {
+				background: white;
+				margin: 0;
+				padding: 10px 15px 10px 15px;
+			}
+		}	
+		.views-row-last {
+			margin-bottom: 0;
+		}
+		.item-list {
+			.pager-previous,
+			.pager-next {
+				position: absolute;
+				top: 117px;
+				width: 48px;
+				height: 90px;
+				display: block;
+				a {
+					display: block;
+					width: 48px;
+					height: 90px;
+					text-indent: -9999px;
+				}
+			}
+			.pager-previous {
+				left: -125px;
+				background: url("../img/pager-prev-light-inactive.png") no-repeat center center;
+				a {
+					background: url("../img/pager-prev-light.png") no-repeat center center;
+				}
+			}
+			.pager-next {
+				right: -125px;
+				background: url("../img/pager-next-light-inactive.png") no-repeat center center;
+				a {
+					background: url("../img/pager-next-light.png") no-repeat center center;
+				}
+			}
+			.pager-current {
+				display: none;
+			}
+		}
+	}
+}
+
+/* Partner Overview */
+.supplier-overview {
+	.views-row {
+		.title {
+			line-height: 33px;
+		}
+		.address {
+			padding: 15px;
+		}
+	}
+}
+/* Partner Overview */
+.partner-overview {
+	.views-row {
+		.title {
+			line-height: 33px;
+		}
+		.image {
+			padding: 0 15px;
+			@include box-sizing(border-box);
+		}
+	}
+}
+
+/*
+========================================================================== 
+	News
+========================================================================== 
+*/
+.news-overview {
+	.views-row {
+		border-bottom: 1px solid $beige;
+		margin-bottom: 25px;
+		.title {
+			font-size: $font-size-larger;
+			a {
+				color: $text-color-std;
+				text-decoration: none;
+				line-height: $line-height-std;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+		}
+		.meta {
+			font-size: $font-size-std;
+			text-transform: uppercase;
+			font-weight: bold;
+			color: #c9c9c9;
+			padding: 12px 0;
+			a {
+				color: $link-color-std;
+				text-decoration: none;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+		}
+		.image {
+			margin-bottom: 10px;
+			img {
+				@include transition-property(opacity);
+				@include transition-duration(250ms);
+			}
+			img:hover {
+				@include opacity(0.85);
+			}
+		}
+		.resume {
+			margin-bottom: 15px;
+			line-height: $line-height-std;
+			p {
+				margin-bottom: 1em;
+			}
+			p:last-child {
+				margin-bottom: 0;
+			}
+		}
+		.read-more {
+			margin-bottom: 25px;
+			text-align: right;
+			a {
+				@include btn-link($link-color-alt);
+			}
+		}
+	}
+	.views-row-last {
+		border-bottom: 0;
+	}
+}
+
+/*
+========================================================================== 
+	Events
+========================================================================== 
+*/
+
+/* Overview */
+.events-overview {
+	.views-row {
+		border-bottom: 1px solid $beige;
+		margin-bottom: 25px;
+		.date {
+			float: left;
+			border-right: 1px solid $beige;
+			margin: 0 12px 20px 0;
+			padding: 0 12px 0 0;
+			text-align: center;
+			.week-day {
+				font-size: 0.83em;
+				display: block;
+				font-weight: $font-weight-bold;
+				margin: 0 0 2px 0;
+			}
+			.month-day {
+				font-size: 2.66em;
+				display: block;
+				font-weight: $font-weight-bold;
+			}
+			.month {
+				font-size: 1.83em;
+				display: block;
+			}
+		}
+		.title {
+			font-size: $font-size-large;
+			font-weight: bold;
+			line-height: $line-height-std;
+			margin-bottom: 10px;
+			a {
+				color: $text-color-std;
+				text-decoration: none;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+		}
+		.resume {
+			line-height: $line-height-std;
+			margin-bottom: 15px;
+		}
+		.date {
+			
+		}
+		.read-more {	
+			margin-bottom: 25px;
+			a {
+				color: $link-color-std;
+				text-decoration: none;
+				font-weight: $font-weight-semibold;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+/*
+========================================================================== 
+	Sidebar - News, Events etc.
+========================================================================== 
+*/
+
+/* Popular events */
+.events-popular,
+.news-popular {
+	.views-row {
+		margin: 0 0 15px 0;
+		padding: 0 0 15px 0;
+		border-bottom: 1px solid #bebebc;
+		overflow: hidden;
+		.title {
+			line-height: $line-height-std;
+			margin-bottom: 5px;
+			a {
+				color: $text-color-std !important;
+				text-decoration: none;
+				font-weight: bold;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+		}
+		.date {
+			text-align: left;
+			width: 50%;
+			float: left;
+			font-style: italic;
+		}
+		.participants,
+		.comments {
+			text-align: right;
+			width: 50%;
+			float: left;
+			font-style: italic;
+		}
+	}
+	.views-row-last {
+		padding: 0;
+		margin: 0;
+		border-bottom: none;
+	}
+}
+
+/* Exposed filters */
+#block-views-exp-ting-events-page,
+#block-views-exp-ting-news-page {
+	.views-exposed-widgets { margin: 0; padding: 0; }
+	.views-exposed-widget { margin: 0; padding: 0; }
+	.form-item { margin: 0; padding: 0; }
+	.form-type-bef-link {
+		margin: 0 0 15px 0;
+		a {
+			color: $text-color-std;
+			font-weight: bold;
+		}
+	}
+	.form-type-bef-link.selected {
+		a {
+			text-decoration: underline;
+			color: $text-color-light;
+		}
+	}
+	.form-item:last-child {
+		margin: 0;
+	}
+}
+
+/*
+========================================================================== 
+	Community Entrances
+========================================================================== 
+*/
+.community-entrances {
+	width: 100%;
+	padding: 40px 0 20px 0;
+	overflow: hidden;	
+	.views-row {
+		background: white;
+		display: block;
+		float: left;
+		width: 100%;
+		margin: 0 0 20px 0;		
+		height: auto;
+		text-align: center;
+		@include border-radius(3px);
+		@include box-sizing(border-box);
+		a {
+			padding: 20px 30px 25px;
+			display: block;
+			text-decoration: none;
+			h3 {
+				text-decoration: none;
+				font-size: $font-size-larger;
+				color: $link-color-std;
+				line-height: $line-height-std;
+				margin: 0 0 15px 0;
+				font-weight: $font-weight-semibold;
+				span {
+					font-size: 1.5em;
+					position: relative;
+					top: 6px;
+					margin: 0 4px 0 0;
+				}
+			}
+			p {
+				color: $text-color-std;
+				line-height: $line-height-std;
+				padding: 0 10px;
+			}
+		}
+	}	
+}
+
+/*
+========================================================================== 
+	Messages
+========================================================================== 
+*/
+.messages-user {
+	.views-row {
+		padding: 25px 0 25px 40px;
+		border-bottom: 1px solid $beige;
+		overflow: hidden;
+		position: relative;
+		.message-icon {
+			position: absolute;
+			left: 0;
+			top: 27px;
+		}
+		> .message {
+			margin-bottom: 5px;
+			line-height: $line-height-std;
+			a {
+				color: $link-color-std;
+				text-decoration: none;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+		}
+		.created {
+			font-style: italic;
+			color: #35362e;
+		}
+	}
+	.views-row-first {
+		padding: 0 0 25px 40px;
+		.message-icon {
+			top: 2px;
+		}
+	}
+}
+
+/*
+========================================================================== 
+	User Followers
+========================================================================== 
+*/
+.user-followers,
+.event-attendees {
+	.views-row {
+		overflow: hidden;
+		margin: 0 0 15px 0;
+		.picture {
+			height: 45px;
+			float: left;
+			margin: 0 10px 0 0;
+			img {
+				@include border-radius(45px);
+			}
+		}
+		.user-name,
+		.name {
+			height: 45px;
+			line-height: 45px;
+			span {
+				line-height: 1;
+				vertical-align: middle;
+				display: inline-block;
+			}
+			a {
+				text-decoration: none;
+				color: $text-color-std;
+				font-weight: bold;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+			.employer {
+				display: block;
+				margin-top: 3px;
+			}
+		}
+	}
+	.views-row-last {
+		margin: 0;
+	}
+}
+
+/*
+========================================================================== 
+	User Projects
+========================================================================== 
+*/
+.user-projects {
+	.views-row {
+		margin: 0 0 10px 0;
+		a {
+			color: $text-color-std;
+			text-decoration: none;
+			font-weight: bold;
+		}
+		a:hover {
+			text-decoration: underline !important;
+		}
+	}
+	.views-row-last {
+		margin: 0;
+	}
+}
+
+/*
+========================================================================== 
+	Slideshow - Front Page
+========================================================================== 
+*/
+.front {
+	#flexslider-1.flexslider {
+		margin: 0;
+		padding: 0;
+		border: none;
+		position: relative;
+		color: white;
+		height: 160px;
+		overflow: hidden;
+		@include border-radius(0);
+		@include box-shadow(none);
+		.slides {
+			img {
+				width: auto;
+				height: auto;
+				max-width: auto;
+			}
+		}
+		.views-field-field-slide-image {
+			img {
+				height: 205px;
+				width: 800px;
+				max-width: none;
+				position: absolute;
+				left: 50%;
+				margin-left: -400px;
+			}
+		}
+		.full {
+			width: 100%;
+		}
+		.half {
+			width: 100%;
+		}
+		.views-field-nothing {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 10;
+			width: 100%;
+			height: 160px;
+			line-height: 160px;
+			text-align: center;
+			display: table;
+			> .field-content {
+				margin: auto;
+				width: 100%;
+				padding: 0 10px;
+				display: inline-block;
+				vertical-align: middle;
+				line-height: 1em;
+				position: relative;
+			}
+			.slide-title {
+				font-weight: $font-weight-semibold;
+				text-transform: uppercase;
+				font-size: $font-size-large;
+				line-height: $line-height-std;
+				margin: 0 0 15px 0;
+				padding: 0 10px;
+				position: relative;
+				top: -10px;
+				@include transition-property(top,opacity);
+				@include transition-duration($anim-speed);
+				@include transition-timing-function($anim-ease-type);		
+				@include opacity(0);
+				@include text-shadow(2px 2px 0 rgba(0,0,0,0.20));
+			}
+			.slide-body {
+				display: none;
+			}
+			.item-list {
+				position: relative;
+				top: 0;
+				@include transition-property(top,opacity);
+				@include transition-duration($anim-speed*2);
+				@include transition-timing-function($anim-ease-type);
+				@include transition-delay($anim-speed);			
+				@include opacity(0);
+				li {
+					list-style: none;
+					display: inline-block;
+					line-height: 1em;
+					margin: 0 15px 0 0;
+					padding: 0;
+					a {
+						@include btn-link(white);
+						font-size: $font-size-large;
+						font-weight: normal;
+					}
+				}
+				li.last {
+					a {
+						background: transparent;
+						border: 1px solid white;
+						color: white;
+					}
+				}	
+				li.first {
+					a {
+						background: white;
+						border: none;
+						color: $green;
+					}
+				}
+			}
+		}
+		.extra-image {
+			@include transition-property(opacity,top);
+			@include transition-duration($anim-speed*2);
+			@include transition-timing-function($anim-ease-type);
+			@include transition-delay($anim-speed);			
+			@include opacity(0);
+		}
+		li.animated {
+			.slide-title {
+				top: 0;
+				@include opacity(1);
+			}
+			.slide-body {
+				top: 0;
+				@include opacity(1);
+			}
+			.item-list {
+				top: 0;
+				@include opacity(1);
+			}
+			.extra-image {
+				top: 0;
+				@include opacity(1);
+			}
+		}
+		.flex-control-nav {
+			bottom: 10px;
+			z-index: 11;
+			li {
+				margin: 0 4px;
+				a {
+					height: 12px; width: 12px;
+					background: #d1d1d1;
+					@include border-radius(12px);
+					@include box-shadow(rgba(0,0,0,.25) 0 0 2px 0);
+				}
+				a.flex-active {
+					background: #333;
+				}
+			}
+		}
+	}
+}
+
+/*
+========================================================================== 
+	Slideshow - Community
+========================================================================== 
+*/
+.page-community {
+	#flexslider-1.flexslider {
+		margin: 0;
+		padding: 0 0 40px 0;
+		border: none;
+		position: relative;
+		color: white;
+		overflow: hidden;
+		background: transparent;
+		height: auto;
+		@include border-radius(0);
+		@include box-shadow(none);
+		.created {
+			color: $green-light;
+			font-size: 1.83em;
+			line-height: $line-height-std;
+			font-weight: $font-weight-semibold;
+		}
+		.title {
+			font-weight: $font-weight-extrabold;
+			font-size: $font-size-large;
+			line-height: $line-height-std;
+			margin-bottom: 15px;
+			a {
+				color: white;
+				text-decoration: none;
+			}
+		}
+		.read-more {
+			margin-bottom: 15px;
+			font-weight: $font-weight-bold;
+			a {
+				color: $green-dark;
+				text-transform: uppercase;
+				font-size: 1.5em;
+				text-decoration: none;
+			}
+		}
+		.flex-control-nav {
+			bottom: 0;
+			z-index: 11;
+			li {
+				margin: 0 3px;
+				a {
+					height: 9px; width: 9px;
+					background: #e3e9bf;
+					@include border-radius(10px);
+					@include box-shadow(none);
+				}
+				a.flex-active {
+					background: #495804;
+				}
+			}
+		}
+	}
+}
+
+
+/*
+========================================================================== 
+	Slideshow - Quotes
+========================================================================== 
+*/
+#quote-slider.flexslider {
+	margin: 0;
+	padding: 0;
+	border: none;
+	position: relative;
+	@include border-radius(0);
+	@include box-shadow(none);
+	.views-field-field-quote-body {
+		font-size: $font-size-large;
+		line-height: $line-height-std;
+		font-style: italic;
+		margin-bottom: 20px;
+		color: #211e1f;
+		font-family: $font-fam-sec;
+	}
+	.views-field-field-quote-author {
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+	.views-field-field-quote-author-title {
+		color: $text-color-lighter;
+	}
+	.flex-control-nav {
+		li {
+			margin: 0 4px;
+			a {
+				width: 8px; height: 8px;
+				display: inline-block;
+				background: #d1d1d1;
+				@include box-shadow(none);
+				@include border-radius(8px);
+			}
+			.flex-active {
+				background: $text-color-std;
+			}
+		}
+	}
+}
+
+/*
+========================================================================== 
+	Members
+========================================================================== 
+*/
+.view-ting-members {
+	.views-row {
+		float: left;
+		width: 47%;
+		margin: 0 0 15px 0;
+		position: relative;
+		max-width: 250px;
+		@include box(white);	
+		.views-field-name {
+			height: 2.25em;
+			line-height: 2.25em;
+			padding: 15px;
+			span {
+				line-height: $line-height-std;
+				vertical-align: middle;				
+				display: inline-block;
+			}
+			a {
+				text-decoration: none;
+				color: $text-color-std;
+			}	
+			a:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+	.views-row-odd {
+		margin-right: 6%;
+	}
+}
