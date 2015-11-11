@@ -1,0 +1,351 @@
+/*
+========================================================================== 
+	Node (Standard)
+========================================================================== 
+*/
+article.node {
+	margin: 0 0 15px 0;
+	overflow: hidden;
+	h2,h3,h4,h5,h6 {
+		font-weight: bold;
+		margin: 0;
+		padding: 0;
+	}
+	h2 {
+		font-size: 1.5em;
+		padding: 0.25em 0 0.5em;
+		line-height: $line-height-std;
+	}
+	h3 {
+		font-size: 1.25em;
+		padding: 0.25em 0 0.5em;
+		line-height: $line-height-std;
+	}
+	p {
+		margin: 0 0 1.5em;
+		line-height: $line-height-std;
+	}
+	p:last-child {
+		margin: 0;
+	}
+	a {
+		color: $link-color-std;
+		text-decoration: none;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	ul, ol {
+		margin: 0 0 1.5em 0;
+		padding: 0 0 0 30px;
+		li {
+			margin: 0 0 5px 0;
+			line-height: $line-height-std;
+			list-style: disc;
+		}
+	}
+	ul {
+		li {
+			list-style: disc;
+		}
+	}
+	.field {
+		margin: 0 0 15px 0;
+		line-height: $line-height-std;
+	}
+	.node-footer {
+		margin: 15px 0 0 0;
+		> * {
+			display: inline-block;
+			width: 50%;
+		}
+	}
+	.node-links {
+		vertical-align: bottom;
+		line-height: 1em;
+		float: right;
+		ul {
+			margin: 0;
+			padding: 0;
+			text-align: right;
+			height: 65px;
+			line-height: 65px;
+			li {
+				margin: 0 0 0 5px;
+				line-height: 1em;
+				vertical-align: bottom;
+				display: inline-block;
+			}
+			li.statistics_counter {
+				display: none;
+			}
+			li.comment-add {
+				a {
+					@include btn-link(#bfbfbd);
+				}
+			}
+		}
+	}
+	footer {
+		float: left;
+		width: 100%;
+		line-height: 1em;
+		.submitted-headline {
+			margin: 0 0 8px 0;
+		}
+		.node-author {
+			float: left;
+			width: 100%;
+			.author-picture {
+				float: left;
+				margin: 0 6px 0 0;
+				img {
+					@include border-radius(45px);
+				}
+			}
+			.author-name {
+				margin: 9px 0 4px 0;
+				a {
+					color: $link-color-std;
+					text-decoration: none;
+				}
+				a:hover {
+					text-decoration: underline;
+				}
+			}
+			.created {
+				font-style: italic;
+			}
+		}
+	}
+	.social-links {
+		margin-top: 15px;
+		padding-top: 15px;
+		border-top: 1px solid $beige;
+		overflow: hidden;
+		.col-first {
+			float: left;
+			width: 50%;
+			.form-item {
+				width: 200px;
+				margin: 0;
+				position: relative;
+				left: -2.5px;
+			}
+			h3 {
+				display: none;
+			}
+			svg {
+				top: 9px !important;
+			}
+			a {
+				text-decoration: none;
+			}			
+		}
+		.col-sec {
+			float: left;
+			width: 50%;
+			text-align: right;
+			height: 36px;
+			line-height: 36px;
+			.form-item {
+				margin: 0;
+				display: inline-block;
+				vertical-align: middle;
+				line-height: 1;
+			}
+			label {
+				display: none;
+			}
+		}
+	}
+}
+
+/*
+========================================================================== 
+	Project + Team
+========================================================================== 
+*/
+article.node-project,
+article.node-team {
+	.field-name-field-group-image {
+		float: left;
+		margin: 0 15px 7px 0;
+		img {
+			max-width: 250px;
+		}
+	}
+	.field-name-field-group-resume {
+		font-weight: bold;
+		font-size: $font-size-large;	
+	}
+}
+.pane-ting-group-messages-panel-pane-1 {
+	h2 {
+		border-top: 0;
+	}
+}
+
+/*
+========================================================================== 
+	Products
+========================================================================== 
+*/
+article.node-product {
+	.field-label {
+		font-size: $font-size-large;
+		line-height: $line-height-std;
+		margin-bottom: 5px;
+	}
+	.field-name-field-product-features {
+		.field-items {
+			padding: 0 0 0 30px;
+			.field-item {
+				margin-bottom: 5px;
+				display: list-item;
+				list-style: disc;
+			}
+		}
+	}
+}
+.product-metadata {
+	.views-field {
+		margin-bottom: 10px;
+	}
+	.views-label {
+		margin-bottom: 5px;
+		display: inline-block;
+	}
+	.views-field-field-product-download {
+		margin-bottom: 0;
+		a {
+			@include btn-link($link-color-std);
+			color: white !important;
+			width: 100%;
+		}
+	}
+}
+.product-cooperators {
+	.item-list {
+		ul {
+			margin: 0;
+			padding: 0;
+			li {
+				padding: 0;
+				margin: 0 0 10px 0;
+				line-height: $line-height-std;
+				a {
+					color: $text-color-std !important;
+					text-decoration: none;
+					font-weight: bold;
+				}
+				a:hover {
+					text-decoration: underline;
+				}
+			}
+			li:last-child {
+				margin: 0;
+			}
+		}
+	}
+}
+
+/*
+========================================================================== 
+	Comments
+========================================================================== 
+*/
+#comments {
+	> h2.title {
+		padding: 35px 0 20px;
+		border-bottom: 1px solid $beige;
+	}
+	> h2.title.comment-form {
+		border: none;
+		padding: 35px 0 20px;
+	}	
+}
+article.comment {
+	padding: 30px 0;
+	border-bottom: 1px solid $beige;
+	.field-name-comment-body {
+		line-height: $line-height-std;
+		p {
+			margin: 0 0 1em 0;
+		}
+		a {
+			color: $link-color-std;
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+	footer {
+		overflow: hidden;
+		.author-headline {
+			margin: 0 0 8px 0;
+		}
+		.comment-author {
+			float: left;
+			width: 45%;
+			.author-picture {
+				float: left;
+				margin: 0 6px 0 0;
+				img {
+					@include border-radius(45px);
+				}
+			}
+			.author-name {
+				margin: 9px 0 4px 0;
+				a {
+					color: $link-color-std;
+					text-decoration: none;
+				}
+				a:hover {
+					text-decoration: underline;
+				}
+			}
+			.created {
+				font-style: italic;
+			}
+		}
+		.comment-links {
+			float: left;
+			width: 55%;
+			padding: 3px 0 0 0;
+			ul {
+				margin: 0;
+				padding: 0;
+				text-align: right;
+				li {
+					margin: 0 0 0 10px;
+				}
+				li.comment_forbidden {
+					height: 45px;
+					line-height: 45px;
+					span {
+						display: inline-block;
+						line-height: $line-height-std;
+					}
+					a {
+						color: $link-color-std;
+					}
+				}
+				li.comment-reply {
+					margin: 0 0 0 10px;
+					a {
+						@include btn-link(#bfbfbd);
+					}
+				}
+			}
+		}
+	}
+}
+
+/* Reply Page */
+.page-comment-reply {
+	.comment-form {
+		margin-top: 35px;
+	}
+}

@@ -1,0 +1,115 @@
+@import "base";
+
+/* This file will hold styles that are loaded using the same media query as the normal grid. */
+/* If you are using the default media queries provided by Omega, these styles will also
+ *  apply to the widescreen layout unless they are overridden by the widescreen styles. */
+ 
+/*
+========================================================================== 
+	Views
+========================================================================== 
+*/ 
+ 
+/* Slideshow - Frontpage */
+.front {
+	#flexslider-1.flexslider {
+		.views-field-nothing {
+			> .field-content {
+				width: 940px;
+			}
+		}
+		.extra-image {
+			display: block;
+		}
+	}
+} 
+
+/* Slideshow - Community */
+.page-community {
+	#flexslider-1.flexslider {
+		.title {
+			font-size: 3.33em;
+		}
+	}
+}
+
+/* Projects + Products */
+.project-overview,
+.product-overview,
+.team-overview,
+.partner-overview,
+.supplier-overview {
+	.views-row {
+		.image {
+			height: 200px;
+			line-height: 200px;
+		}
+	}
+}
+.page-community {
+	.project-overview {
+		.views-row {
+			min-height: inherit;
+			margin-bottom: 0;
+			.image {
+				height: 200px;
+			}
+		}	
+	}
+}
+
+/* Members */
+.view-ting-members {
+	.views-row {
+		width: 15%;
+		margin: 0 14px 15px 0;
+	}
+}
+
+/* Community Entrances */
+.community-entrances {
+	.views-row {
+		width: 31%;
+		margin: 0 2% 20px 0;		
+		height: 125px;
+	}
+}
+
+/* Sidebar - User Blocks */
+.user-followers,
+.event-attendees {
+	.views-row {
+		.user-name,
+		.name {
+			width: 215px;
+			float: left;
+		}
+	}
+}
+.group-members {
+	.views-row {
+		.user-name {
+			width: 215px;
+			float: left;
+		}
+	}
+}
+
+/*
+========================================================================== 
+	Blocks
+========================================================================== 
+*/
+
+.block-community-stats {
+	padding: 25px 45px;
+	div.text {
+		font-size: $font-size-large;
+	}
+}
+
+.region-menu {
+	.block.search {
+		display: block;
+	}
+}

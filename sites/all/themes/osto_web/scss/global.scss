@@ -1,0 +1,135 @@
+@import "base";
+@import "partials/fonts";
+@import "partials/general";
+@import "partials/nodes";
+@import "partials/views";
+@import "partials/blocks";
+@import "partials/panels";
+@import "partials/navigation";
+@import "partials/forms";
+@import "partials/forum";
+@import "partials/partner";
+
+/*
+========================================================================== 
+	General
+========================================================================== 
+*/
+body {
+	font-family: $font-fam-pri;
+	font-size: 12px;
+}
+.page {
+	overflow: hidden;
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/*
+========================================================================== 
+	Zones
+========================================================================== 
+*/
+#zone-user-wrapper {
+	background: $bg-color-dark;
+	padding: 10px 0;
+	.region-user-first {
+		display: none;
+	}
+	.region-user-second {
+		text-align: center;
+	}
+}
+#zone-slideshow-wrapper {
+	#zone-slideshow {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		.region {
+			width: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	}
+}
+#zone-preface-wrapper {
+	background: $bg-color-beige;
+}
+#zone-header-wrapper {
+	background: $green url("../img/header-bg.png") no-repeat top center;
+}
+#zone-title-wrapper {
+	padding-top: 50px;
+}
+#zone-content-wrapper {
+	background: white;
+	padding: 0 0 50px;
+}
+#zone-postscript-middle-wrapper {
+	background: #d1d1d1;
+	padding: 75px 0;
+}
+#zone-postscript-bottom-wrapper {
+	padding: 50px 0;
+	overflow: hidden;
+}
+#zone-footer-wrapper {
+	background: $bg-color-dark;
+	padding: 50px 0 15px;
+}
+
+/*
+========================================================================== 
+	Frontpage
+========================================================================== 
+*/
+body.front {
+	.zone-preface {
+		padding: 50px 0;
+	}
+	#zone-content-wrapper {
+		padding: 0;
+	}
+}
+
+/*
+========================================================================== 
+	Specific Pages
+========================================================================== 
+*/
+.page-projekter,
+.page-produkter,
+.page-teams,
+.page-offentlige-partnere,
+.page-leverandoerer,
+.page-medlemmer {
+	#zone-title-wrapper,
+	#zone-content-wrapper {
+		background: $bg-color-beige;
+	}
+}
+.page-nyheder {
+	#page-title {
+		display: none;
+	}
+}
+.page-community {
+	#zone-header {
+		padding: 55px 0 20px;
+	}
+	#zone-content-wrapper {
+		padding: 50px 0;
+	}
+	#zone-postface-wrapper {
+		padding: 40px 0;
+		background: $bg-color-dark;	
+	}
+	#zone-postscript-top-wrapper {
+		padding: 50px 0;
+	}
+	#zone-postscript-bottom-wrapper {
+		padding: 0;
+	}
+}
