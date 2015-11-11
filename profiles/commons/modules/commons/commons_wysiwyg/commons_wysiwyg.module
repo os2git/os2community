@@ -1,0 +1,6 @@
+<?php
+
+/**
+ * @file
+ * Provides the ability to edit content using a WYSIWYG editor.
+ */
