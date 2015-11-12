@@ -5,10 +5,10 @@
 */
 #zone-user {
 	.block {
-		color: white;
+		color: $white;
 		line-height: $line-height-std;
 		a {
-			color: $green;
+			color: $blue;
 			text-decoration: none;
 		}
 		a:hover {
@@ -21,9 +21,9 @@
 			display: inline-block;
 			margin-left: 10px;
 			padding-left: 10px;
-			border-left: 1px solid #8a8b87;
+			border-left: 1px solid $gray-dark;
 			a {
-				color: white;
+				color: $white;
 			}
 			a:hover {
 				text-decoration: underline;
@@ -48,7 +48,7 @@
 .region-header-first,
 .region-header-second {
 	.block {
-		color: white;
+		color: $white;
 		h2,
 		.field-name-field-header-title {
 			font-size: 3.33em;
@@ -59,7 +59,7 @@
 			font-size: 1.85em;
 			margin-bottom: 10px;
 			font-weight: $font-weight-bold;
-			color: $green-light;
+			color: $blue-light;
 		}
 	}
 }
@@ -101,7 +101,7 @@
 */
 .region-footer-first,
 .region-footer-second {
-	color: white;
+	color: $white;
 	overflow: hidden;
 	.block {
 		margin-bottom: 35px;
@@ -158,7 +158,7 @@
 			padding-right: 10px;
 			@include box-sizing(border-box);
 			> a {
-				color: white;
+				color: $white;
 				font-size: 1.5em;
 				margin-bottom: 25px;
 				font-weight: bold;
@@ -175,7 +175,7 @@
 					font-size: $font-size-large;
 					line-height: $line-height-std;
 					a {
-						color: white;
+						color: $white;
 						text-decoration: none;
 						&:hover {
 							text-decoration: underline;
@@ -188,7 +188,7 @@
 }
 .region-bottom {
 	padding: 15px 0;
-	border-top: 1px solid #d1d1d1;
+	border-top: 1px solid $gray-lighter;
 	.block {
 		font-size: $font-size-std;
 		color: white;
@@ -256,7 +256,7 @@
 ========================================================================== 
 */
 #block-bean-forside-signup-partner {
-	background: white;
+	background: $white;
 	padding: 45px;
 	@include box-sizing(border-box);
 	@include border-radius(3px);
@@ -267,7 +267,7 @@
 			text-transform: uppercase;
 			margin: 0 0 10px 0;
 			display: block;
-			color: #c9c9c9;
+			color: $gray-lighter;
 			font-weight: $font-weight-semibold;
 		}
 		h2 {
@@ -314,7 +314,7 @@
 		.field-type-link-field {
 			margin: 0;
 			a {
-				@include btn-link($green);
+				@include btn-link($blue);
 				min-width: 175px;
 			}
 		}
@@ -336,7 +336,7 @@
 			text-transform: uppercase;
 			margin: 0 0 10px 0;
 			display: block;
-			color: #c9c9c9;
+			color: $gray-dark;
 			font-weight: $font-weight-semibold;
 		}
 		h2 {
@@ -402,7 +402,7 @@
 	}
 	#zone-postscript-middle-wrapper {
 		padding: 50px 0;
-		background: $beige;
+		background: $gray-lightest;
 	}
 	/**
 	 * Latest Activity
@@ -421,7 +421,7 @@
 			}
 			.block-title:before {
 				@include icon-prepare();
-				color: $green;
+				color: $blue;
 				margin: 0 7px 0 0;
 				font-size: 1.2em;
 				position: relative;
@@ -505,7 +505,7 @@
 			.views-row {
 				margin-bottom: 20px;
 				padding-bottom: 20px;
-				border-bottom: 1px solid #c4c4c4;
+				border-bottom: 1px solid $gray-light;
 				.group {
 					margin-bottom: 8px;
 					line-height: $line-height-std;
@@ -568,10 +568,10 @@
 			.views-row {
 				margin-bottom: 20px;
 				padding-bottom: 20px;
-				border-bottom: 1px solid #c4c4c4;
+				border-bottom: 1px solid $gray-light;
 				overflow: hidden;
 				.category {
-					color: $green;
+					color: $blue;
 					margin-bottom: 8px;
 				}
 				.image {
@@ -631,13 +631,13 @@
 			width: 65%;
 		}
 		.field-name-field-signup-columns {
-			width: 100;
+			width: 100%;
 			.field-item {
 				width: 100%;
 				margin: 0 0 0 0;
 				float: left;
-				background: $green;
-				color: white;
+				background: $blue;
+				color: $white;
 				@include box-sizing(border-box);
 				h3 {
 					text-transform: uppercase;
@@ -662,14 +662,14 @@
 				}
 				a#signup-btn {
 					width: 100%;
-					@include btn-link(white);
+					@include btn-link($white);
 					color: $link-color-std;
 					font-size: $font-size-large;
 				}
 			}
 			.field-item:first-child,
 			.field-item.odd {
-				background: white;
+				background: $white;
 				color: $text-color-std;
 				margin-bottom: 20px;
 				a {
@@ -736,29 +736,45 @@
 	Rating
 ========================================================================== 
 */
+
 .rate-widget {
-	overflow: hidden;
-	line-height: $line-height-std;
+	height: 30px;
 	position: relative;
+	width: 110px!important;
+
+	.item-list {
+		margin-top: 6px;
+	}
+
+	.rate-info {
+		display: none;
+	}
+
+	ul li {
+		list-style-type: none!important;
+	}
+
 	.rate-button {
-		background: white;
-		border: 1px solid #cbcbcb;
+		/*
+		background: $white;
+		border: 1px solid $gray-dark;
 		float: left;
 		padding: 5px 10px 4px;
 		text-decoration: none;
-		color: #666666;
+		color: $gray;
 		border-right: 0;
 		height: $line-height-std;
 		padding-left: 30px;
+		*/
 		@include border-top-left-radius(2px);
-		@include border-bottom-left-radius(2px);		
-		@include background-image(linear-gradient(#ffffff, #f1f1f1));
+		@include border-bottom-left-radius(2px);
+		@include background(linear-gradient($white, $gray-lightest));
 	}
 	.rate-button:hover {
 		text-decoration: none;
 	}
 	.rate-button:active {
-		@include background-image(linear-gradient(#f1f1f1, #ffffff));
+		@include background(linear-gradient($white, $gray-lightest));
 	}
 	.rate-button:before {
 		@include icon-prepare();
@@ -771,9 +787,9 @@
 	.rate-commons-like-count {
 		padding: 5px 7px 4px;
 		float: left;
-		color: #666666;
-		background: #cccccc;
-		border: 1px solid #858585;
+		color: $gray-darker;
+		background: $gray-lightest;
+		border: 1px solid $gray-dark;
 		margin-left: -1px;
 		height: $line-height-std;
 		@include border-top-right-radius(2px);

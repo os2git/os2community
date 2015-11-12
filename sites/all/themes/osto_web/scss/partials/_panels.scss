@@ -12,7 +12,7 @@
 	.pane-title {
 		font-size: $font-size-large;
 		padding: 30px 0;
-		border-top: 1px solid $beige;
+		border-top: 1px solid $gray;
 	}
 }
 
@@ -51,12 +51,12 @@
 /* Project status */
 .panel-right {	
 	.pane-ting-project-status-panel-pane-1 {
-		background: $green;
-		color: white;
+		background: $blue;
+		color: $white;
 		a {
 			display: block;
 			text-decoration: none;
-			color: white;
+			color: $white;
 		}
 		div.status-wrapper {
 			padding-left: 70px;
@@ -71,7 +71,7 @@
 			top: 0;
 		}
 		strong {
-			color: $green-dark;
+			color: $blue-dark;
 			text-transform: uppercase;
 			font-weight: $font-weight-normal;
 			display: block;
@@ -127,8 +127,8 @@
 		margin: 0 0 10px 0;
 		table {
 			tr {
-				background: white;
-				border-bottom: 5px solid $beige;
+				background: $white;
+				border-bottom: 5px solid $gray;
 				th {
 					display: none;
 				}
@@ -144,7 +144,7 @@
 	}
 	.github {
 		a {
-			@include btn-link($green);
+			@include btn-link($blue);
 			width: 100%;
 			font-weight: normal;
 			text-transform: none;
@@ -204,7 +204,7 @@
 	.register {
 		a {
 			width: 100%;
-			@include btn-link($green);
+			@include btn-link($blue);
 		}
 	}
 	.unregister {

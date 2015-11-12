@@ -127,7 +127,7 @@
 			margin-bottom: 0;
 		}
 		a {
-			@include btn-link($green);
+			@include btn-link($blue);
 		}
 	}
 	.item-list {
@@ -178,7 +178,7 @@
 		width: 100%;
 		margin: 0 0 15px 0;
 		position: relative;
-		@include box(white);
+		@include box($white);
 		.title {
 			font-size: $font-size-large;
 			line-height: $line-height-std;
@@ -197,7 +197,7 @@
 					left: 0;
 					top: 3px;
 					font-size: 1.9em;
-					color: $green;
+					color: $blue;
 				}
 				span.text {
 					display: inline-block;
@@ -251,7 +251,7 @@
 			line-height: 30px;
 			vertical-align: middle;
 			color: $text-color-light;
-			border-top: 1px solid $beige;
+			border-top: 1px solid $gray-dark;
 			> span {
 				display: block;
 			}
@@ -289,7 +289,7 @@
 			position: absolute;
 			top: -62px;
 			right: 0;
-			@include btn-link($blue-light);
+			@include btn-link($blue);
 		}
 	}
 	#views-exposed-form-ting-projects-page,
@@ -344,7 +344,7 @@
 .page-community {
 	.block-ting-projects-block-2 {
 		.block-title {
-			color: white;
+			color: $white;
 			font-size: 1.5em;
 			margin-bottom: 25px;
 		}
@@ -361,7 +361,7 @@
 				line-height: $font-size-std;
 				height: $font-size-std;
 				a {
-					color: white;
+					color: $gray-darker;
 					text-decoration: none;
 					display: block;
 					padding-left: 0;
@@ -371,7 +371,7 @@
 						left: 0;
 						top: 7px;
 						font-size: 1.75em;
-						color: $green;
+						color: $blue;
 					}
 					span.text {
 						display: inline-block;
@@ -383,7 +383,7 @@
 			.partners-sec,
 			.owner-sec {
 				margin-bottom: 10px;
-				color: white;
+				color: $gray-darker;
 				font-style: italic;
 			}	
 			.image {
@@ -474,7 +474,7 @@
 */
 .news-overview {
 	.views-row {
-		border-bottom: 1px solid $beige;
+		border-bottom: 1px solid $gray-dark;
 		margin-bottom: 25px;
 		.title {
 			font-size: $font-size-larger;
@@ -543,11 +543,11 @@
 /* Overview */
 .events-overview {
 	.views-row {
-		border-bottom: 1px solid $beige;
+		border-bottom: 1px solid $gray-dark;
 		margin-bottom: 25px;
 		.date {
 			float: left;
-			border-right: 1px solid $beige;
+			border-right: 1px solid $gray-dark;
 			margin: 0 12px 20px 0;
 			padding: 0 12px 0 0;
 			text-align: center;
@@ -726,7 +726,7 @@
 .messages-user {
 	.views-row {
 		padding: 25px 0 25px 40px;
-		border-bottom: 1px solid $beige;
+		border-bottom: 1px solid $gray-dark;
 		overflow: hidden;
 		position: relative;
 		.message-icon {
@@ -837,7 +837,7 @@
 		padding: 0;
 		border: none;
 		position: relative;
-		color: white;
+		color: $white;
 		height: 160px;
 		overflow: hidden;
 		@include border-radius(0);
@@ -875,6 +875,14 @@
 			line-height: 160px;
 			text-align: center;
 			display: table;
+
+			background: linear-gradient(to right, rgba(10,112,227,1) 0%, rgba(10,112,227,1) 10%, rgba(10,112,227,0.5) 50%, rgba(10,112,227,1) 90%, rgba(10,112,227,1) 100%);
+			content: "";
+			display: block;
+			position: relative;
+			height: 100%;
+			width: 100%;
+
 			> .field-content {
 				margin: auto;
 				width: 100%;
@@ -933,7 +941,7 @@
 					a {
 						background: white;
 						border: none;
-						color: $green;
+						color: $blue;
 					}
 				}
 			}
@@ -1000,7 +1008,7 @@
 		@include border-radius(0);
 		@include box-shadow(none);
 		.created {
-			color: $green-light;
+			color: $blue-light;
 			font-size: 1.83em;
 			line-height: $line-height-std;
 			font-weight: $font-weight-semibold;
@@ -1011,7 +1019,7 @@
 			line-height: $line-height-std;
 			margin-bottom: 15px;
 			a {
-				color: white;
+				color: $white;
 				text-decoration: none;
 			}
 		}
@@ -1019,7 +1027,7 @@
 			margin-bottom: 15px;
 			font-weight: $font-weight-bold;
 			a {
-				color: $green-dark;
+				color: $blue-dark;
 				text-transform: uppercase;
 				font-size: 1.5em;
 				text-decoration: none;
@@ -1032,12 +1040,12 @@
 				margin: 0 3px;
 				a {
 					height: 9px; width: 9px;
-					background: #e3e9bf;
+					background: $gray;
 					@include border-radius(10px);
 					@include box-shadow(none);
 				}
 				a.flex-active {
-					background: #495804;
+					background: $blue;
 				}
 			}
 		}

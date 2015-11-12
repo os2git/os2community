@@ -4,14 +4,20 @@
 ========================================================================== 
 */
 
-$green-dark: #505b00;
-$green: #9fb600;
-$green-light: #d1df73;
-$orange: #bd5c2c;
-$blue: #399dcf;
-$blue-light: #72a9c3;
-$turquoise: #2cbda7;
-$beige: #e7e7e4;
+$white:            #fff;
+$black:            #000;
+
+$gray-lightest:    lighten($black, 95%);
+$gray-lighter:     lighten($black, 90%);
+$gray-light:       lighten($black, 70%);
+$gray:             lighten($black, 60%);
+$gray-dark:        lighten($black, 50%);
+$gray-darker:      lighten($black, 40%);
+$gray-darkest:     lighten($black, 30%);
+
+$blue: rgb(10, 112, 227);
+$blue-light: lighten($blue, 30%);
+$blue-dark: darken($blue, 30%);
 
 /*
 ========================================================================== 
@@ -26,8 +32,8 @@ $text-color-std: #211e1f;
 $text-color-dark: #000000;
 
 /* Links */
-$link-color-std: $green;
-$link-color-alt: #bfbfbd;
+$link-color-std: $blue;
+$link-color-alt: $blue-dark;
 
 /* Background */
 $bg-color-dark: #35362e;
