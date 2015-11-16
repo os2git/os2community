@@ -1,0 +1,7 @@
+name = OS2 web modifications
+description = Modifies original ting setup to reflect os2 identity
+core = 7.x
+package = ITK
+version = 7.x-1.0
+project = osto_web_modifications
+features[features_api][] = api:2
