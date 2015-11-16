@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the OS2 views feature.
+ */
+
+include_once 'osto_views.features.inc';
