@@ -873,9 +873,7 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'create document content'.
   $permissions['create document content'] = array(
     'name' => 'create document content',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -883,7 +881,7 @@ function osto_permissions_user_default_permissions() {
   $permissions['create event content'] = array(
     'name' => 'create event content',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
       'moderator' => 'moderator',
     ),
     'module' => 'node',
@@ -936,9 +934,7 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'create forum content'.
   $permissions['create forum content'] = array(
     'name' => 'create forum content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -991,7 +987,8 @@ function osto_permissions_user_default_permissions() {
   $permissions['create product content'] = array(
     'name' => 'create product content',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
     ),
     'module' => 'node',
   );
@@ -999,24 +996,27 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'create project content'.
   $permissions['create project content'] = array(
     'name' => 'create project content',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'create public_partner content'.
   $permissions['create public_partner content'] = array(
     'name' => 'create public_partner content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'create quote content'.
   $permissions['create quote content'] = array(
     'name' => 'create quote content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
@@ -1024,6 +1024,7 @@ function osto_permissions_user_default_permissions() {
   $permissions['create slide content'] = array(
     'name' => 'create slide content',
     'roles' => array(
+      'administrator' => 'administrator',
       'moderator' => 'moderator',
     ),
     'module' => 'node',
@@ -1032,7 +1033,10 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'create supplier content'.
   $permissions['create supplier content'] = array(
     'name' => 'create supplier content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
@@ -1200,30 +1204,37 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'delete any product content'.
   $permissions['delete any product content'] = array(
     'name' => 'delete any product content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any project content'.
   $permissions['delete any project content'] = array(
     'name' => 'delete any project content',
-    'roles' => array(
-      'moderator' => 'moderator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any public_partner content'.
   $permissions['delete any public_partner content'] = array(
     'name' => 'delete any public_partner content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any quote content'.
   $permissions['delete any quote content'] = array(
     'name' => 'delete any quote content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
@@ -1240,6 +1251,7 @@ function osto_permissions_user_default_permissions() {
   $permissions['delete any slide content'] = array(
     'name' => 'delete any slide content',
     'roles' => array(
+      'administrator' => 'administrator',
       'moderator' => 'moderator',
     ),
     'module' => 'node',
@@ -1248,7 +1260,10 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'delete any supplier content'.
   $permissions['delete any supplier content'] = array(
     'name' => 'delete any supplier content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
@@ -1304,7 +1319,7 @@ function osto_permissions_user_default_permissions() {
   $permissions['delete own event content'] = array(
     'name' => 'delete own event content',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
       'moderator' => 'moderator',
     ),
     'module' => 'node',
@@ -1323,9 +1338,7 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'delete own forum content'.
   $permissions['delete own forum content'] = array(
     'name' => 'delete own forum content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1368,30 +1381,37 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'delete own product content'.
   $permissions['delete own product content'] = array(
     'name' => 'delete own product content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own project content'.
   $permissions['delete own project content'] = array(
     'name' => 'delete own project content',
-    'roles' => array(
-      'moderator' => 'moderator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own public_partner content'.
   $permissions['delete own public_partner content'] = array(
     'name' => 'delete own public_partner content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own quote content'.
   $permissions['delete own quote content'] = array(
     'name' => 'delete own quote content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
@@ -1399,6 +1419,7 @@ function osto_permissions_user_default_permissions() {
   $permissions['delete own slide content'] = array(
     'name' => 'delete own slide content',
     'roles' => array(
+      'administrator' => 'administrator',
       'moderator' => 'moderator',
     ),
     'module' => 'node',
@@ -1407,7 +1428,10 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'delete own supplier content'.
   $permissions['delete own supplier content'] = array(
     'name' => 'delete own supplier content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
@@ -1437,9 +1461,7 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'delete revisions'.
   $permissions['delete revisions'] = array(
     'name' => 'delete revisions',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1610,9 +1632,7 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'edit any document content'.
   $permissions['edit any document content'] = array(
     'name' => 'edit any document content',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1711,30 +1731,37 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'edit any product content'.
   $permissions['edit any product content'] = array(
     'name' => 'edit any product content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any project content'.
   $permissions['edit any project content'] = array(
     'name' => 'edit any project content',
-    'roles' => array(
-      'moderator' => 'moderator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any public_partner content'.
   $permissions['edit any public_partner content'] = array(
     'name' => 'edit any public_partner content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit any quote content'.
   $permissions['edit any quote content'] = array(
     'name' => 'edit any quote content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
@@ -1751,6 +1778,7 @@ function osto_permissions_user_default_permissions() {
   $permissions['edit any slide content'] = array(
     'name' => 'edit any slide content',
     'roles' => array(
+      'administrator' => 'administrator',
       'moderator' => 'moderator',
     ),
     'module' => 'node',
@@ -1759,7 +1787,10 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'edit any supplier content'.
   $permissions['edit any supplier content'] = array(
     'name' => 'edit any supplier content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
@@ -1833,9 +1864,7 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'edit own document content'.
   $permissions['edit own document content'] = array(
     'name' => 'edit own document content',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1852,7 +1881,7 @@ function osto_permissions_user_default_permissions() {
   $permissions['edit own event content'] = array(
     'name' => 'edit own event content',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
       'moderator' => 'moderator',
     ),
     'module' => 'node',
@@ -1861,9 +1890,7 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'edit own forum content'.
   $permissions['edit own forum content'] = array(
     'name' => 'edit own forum content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -1907,7 +1934,8 @@ function osto_permissions_user_default_permissions() {
   $permissions['edit own product content'] = array(
     'name' => 'edit own product content',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
     ),
     'module' => 'node',
   );
@@ -1915,23 +1943,27 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'edit own project content'.
   $permissions['edit own project content'] = array(
     'name' => 'edit own project content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own public_partner content'.
   $permissions['edit own public_partner content'] = array(
     'name' => 'edit own public_partner content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'edit own quote content'.
   $permissions['edit own quote content'] = array(
     'name' => 'edit own quote content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
@@ -1939,6 +1971,7 @@ function osto_permissions_user_default_permissions() {
   $permissions['edit own slide content'] = array(
     'name' => 'edit own slide content',
     'roles' => array(
+      'administrator' => 'administrator',
       'moderator' => 'moderator',
     ),
     'module' => 'node',
@@ -1947,7 +1980,10 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'edit own supplier content'.
   $permissions['edit own supplier content'] = array(
     'name' => 'edit own supplier content',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
@@ -2165,9 +2201,7 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'revert revisions'.
   $permissions['revert revisions'] = array(
     'name' => 'revert revisions',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -2711,9 +2745,7 @@ function osto_permissions_user_default_permissions() {
   // Exported permission: 'view revisions'.
   $permissions['view revisions'] = array(
     'name' => 'view revisions',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
