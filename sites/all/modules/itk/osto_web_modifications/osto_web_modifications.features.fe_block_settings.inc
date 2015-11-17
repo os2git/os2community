@@ -2601,6 +2601,39 @@ community',
     'visibility' => 0,
   );
 
+  $export['views-ting_products-block_1'] = array(
+    'cache' => -1,
+    'css_class' => '',
+    'custom' => 0,
+    'delta' => 'ting_products-block_1',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => '<front>',
+    'roles' => array(),
+    'themes' => array(
+      'omega' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'omega',
+        'weight' => 0,
+      ),
+      'osto_web' => array(
+        'region' => 'preface_first',
+        'status' => 1,
+        'theme' => 'osto_web',
+        'weight' => -49,
+      ),
+      'ting' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'ting',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
+  );
+
   $export['views-ting_sidebar_all_users-block'] = array(
     'cache' => -1,
     'css_class' => '',
