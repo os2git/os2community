@@ -2198,7 +2198,7 @@ community',
       ),
     ),
     'title' => '',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
   $export['views-ting_sidebar_all_users-block'] = array(
