@@ -467,7 +467,6 @@ function osto_permissions_user_default_permissions() {
     'name' => 'administer modules',
     'roles' => array(
       'administrator' => 'administrator',
-      'moderator' => 'moderator',
     ),
     'module' => 'system',
   );
@@ -543,7 +542,6 @@ function osto_permissions_user_default_permissions() {
     'name' => 'administer permissions',
     'roles' => array(
       'administrator' => 'administrator',
-      'moderator' => 'moderator',
     ),
     'module' => 'user',
   );
@@ -641,7 +639,6 @@ function osto_permissions_user_default_permissions() {
     'name' => 'administer shortcuts',
     'roles' => array(
       'administrator' => 'administrator',
-      'moderator' => 'moderator',
     ),
     'module' => 'shortcut',
   );
@@ -651,7 +648,6 @@ function osto_permissions_user_default_permissions() {
     'name' => 'administer site configuration',
     'roles' => array(
       'administrator' => 'administrator',
-      'moderator' => 'moderator',
     ),
     'module' => 'system',
   );
@@ -1044,7 +1040,6 @@ function osto_permissions_user_default_permissions() {
     'name' => 'customize shortcut links',
     'roles' => array(
       'administrator' => 'administrator',
-      'moderator' => 'moderator',
     ),
     'module' => 'shortcut',
   );
@@ -2154,7 +2149,6 @@ function osto_permissions_user_default_permissions() {
     'name' => 'select account cancellation method',
     'roles' => array(
       'administrator' => 'administrator',
-      'moderator' => 'moderator',
     ),
     'module' => 'user',
   );
@@ -2309,7 +2303,6 @@ function osto_permissions_user_default_permissions() {
     'name' => 'switch shortcut sets',
     'roles' => array(
       'administrator' => 'administrator',
-      'moderator' => 'moderator',
     ),
     'module' => 'shortcut',
   );
@@ -2554,6 +2547,7 @@ function osto_permissions_user_default_permissions() {
     'name' => 'view bean page',
     'roles' => array(
       'administrator' => 'administrator',
+      'moderator' => 'moderator',
     ),
     'module' => 'bean',
   );
@@ -2669,8 +2663,6 @@ function osto_permissions_user_default_permissions() {
     'name' => 'view services',
     'roles' => array(
       'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'socialfield',
   );
