@@ -2463,39 +2463,6 @@ community',
     'visibility' => 0,
   );
 
-  $export['views-og_members-block_1'] = array(
-    'cache' => -1,
-    'css_class' => '',
-    'custom' => 0,
-    'delta' => 'og_members-block_1',
-    'module' => 'views',
-    'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'omega' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'omega',
-        'weight' => 4,
-      ),
-      'osto_web' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osto_web',
-        'weight' => 5,
-      ),
-      'ting' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'ting',
-        'weight' => 4,
-      ),
-    ),
-    'title' => '',
-    'visibility' => 0,
-  );
-
   $export['views-ting_basic_page_links-block'] = array(
     'cache' => -1,
     'css_class' => '',
@@ -2798,72 +2765,6 @@ community',
       ),
     ),
     'title' => '',
-    'visibility' => 0,
-  );
-
-  $export['views-ting_projects-block_1'] = array(
-    'cache' => -1,
-    'css_class' => '',
-    'custom' => 0,
-    'delta' => 'ting_projects-block_1',
-    'module' => 'views',
-    'node_types' => array(),
-    'pages' => '<front>',
-    'roles' => array(),
-    'themes' => array(
-      'omega' => array(
-        'region' => 'preface_first',
-        'status' => 1,
-        'theme' => 'omega',
-        'weight' => -48,
-      ),
-      'osto_web' => array(
-        'region' => 'preface_first',
-        'status' => 1,
-        'theme' => 'osto_web',
-        'weight' => -48,
-      ),
-      'ting' => array(
-        'region' => 'preface_first',
-        'status' => 1,
-        'theme' => 'ting',
-        'weight' => -48,
-      ),
-    ),
-    'title' => 'Projekter',
-    'visibility' => 1,
-  );
-
-  $export['views-ting_projects-block_2'] = array(
-    'cache' => -1,
-    'css_class' => '',
-    'custom' => 0,
-    'delta' => 'ting_projects-block_2',
-    'module' => 'views',
-    'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'omega' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'omega',
-        'weight' => 0,
-      ),
-      'osto_web' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osto_web',
-        'weight' => -14,
-      ),
-      'ting' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'ting',
-        'weight' => 0,
-      ),
-    ),
-    'title' => 'Projekter',
     'visibility' => 0,
   );
 
