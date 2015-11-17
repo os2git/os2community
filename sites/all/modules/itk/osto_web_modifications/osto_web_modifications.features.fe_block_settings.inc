@@ -177,39 +177,6 @@ function osto_web_modifications_default_fe_block_settings() {
     'visibility' => 1,
   );
 
-  $export['bean-forum-header'] = array(
-    'cache' => 1,
-    'css_class' => '',
-    'custom' => 0,
-    'delta' => 'forum-header',
-    'module' => 'bean',
-    'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'omega' => array(
-        'region' => 'header_first',
-        'status' => 1,
-        'theme' => 'omega',
-        'weight' => -47,
-      ),
-      'osto_web' => array(
-        'region' => 'header_first',
-        'status' => 1,
-        'theme' => 'osto_web',
-        'weight' => -47,
-      ),
-      'ting' => array(
-        'region' => 'header_first',
-        'status' => 1,
-        'theme' => 'ting',
-        'weight' => -47,
-      ),
-    ),
-    'title' => '',
-    'visibility' => 0,
-  );
-
   $export['bean-header-community-forside'] = array(
     'cache' => 1,
     'css_class' => '',
@@ -1067,72 +1034,6 @@ community',
         'status' => 0,
         'theme' => 'ting',
         'weight' => -6,
-      ),
-    ),
-    'title' => '',
-    'visibility' => 0,
-  );
-
-  $export['forum-active'] = array(
-    'cache' => -2,
-    'css_class' => '',
-    'custom' => 0,
-    'delta' => 'active',
-    'module' => 'forum',
-    'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'omega' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'omega',
-        'weight' => -32,
-      ),
-      'osto_web' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osto_web',
-        'weight' => -47,
-      ),
-      'ting' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'ting',
-        'weight' => -32,
-      ),
-    ),
-    'title' => '',
-    'visibility' => 0,
-  );
-
-  $export['forum-new'] = array(
-    'cache' => -2,
-    'css_class' => '',
-    'custom' => 0,
-    'delta' => 'new',
-    'module' => 'forum',
-    'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'omega' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'omega',
-        'weight' => -12,
-      ),
-      'osto_web' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osto_web',
-        'weight' => -17,
-      ),
-      'ting' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'ting',
-        'weight' => -12,
       ),
     ),
     'title' => '',
@@ -2327,39 +2228,6 @@ community',
     'visibility' => 1,
   );
 
-  $export['views-4d832831a8447b7cef191158f8744d36'] = array(
-    'cache' => -1,
-    'css_class' => 'latest-posts',
-    'custom' => 0,
-    'delta' => '4d832831a8447b7cef191158f8744d36',
-    'module' => 'views',
-    'node_types' => array(),
-    'pages' => 'community',
-    'roles' => array(),
-    'themes' => array(
-      'omega' => array(
-        'region' => 'content',
-        'status' => 1,
-        'theme' => 'omega',
-        'weight' => -44,
-      ),
-      'osto_web' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osto_web',
-        'weight' => -42,
-      ),
-      'ting' => array(
-        'region' => 'content',
-        'status' => 1,
-        'theme' => 'ting',
-        'weight' => -44,
-      ),
-    ),
-    'title' => '',
-    'visibility' => 1,
-  );
-
   $export['views-5eb55eb9bfe69366803b07b73f329b4f'] = array(
     'cache' => -1,
     'css_class' => 'latest-events',
@@ -2422,41 +2290,6 @@ community',
         'status' => 1,
         'theme' => 'ting',
         'weight' => -42,
-      ),
-    ),
-    'title' => '',
-    'visibility' => 0,
-  );
-
-  $export['views-forum_most_active-block'] = array(
-    'cache' => -1,
-    'css_class' => '',
-    'custom' => 0,
-    'delta' => 'forum_most_active-block',
-    'module' => 'views',
-    'node_types' => array(
-      0 => 'forum',
-    ),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'omega' => array(
-        'region' => 'sidebar_first',
-        'status' => 1,
-        'theme' => 'omega',
-        'weight' => -37,
-      ),
-      'osto_web' => array(
-        'region' => 'sidebar_first',
-        'status' => 1,
-        'theme' => 'osto_web',
-        'weight' => -40,
-      ),
-      'ting' => array(
-        'region' => 'sidebar_first',
-        'status' => 1,
-        'theme' => 'ting',
-        'weight' => -37,
       ),
     ),
     'title' => '',
