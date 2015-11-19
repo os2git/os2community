@@ -9,8 +9,8 @@ form {
 		line-height: $line-height-std;
 		padding: .75em 1em;
 		color: $text-color-std;
-		border: 1px solid #dedede;
-		background: white;
+		border: 1px solid $gray-light;
+		background: $white;
 		margin: 0;		
 		max-width: 100%;
 		@include box-sizing(border-box);
@@ -18,7 +18,7 @@ form {
 	/* Buttons */
 	input[type=submit],
 	button {
-		@include btn($green);
+		@include btn($blue);
 	}
 	#edit-preview {
 		@include btn($link-color-alt);
@@ -26,7 +26,7 @@ form {
 	}
 	/* Fieldsets */
 	fieldset {
-		border-top: 1px solid #c9c9c9;
+		border-top: 1px solid $gray-light;
 		display: block;
 		float: left;
 		width: 100%;
@@ -41,11 +41,11 @@ form {
 			display: block;
 			float: left;
 			width: 100%;
-			color: #c9c9c9;
+			color: $gray-light;
 			padding: 0;
 			margin: 20px 0;
 			a {
-				color: #c9c9c9;
+				color: $gray-light;
 				text-decoration: none;
 			}
 		}
@@ -200,8 +200,8 @@ div.fancy-select div.trigger {
 	line-height: $line-height-std;
 	padding: .35em 2.5em .35em 1em;
 	color: $text-color-std;
-	border: 1px solid #dedede;
-	background: white;
+	border: 1px solid $gray-dark;
+	background: $white;
 	margin: 0;		
 	max-width: 100%;
 	position: relative;
@@ -219,7 +219,7 @@ div.fancy-select div.trigger:after {
 	width: 0;
 	height: 0;
 	border: 5px solid transparent;
-	border-top-color: #4B5468;
+	border-top-color: $gray-dark;
 	top: 9px;
 	right: 10px;
 }
@@ -236,8 +236,8 @@ div.fancy-select ul.options {
 	overflow: auto;
 	background: white;
 	min-width: 225px;
-	border-left: 1px solid #dedede;
-	border-right: 1px solid #dedede;
+	border-left: 1px solid $gray-dark;
+	border-right: 1px solid $gray-dark;
 	@include box-shadow(0 2px 2px rgba(0,0,0,0.15));
 	@include box-sizing(border-box);
 	transition: opacity 250px ease-out, top 250px ease-out, visibility 250px ease-out;
@@ -289,7 +289,7 @@ div.fancy-select ul.options li {
 	cursor: pointer;
 	white-space: nowrap;
 	font-size: $font-size-small;
-	border-top: 1px solid #f8f8f8;
+	border-top: 1px solid $gray-dark;
 	transition: all 150ms ease-out;
 	-webkit-transition: all 150ms ease-out;
 	-moz-transition: all 150ms ease-out;
@@ -302,7 +302,7 @@ div.fancy-select ul.options li.selected {
 }
 
 div.fancy-select ul.options li.hover {
-	background: #f8f8f8;
+	background: $gray;
 }
 
 /*
@@ -347,7 +347,7 @@ div.fancy-select ul.options li.hover {
 	.search-result {
 		a {
 			text-decoration: none;
-			color: $green;
+			color: $blue;
 			margin-bottom: 0.5em;
 			display: block;
 		}

@@ -3,7 +3,7 @@
 		padding-left: 0.5em;
 		font-style: italic;
 		margin-left: 1em;
-		border-left: 3px solid $beige;
+		border-left: 3px solid $gray;
 	}
 	.field-label {
 		font-size: $font-size-large;
@@ -44,7 +44,7 @@
 				text-decoration: none;
 			}
 			.user-name {
-				color: $green;
+				color: $blue;
 				margin-bottom: 5px;
 			}
 			.jobtitle {
@@ -65,7 +65,7 @@
 		font-weight: bold;
 	}
 	span.companyname {
-		color: $green;
+		color: $blue;
 	}
 	h2 {		
 		font-size: $font-size-large;
@@ -83,8 +83,8 @@
 		}
 		a {
 			margin-top: 0.5em;
-			background: #9fb600;
-			color: white;
+			background: $blue-light;
+			color: $white;
 			text-align: center;
 			padding: 1em 2em;
 			text-transform: uppercase;

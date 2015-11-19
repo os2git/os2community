@@ -81,7 +81,7 @@ article.node {
 			}
 			li.comment-add {
 				a {
-					@include btn-link(#bfbfbd);
+					@include btn-link($blue);
 				}
 			}
 		}
@@ -121,7 +121,7 @@ article.node {
 	.social-links {
 		margin-top: 15px;
 		padding-top: 15px;
-		border-top: 1px solid $beige;
+		border-top: 1px solid $gray-dark;
 		overflow: hidden;
 		.col-first {
 			float: left;
@@ -258,7 +258,7 @@ article.node-product {
 #comments {
 	> h2.title {
 		padding: 35px 0 20px;
-		border-bottom: 1px solid $beige;
+		border-bottom: 1px solid $gray-dark;
 	}
 	> h2.title.comment-form {
 		border: none;
@@ -267,7 +267,7 @@ article.node-product {
 }
 article.comment {
 	padding: 30px 0;
-	border-bottom: 1px solid $beige;
+	border-bottom: 1px solid $gray-dark;
 	.field-name-comment-body {
 		line-height: $line-height-std;
 		p {

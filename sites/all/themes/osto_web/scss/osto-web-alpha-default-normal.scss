@@ -17,7 +17,15 @@
 			> .field-content {
 				width: 940px;
 			}
+
+			background: linear-gradient(to right, rgba(10,112,227,1) 0%, rgba(10,112,227,1) 10%, rgba(10,112,227,0.5) 50%, rgba(10,112,227,1) 90%, rgba(10,112,227,1) 100%);
+			content: "";
+			display: block;
+			position: relative;
+			height: 100%;
+			width: 100%;
 		}
+
 		.extra-image {
 			display: block;
 		}

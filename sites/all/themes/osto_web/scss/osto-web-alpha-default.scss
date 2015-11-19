@@ -86,7 +86,7 @@
 			content: '';
 			display: block;
 			height: 3px;
-			background-color: $green;
+			background-color: $blue;
 		}
 		/* Level 2 */
 		> ul {
@@ -135,6 +135,8 @@
 					height: 500px;
 					width: 1920px;
 					margin-left: -960px;
+
+					@include filter(grayscale(100%));
 				}
 			}
 		}
@@ -147,6 +149,16 @@
 		.views-field-nothing {
 			height: 500px;
 			line-height: 500px;
+
+			&:after {
+				background: linear-gradient(to right, rgba(10,112,227,1) 0%,rgba(10,112,227,1) 10%,rgba(10,112,227,0.5) 50%,rgba(10,112,227,1) 90%,rgba(10,112,227,1) 100%);
+				content: "";
+				display: block;
+				position: absolute;
+				height: 100%;
+				width: 100%;
+			}
+
 			> .field-content {
 				width: 720px;
 			}

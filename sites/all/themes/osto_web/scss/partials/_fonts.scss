@@ -100,7 +100,7 @@
 .message-icon {
 	div:before {
 		@include icon-prepare();
-		color: $green;
+		color: $blue;
 		font-size: 2.3em;
 		position: relative;
 		top: 2px;

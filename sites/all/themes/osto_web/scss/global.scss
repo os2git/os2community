@@ -1,3 +1,5 @@
+@import "assets/variables";
+
 @import "base";
 @import "partials/fonts";
 @import "partials/general";
@@ -9,6 +11,7 @@
 @import "partials/forms";
 @import "partials/forum";
 @import "partials/partner";
+
 
 /*
 ========================================================================== 
@@ -55,20 +58,25 @@ img {
 	}
 }
 #zone-preface-wrapper {
-	background: $bg-color-beige;
+	background: $gray-lightest;
 }
 #zone-header-wrapper {
-	background: $green url("../img/header-bg.png") no-repeat top center;
+	background: linear-gradient(to right, rgba(10,112,227,1) 0%,rgba(10,112,227,1) 35%,rgba(10,112,227,0.7) 50%,rgba(10,112,227,1) 65%,rgba(10,112,227,1) 100%),url("../img/header-bg.png");
+	background-size: auto 293px;
+	background-repeat: no-repeat;
+	background-position-y: center;
+	background-position-x: center;
 }
+
 #zone-title-wrapper {
 	padding-top: 50px;
 }
 #zone-content-wrapper {
-	background: white;
+	background: $white;
 	padding: 0 0 50px;
 }
 #zone-postscript-middle-wrapper {
-	background: #d1d1d1;
+	background: $gray-lightest;
 	padding: 75px 0;
 }
 #zone-postscript-bottom-wrapper {
@@ -107,7 +115,7 @@ body.front {
 .page-medlemmer {
 	#zone-title-wrapper,
 	#zone-content-wrapper {
-		background: $bg-color-beige;
+		background: $white;
 	}
 }
 .page-nyheder {

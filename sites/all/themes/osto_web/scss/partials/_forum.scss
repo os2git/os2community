@@ -9,7 +9,7 @@
 			vertical-align: text-top;					
 			font-size: 12px;
 			.forum-item-wrap {
-				border-bottom: 1px solid #bebebc;	
+				border-bottom: 1px solid $gray-dark;
 				margin: 0 20px 20px 0;
 				padding: 0 10px 20px 0;
 			}
@@ -40,7 +40,7 @@
 					}
 					span.user {
 						a {
-							color: $green;	
+							color: $blue;
 							font-weight: normal;
 						}				
 						a:hover {
@@ -58,7 +58,7 @@
 					font-weight: normal;
 					font-size: $font-size-large;
 					span.ting-icon-bubbles2 {
-						color: $green;
+						color: $blue;
 						margin-right: 0.5em;
 					}
 					span.total {
@@ -69,8 +69,8 @@
 			}
 			.goto-forum {
 				a {
-					background: #9fb600;
-					color: white;
+					background: $blue-light;
+					color: $white;
 					text-align: center;
 					padding: 1em 2em;
 					text-transform: uppercase;
@@ -101,7 +101,7 @@
 			padding: 0;
 		}
 		.active-comments {
-			border-bottom: 1px solid #bebebc;
+			border-bottom: 1px solid $gray-dark;
 			padding-bottom: 1em;
 			margin-bottom: 1em;	
 			overflow: hidden;
@@ -148,7 +148,7 @@
 		overflow: hidden;
 		position: relative;
 		padding: 1.2em 0;
-		border-bottom: 1px solid #bebebc;
+		border-bottom: 1px solid $gray-dark;
 	} 
 	.post-title {
 		margin-bottom: 5px;
@@ -159,7 +159,7 @@
 		.user {
 			a {
 				font-weight: normal;
-				color:$green;
+				color: $blue;
 			}		
 			a:hover {
 				text-decoration: underline;
