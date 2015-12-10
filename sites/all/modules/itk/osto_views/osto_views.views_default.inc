@@ -5359,11 +5359,11 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class=\'[field_slide_layout]\'>
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<span class=\'[field_slide_layout]\'>
 [title]
 [field_slide_body]
 [field_slide_link]
-</div>';
+</span>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Felt: Indhold: Ekstra billede */
   $handler->display->display_options['fields']['field_slide_image_extra']['id'] = 'field_slide_image_extra';
@@ -5416,11 +5416,11 @@ function osto_views_views_default_views() {
     t('<div class="slide-title">[title]</div>'),
     t('<div class="slide-body">[field_slide_body]</div>'),
     t('<div class="slide-link">[field_slide_link]</div>'),
-    t('<div class=\'[field_slide_layout]\'>
+    t('<span class=\'[field_slide_layout]\'>
 [title]
 [field_slide_body]
 [field_slide_link]
-</div>'),
+</span>'),
     t('<div class="extra-image">[field_slide_image_extra]</div>'),
     t('Block'),
     t('Slideshow'),
