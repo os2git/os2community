@@ -88,12 +88,13 @@ function ting_blocks_newsletter_signup_view() {
  */
 function ting_blocks_community_stats_view() {
 	$output = "";
-	$output .= "<div class='image'><img src='".drupal_get_path("theme","ting")."/img/danmarkskort.png' /></div>";
+	$output .= "<div class='image'><img alt='Danmarkskort' src='".drupal_get_path("theme","ting")."/img/danmarkskort.png' /></div>";
 	$output .= "<div class='text'><div>".variable_get('community_stats_text', '')."</div></div>";
 	$output .= "<div class='stats'>";
 	$output .= "<div><strong>".ting_blocks_get_community_stats("partners")."</strong><span>Off. partnere</span></div>";
 	$output .= "<div><strong>".ting_blocks_get_community_stats("suppliers")."</strong><span>Leverandører</span></div>";
 	$output .= "<div><strong>".ting_blocks_get_community_stats("products")."</strong><span>Produkter</span></div>";
+	// Disable parts of the stats. They may be used at a later time.
 	//$output .= "<div><strong>".ting_blocks_get_community_stats("members")."</strong><span>Medlemmer</span></div>";
 	//$output .= "<div><strong>".ting_blocks_get_community_stats("projects")."</strong><span>Projekter</span></div>";
 	//$output .= "<div><strong>".ting_blocks_get_community_stats("events")."</strong><span>Events</span></div>";
