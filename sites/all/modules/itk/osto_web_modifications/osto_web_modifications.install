@@ -16,7 +16,18 @@ function osto_web_modifications_update_7001() {
  */
 function osto_web_modifications_update_7002() {
   $module_enable = array();
-  $module_enable[] = 'ostonewsletter';
+  $module_enable[] = 'osto_newsletter';
+
+  module_enable($module_enable);
+}
+
+
+/**
+ *  Enable contact module.
+ */
+function osto_web_modifications_update_7003() {
+  $module_enable = array();
+  $module_enable[] = 'contact';
 
   module_enable($module_enable);
 }
