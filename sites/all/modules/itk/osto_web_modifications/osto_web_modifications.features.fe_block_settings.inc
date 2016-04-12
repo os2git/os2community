@@ -1795,6 +1795,39 @@ community',
     'visibility' => 1,
   );
 
+  $export['views-4d832831a8447b7cef191158f8744d36'] = array(
+    'cache' => -1,
+    'css_class' => 'latest-posts',
+    'custom' => 0,
+    'delta' => '4d832831a8447b7cef191158f8744d36',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => 'community',
+    'roles' => array(),
+    'themes' => array(
+      'omega' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'omega',
+        'weight' => -44,
+      ),
+      'osto_web' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'osto_web',
+        'weight' => -48,
+      ),
+      'ting' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'ting',
+        'weight' => -44,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
   $export['views-5eb55eb9bfe69366803b07b73f329b4f'] = array(
     'cache' => -1,
     'css_class' => 'latest-events',
@@ -1857,6 +1890,41 @@ community',
         'status' => 1,
         'theme' => 'ting',
         'weight' => -42,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
+  );
+
+  $export['views-forum_most_active-block'] = array(
+    'cache' => -1,
+    'css_class' => '',
+    'custom' => 0,
+    'delta' => 'forum_most_active-block',
+    'module' => 'views',
+    'node_types' => array(
+      0 => 'forum',
+    ),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'omega' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'omega',
+        'weight' => -37,
+      ),
+      'osto_web' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'osto_web',
+        'weight' => -40,
+      ),
+      'ting' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'ting',
+        'weight' => -37,
       ),
     ),
     'title' => '',
@@ -2199,6 +2267,72 @@ community',
     ),
     'title' => '',
     'visibility' => 1,
+  );
+
+  $export['views-ting_projects-block_1'] = array(
+    'cache' => -1,
+    'css_class' => '',
+    'custom' => 0,
+    'delta' => 'ting_projects-block_1',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => '<front>',
+    'roles' => array(),
+    'themes' => array(
+      'omega' => array(
+        'region' => 'preface_first',
+        'status' => 1,
+        'theme' => 'omega',
+        'weight' => -48,
+      ),
+      'osto_web' => array(
+        'region' => 'preface_first',
+        'status' => 1,
+        'theme' => 'osto_web',
+        'weight' => -48,
+      ),
+      'ting' => array(
+        'region' => 'preface_first',
+        'status' => 1,
+        'theme' => 'ting',
+        'weight' => -48,
+      ),
+    ),
+    'title' => 'Projekter',
+    'visibility' => 1,
+  );
+
+  $export['views-ting_projects-block_2'] = array(
+    'cache' => -1,
+    'css_class' => '',
+    'custom' => 0,
+    'delta' => 'ting_projects-block_2',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'omega' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'omega',
+        'weight' => 0,
+      ),
+      'osto_web' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osto_web',
+        'weight' => -14,
+      ),
+      'ting' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'ting',
+        'weight' => 0,
+      ),
+    ),
+    'title' => 'Projekter',
+    'visibility' => 0,
   );
 
   $export['views-ting_sidebar_all_users-block'] = array(
