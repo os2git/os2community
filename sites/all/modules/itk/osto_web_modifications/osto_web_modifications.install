@@ -1,0 +1,22 @@
+<?php
+
+/**
+ *  Enable mailchimp.
+ */
+function osto_web_modifications_update_7001() {
+  $module_enable = array();
+  $module_enable[] = 'mailchimp';
+  $module_enable[] = 'mailchimp_signup';
+
+  module_enable($module_enable);
+}
+
+/**
+ *  Enable osto newsletter.
+ */
+function osto_web_modifications_update_7002() {
+  $module_enable = array();
+  $module_enable[] = 'ostonewsletter';
+
+  module_enable($module_enable);
+}

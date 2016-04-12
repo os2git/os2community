@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the osto_newsletter feature.
+ */
+
+include_once 'osto_newsletter.features.inc';
