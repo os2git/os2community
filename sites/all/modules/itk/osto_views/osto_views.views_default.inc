@@ -2978,7 +2978,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Felt: Indhold: Offentlige partnere */
+  /* Felt: Indhold: Partnere */
   $handler->display->display_options['fields']['field_main_partners']['id'] = 'field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['table'] = 'field_data_field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['field'] = 'field_main_partners';
@@ -3019,7 +3019,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'product' => 'product',
   );
-  /* Filterkriterie: Indhold: Offentlige partnere (field_main_partners) */
+  /* Filterkriterie: Indhold: Partnere (field_main_partners) */
   $handler->display->display_options['filters']['field_main_partners_target_id']['id'] = 'field_main_partners_target_id';
   $handler->display->display_options['filters']['field_main_partners_target_id']['table'] = 'field_data_field_main_partners';
   $handler->display->display_options['filters']['field_main_partners_target_id']['field'] = 'field_main_partners_target_id';
@@ -3284,7 +3284,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'h3';
   $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'title';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Felt: Indhold: Offentlige partnere */
+  /* Felt: Indhold: Partnere */
   $handler->display->display_options['fields']['field_main_partners']['id'] = 'field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['table'] = 'field_data_field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['field'] = 'field_main_partners';
@@ -3850,7 +3850,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'h3';
   $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'title';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Felt: Indhold: Offentlige partnere */
+  /* Felt: Indhold: Partnere */
   $handler->display->display_options['fields']['field_main_partners']['id'] = 'field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['table'] = 'field_data_field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['field'] = 'field_main_partners';
@@ -4144,7 +4144,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['field_project_owner']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_project_owner']['element_wrapper_class'] = 'owner-sec';
   $handler->display->display_options['fields']['field_project_owner']['element_default_classes'] = FALSE;
-  /* Felt: Indhold: Offentlige partnere */
+  /* Felt: Indhold: Partnere */
   $handler->display->display_options['fields']['field_main_partners']['id'] = 'field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['table'] = 'field_data_field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['field'] = 'field_main_partners';
