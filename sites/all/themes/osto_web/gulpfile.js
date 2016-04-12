@@ -8,7 +8,6 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var rename = require('gulp-rename');
-var compass = require('gulp-compass');
 
 /**
  * Setting up browsersync.
