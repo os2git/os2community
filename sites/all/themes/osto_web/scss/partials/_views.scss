@@ -878,8 +878,7 @@
 			line-height: 160px;
 			text-align: center;
 			display: table;
-
-			background: linear-gradient(to right, rgba(10,112,227,1) 0%, rgba(10,112,227,1) 10%, rgba(10,112,227,0.5) 50%, rgba(10,112,227,1) 90%, rgba(10,112,227,1) 100%);
+			
 			content: "";
 			display: block;
 			position: relative;
@@ -970,7 +969,6 @@
 				@include opacity(1);
 			}
 			.extra-image {
-				z-index: 12;
 				position: absolute;
 				right: 0;
 				width: 940px;
