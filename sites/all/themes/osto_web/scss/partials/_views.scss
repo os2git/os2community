@@ -970,6 +970,13 @@
 				@include opacity(1);
 			}
 			.extra-image {
+				z-index: 12;
+				position: absolute;
+				right: 0;
+				width: 940px;
+				margin: 0 auto;
+				left: 0;
+
 				top: 0;
 				@include opacity(1);
 			}
