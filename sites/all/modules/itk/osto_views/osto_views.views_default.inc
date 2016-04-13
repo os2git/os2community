@@ -467,6 +467,13 @@ function osto_views_views_default_views() {
   $handler->display->display_options['footer']['area']['empty'] = TRUE;
   $handler->display->display_options['footer']['area']['content'] = '<a href="/nyheder" class="btn-link">Gå til nyheder &raquo;</a>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
+  /* Opførsel ved ingen resultater: Global: Tekstområde */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<div class="views-row">Ingen kommende begivenheder</div>';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   /* Felt: Indhold: Titel */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -568,17 +575,6 @@ function osto_views_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filterkriterie: Indhold: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'forum' => 'forum',
-  );
-  $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
-  $handler->display->display_options['filters']['type']['expose']['label'] = 'Type';
-  $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
-  $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
   $handler->display->display_options['block_description'] = 'Community forside: Seneste forumindlæg';
 
   /* Display: Begivenheder */
@@ -639,6 +635,13 @@ function osto_views_views_default_views() {
   $handler->display->display_options['filters']['type']['expose']['label'] = 'Type';
   $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+  /* Filterkriterie: Indhold: Dato - slutdato (field_event_date:value2) */
+  $handler->display->display_options['filters']['field_event_date_value2']['id'] = 'field_event_date_value2';
+  $handler->display->display_options['filters']['field_event_date_value2']['table'] = 'field_data_field_event_date';
+  $handler->display->display_options['filters']['field_event_date_value2']['field'] = 'field_event_date_value2';
+  $handler->display->display_options['filters']['field_event_date_value2']['operator'] = '>';
+  $handler->display->display_options['filters']['field_event_date_value2']['granularity'] = 'second';
+  $handler->display->display_options['filters']['field_event_date_value2']['default_date'] = 'now';
   $handler->display->display_options['block_description'] = 'Community forside: Seneste events';
   $translatables['ting_communiy_latest_activity'] = array(
     t('Master'),
@@ -650,6 +653,7 @@ function osto_views_views_default_views() {
     t('Stigende'),
     t('Faldende'),
     t('<a href="/nyheder" class="btn-link">Gå til nyheder &raquo;</a>'),
+    t('<div class="views-row">Ingen kommende begivenheder</div>'),
     t('Type'),
     t('Community forside: Seneste nyheder'),
     t('Forumindlæg'),
@@ -2978,7 +2982,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Felt: Indhold: Partnere */
+  /* Felt: Indhold: Offentlige partnere */
   $handler->display->display_options['fields']['field_main_partners']['id'] = 'field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['table'] = 'field_data_field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['field'] = 'field_main_partners';
@@ -3019,7 +3023,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'product' => 'product',
   );
-  /* Filterkriterie: Indhold: Partnere (field_main_partners) */
+  /* Filterkriterie: Indhold: Offentlige partnere (field_main_partners) */
   $handler->display->display_options['filters']['field_main_partners_target_id']['id'] = 'field_main_partners_target_id';
   $handler->display->display_options['filters']['field_main_partners_target_id']['table'] = 'field_data_field_main_partners';
   $handler->display->display_options['filters']['field_main_partners_target_id']['field'] = 'field_main_partners_target_id';
@@ -3284,7 +3288,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'h3';
   $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'title';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Felt: Indhold: Partnere */
+  /* Felt: Indhold: Offentlige partnere */
   $handler->display->display_options['fields']['field_main_partners']['id'] = 'field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['table'] = 'field_data_field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['field'] = 'field_main_partners';
@@ -3695,7 +3699,8 @@ function osto_views_views_default_views() {
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['relationship'] = 'reverse_field_product_project_node';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
 
@@ -3850,7 +3855,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'h3';
   $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'title';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Felt: Indhold: Partnere */
+  /* Felt: Indhold: Offentlige partnere */
   $handler->display->display_options['fields']['field_main_partners']['id'] = 'field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['table'] = 'field_data_field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['field'] = 'field_main_partners';
@@ -4144,7 +4149,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['field_project_owner']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_project_owner']['element_wrapper_class'] = 'owner-sec';
   $handler->display->display_options['fields']['field_project_owner']['element_default_classes'] = FALSE;
-  /* Felt: Indhold: Partnere */
+  /* Felt: Indhold: Offentlige partnere */
   $handler->display->display_options['fields']['field_main_partners']['id'] = 'field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['table'] = 'field_data_field_main_partners';
   $handler->display->display_options['fields']['field_main_partners']['field'] = 'field_main_partners';
