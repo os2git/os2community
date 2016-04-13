@@ -80,5 +80,39 @@ function osto_newsletter_default_mailchimp_signup() {
     },
     "rdf_mapping" : []
   }');
+  $items['nyhedsbrev_mail_only'] = entity_import('mailchimp_signup', '{
+    "name" : "nyhedsbrev_mail_only",
+    "mc_lists" : { "971cbdb77b" : "971cbdb77b" },
+    "mode" : "1",
+    "title" : "Nyhedsbrev",
+    "settings" : {
+      "path" : "",
+      "submit_button" : "Indsend",
+      "confirmation_message" : "Du er nu oprettet som abonnent.",
+      "destination" : "",
+      "mergefields" : {
+        "EMAIL" : {
+          "name" : "Email",
+          "req" : true,
+          "field_type" : "email",
+          "public" : true,
+          "show" : true,
+          "order" : "1",
+          "default" : "",
+          "helptext" : "",
+          "size" : "25",
+          "tag" : "EMAIL",
+          "id" : 0
+        },
+        "NAME" : 0,
+        "TYPE" : 0
+      },
+      "description" : "",
+      "doublein" : 0,
+      "send_welcome" : 0,
+      "include_interest_groups" : 0
+    },
+    "rdf_mapping" : []
+  }');
   return $items;
 }
