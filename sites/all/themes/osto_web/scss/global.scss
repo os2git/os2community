@@ -22,12 +22,14 @@ body {
 	font-family: $font-fam-pri;
 	font-size: 12px;
 }
-.page {
-	overflow: hidden;
-}
+
 img {
 	max-width: 100%;
 	height: auto;
+}
+
+.page {
+	overflow: hidden;
 }
 
 /*

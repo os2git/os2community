@@ -948,12 +948,20 @@
 				}
 			}
 		}
+		.background-overlay {
+			background: linear-gradient(to right, rgba(10,112,227,1) 0%,rgba(10,112,227,1) 10%,rgba(10,112,227,0.5) 50%,rgba(10,112,227,1) 90%,rgba(10,112,227,1) 100%);
+			height: 100%;
+			width: 100%;
+			position: absolute;
+		}
 		.extra-image {
 			@include transition-property(opacity,top);
 			@include transition-duration($anim-speed*2);
 			@include transition-timing-function($anim-ease-type);
 			@include transition-delay($anim-speed);			
 			@include opacity(0);
+
+			display: none;
 		}
 		li.animated {
 			.slide-title {
