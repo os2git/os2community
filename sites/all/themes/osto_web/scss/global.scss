@@ -63,7 +63,7 @@ img {
 	background: $gray-lightest;
 }
 #zone-header-wrapper {
-	background: linear-gradient(to right, rgba(10,112,227,1) 0%,rgba(10,112,227,1) 35%,rgba(10,112,227,0.7) 50%,rgba(10,112,227,1) 65%,rgba(10,112,227,1) 100%),url("../img/header-bg.png");
+	background: linear-gradient(to right, $blue 0%,$blue 35%,rgba(10,112,227,0.7) 50%,$blue 65%,$blue 100%),url("../img/header-bg.png");
 	background-size: auto 293px;
 	background-repeat: no-repeat;
 	background-position-y: center;
