@@ -253,7 +253,7 @@
 			height: 30px;
 			line-height: 30px;
 			vertical-align: middle;
-			color: $text-color-light;
+			color: $gray;
 			border-top: 1px solid $gray-dark;
 			> span {
 				display: block;
@@ -335,7 +335,7 @@
 				font-size: 12px;
 				padding: 0 1.5em;
 				font-size: 10px;
-				background: #bfbfbd;
+				background: $gray;
 			}
 		}
 		.views-submit-button {
@@ -494,7 +494,7 @@
 			font-size: $font-size-std;
 			text-transform: uppercase;
 			font-weight: bold;
-			color: #c9c9c9;
+			color: $gray;
 			padding: 12px 0;
 			a {
 				color: $link-color-std;
@@ -667,7 +667,7 @@
 	.form-type-bef-link.selected {
 		a {
 			text-decoration: underline;
-			color: $text-color-light;
+			color: $gray;
 		}
 	}
 	.form-item:last-child {
