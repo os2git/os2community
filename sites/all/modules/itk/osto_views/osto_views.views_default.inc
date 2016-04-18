@@ -4840,13 +4840,13 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['field_supp_num_employees']['element_wrapper_class'] = 'fact employees';
   $handler->display->display_options['fields']['field_supp_num_employees']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_supp_num_employees']['hide_empty'] = TRUE;
-  /* Felt: Indhold: TING leverandør siden */
+  /* Felt: Indhold: OS2 leverandør siden */
   $handler->display->display_options['fields']['field_supp_supplier_since']['id'] = 'field_supp_supplier_since';
   $handler->display->display_options['fields']['field_supp_supplier_since']['table'] = 'field_data_field_supp_supplier_since';
   $handler->display->display_options['fields']['field_supp_supplier_since']['field'] = 'field_supp_supplier_since';
   $handler->display->display_options['fields']['field_supp_supplier_since']['label'] = '';
   $handler->display->display_options['fields']['field_supp_supplier_since']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_supp_supplier_since']['alter']['text'] = '<span class="label">TING leverandør siden: </span>[field_supp_supplier_since] ';
+  $handler->display->display_options['fields']['field_supp_supplier_since']['alter']['text'] = '<span class="label">OS2 leverandør siden: </span>[field_supp_supplier_since] ';
   $handler->display->display_options['fields']['field_supp_supplier_since']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_supp_supplier_since']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['field_supp_supplier_since']['element_wrapper_class'] = 'fact supplier-since';
@@ -4965,7 +4965,7 @@ function osto_views_views_default_views() {
     t('<span class="label">Organisation: </span>[field_pub_part_organisation] '),
     t('<span class="label">Virksomhedsnavn: </span><span class="companyname">[field_supp_company]</span>'),
     t('<span class="label">Antal ansatte: </span>[field_supp_num_employees]'),
-    t('<span class="label">TING leverandør siden: </span>[field_supp_supplier_since] '),
+    t('<span class="label">OS2 leverandør siden: </span>[field_supp_supplier_since] '),
     t('<span class="label">Offentlig partner siden: </span>[field_pub_part_partner_since]'),
     t('<span class="label">Partnerskabsaftale:</span><a href="[field_pub_part_partner_contract]">Download PDF</a>'),
     t('Download PDF'),
@@ -5586,7 +5586,7 @@ function osto_views_views_default_views() {
       'address' => 'address',
     ),
   );
-  /* Felt: Indhold: TING leverandør siden */
+  /* Felt: Indhold: OS2 leverandør siden */
   $handler->display->display_options['fields']['field_supp_supplier_since']['id'] = 'field_supp_supplier_since';
   $handler->display->display_options['fields']['field_supp_supplier_since']['table'] = 'field_data_field_supp_supplier_since';
   $handler->display->display_options['fields']['field_supp_supplier_since']['field'] = 'field_supp_supplier_since';

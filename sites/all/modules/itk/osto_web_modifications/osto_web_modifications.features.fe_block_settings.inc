@@ -1993,7 +1993,7 @@ community',
         'weight' => -42,
       ),
     ),
-    'title' => 'TING nyheder',
+    'title' => 'OS2 nyheder',
     'visibility' => 0,
   );
 
