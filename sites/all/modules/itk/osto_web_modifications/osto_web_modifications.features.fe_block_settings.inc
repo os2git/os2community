@@ -610,38 +610,6 @@ nyheder/*',
     'visibility' => 0,
   );
 
-  $export['context_ui-devel'] = array(
-    'cache' => 1,
-    'css_class' => '',
-    'custom' => 0,
-    'delta' => 'devel',
-    'module' => 'context_ui',
-    'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'omega' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'omega',
-        'weight' => -28,
-      ),
-      'osto_web' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osto_web',
-        'weight' => -44,
-      ),
-      'ting' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'ting',
-        'weight' => -28,
-      ),
-    ),
-    'title' => '',
-    'visibility' => 0,
-  );
 
   $export['context_ui-editor'] = array(
     'cache' => 1,
@@ -1007,71 +975,6 @@ community',
     'visibility' => 0,
   );
 
-  $export['devel-execute_php'] = array(
-    'cache' => -1,
-    'css_class' => '',
-    'custom' => 0,
-    'delta' => 'execute_php',
-    'module' => 'devel',
-    'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'omega' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'omega',
-        'weight' => -19,
-      ),
-      'osto_web' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osto_web',
-        'weight' => -31,
-      ),
-      'ting' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'ting',
-        'weight' => -19,
-      ),
-    ),
-    'title' => '',
-    'visibility' => 0,
-  );
-
-  $export['devel-switch_user'] = array(
-    'cache' => -1,
-    'css_class' => '',
-    'custom' => 0,
-    'delta' => 'switch_user',
-    'module' => 'devel',
-    'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'omega' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'omega',
-        'weight' => -6,
-      ),
-      'osto_web' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osto_web',
-        'weight' => -12,
-      ),
-      'ting' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'ting',
-        'weight' => -6,
-      ),
-    ),
-    'title' => '',
-    'visibility' => 0,
-  );
 
   $export['icon_tabs-icon-tabs'] = array(
     'cache' => -1,
@@ -1133,39 +1036,6 @@ community',
         'status' => 0,
         'theme' => 'ting',
         'weight' => -5,
-      ),
-    ),
-    'title' => '',
-    'visibility' => 0,
-  );
-
-  $export['menu-devel'] = array(
-    'cache' => -1,
-    'css_class' => '',
-    'custom' => 0,
-    'delta' => 'devel',
-    'module' => 'menu',
-    'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'omega' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'omega',
-        'weight' => 1,
-      ),
-      'osto_web' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osto_web',
-        'weight' => -2,
-      ),
-      'ting' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'ting',
-        'weight' => 1,
       ),
     ),
     'title' => '',

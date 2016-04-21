@@ -91,15 +91,6 @@ function osto_permissions_user_default_permissions() {
     'module' => 'contextual',
   );
 
-  // Exported permission: 'access devel information'.
-  $permissions['access devel information'] = array(
-    'name' => 'access devel information',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'devel',
-  );
-
   // Exported permission: 'access generel_s_gning search_api_page'.
   $permissions['access generel_s_gning search_api_page'] = array(
     'name' => 'access generel_s_gning search_api_page',
@@ -2004,15 +1995,6 @@ function osto_permissions_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
-  // Exported permission: 'execute php code'.
-  $permissions['execute php code'] = array(
-    'name' => 'execute php code',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'devel',
-  );
-
   // Exported permission: 'flag email_node'.
   $permissions['flag email_node'] = array(
     'name' => 'flag email_node',
@@ -2305,15 +2287,6 @@ function osto_permissions_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'shortcut',
-  );
-
-  // Exported permission: 'switch users'.
-  $permissions['switch users'] = array(
-    'name' => 'switch users',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'devel',
   );
 
   // Exported permission: 'translate interface'.
