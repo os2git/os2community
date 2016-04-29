@@ -95,7 +95,7 @@ function ting_blocks_community_stats_view() {
 	$output .= "<div><strong>".ting_blocks_get_community_stats("suppliers")."</strong><span>Leverandører</span></div>";
 	$output .= "<div><strong>".ting_blocks_get_community_stats("products")."</strong><span>Produkter</span></div>";
 	$output .= "<div><strong>".ting_blocks_get_community_stats("projects")."</strong><span>Projekter</span></div>";
-	$output .= "<div><strong>".ting_blocks_get_community_stats("teams")."</strong><span>Teams</span></div>";
+	$output .= "<div><strong>".ting_blocks_get_community_stats("teams")."</strong><span>Grupper</span></div>";
 	$output .= "</div>";
 	
 	return $output;
