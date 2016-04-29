@@ -2467,6 +2467,7 @@ function osto_permissions_user_default_permissions() {
     'roles' => array(
       'administrator' => 'administrator',
       'moderator' => 'moderator',
+      'os2 projektmedlem' => 'os2 projektmedlem',
     ),
     'module' => 'filter',
   );

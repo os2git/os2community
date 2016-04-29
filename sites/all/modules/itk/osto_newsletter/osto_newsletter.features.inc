@@ -28,9 +28,9 @@ function osto_newsletter_default_mailchimp_signup() {
     "title" : "Nyhedsbrev",
     "settings" : {
       "path" : "",
-      "submit_button" : "Indsend",
+      "submit_button" : "Tilmeld",
       "confirmation_message" : "Du er nu oprettet som abonnent.",
-      "destination" : "",
+      "destination" : "newsletter-confirm",
       "mergefields" : {
         "EMAIL" : {
           "name" : "Email",
@@ -47,7 +47,7 @@ function osto_newsletter_default_mailchimp_signup() {
         },
         "NAME" : {
           "name" : "Navn",
-          "req" : true,
+          "req" : false,
           "field_type" : "text",
           "public" : true,
           "show" : true,
@@ -87,9 +87,9 @@ function osto_newsletter_default_mailchimp_signup() {
     "title" : "Nyhedsbrev",
     "settings" : {
       "path" : "",
-      "submit_button" : "Indsend",
+      "submit_button" : "Tilmeld",
       "confirmation_message" : "Du er nu oprettet som abonnent.",
-      "destination" : "",
+      "destination" : "newsletter-confirm",
       "mergefields" : {
         "EMAIL" : {
           "name" : "Email",
