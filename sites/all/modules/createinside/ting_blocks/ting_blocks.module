@@ -87,16 +87,15 @@ function ting_blocks_newsletter_signup_view() {
  * Community stats - block view
  */
 function ting_blocks_community_stats_view() {
-	
 	$output = "";
-	$output .= "<div class='image'><img src='".drupal_get_path("theme","ting")."/img/danmarkskort.png' /></div>";
+	$output .= "<div class='image'><img alt='Danmarkskort' src='".drupal_get_path("theme","ting")."/img/danmarkskort.png' /></div>";
 	$output .= "<div class='text'><div>".variable_get('community_stats_text', '')."</div></div>";
 	$output .= "<div class='stats'>";
 	$output .= "<div><strong>".ting_blocks_get_community_stats("partners")."</strong><span>Off. partnere</span></div>";
 	$output .= "<div><strong>".ting_blocks_get_community_stats("suppliers")."</strong><span>Leverandører</span></div>";
-	$output .= "<div><strong>".ting_blocks_get_community_stats("members")."</strong><span>Medlemmer</span></div>";
+	$output .= "<div><strong>".ting_blocks_get_community_stats("products")."</strong><span>Produkter</span></div>";
 	$output .= "<div><strong>".ting_blocks_get_community_stats("projects")."</strong><span>Projekter</span></div>";
-	$output .= "<div><strong>".ting_blocks_get_community_stats("events")."</strong><span>Events</span></div>";
+	$output .= "<div><strong>".ting_blocks_get_community_stats("teams")."</strong><span>Grupper</span></div>";
 	$output .= "</div>";
 	
 	return $output;
@@ -144,6 +143,22 @@ function ting_blocks_get_community_stats($type) {
 			  ->propertyCondition('status', 1);
 			$result = $query->count()->execute();	
 		break;
+		case "products":
+			$query = new EntityFieldQuery();
+			$query
+				->entityCondition('entity_type', 'node')
+				->entityCondition('bundle', 'product')
+				->propertyCondition('status', 1);
+			$result = $query->count()->execute();
+			break;
+		case "teams":
+			$query = new EntityFieldQuery();
+			$query
+				->entityCondition('entity_type', 'node')
+				->entityCondition('bundle', 'team')
+				->propertyCondition('status', 1);
+			$result = $query->count()->execute();
+			break;
 	}
 	return (isset($result) ? $result : FALSE);
 }

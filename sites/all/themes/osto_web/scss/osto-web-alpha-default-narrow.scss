@@ -27,7 +27,7 @@
 		width: 103%;
 		.block {
 			float: left;
-			width: 31%;
+			width: 48%;
 			margin: 0 2% 0 0;
 		}
 	}
@@ -40,6 +40,11 @@
 				margin: 0 2% 0 0;
 			}
 		}
+	}
+
+	section.latest-group-content,
+	section.latest-content-products {
+		width: 49%;
 	}
 }
  
@@ -114,14 +119,27 @@
 /* Slideshow - Front Page */
 .front {
 	#flexslider-1.flexslider {
+		font-size: .8em;
+		height: 400px;
 		.views-field-nothing {
-			background: linear-gradient(to right, rgba(10,112,227,1) 0%,rgba(10,112,227,1) 10%,rgba(10,112,227,0.5) 50%,rgba(10,112,227,1) 90%,rgba(10,112,227,1) 100%);
 			content: "";
 			display: block;
 			position: relative;
+			line-height: 400px;
 			height: 100%;
 			width: 100%;
+
+			.field-content {
+				width: 100%;
+			}
 		}
+		.background-overlay {
+			background: linear-gradient(to right, $blue 0%,$blue 10%,rgba(10,112,227,0.5) 50%,$blue 90%,$blue 100%);
+			height: 100%;
+			width: 100%;
+			position: absolute;
+		}
+
 		.extra-image {
 			display: none;
 		}
@@ -212,4 +230,17 @@
 	.region-content {
 		max-width: 620px;
 	}
+}
+
+
+
+/*
+==========================================================================
+	Menus
+==========================================================================
+*/
+
+#region-menu {
+	width: 90%;
+	padding: 0 5%;
 }

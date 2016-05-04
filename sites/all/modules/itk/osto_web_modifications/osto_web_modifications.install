@@ -1,0 +1,34 @@
+<?php
+
+/**
+ *  Enable mailchimp.
+ */
+function osto_web_modifications_update_7001() {
+  $module_enable = array();
+  $module_enable[] = 'mailchimp';
+  $module_enable[] = 'mailchimp_signup';
+
+  module_enable($module_enable);
+}
+
+/**
+ *  Enable osto newsletter.
+ */
+function osto_web_modifications_update_7002() {
+  $module_enable = array();
+  $module_enable[] = 'osto_newsletter';
+
+  module_enable($module_enable);
+}
+
+
+/**
+ *  Enable contact module.
+ */
+function osto_web_modifications_update_7003() {
+  $module_enable = array();
+  $module_enable[] = 'contact';
+  $module_enable[] = 'osto_contact';
+
+  module_enable($module_enable);
+}

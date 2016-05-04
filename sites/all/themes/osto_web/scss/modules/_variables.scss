@@ -4,11 +4,28 @@
 ========================================================================== 
 */
 
+/*
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800);
 @import url(http://fonts.googleapis.com/css?family=Merriweather:400,700,300);
 
 $font-fam-pri: 'Open Sans', sans-serif;
 $font-fam-sec: 'Merriweather', serif;
+*/
+
+@font-face {
+	font-family: 'Montserrat-Regular';
+	src: url("../fonts/Montserrat/Montserrat-Regular.ttf");
+}
+@font-face {
+	font-family: 'Montserrat-Bold';
+	src: url("../fonts/Montserrat/Montserrat-Bold.ttf");
+	font-weight: bold;
+}
+
+$font-fam-pri: "Montserrat-Regular", 'Open Sans', sans-serif;
+$font-fam-sec: "Montserrat-Regular", 'Merriweather', serif;
+
+$line-height-std: 1.3em;
 
 $font-size-std-px: 12;
 $font-size-small: (10/$font-size-std-px)*1em;
@@ -22,8 +39,6 @@ $font-weight-normal: 400;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 $font-weight-extrabold: 800;
-
-$line-height-std: 1.3em;
 
 /*
 ========================================================================== 
