@@ -109,7 +109,7 @@ Dette link kan kun bruges til at logge ind, og det sender dig til en side hvor d
 
 Når du har valgt en adgangskode kan du logge ind på [site:login-url] med:
 
-Brugernavn: [user:name]
+Brugernavn: [user:name-raw]
 Adgangskode: Din adgangskode
 
 --  [site:name] holdet';
@@ -136,7 +136,7 @@ Dette link kan kun bruges til at logge ind, og det sender dig til en side hvor d
 
 Når du har valgt en adgangskode kan du logge ind på [site:login-url] med:
 
-Brugernavn: [user:name]
+Brugernavn: [user:name-raw]
 Adgangskode: Din adgangskode
 
 -- [site:name] holdet';
@@ -184,7 +184,7 @@ Linket kan kun bruges én gang, og det fører dig til en side, hvor du kan vælg
 
 Når du har valgt en adgangskode kan du fremover logge ind på [site:login-url] med:
 
-Brugernavn: [user:name]
+Brugernavn: [user:name-raw]
 Adgangskode: Din adgangskode
 
 -- [site:name]';
@@ -349,7 +349,7 @@ Din konto på [site:name] er blevet lukket.
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_register';
-  $strongarm->value = '0';
+  $strongarm->value = '2';
   $export['user_register'] = $strongarm;
 
   $strongarm = new stdClass();

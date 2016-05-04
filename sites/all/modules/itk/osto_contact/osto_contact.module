@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the OS2 web contact feature.
+ */
+
+include_once 'osto_contact.features.inc';

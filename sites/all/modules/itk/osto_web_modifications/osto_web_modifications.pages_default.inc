@@ -181,7 +181,9 @@ function osto_web_modifications_default_page_manager_handlers() {
       ),
     );
     $pane->cache = array();
-    $pane->style = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 1;
@@ -190,7 +192,7 @@ function osto_web_modifications_default_page_manager_handlers() {
     $display->content['new-caa3c3b5-1053-4ece-b157-f67dbd77ac32'] = $pane;
     $display->panels['left'][1] = 'new-caa3c3b5-1053-4ece-b157-f67dbd77ac32';
     $pane = new stdClass();
-    $pane->pid = 'new-9deb9fc4-5540-4d83-a021-633cffb541c5';
+    $pane->pid = 'new-2c9d21f9-ab45-4592-ac52-982d3deaf0fe';
     $pane->panel = 'right';
     $pane->type = 'views_panes';
     $pane->subtype = 'ting_project_status-panel_pane_1';
@@ -198,21 +200,77 @@ function osto_web_modifications_default_page_manager_handlers() {
     $pane->access = array();
     $pane->configuration = array();
     $pane->cache = array();
-    $pane->style = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '9deb9fc4-5540-4d83-a021-633cffb541c5';
-    $display->content['new-9deb9fc4-5540-4d83-a021-633cffb541c5'] = $pane;
-    $display->panels['right'][0] = 'new-9deb9fc4-5540-4d83-a021-633cffb541c5';
+    $pane->uuid = '2c9d21f9-ab45-4592-ac52-982d3deaf0fe';
+    $display->content['new-2c9d21f9-ab45-4592-ac52-982d3deaf0fe'] = $pane;
+    $display->panels['right'][0] = 'new-2c9d21f9-ab45-4592-ac52-982d3deaf0fe';
+    $pane = new stdClass();
+    $pane->pid = 'new-fc297084-5d35-442f-9c45-06be4e645ada';
+    $pane->panel = 'right';
+    $pane->type = 'views';
+    $pane->subtype = 'ting_product_metadata';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '1',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'block_5',
+      'context' => array(
+        0 => 'argument_entity_id:node_1.nid',
+      ),
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'fc297084-5d35-442f-9c45-06be4e645ada';
+    $display->content['new-fc297084-5d35-442f-9c45-06be4e645ada'] = $pane;
+    $display->panels['right'][1] = 'new-fc297084-5d35-442f-9c45-06be4e645ada';
     $pane = new stdClass();
     $pane->pid = 'new-94e7f02a-473c-4906-8c1c-e38de4f7b220';
     $pane->panel = 'right';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:group_group';
     $pane->shown = TRUE;
-    $pane->access = array();
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 2,
+              1 => 4,
+              2 => 3,
+              3 => 5,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
     $pane->configuration = array(
       'label' => 'hidden',
       'formatter' => 'og_group_subscribe',
@@ -232,11 +290,11 @@ function osto_web_modifications_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 2;
     $pane->locks = array();
     $pane->uuid = '94e7f02a-473c-4906-8c1c-e38de4f7b220';
     $display->content['new-94e7f02a-473c-4906-8c1c-e38de4f7b220'] = $pane;
-    $display->panels['right'][1] = 'new-94e7f02a-473c-4906-8c1c-e38de4f7b220';
+    $display->panels['right'][2] = 'new-94e7f02a-473c-4906-8c1c-e38de4f7b220';
     $pane = new stdClass();
     $pane->pid = 'new-6ee8a96c-353d-4a48-be9b-5778e3ce1f9b';
     $pane->panel = 'right';
@@ -257,11 +315,11 @@ function osto_web_modifications_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 2;
+    $pane->position = 3;
     $pane->locks = array();
     $pane->uuid = '6ee8a96c-353d-4a48-be9b-5778e3ce1f9b';
     $display->content['new-6ee8a96c-353d-4a48-be9b-5778e3ce1f9b'] = $pane;
-    $display->panels['right'][2] = 'new-6ee8a96c-353d-4a48-be9b-5778e3ce1f9b';
+    $display->panels['right'][3] = 'new-6ee8a96c-353d-4a48-be9b-5778e3ce1f9b';
     $pane = new stdClass();
     $pane->pid = 'new-d9ff86d4-4df2-4dc4-bc70-62b7941dc867';
     $pane->panel = 'right';
@@ -275,14 +333,16 @@ function osto_web_modifications_default_page_manager_handlers() {
       ),
     );
     $pane->cache = array();
-    $pane->style = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 3;
+    $pane->position = 4;
     $pane->locks = array();
     $pane->uuid = 'd9ff86d4-4df2-4dc4-bc70-62b7941dc867';
     $display->content['new-d9ff86d4-4df2-4dc4-bc70-62b7941dc867'] = $pane;
-    $display->panels['right'][3] = 'new-d9ff86d4-4df2-4dc4-bc70-62b7941dc867';
+    $display->panels['right'][4] = 'new-d9ff86d4-4df2-4dc4-bc70-62b7941dc867';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-405e8a5f-755e-46c7-aa19-87618aaffd86';
   $handler->conf['display'] = $display;
@@ -489,6 +549,319 @@ function osto_web_modifications_default_page_manager_handlers() {
     $pane->uuid = '4fbdd8b6-32aa-46b6-be9f-90415be75cb4';
     $display->content['new-4fbdd8b6-32aa-46b6-be9f-90415be75cb4'] = $pane;
     $display->panels['left'][0] = 'new-4fbdd8b6-32aa-46b6-be9f-90415be75cb4';
+    $pane = new stdClass();
+    $pane->pid = 'new-86b014f4-1174-4b0e-8950-e6cde26f679f';
+    $pane->panel = 'right';
+    $pane->type = 'views';
+    $pane->subtype = 'ting_product_metadata';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '1',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'block_4',
+      'context' => array(
+        0 => 'argument_entity_id:node_1.nid',
+      ),
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '86b014f4-1174-4b0e-8950-e6cde26f679f';
+    $display->content['new-86b014f4-1174-4b0e-8950-e6cde26f679f'] = $pane;
+    $display->panels['right'][0] = 'new-86b014f4-1174-4b0e-8950-e6cde26f679f';
+    $pane = new stdClass();
+    $pane->pid = 'new-f71d1919-0d8b-435d-812d-1b7cf93d2bb9';
+    $pane->panel = 'right';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'node:group_group';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'role',
+          'settings' => array(
+            'rids' => array(
+              0 => 4,
+              1 => 3,
+              2 => 5,
+            ),
+          ),
+          'context' => 'logged-in-user',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'label' => 'hidden',
+      'formatter' => 'og_group_subscribe',
+      'delta_limit' => 0,
+      'delta_offset' => '0',
+      'delta_reversed' => FALSE,
+      'formatter_settings' => array(
+        'field_name' => '0',
+      ),
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 1,
+      'override_title_text' => 'Medlemskab',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'f71d1919-0d8b-435d-812d-1b7cf93d2bb9';
+    $display->content['new-f71d1919-0d8b-435d-812d-1b7cf93d2bb9'] = $pane;
+    $display->panels['right'][1] = 'new-f71d1919-0d8b-435d-812d-1b7cf93d2bb9';
+    $pane = new stdClass();
+    $pane->pid = 'new-31ca3d24-a717-42ea-8dc9-70e7b6496987';
+    $pane->panel = 'right';
+    $pane->type = 'views';
+    $pane->subtype = 'ting_product_metadata';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '1',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'block_1',
+      'context' => array(
+        0 => 'argument_entity_id:node_1.nid',
+      ),
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '31ca3d24-a717-42ea-8dc9-70e7b6496987';
+    $display->content['new-31ca3d24-a717-42ea-8dc9-70e7b6496987'] = $pane;
+    $display->panels['right'][2] = 'new-31ca3d24-a717-42ea-8dc9-70e7b6496987';
+    $pane = new stdClass();
+    $pane->pid = 'new-9de2623e-f50f-4fac-b1b9-b9e8ce25b1da';
+    $pane->panel = 'right';
+    $pane->type = 'views';
+    $pane->subtype = 'ting_product_related_project';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '1',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'block',
+      'context' => array(
+        0 => 'argument_entity_id:node_1.nid',
+      ),
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = '9de2623e-f50f-4fac-b1b9-b9e8ce25b1da';
+    $display->content['new-9de2623e-f50f-4fac-b1b9-b9e8ce25b1da'] = $pane;
+    $display->panels['right'][3] = 'new-9de2623e-f50f-4fac-b1b9-b9e8ce25b1da';
+    $pane = new stdClass();
+    $pane->pid = 'new-d07d0405-a7fd-45b5-84f4-ab05c126c1f4';
+    $pane->panel = 'right';
+    $pane->type = 'views';
+    $pane->subtype = 'ting_product_metadata';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '1',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'block_3',
+      'context' => array(
+        0 => 'argument_entity_id:node_1.nid',
+      ),
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 4;
+    $pane->locks = array();
+    $pane->uuid = 'd07d0405-a7fd-45b5-84f4-ab05c126c1f4';
+    $display->content['new-d07d0405-a7fd-45b5-84f4-ab05c126c1f4'] = $pane;
+    $display->panels['right'][4] = 'new-d07d0405-a7fd-45b5-84f4-ab05c126c1f4';
+    $pane = new stdClass();
+    $pane->pid = 'new-bbd6370b-d696-47fe-8eae-5b8155ff56b2';
+    $pane->panel = 'right';
+    $pane->type = 'views';
+    $pane->subtype = 'ting_product_metadata';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '1',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'block_2',
+      'context' => array(
+        0 => 'argument_entity_id:node_1.nid',
+      ),
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 5;
+    $pane->locks = array();
+    $pane->uuid = 'bbd6370b-d696-47fe-8eae-5b8155ff56b2';
+    $display->content['new-bbd6370b-d696-47fe-8eae-5b8155ff56b2'] = $pane;
+    $display->panels['right'][5] = 'new-bbd6370b-d696-47fe-8eae-5b8155ff56b2';
+    $pane = new stdClass();
+    $pane->pid = 'new-513c03cc-1454-4426-a533-7df1d2b2602c';
+    $pane->panel = 'right';
+    $pane->type = 'views';
+    $pane->subtype = 'ting_product_partners';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '0',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'block',
+      'context' => array(
+        0 => 'argument_entity_id:node_1.nid',
+      ),
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 6;
+    $pane->locks = array();
+    $pane->uuid = '513c03cc-1454-4426-a533-7df1d2b2602c';
+    $display->content['new-513c03cc-1454-4426-a533-7df1d2b2602c'] = $pane;
+    $display->panels['right'][6] = 'new-513c03cc-1454-4426-a533-7df1d2b2602c';
+    $pane = new stdClass();
+    $pane->pid = 'new-73d17ee0-e3be-469e-a54e-c15e088cb72b';
+    $pane->panel = 'right';
+    $pane->type = 'views';
+    $pane->subtype = 'ting_product_partners';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '0',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'block_1',
+      'context' => array(
+        0 => 'argument_entity_id:node_1.nid',
+      ),
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 7;
+    $pane->locks = array();
+    $pane->uuid = '73d17ee0-e3be-469e-a54e-c15e088cb72b';
+    $display->content['new-73d17ee0-e3be-469e-a54e-c15e088cb72b'] = $pane;
+    $display->panels['right'][7] = 'new-73d17ee0-e3be-469e-a54e-c15e088cb72b';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-4fbdd8b6-32aa-46b6-be9f-90415be75cb4';
   $handler->conf['display'] = $display;

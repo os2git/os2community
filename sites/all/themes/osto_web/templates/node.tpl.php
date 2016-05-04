@@ -36,20 +36,7 @@
   <?php endif; ?>  
   
   </div>
-  
-  <div class="social-links">
-	  <div class='col-first'>
-			<?php
-				print render($content['rrssb']);
-			?>
-	  </div>
-	  <div class='col-sec'>
-			<?php
-		    print render($content['rate_commons_like']);
-			?>
-	  </div>
-  </div>
-  
+
   <div class="clearfix">
     <?php print render($content['comments']); ?>
   </div>

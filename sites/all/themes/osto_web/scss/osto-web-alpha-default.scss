@@ -31,9 +31,7 @@
 	width: 100%;
 	min-height: 90px;
 	.block-superfish {
-		max-width: 840px;
-		min-width: 650px;
-		width: 82%;
+		width: 100%;
 		float: left;
 	}
 }
@@ -45,7 +43,7 @@
 	}
 }
 #region-menu {
-	width: 75%;
+	width: 65%;
 	margin: 0;
 	position: initial;
 	float: left;
@@ -89,7 +87,7 @@
 			background-color: $blue;
 		}
 		/* Level 2 */
-		> ul {
+		ul {
 			background: white;
 			top: 90px;
 			width: 18em !important;
@@ -146,12 +144,19 @@
 		.half {
 			width: 50%;
 		}
+		.background-overlay {
+			background: linear-gradient(to right, $blue 0%,$blue 10%,rgba(10,112,227,0.5) 50%,$blue 90%,$blue 100%);
+			height: 100%;
+			width: 100%;
+			position: absolute;
+		}
+
 		.views-field-nothing {
 			height: 500px;
 			line-height: 500px;
 
 			&:after {
-				background: linear-gradient(to right, rgba(10,112,227,1) 0%,rgba(10,112,227,1) 10%,rgba(10,112,227,0.5) 50%,rgba(10,112,227,1) 90%,rgba(10,112,227,1) 100%);
+
 				content: "";
 				display: block;
 				position: absolute;
@@ -204,7 +209,7 @@
 			top: -10px;
 			img {
 				float: right;
-				max-width: 100%;
+				max-width: 47em;
 				height: auto;
 			}
 		}
