@@ -227,4 +227,19 @@
     }
   });
 
+  /**
+   * Sets CKEditor configuration.
+   *
+   * @type {Drupal~behavior}
+   *
+   * @prop {Drupal~behaviorAttach} attach
+   *   Attaches config behaviour to the CKEditor.
+   */
+  Drupal.behaviors.ckeditor = {
+    attach: function (context, settings) {
+      // Manually set the cache-busting string to the same value as Drupal.
+      CKEDITOR.timestamp = Drupal.settings.ckeditor.timestamp;
+    }
+  };
+
 })(Drupal, Drupal.debounce, CKEDITOR, jQuery);

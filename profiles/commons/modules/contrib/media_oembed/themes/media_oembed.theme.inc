@@ -8,7 +8,7 @@
 /**
  * Preprocess function for theme('media_oembed').
  */
-function media_oembed_preprocess_media_oembed(&$variables) {
+function template_preprocess_media_oembed(&$variables) {
   $uri = $variables['uri'];
 
   // Make the file object available.

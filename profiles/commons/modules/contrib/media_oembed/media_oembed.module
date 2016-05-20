@@ -90,7 +90,7 @@ function media_oembed_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('media_oembed_settings'),
     'file' => 'media_oembed.admin.inc',
-    'access arguments' => array('administer site configuration'),
+    'access arguments' => array('administer media oembed'),
     'type' => MENU_LOCAL_TASK,
   );
 

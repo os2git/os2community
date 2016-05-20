@@ -38,6 +38,7 @@ function entity_embed_dialog_form($form, &$form_state, $filter_format, $embed_bu
     'data-entity-embed-display' => 'entityreference:entityreference_entity_view',
     'data-entity-embed-settings' => array(),
     'data-align' => '',
+    'data-caption' => '',
   );
 
   if (empty($form_state['step'])) {
@@ -204,7 +205,13 @@ function entity_embed_dialog_form($form, &$form_state, $filter_format, $embed_bu
         }
       }
 
-      // Build the list of allowed display plugins.
+      // The 'Rendered entity' formatter can not be used for files unless
+      // the file_entity module is available.
+      if (!empty($formatter_options['entityreference:entityreference_entity_view']) && $entity_element['data-entity-type'] == 'file' && !module_exists('file_entity')) {
+        unset($formatter_options['entityreference:entityreference_entity_view']);
+      }
+
+      // Build the list of allowed Entity Embed Display plugins.
       $allowed_plugins = $embed_button->display_plugins;
 
       // If list of allowed options is empty, it means that all plugins are
@@ -219,8 +226,8 @@ function entity_embed_dialog_form($form, &$form_state, $filter_format, $embed_bu
         $entity_element['data-entity-embed-display'] = key($display_plugin_options);
       }
 
-      // The default display plugin has been deprecated by the rendered entity
-      // field formatter.
+      // The default Entity Embed Display plugin has been deprecated by the
+      // rendered entity field formatter.
       if ($entity_element['data-entity-embed-display'] === 'default') {
         $entity_element['data-entity-embed-display'] = 'entityreference:entityreference_entity_view';
       }
@@ -259,39 +266,15 @@ function entity_embed_dialog_form($form, &$form_state, $filter_format, $embed_bu
       // Split the formatter into separate parts.
       $formatter_parts = explode(':', $plugin_id);
       $formatter_module = $formatter_parts[0];
-      $formatter_name = $formatter_parts[1];
+      $formatter_type = $formatter_parts[1];
 
       // Retrieve the settings appropriate for the currently selected formatter.
-      if (!empty($formatter_name)) {
+      if (!empty($formatter_type)) {
         if (is_string($entity_element['data-entity-embed-settings'])) {
           $entity_element['data-entity-embed-settings'] = drupal_json_decode($entity_element['data-entity-embed-settings']);
         }
 
-        $field_formatter_info = field_info_formatter_types($formatter_name);
-
-        // Invoke hook_field_formatter_settings_form(). We are reusing field
-        // formatter functions, but we are not working with a Field API field,
-        // so set $field accordingly. Unfortunately, the API is for $settings to
-        // be transferred via the $instance parameter, so we must mock it.
-        if (isset($field_formatter_info['module']) && ($function = ($field_formatter_info['module'] . '_field_formatter_settings_form')) && function_exists($function)) {
-          list($id, $vid, $bundle) = entity_extract_ids($entity_element['data-entity-type'], $entity);
-
-          $field = NULL;
-          $view_mode = 'default';
-          $mock_instance = array(
-            'display' => array(
-              $view_mode => array(
-                'type' => $formatter_name,
-                'settings' => $entity_element['data-entity-embed-settings'] + field_info_formatter_settings($formatter_name),
-              ),
-            ),
-            'entity_type' => $entity_element['data-entity-type'],
-            'bundle' => $bundle,
-          );
-
-          $settings = $function($field, $mock_instance, $view_mode, $form, $form_state);
-          $form['attributes']['data-entity-embed-settings'] += $settings;
-        }
+        $form['attributes']['data-entity-embed-settings'] += entity_embed_field_info_formatter_settings($entity_element['data-entity-type'], $entity, $formatter_type, $entity_element['data-entity-embed-settings'], $form, $form_state);
       }
 
       $filters = filter_list_format($filter_format->format);
@@ -315,7 +298,19 @@ function entity_embed_dialog_form($form, &$form_state, $filter_format, $embed_bu
         );
       }
 
-      // @todo Re-add caption attribute.
+      // When Editor's editor_caption is being used, the text editor may offer
+      // the ability to add a caption.
+      if (isset($entity_element['data-caption']) && isset($filters['editor_caption']) && $filters['editor_caption']->status) {
+        $form['attributes']['data-caption'] = array(
+          '#title' => t('Caption'),
+          '#type' => 'textfield',
+          '#default_value' => $entity_element['data-caption'] === '' ? '' : $entity_element['data-caption'],
+          '#wrapper_attributes' => array('class' => array('container-inline')),
+          '#attributes' => array('class' => array('container-inline')),
+          '#parents' => array('attributes', 'data-caption'),
+        );
+      }
+
       $form['actions'] = array(
         '#type' => 'actions',
       );
@@ -395,8 +390,8 @@ function entity_embed_dialog_form_validate($form, &$form_state) {
               form_set_value($form['attributes']['data-entity-uuid'], '', $form_state);
             }
 
-            // Ensure that at least one display plugin is present before
-            // proceeding to the next step. Raise an error otherwise.
+            // Ensure that at least one Entity Embed Display plugin is present
+            // before proceeding to the next step. Rasie an error otherwise.
             $embed_button = $form['#embed_button'];
             $allowed_plugins = $embed_button->display_plugins;
             $available_plugins = entity_embed_get_entity_field_formatters($entity_type);
@@ -407,7 +402,7 @@ function entity_embed_dialog_form_validate($form, &$form_state) {
             // raise error. Also log an exception.
             if (empty($display_plugin_options)) {
               form_set_error('data-entity-id', t('No display options available for the selected entity. Please select another entity.'));
-              watchdog('entity_embed', 'No display options available for "@type:" entity "@id" while embedding using button "@button". Please ensure that at least one display plugin is allowed for this embed button which is available for this entity.', array('@type' => $entity_type, '@id' => $id, '@button' => $embed_button->admin_title), WATCHDOG_WARNING);
+              watchdog('entity_embed', 'No display options available for "@type:" entity "@id" while embedding using button "@button". Please ensure that at least one Entity Embed Display plugin is allowed for this embed button which is available for this entity.', array('@type' => $entity_type, '@id' => $id, '@button' => $embed_button->admin_title), WATCHDOG_WARNING);
             }
           }
         }

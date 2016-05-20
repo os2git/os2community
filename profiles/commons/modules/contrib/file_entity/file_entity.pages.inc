@@ -841,7 +841,7 @@ function file_entity_edit_submit($form, &$form_state) {
   }
 
   if (file_uri_scheme($file->uri) != $form_state['values']['scheme']) {
-    $file_destination = $form_state['storage']['scheme'] . '://' . file_uri_target($file->uri);
+    $file_destination = $form_state['values']['scheme'] . '://' . file_uri_target($file->uri);
     $file_destination = file_stream_wrapper_uri_normalize($file_destination);
     if ($moved_file = file_move($file, $file_destination, FILE_EXISTS_RENAME)) {
       // Only re-assign the file object if file_move() did not fail.

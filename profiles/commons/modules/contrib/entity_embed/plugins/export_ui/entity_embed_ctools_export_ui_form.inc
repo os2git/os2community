@@ -157,9 +157,9 @@ function entity_embed_ctools_export_ui_form(&$form, &$form_state) {
   // The selection is hidden if there's just one option, since that's always
   // going to be allowed.
   if (count($formatter_options) > 1) {
-    // Allow option to limit display plugins.
+    // Allow option to limit Entity Embed Display plugins.
     $form['display_plugins'] += array(
-      '#title' => t('Allowed display plugins'),
+      '#title' => t('Allowed Entity Embed Display plugins'),
       '#options' => $formatter_options,
       '#description' => t('If none are selected, all are allowed. Note that these are the plugins which are allowed for this entity type, all of these might not be available for the selected entity.'),
     );

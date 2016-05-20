@@ -6,9 +6,9 @@ core = 7.x
 dependencies[] = dialog
 dependencies[] = node
 
-; Information added by Drupal.org packaging script on 2015-10-09
-version = "7.x-2.0-alpha6"
+; Information added by Drupal.org packaging script on 2016-04-18
+version = "7.x-2.0-alpha9"
 core = "7.x"
 project = "dialog"
-datestamp = "1444384150"
+datestamp = "1460972353"
 

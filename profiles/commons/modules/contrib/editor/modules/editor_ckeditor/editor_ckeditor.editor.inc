@@ -36,13 +36,25 @@ function editor_ckeditor_editor_info() {
             'items' => array('Blockquote', 'DrupalImage'),
           ),
           array(
+            'name' => 'Language',
+            'items' => array('Language'),
+          ),
+          array(
             'name' => 'Tools',
             'items' => array('Source', 'Maximize'),
           ),
         ),
       ),
+      'image_upload' => array('status' => TRUE),
       'format_list' => array('p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'),
-      'style_list' => array(),
+      'plugins' => array(
+        'style' => array(
+          'style_list' => array(),
+        ),
+        'language' => array(
+          'language_list' => 'un',
+        ),
+      ),
     ),
     'file' => 'includes/editor_ckeditor.admin.inc',
     'settings callback' => 'editor_ckeditor_settings_form',

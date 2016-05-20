@@ -215,11 +215,6 @@ function ckeditor_ckeditor_plugin() {
     closedir($handle);
   }
 
-  // Remove the Media plugin if the Media module isn't installed.
-  if (isset($plugins['media']) && module_exists('media') == FALSE) {
-    unset($plugins['media']);
-  }
-
   // Remove the IMCE plugin if the IMCE module isn't installed.
   if (isset($plugins['imce']) && module_exists('imce') == FALSE) {
     unset($plugins['imce']);

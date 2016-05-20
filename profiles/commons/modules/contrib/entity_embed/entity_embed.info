@@ -1,5 +1,5 @@
 name = Entity Embed
-description = Integrates with CKEditor to allow any entity to be embedded within a text area.
+description = Allows entities to be embedded using a text editor.
 package = Media
 core = 7.x
 
@@ -22,8 +22,8 @@ files[] = entity_embed.test
 configure = admin/config/content/embed-button
 
 
-; Information added by drush on 2015-10-28
+; Information added by drush on 2016-04-22
 version = ""
 project = "entity_embed"
-datestamp = "1446047083"
+datestamp = "1461345031"
 

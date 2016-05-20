@@ -47,6 +47,8 @@ function entity_embed_menu() {
     'access callback' => '_entity_embed_button_is_enabled',
     'access arguments' => array(3, 4),
     'file' => 'entity_embed.admin.inc',
+    'delivery callback' => 'ajax_deliver_dialog',
+    'theme callback' => 'ajax_base_page_theme',
     'type' => MENU_CALLBACK,
   );
 
@@ -304,12 +306,18 @@ function _entity_embed_preview_format_access($format) {
 function _entity_embed_button_is_enabled($filter_format, $embed_button) {
   editor_format_ensure_additional_properties($filter_format);
 
+  if (!editor_load($filter_format->editor)) {
+    return FALSE;
+  }
+
   $button_name = $embed_button->name;
 
-  foreach ($filter_format->editor_settings['toolbar'] as $row) {
-    foreach ($row as $button_group) {
-      if (in_array($button_name, $button_group['items'])) {
-        return TRUE;
+  if (!empty($filter_format->editor_settings['toolbar'])) {
+    foreach ($filter_format->editor_settings['toolbar'] as $row) {
+      foreach ($row as $button_group) {
+        if (in_array($button_name, $button_group['items'])) {
+          return TRUE;
+        }
       }
     }
   }
@@ -431,8 +439,8 @@ function _entity_embed_render_placeholders_tips($filter, $format, $long = FALSE)
     return t('
         <p>You can embed entities. Additional properties can be added to the embed tag like data-caption and data-align if supported. Examples:</p>
         <ul>
-          <li>Embed by ID: <code>&lt;div data-entity-type="node" data-entity-id="1" data-view-mode="teaser" /&gt;</code></li>
-          <li>Embed by UUID: <code>&lt;div data-entity-type="node" data-entity-uuid="07bf3a2e-1941-4a44-9b02-2d1d7a41ec0e" data-view-mode="teaser" /&gt;</code></li>
+          <li>Embed by ID: <code>&lt;drupal-entity data-entity-type="node" data-entity-id="1" data-view-mode="teaser" /&gt;</code></li>
+          <li>Embed by UUID: <code>&lt;drupal-entity data-entity-type="node" data-entity-uuid="07bf3a2e-1941-4a44-9b02-2d1d7a41ec0e" data-view-mode="teaser" /&gt;</code></li>
         </ul>');
   }
   else {
@@ -480,7 +488,7 @@ function _entity_embed_render_placeholders($text, $filter, $format, $langcode, $
     $dom = entity_embed_dom_load_html($text);
     $xpath = new \DOMXPath($dom);
 
-    foreach ($xpath->query('//*[@data-entity-type and (@data-entity-uuid or @data-entity-id) and (@data-entity-embed-display or @data-view-mode)]') as $node) {
+    foreach ($xpath->query('//drupal-entity[@data-entity-type and (@data-entity-uuid or @data-entity-id) and (@data-entity-embed-display or @data-view-mode)]') as $node) {
       $entity_type = $node->getAttribute('data-entity-type');
       $entity = NULL;
       $entity_output = '';
@@ -526,7 +534,7 @@ function _entity_embed_render_placeholders($text, $filter, $format, $langcode, $
         watchdog_exception('entity_embed', $e);
       }
 
-      entity_embed_set_dom_node_content($node, $entity_output);
+      entity_embed_replace_dom_node_content($node, $entity_output);
     }
 
     $result = entity_embed_serialize($dom);
