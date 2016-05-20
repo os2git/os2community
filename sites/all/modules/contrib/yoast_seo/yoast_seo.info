@@ -1,0 +1,24 @@
+name = Yoast SEO for Drupal
+description = "Adds Yoast SEO page analysis and configuration"
+package = SEO
+core = 7.x
+
+; These are provided by core.
+dependencies[] = node
+dependencies[] = path
+dependencies[] = ctools
+
+; A newer version of Metatag is required due to internal API changes.
+dependencies[] = metatag (>= 1.7)
+
+configure = admin/config/search/yoast
+
+; Views Handlers.
+files[] = views/yoast_seo_handler_score.inc
+
+; Information added by Drupal.org packaging script on 2016-03-07
+version = "7.x-1.0-beta3+2-dev"
+core = "7.x"
+project = "yoast_seo"
+datestamp = "1457350980"
+
