@@ -56,7 +56,7 @@ function flexslider_picture_field_formatter_settings_form($field, $instance, $vi
 /**
  * Implements hook_field_formatter_settings_summary().
  *
- * Displays the summary of the set options of a flexslider formatted image field
+ * Displays the summary of the options of a flexslider formatted image field.
  */
 function flexslider_picture_field_formatter_settings_summary($field, $instance, $view_mode) {
   return flexslider_fields_field_formatter_settings_summary($field, $instance, $view_mode);
@@ -65,7 +65,7 @@ function flexslider_picture_field_formatter_settings_summary($field, $instance, 
 /**
  * Implements hook_field_formatter_view().
  *
- * Prepares a renderable array of images and adds the neccessary JS and CSS
+ * Prepares a renderable array of images and adds the neccessary JS and CSS.
  */
 function flexslider_picture_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = flexslider_fields_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display);
@@ -94,6 +94,8 @@ function flexslider_picture_field_formatter_view($entity_type, $entity, $field, 
 function flexslider_picture_form_ctools_export_ui_edit_item_form_alter(&$form, &$form_state) {
   if ($form_state['plugin']['schema'] == 'flexslider_optionset') {
     $form['image_style']['#tree'] = TRUE;
+    $form['image_style']['#weight'] = 0;
+    $form['title']['#weight'] = -1;
     $form['image_style']['imagestyle_type'] = array(
       '#type' => 'radios',
       '#title' => t('Image type'),
@@ -115,7 +117,7 @@ function flexslider_picture_form_ctools_export_ui_edit_item_form_alter(&$form, &
       '#states' => array(
         'visible' => array(
           ':input[name="image_style[imagestyle_type]"]' => array('value' => 'picture_mapping'),
-        )
+        ),
       ),
       '#weight' => -1,
     );
@@ -130,9 +132,26 @@ function flexslider_picture_form_ctools_export_ui_edit_item_form_alter(&$form, &
     else {
       $form['image_style']['mapping'] += array(
         '#type' => 'item',
-        '#markup' => t('There\'re no picture mappings defined, you\'ll have to !create them first.', array('!create' => l(t('create'), 'admin/config/media/picture'))),
+        '#markup' => t("There're no picture mappings defined, you'll have to !create them first.", array('!create' => l(t('create'), 'admin/config/media/picture'))),
       );
     }
+    $image_styles = image_style_options(FALSE);
+    $form['image_style']['fallback'] = array(
+      '#title' => t('Fallback image style'),
+      '#description' => t('The fallback image style to use'),
+      '#type' => 'select',
+      '#empty_option' => t('Automatic'),
+      '#options' => $image_styles + array(
+        PICTURE_EMPTY_IMAGE => t('Empty image'),
+        PICTURE_ORIGINAL_IMAGE => t('Original image'),
+      ),
+      '#states' => array(
+        'visible' => array(
+          ':input[name="image_style[imagestyle_type]"]' => array('value' => 'picture_mapping'),
+        ),
+      ),
+      '#default_value' => (!empty($form_state['item']->fallback)) ? $form_state['item']->fallback : '',
+    );
 
     // Colorbox support.
     $form['image_style']['colorboxEnabled'] = array(
@@ -153,6 +172,23 @@ function flexslider_picture_form_ctools_export_ui_edit_item_form_alter(&$form, &
       ),
     );
 
+    $form['image_style']['colorboxFallbackImageStyle'] = array(
+      '#title' => t('Colorbox fallback image style'),
+      '#type' => 'select',
+      '#default_value' => (!empty($form_state['item']->options['colorboxFallbackImageStyle'])) ? $form_state['item']->options['colorboxFallbackImageStyle'] : '',
+      '#required' => FALSE,
+      '#empty_option' => t('Automatic'),
+      '#options' => $image_styles + array(
+        PICTURE_EMPTY_IMAGE => t('Empty image'),
+        PICTURE_ORIGINAL_IMAGE => t('Original image'),
+      ),
+      '#states' => array(
+        'visible' => array(
+          ':input[name$="image_style[colorboxEnabled]"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+
     $form['#submit'][] = '_flexslider_picture_ctools_export_ui_edit_item_form_submit';
   }
 }
@@ -161,7 +197,11 @@ function flexslider_picture_form_ctools_export_ui_edit_item_form_alter(&$form, &
  * Submit callback.
  */
 function _flexslider_picture_ctools_export_ui_edit_item_form_submit($form, &$form_state) {
-  $fields = array_intersect_key($form_state['values']['image_style'], drupal_map_assoc(array('imagestyle_type', 'mapping')));
+  $fields = array_intersect_key($form_state['values']['image_style'], drupal_map_assoc(array(
+    'imagestyle_type',
+    'mapping',
+    'fallback',
+  )));
   $fields['flexslider_optionset'] = $form_state['values']['name'];
   db_merge('flexslider_picture_optionset')
     ->key(array('flexslider_optionset' => $form_state['values']['name']))
@@ -174,10 +214,12 @@ function _flexslider_picture_ctools_export_ui_edit_item_form_submit($form, &$for
   $optionset = &$form_state['optionset'];
   $optionset->options['colorboxEnabled'] = !empty($form_state['values']['image_style']['colorboxEnabled']);
   $optionset->options['colorboxImageStyle'] = !empty($form_state['values']['image_style']['colorboxImageStyle']) ? $form_state['values']['image_style']['colorboxImageStyle'] : '';
+  $optionset->options['colorboxFallbackImageStyle'] = !empty($form_state['values']['image_style']['colorboxFallbackImageStyle']) ? $form_state['values']['image_style']['colorboxFallbackImageStyle'] : '';
 }
 
 /**
  * Join callback.
+ *
  * @see flexslider_picture_schema_alter()
  */
 function flexslider_picture_join_callback(&$query, $schema, $join_schema) {
@@ -201,6 +243,7 @@ function flexslider_picture_flexslider_default_presets_alter(&$defaults) {
     if (!empty($default_preset)) {
       $settings->imagestyle_type = $default_preset->imagestyle_type;
       $settings->mapping = $default_preset->mapping;
+      $settings->fallback = $default_preset->fallback;
     }
   }
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Picture - map breakpoints and image styles
+ * Picture - map breakpoints and image styles.
  */
 
 /**
@@ -37,6 +37,9 @@ function picture_select_breakpoint_group_form($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Validate breakpoint group.
+ */
 function picture_select_breakpoint_group_form_validate($form, &$form_state) {
   if (!isset($form_state['values']['breakpoint_group']) || empty($form_state['values']['breakpoint_group'])) {
     form_error($form['breakpoint_group'], t('No breakpoint group was selected.'));
@@ -50,6 +53,9 @@ function picture_select_breakpoint_group_form_submit($form, &$form_state) {
   $form_state['item']->setBreakpointGroup($form_state['values']['breakpoint_group']);
 }
 
+/**
+ * Build picture mapping form.
+ */
 function picture_mapping_form(&$form, &$form_state) {
   $picture_mapping = $form_state['item'];
   $form['info']['label']['#required'] = TRUE;
@@ -108,6 +114,7 @@ function picture_mapping_form(&$form, &$form_state) {
         '#type' => 'select',
         '#title' => t('Image style'),
         '#options' => $image_styles,
+        '#maxlength' => 1024,
         '#default_value' => isset($mapping_definition['image_style']) ? $mapping_definition['image_style'] : '',
         '#description' => t('Select an image style for this breakpoint.'),
         '#states' => array(
@@ -145,6 +152,9 @@ function picture_mapping_form(&$form, &$form_state) {
   return $form;
 }
 
+/**
+ * Helper function for the form.
+ */
 function picture_mapping_form_change_breakpoint_group($form, &$form_state) {
   return $form['mapping'];
 }
@@ -174,7 +184,6 @@ function picture_mapping_form_validate($form, &$form_state) {
 function picture_admin_settings() {
   $form = array();
   $picture_mappings = picture_get_mapping_options();
-  $ckeditor_mappins = array();
 
   // Check if picture mappings have been configured before proceeding.
   if ($picture_mappings) {
@@ -182,7 +191,7 @@ function picture_admin_settings() {
     $form['description'] = array(
       '#type' => 'item',
       '#title' => t('Choose which picture mappings will be available in the CKEditor image dialog.'),
-      '#description' => 'See picture_wysiwyg.css for an example of how to style these images in your theme using the selectors suggested below.',
+      '#description' => t('See picture_wysiwyg.css for an example of how to style these images in your theme using the selectors suggested below.'),
     );
 
     // Retrieve pre-existing settings.
@@ -201,7 +210,9 @@ function picture_admin_settings() {
       );
       $form[$machine_name]['css'] = array(
         '#type' => 'item',
-        '#markup' => 'Consider using the selector <code>span[data-picture-mapping="' . $machine_name . '"]</code> in your theme CSS.',
+        '#markup' => t('Consider using the selector <code>span[data-picture-mapping="@machine_name"]</code> in your theme CSS.', array(
+          '@machine_name' => $machine_name,
+        )),
       );
       $form[$machine_name]['weight'] = array(
         '#type' => 'select',
@@ -213,8 +224,31 @@ function picture_admin_settings() {
       $form[$machine_name]['fallback'] = array(
         '#type' => 'select',
         '#title' => t('Fallback image style'),
-        '#options' => drupal_map_assoc(array_keys(image_styles())),
+        '#options' => drupal_map_assoc(array_keys(image_styles())) + array(
+          PICTURE_EMPTY_IMAGE => t('Empty image'),
+        ),
         '#default_value' => isset($ckeditor_mappings[$machine_name]) ? $ckeditor_mappings[$machine_name]['fallback'] : NULL,
+      );
+      $form[$machine_name]['lazyload'] = array(
+        '#title' => t('Picture lazyload'),
+        '#description' => t('Image will be rendered when it appears in viewport, helps to optimize page load speed.'),
+        '#type' => 'checkbox',
+        '#default_value' => isset($ckeditor_mappings[$machine_name]['lazyload']) ? $ckeditor_mappings[$machine_name]['lazyload'] : 0,
+      );
+
+      $form[$machine_name]['lazyload_aspect_ratio'] = array(
+        '#title' => t('Keep aspect ratio'),
+        '#type' => 'checkbox',
+        '#description' => t('Preserve the space for the image being lazyloaded to avoid layout reflows. <br /> Image ratio is defined per breakpoint, make sure all images from srcset have the same ratio. <br />Output example: !example',
+          array('!example' => htmlentities('<source media="(...)" data-srcset="image_400x200.jpg x1, iamge_800x400.jpg x2, image_1200x600.jpg x3" data-aspectratio="2" />'))
+        ),
+        '#default_value' => isset($ckeditor_mappings[$machine_name]['lazyload_aspect_ratio']) ? $ckeditor_mappings[$machine_name]['lazyload_aspect_ratio'] : 0,
+        '#states' => array(
+          'visible' => array(
+            ':input[name="article_responsive_image[lazyload]"]' => array('checked' => TRUE),
+            ':input[name="article_responsive_image[fallback]"]' => array('value' => PICTURE_EMPTY_IMAGE),
+          ),
+        ),
       );
     }
     $form['#tree'] = TRUE;
@@ -240,13 +274,47 @@ function picture_admin_settings() {
 
   $form['picture_js_scope'] = array(
     '#title' => t('Picture JavaScript scope'),
-    '#description' => t('For performance reasons, JS should be loaded in the footer. However, you can move the Picture module\'s JS to the header so that it loads before JS from other modules like Views Slideshow.'),
+    '#description' => t("For performance reasons, JS should be loaded in the footer. However, you can move the Picture module's JS to the header so that it loads before JS from other modules like Views Slideshow."),
     '#type' => 'radios',
     '#options' => array(
       'header' => t('Header'),
       'footer' => t('Footer'),
     ),
     '#default_value' => variable_get('picture_js_scope', 'footer'),
+  );
+
+  $form['picture_polyfill_version'] = array(
+    '#title' => t('Picture polyfill to use'),
+    '#description' => t('For performance reasons, use the minified version.'),
+    '#type' => 'radios',
+    '#options' => array(
+      'min' => t('Minified polyfill'),
+      'dev' => t('Development polyfill'),
+      'own' => t('Use custom polyfill'),
+    ),
+    '#default_value' => variable_get('picture_polyfill_version', 'min'),
+  );
+
+  $form['picture_fallback_method'] = array(
+    '#title' => t('Picture fallback method'),
+    '#description' => t('Use the fallback method, the defualt is to use srcset since it avoids double downloads, but src is the right method and will also work if the browser does not support javascript.'),
+    '#type' => 'radios',
+    '#options' => array(
+      'src' => t('src fallback'),
+      'srcset' => t('srcset fallback'),
+    ),
+    '#default_value' => variable_get('picture_fallback_method', 'srcset'),
+  );
+
+  $form['picture_img_sizes_output_method'] = array(
+    '#title' => t('"Image with sizes" output method'),
+    '#description' => t('"srcset on Image tag" creates the correct markup, however "picture element" will prevent duplicate downloads.'),
+    '#type' => 'radios',
+    '#options' => array(
+      'img_srcset' => t('srcset on Image tag'),
+      'picture_element' => t('Picture element'),
+    ),
+    '#default_value' => variable_get('picture_img_sizes_output_method', 'picture_element'),
   );
 
   $form['submit'] = array(
@@ -258,6 +326,7 @@ function picture_admin_settings() {
 
 /**
  * Validate handler for the picture_ckeditor_settings form.
+ *
  * It checks that a fallback image style is selected for every
  * picture mapping that has been enabled for the CKEditor image dialog.
  */
@@ -276,8 +345,7 @@ function picture_admin_settings_validate($form, &$form_state) {
 }
 
 /**
- * Submit handler for the picture_ckeditor_settings form. Places chosen picture
- * groups into the variables table.
+ * Submit handler, places chosen picture groups into the variables table.
  */
 function picture_admin_settings_submit($form, &$form_state) {
   $picture_mappings = picture_mapping_load_all();
@@ -289,16 +357,23 @@ function picture_admin_settings_submit($form, &$form_state) {
       $ckeditor_mappings[$machine_name]['enabled'] = $form_state['values'][$machine_name]['enabled'];
       $ckeditor_mappings[$machine_name]['weight'] = $form_state['values'][$machine_name]['weight'];
       $ckeditor_mappings[$machine_name]['fallback'] = $form_state['values'][$machine_name]['fallback'];
+      $ckeditor_mappings[$machine_name]['lazyload'] = $form_state['values'][$machine_name]['lazyload'];
+      $ckeditor_mappings[$machine_name]['lazyload_aspect_ratio'] = $form_state['values'][$machine_name]['lazyload_aspect_ratio'];
     }
 
     uasort($ckeditor_mappings, 'picture_compare_weights');
     variable_set('picture_ckeditor_mappings', $ckeditor_mappings);
     variable_set('picture_ckeditor_label', $form_state['values']['ckeditor_label']);
   }
+
   if (isset($form_state['values']['picture_updated_to_file_entity_2']) && $form_state['values']['picture_updated_to_file_entity_2']) {
     variable_set('picture_updated_to_file_entity_2', _picture_update_to_file_entity_2());
   }
+
   variable_set('picture_js_scope', $form_state['values']['picture_js_scope']);
+  variable_set('picture_polyfill_version', $form_state['values']['picture_polyfill_version']);
+  variable_set('picture_fallback_method', $form_state['values']['picture_fallback_method']);
+  variable_set('picture_img_sizes_output_method', $form_state['values']['picture_img_sizes_output_method']);
   drupal_set_message(t('Your settings have been saved'));
 }
 
@@ -322,7 +397,7 @@ function _picture_update_to_file_entity_2() {
       $current_displays = file_displays_load($file_type->type, $view_mode, TRUE);
       if (isset($current_displays['file_picture']) && $current_displays['file_picture']->status) {
         if (!isset($current_displays['file_field_picture']) || !$current_displays['file_field_picture']->status) {
-          $display = file_display_new($file_type->type, $view_mode, 'file_field_picture');//clone $current_displays['file_picture'];
+          $display = file_display_new($file_type->type, $view_mode, 'file_field_picture');
           $display->settings = $current_displays['file_picture']->settings;
           unset($display->settings['alt']);
           unset($display->settings['title']);
@@ -346,8 +421,8 @@ function _picture_update_to_file_entity_2() {
 }
 
 /**
-  * Helper function to sort picture groups for the CKEditor image dialog
-  */
+ * Sort picture groups for the CKEditor image dialog.
+ */
 function picture_compare_weights($a, $b) {
   if ($a['weight'] == $b['weight']) {
     return 0;

@@ -112,7 +112,7 @@ function imagefield_focus_scale_and_crop_effect(&$image, $data) {
       $scale = min(1, $data['width'] / $rect['width'], $data['height'] / $rect['height']);
       $scale_low = min($scale, max($data['width'] / $image->info['width'], $data['height'] / $image->info['height']));
       if ($data['strength'] == 'medium') {
-        $scale = sqrt($scale * $scale_low);
+        $scale = ($scale + $scale_low) / 2;
       }
       elseif ($data['strength'] == 'low') {
         $scale = $scale_low;
@@ -120,7 +120,7 @@ function imagefield_focus_scale_and_crop_effect(&$image, $data) {
 
       $width0 = $image->info['width'] * $scale;
       $height0 = $image->info['height'] * $scale;
-      if ($scale < 1 && !image_resize_effect($image, array('width' => $width0, 'height' => $height0))) {
+      if (($scale < 1) && !image_resize_effect($image, array('width' => $width0, 'height' => $height0))) {
         return FALSE;
       }
 
@@ -131,7 +131,7 @@ function imagefield_focus_scale_and_crop_effect(&$image, $data) {
       $height = min($height0, $data['height']);
       $xoffset = min($width0 - $width, max(0, $rect['xoffset'] + ($rect['width'] - $width) / 2));
       $yoffset = min($height0 - $height, max(0, $rect['yoffset'] + ($rect['height'] - $height) / 2));
-      return image_crop_effect($image, array('width' => $width, 'height' => $height, 'anchor' => round($xoffset) .'-'. round($yoffset)));
+      return image_crop_effect($image, array('width' => $width, 'height' => $height, 'anchor' => $xoffset .'-'. $yoffset));
     }
   }
 
