@@ -39,6 +39,11 @@ div.vertical-tabs ul li.vertical-tab-button a {
 div.vertical-tabs ul li.first a {
   border-top: 0;
 }
+
+div.vertical-tabs .vertical-tabs-pane ul li.first a {
+  border-top: 2px solid #0074BD;
+}
+
 div.vertical-tabs ul li.vertical-tab-button strong {
   font-size: 0.923em;
 }
@@ -86,10 +91,9 @@ div.vertical-tabs fieldset.vertical-tabs-pane > legend {
  * with "box-sizing" to prevent box model issues from occurring in most browsers.
 */
 .vertical-tabs .form-type-textfield input {
-  width: 100%;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
 }
 * html .vertical-tabs .form-type-textfield,
 * html .vertical-tabs .form-textarea-wrapper {
