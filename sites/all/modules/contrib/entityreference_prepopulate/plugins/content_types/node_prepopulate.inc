@@ -21,7 +21,7 @@ function entityreference_prepopulate_node_prepopulate_content_type_render($subty
   if (empty($context->data)) {
     return;
   }
-  
+
   $node = $context->data;
   $links = entityreference_prepopulate_create_node_links('node', $node->nid, $conf['field_name'], NULL, !empty($conf['types']) ? $conf['types'] : NULL);
   if (!$links) {

@@ -272,17 +272,39 @@ function socialfield_delete_service_submit($form, $form_state) {
  * Implements hook_field_info().
  */
 function socialfield_field_info() {
+  $used_services = array_keys(variable_get('socialfield_services'));
+  $used_services = array_combine($used_services, $used_services);
+
+  $displayed_services = array('twitter', 'googleplus', 'facebook');
+  $displayed_services = array_combine($displayed_services, $displayed_services);
+
   return array(
     'social_links_field' => array(
       'label' => t('Social links'),
       'description' => t('Social links'),
       'default_widget' => 'socialfield_widget',
       'default_formatter' => 'socialfield_formatter',
+      'property_type' => 'socialfield',
+      'property_callbacks' => array('socialfield_property_callback_property_info_callback'),
       'instance_settings' => array(
-        'services' => array('twitter', 'googleplus', 'facebook'),
+        'used_services' => $used_services,
+        'services' => $displayed_services,
       ),
     ),
   );
+}
+
+/**
+ * Field property info callback.
+ */
+function socialfield_property_callback_property_info_callback(&$info, $entity_type, $field, $instance, $field_type) {
+  $name = $field['field_name'];
+  $property = &$info[$entity_type]['bundles'][$instance['bundle']]['properties'][$name];
+
+  $property['type'] = 'socialfield';
+  $property['getter callback'] = 'entity_metadata_field_verbatim_get';
+  $property['setter callback'] = 'entity_metadata_field_verbatim_set';
+  unset($property['query callback']);
 }
 
 /**
@@ -294,18 +316,138 @@ function socialfield_field_instance_settings_form($field, $instance) {
   foreach ($social_services as $name => $service) {
     $options[$name] = $service['name'];
   }
-
-  $form['services'] = array(
-    '#title' => t('Social services'),
-    '#type' => 'select',
-    '#multiple' => TRUE,
-    '#size' => 10,
+  $form = array(
+    '#type' => 'container',
+    '#process' => array(
+      '_socialfield_field_instance_settings_form',
+    ),
+    '#field' => $field,
+    '#instance' => $instance,
     '#options' => $options,
-    '#default_value' => $instance['settings']['services'],
-    '#required' => TRUE,
+  );
+  return $form;
+}
+
+/**
+ * Instance settings form process callback function.
+ */
+function _socialfield_field_instance_settings_form($form, &$form_state) {
+  $form_state['#used_services'] = $form['#instance']['settings']['used_services'];
+  $form_state['#services'] = $form['#instance']['settings']['services'];
+
+  $rows = array();
+  foreach ($form['#options'] as $service_name => $s_name) {
+    $use_service = in_array($service_name, $form_state['#used_services']);
+    $display_service = in_array($service_name, $form_state['#services']);
+    $row = array(
+      'service_name' => array(
+        '#markup' => $service_name,
+      ),
+      'used_services' => array(
+        '#type' => 'checkbox',
+        '#default_value' => $use_service,
+        '#attributes' => array('class' => array('socialfield-table-used-service-checkbox')),
+      ),
+      'displayed_services' => array(
+        '#type' => 'checkbox',
+        '#default_value' => $display_service,
+        '#attributes' => array('class' => array('socialfield-table-displayed-service-checkbox')),
+      ),
+    );
+
+    if ($display_service) {
+      $row['used_services']['#attributes']['disabled'] = TRUE;
+    }
+
+    $rows[] = $row;
+  }
+
+  // Theme this part of the form as a table.
+  $form['table'] = array(
+    '#theme' => 'socialfield_form_table',
+    '#header' => array(t('Service'), t('Used services'), t('Displayed services')),
+    'rows' => $rows,
+    '#attributes' => array('id' => 'socialfield-instance-settings-services-table'),
+    '#element_validate' => array('_socialfield_validate_services'),
   );
 
+  $path = drupal_get_path('module', 'socialfield');
+  $form['#attached']['js'][] = $path . '/js/socialfield.js';
+
   return $form;
+}
+
+/**
+ * Setting instance settings from table settings.
+ */
+function _socialfield_validate_services($form, &$form_state) {
+  $used_services = $form_state['#used_services'];
+  $displayed_services = $form_state['#services'];
+
+  // Getting new instance settings.
+  foreach ($form['rows'] as $key => &$row) {
+    if (!is_numeric($key)) {
+      continue;
+    }
+
+    $service_name = $row['service_name']['#markup'];
+
+    // Service checked, wanted to be used.
+    if ($row['used_services']['#value']) {
+      $used_services[$service_name] = $service_name;
+    }
+    else {
+      unset($used_services[$service_name]);
+    }
+
+    // This service was checked to be displayed with icon on widget.
+    if ($row['displayed_services']['#value']) {
+      $used_services[$service_name] = $service_name;
+      $displayed_services[$service_name] = $service_name;
+    }
+    else {
+      unset($displayed_services[$service_name]);
+    }
+  }
+
+  if (!count($displayed_services)) {
+    form_set_error('table', t('Select at least one service to display.'));
+  }
+
+  // Setting new instance settings.
+  $form_state['values']['instance']['settings']['used_services'] = $used_services;
+  $form_state['values']['instance']['settings']['services'] = $displayed_services;
+  unset($form_state['values']['instance']['settings']['table']);
+}
+
+/**
+ * Theme callback for the form table.
+ */
+function theme_socialfield_form_table(&$variables) {
+  // Getting the userful values.
+  $form = $variables['form'];
+  $rows = $form['rows'];
+  $header = $form['#header'];
+  $attributes = $form['#attributes'];
+
+  // Setup the structure to be rendered and returned.
+  $content = array(
+    '#theme' => 'table',
+    '#header' => $header,
+    '#rows' => array(),
+    '#attributes' => $attributes,
+  );
+
+  // Traverse each row and each column in each row.
+  foreach (element_children($rows) as $row_index) {
+    $row = array();
+    foreach (element_children($rows[$row_index]) as $col_index) {
+      $row[] = drupal_render($rows[$row_index][$col_index]);
+    }
+    $content['#rows'][] = $row;
+  }
+
+  return drupal_render($content);
 }
 
 /**
@@ -342,7 +484,15 @@ function socialfield_field_validate($entity_type, $entity, $field, $instance, $l
       $match = drupal_match_path($item['url'], $services[$item['service']]['validation_pattern']);
       if (!$match) {
         $form_element = array_merge($form_elements, array('element_' . $delta, 'url'));
-        form_set_error(implode('][', $form_element), t("You can't use such URLs."));
+        form_set_error(
+          implode('][', $form_element),
+            t("%service link should match the following pattern: %pattern",
+            array(
+              '%service' => $services[$item['service']]['name'],
+              '%pattern' => $services[$item['service']]['validation_pattern'],
+            )
+          )
+        );
       }
     }
   }
@@ -377,6 +527,10 @@ function socialfield_theme($existing, $type, $theme, $path) {
         'field' => NULL,
         'label' => NULL,
       )
+    ),
+    'socialfield_form_table' => array(
+      // The renderable element is the form.
+      'render element' => 'form',
     ),
   );
 
@@ -442,9 +596,6 @@ function socialfield_field_widget_form(&$form, &$form_state, $field, $instance, 
     'field_name' => $field['field_name'],
     'langcode' => $langcode,
   );
-
-  // Getting default services from field instance setting.
-  $services = array_values($instance['settings']['services']);
 
   // A service (option) from select list was accessed.
   if (isset($form_state['triggering_element']['#value']) && isset($form_state['triggering_element']['#socialfield_add'])) {
@@ -532,22 +683,21 @@ function socialfield_field_widget_form(&$form, &$form_state, $field, $instance, 
   // Validate on elements.
   $element['#element_validate'] = array('socialfield_service_validate');
 
-  // Getting all services.
-  $social_services = variable_get('socialfield_services');
-
-  // Selecting services for the select list.
-  $options = array();
-  foreach ($social_services as $name => $service) {
-    if (!in_array($name, $form_state['services'])) {
-      $options[$name] = $service['name'];
-    }
+  // Getting services for the select list.
+  $options = array_keys(variable_get('socialfield_services'));
+  $options = array_combine($options, $options);
+  if (isset($instance['settings']['used_services'])) {
+    $options = $instance['settings']['used_services'];
   }
+  $options = array_diff($options, $form_state['services']);
+  $options = array_map('ucfirst', $options);
 
   // Select for adding new element (service and url) to form. Done with Ajax Forms.
   $element['social_buttons']['add_one_social'] = array(
     '#type' => 'select',
     '#options' => array('_none' => t('Add more')) + $options,
     '#socialfield_add' => TRUE,
+    '#access' => !empty($options),
     '#validate' => array(),
     '#limit_validation_errors' => array(),
     '#attributes' => array('class' => array('add_one_social_service')),
@@ -636,8 +786,43 @@ function socialfield_field_formatter_info() {
     'socialfield_formatter' => array(
       'label' => t('Icons'),
       'field types' => array('social_links_field'),
+      'settings' => array(
+        'link_text' => FALSE,
+      ),
     ),
   );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function socialfield_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  // Getting the view mode where our settings are stored.
+  $display = $instance['display'][$view_mode];
+
+  // Getting the actual settings.
+  $settings = $display['settings'];
+
+  // Initialize the element variable.
+  $element = array();
+  $element['link_text'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Hidden text on link'),
+    '#description' => t('Each icon link will contain his service name as a hidden text. This if useful for screen readers.'),
+    '#default_value'  => $settings['link_text'],
+  );
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function socialfield_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $summary = t('Display links as icons.');
+  return $summary;
 }
 
 /**
@@ -656,8 +841,13 @@ function socialfield_field_formatter_view($entity_type, $entity, $field, $instan
       $servicess = variable_get('socialfield_services');
       foreach ($items as $item) {
         // Social link.
+        $hidden_text = '';
+        if (isset($display['settings']['link_text']) && $display['settings']['link_text']) {
+          // Wanting to set hidden text on link.
+          $hidden_text = '<span class="element-invisible">' . check_plain($item['service']) . '</span>';
+        }
         $link = l(
-          '<i class="icon ' . $servicess[$item['service']]['icon'] . '"></i>',
+          '<i class="icon ' . $servicess[$item['service']]['icon'] . '">' . $hidden_text . '</i>',
           $item['url'],
           array(
             'html' => TRUE,

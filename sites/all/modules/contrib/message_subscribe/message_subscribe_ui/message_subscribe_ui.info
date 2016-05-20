@@ -4,7 +4,7 @@ core = 7.x
 package = Message
 php = 5.2.4
 version = 7.x-1.0
-project = message_subscribe_ui
+project = message_subscribe
 dependencies[] = message_subscribe
 dependencies[] = views
 dependencies[] = views_content
@@ -14,9 +14,9 @@ features[views_view][] = subscribe_node
 features[views_view][] = subscribe_taxonomy_term
 features[views_view][] = subscribe_user
 
-; Information added by Drupal.org packaging script on 2014-03-30
-version = "7.x-1.0-rc2"
+; Information added by Drupal.org packaging script on 2015-03-09
+version = "7.x-1.0-rc2+14-dev"
 core = "7.x"
 project = "message_subscribe"
-datestamp = "1396169645"
+datestamp = "1425885782"
 

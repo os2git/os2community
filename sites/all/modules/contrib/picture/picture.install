@@ -3,6 +3,7 @@
  * @file
  * Install/schema hooks for the picture module.
  */
+
 /**
  * Implements hook_schema().
  */
@@ -15,7 +16,7 @@ function picture_schema() {
         'type' => 'serial',
         'not null' => TRUE,
         'description' => 'The internal identifier for this mapping',
-        'no export' => TRUE, // do not export database only keys.
+        'no export' => TRUE,
       ),
       'label' => array(
         'type' => 'varchar',
@@ -44,7 +45,6 @@ function picture_schema() {
       ),
     ),
     'primary key' => array('id'),
-    // CTools exportable object definition
     'export' => array(
       'key' => 'machine_name',
       'key name' => 'machine_name',
@@ -68,6 +68,14 @@ function picture_schema() {
 }
 
 /**
+ * Implements hook_install().
+ */
+function picture_install() {
+  module_load_include('admin.inc', 'picture');
+  variable_set('picture_updated_to_file_entity_2', _picture_update_to_file_entity_2());
+}
+
+/**
  * Implements hook_uninstall().
  */
 function picture_uninstall() {
@@ -75,6 +83,49 @@ function picture_uninstall() {
   variable_del('picture_ckeditor_label');
   variable_del('picture_updated_to_file_entity_2');
   variable_del('picture_js_scope');
+  variable_del('picture_polyfill_version');
+  variable_del('picture_fallback_method');
+  // Delete field formatter settings.
+  ctools_include('export');
+  $entity_info = entity_get_info('file');
+  $file_types = file_type_load_all();
+  $view_modes = array_keys($entity_info['view modes']);
+  $view_modes[] = 'default';
+  $formatters = array(
+    'file_picture',
+    'file_field_picture',
+    'file_picture_sizes_formatter',
+    'file_field_picture_sizes_formatter'
+  );
+  foreach ($file_types as $file_type) {
+    foreach ($view_modes as $view_mode) {
+      foreach ($formatters as $formatter) {
+        ctools_export_crud_delete('file_display', $file_type->type . '__' . $view_mode . '__' . $formatter);
+      }
+    }
+  }
+  file_info_cache_clear();
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function picture_requirements($phase) {
+  $requirements = array();
+  if (module_exists('colorbox')) {
+    $t = get_t();
+    $info = system_get_info('module', 'colorbox');
+    $requirements['picture_colorbox'] = array(
+      'title' => $t('Picture: Colorbox module version.'),
+      'value' => $info['version'],
+      'severity' => REQUIREMENT_OK,
+    );
+    if (version_compare($info['version'], '7.x-2.5') < 0) {
+      $requirements['picture_colorbox']['description'] = $t('The Colorbox module must be version 7.x-2.5 or higher in order to work with the Picture module.');
+      $requirements['picture_colorbox']['severity'] = REQUIREMENT_ERROR;
+    }
+  }
+  return $requirements;
 }
 
 /**
@@ -91,7 +142,7 @@ function picture_update_7200() {
   ));
   variable_set('picture_ckeditor_mappings', variable_get('picture_ckeditor_groups', array()));
   variable_del('picture_ckeditor_groups');
-  // force a schema reset:
+  // Force a schema reset.
   drupal_get_schema('picture_mapping', TRUE);
 
   // Get old picture mappings from code.
@@ -154,7 +205,7 @@ function picture_update_7202() {
     $instances = field_read_instances(array('field_id' => $field['id']));
     foreach ($instances as $instance) {
       foreach ($instance['display'] as $view_mode => $view_mode_settings) {
-        if ($view_mode_settings['type'] == 'picture') {
+        if ($view_mode_settings['type'] == 'picture' && isset($instance['display'][$view_mode]['settings']['colorbox'])) {
           $colorbox_group = $instance['display'][$view_mode]['settings']['colorbox'];
           $instance['display'][$view_mode]['settings']['colorbox_settings'] = array(
             'colorbox_group' => $colorbox_group,

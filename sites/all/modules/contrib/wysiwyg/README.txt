@@ -31,15 +31,10 @@ To submit bug reports and feature suggestions, or to track changes:
 * Go to Administration » Configuration » Content authoring » Text formats, and
 
   - either configure the Full HTML format, assign it to trusted roles, and
-    disable "Limit allowed HTML tags", "Convert line breaks...", and
-    (optionally) "Convert URLs into links".
-    Note that disabling "Limit allowed HTML tags" will allow users to post
-    anything, including potentially malicious content. For a more configurable
-    alternative to "Limit allowed HTML tags" try
-    http://drupal.org/project/wysiwyg_filter.
+    disable "HTML filter", "Line break converter", and (optionally) "URL filter".
 
   - or add a new text format, assign it to trusted roles, and ensure that above
-    mentioned input filters are configured as detailed.
+    mentioned input filters are disabled.
 
 * Setup editor profiles in Administration » Configuration » Content authoring
   » Wysiwyg.
