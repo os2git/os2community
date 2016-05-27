@@ -20,6 +20,11 @@ function media_oembed_media_oembed_request_alter(&$parameters, &$provider, $url)
  * Implement hook_media_oembed_response_alter().
  */
 function media_oembed_media_oembed_response_alter(&$response) {
+  // SlideShare sets uses the property to store the thumbnail URL.
+  if ($response['provider'] == 'default:slideshare' && empty($response['thumbnail_url']) && !empty($response['thumbnail'])) {
+    $response['thumbnail_url'] = $response['thumbnail'];
+  }
+
   // SoundCloud rich responses are audio players that should be re-cast as audio
   // files.
   if ($response['type'] == 'rich' && $response['provider'] == 'default:soundcloud') {
@@ -36,9 +41,10 @@ function media_oembed_media_oembed_response_alter(&$response) {
     }
   }
 
-  // SlideShare sets uses the property to store the thumbnail URL.
-  if ($response['provider'] == 'default:slideshare' && empty($response['thumbnail_url']) && !empty($response['thumbnail'])) {
-    $response['thumbnail_url'] = $response['thumbnail'];
+  // Spotify rich responses are audio players that should be re-cast as audio
+  // files.
+  if ($response['type'] == 'rich' && $response['provider'] == 'default:spotify') {
+    $response['mime_type'] = 'audio/oembed';
   }
 
   // If a photo provider doesn't include a thumbnail URL fall back to the full

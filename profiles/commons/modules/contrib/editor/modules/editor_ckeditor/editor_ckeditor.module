@@ -5,7 +5,7 @@
  * Adds CKEditor as a supported editor.
  */
 
-define('CKEDITOR_VERSION', '4.4.7');
+define('CKEDITOR_VERSION', '4.5.8');
 
 /**
  * Implements hook_init().
@@ -38,7 +38,7 @@ function editor_ckeditor_menu() {
   $items['editor-ckeditor/dialog/link/%filter_format'] = array(
     'title' => 'Edit image',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('editor_ckeditor_editor_dialog_link_form', 3),
+    'page arguments' => array('editor_ckeditor_link_dialog_form', 3),
     'access callback' => 'editor_format_access',
     'access arguments' => array(3),
     'theme callback' => 'ajax_base_page_theme',
@@ -48,7 +48,7 @@ function editor_ckeditor_menu() {
   $items['editor-ckeditor/dialog/image/%filter_format'] = array(
     'title' => 'Edit image',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('editor_ckeditor_editor_dialog_image_form', 3),
+    'page arguments' => array('editor_ckeditor_image_dialog_form', 3),
     'access callback' => 'editor_format_access',
     'access arguments' => array(3),
     'theme callback' => 'ajax_base_page_theme',
@@ -77,11 +77,22 @@ function editor_ckeditor_theme() {
 function editor_ckeditor_library() {
   $path = drupal_get_path('module', 'editor_ckeditor');
 
-  $libraries['drupal.editor_ckeditor.image.admin'] = array(
-    'title' => 'Administrative library for CKEditor image plugin.',
+  $libraries['drupal.editor_ckeditor.plugins.language'] = array(
+    'title' => 'Language plugin.',
     'version' => VERSION,
     'css' => array(
-      $path . '/css/editor_ckeditor.image.admin.css' => array(),
+      $path . '/css/plugins/language/editor_ckeditor.language.css' => array(), // Ensure that this comes after seven's style.css
+    ),
+  );
+
+  $libraries['drupal.editor_ckeditor.language.admin'] = array(
+    'title' => 'Administrative library for configuring the language plugin.',
+    'version' => VERSION,
+    'js' => array(
+      $path . '/js/editor_ckeditor.language.admin.js' => array(),
+    ),
+    'dependencies' => array(
+      array('system', 'drupal.vertical-tabs'),
     ),
   );
 
@@ -141,6 +152,20 @@ function editor_ckeditor_library() {
  */
 function editor_ckeditor_library_alter(&$libraries, $module) {
   global $theme;
+
+  // Pass Drupal's JS cache-busting string via settings along to CKEditor.
+  // @see http://docs.ckeditor.com/#!/api/CKEDITOR-property-timestamp
+  if ($module === 'editor_ckeditor' && isset($libraries['drupal.ckeditor'])) {
+    $query_string = variable_get('css_js_query_string') ?: '0';
+    $libraries['drupal.ckeditor']['js'][] = array(
+      'type' => 'setting',
+      'data' => array(
+        'ckeditor' => array(
+          'timestamp' => $query_string,
+        ),
+      ),
+    );
+  }
 
   // A number of core themes have styling issues with the toolbar configurator.
   // Add an appropriate 'override' stylesheet to the default administration
@@ -220,7 +245,7 @@ function editor_ckeditor_form_filter_format_editor_image_form_alter(&$form, $for
  * Checks if the Caption plugin should be enabled based on the configuration of
  * a text format and editor.
  *
- * @param $format
+ * @param object $format
  *   The filter format object for which to check the settings of.
  *
  * @return bool
@@ -242,7 +267,7 @@ function editor_ckeditor_image_plugin_check($format) {
 /**
  * Editor JS settings callback; Add CKEditor settings to the page for a format.
  *
- * @param $format
+ * @param object $format
  *   The filter format object for which CKEditor is adding its settings.
  * @param $existing_settings
  *   Settings that have already been added to the page by filters.
@@ -255,9 +280,6 @@ function editor_ckeditor_get_settings($format, $existing_settings) {
   global $language;
 
   editor_format_ensure_additional_properties($format);
-
-  // Retrieve available filters and load all configured filters.
-  $filters = !empty($format->format) ? filter_list_format($format->format) : array();
 
   // Loop through all available plugins and check to see if it has been
   // explicitly enabled. At the same time, associate each plugin with its
@@ -378,6 +400,7 @@ function editor_ckeditor_get_settings($format, $existing_settings) {
     'contentsCss' => array_values($css),
     'pasteFromWordPromptCleanup' => TRUE,
     'entities' => FALSE,
+    'disableNativeSpellChecker' => FALSE,
     'indentClasses' => array('indent1', 'indent2', 'indent3'),
     'justifyClasses' => array('text-align-left', 'text-align-center', 'text-align-right', 'text-align-justify'),
     'coreStyles_underline' => array('element' => 'span', 'attributes' => array('class' => 'underline')),
@@ -385,6 +408,35 @@ function editor_ckeditor_get_settings($format, $existing_settings) {
     'language' => isset($language->language) ? $language->language : '',
     'resize_dir' => 'vertical',
   );
+
+  // Add the language list if configured.
+  $language_list = array();
+  $config = array('language_list' => 'un');
+  if (isset($format->editor_settings['plugins']['language'])) {
+    $config = $format->editor_settings['plugins']['language'];
+  }
+
+  $predefined_languages = ($config['language_list'] === 'all') ?
+    editor_ckeditor_standard_language_list() :
+    editor_ckeditor_united_nations_language_list();
+
+  // Generate the language_list setting as expected by the CKEditor Language
+  // plugin, but key the values by the full language name so that we can sort
+  // them later on.
+  foreach ($predefined_languages as $langcode => $lang) {
+    $english_name = $lang[0];
+    $direction = empty($lang[2]) ? NULL : $lang[2];
+    if ($direction === 'rtl') {
+      $language_list[$english_name] = $langcode . ':' . $english_name . ':rtl';
+    }
+    else {
+      $language_list[$english_name] = $langcode . ':' . $english_name;
+    }
+  }
+
+  // Sort on full language name.
+  ksort($language_list);
+  $settings['language_list'] = array_values($language_list);
 
   // Add the allowedContent setting, which ensures CKEditor only allows tags
   // and attributes that are allowed by the text format for this text editor.
@@ -409,8 +461,8 @@ function editor_ckeditor_get_settings($format, $existing_settings) {
   }
 
   if (isset($external_plugins['drupalimagecaption'])) {
-    $settings['drupal']['captionFilterEnabled'] = !empty($filters['editor_caption']->status);
-    $settings['drupal']['alignFilterEnabled'] = !empty($filters['editor_align']->status);
+    $settings['drupal']['captionFilterEnabled'] = !empty($format->filters['editor_caption']->status);
+    $settings['drupal']['alignFilterEnabled'] = !empty($format->filters['editor_align']->status);
     $settings['drupal']['imageCaptionPlaceholderText'] = t('Enter caption text here.');
     $settings['image2_captionedClass'] = 'caption caption-img';
     $settings['image2_alignClasses'] = array('align-left', 'align-center', 'align-right');
@@ -428,7 +480,7 @@ function editor_ckeditor_get_settings($format, $existing_settings) {
  * filter system, by enabling CKEditor's Advanced Content Filter (ACF)
  * functionality: http://ckeditor.com/blog/CKEditor-4.1-RC-Released.
  *
- * @param $format
+ * @param object $format
  *   The text format object.
  *
  * @return array
@@ -447,9 +499,7 @@ function editor_ckeditor_get_acf_settings($format) {
     return array(TRUE, FALSE);
   }
 
-  /**
-   * Converts Drupal-stored attribute values to CKEditor attribute lists.
-   */
+  // Converts Drupal-stored attribute values to CKEditor attribute lists.
   $get_attribute_values = function($attribute_values, $allowed_values) {
     $values = array_keys(array_filter($attribute_values, function($value) use ($allowed_values) {
       if ($allowed_values) {
@@ -502,8 +552,8 @@ function editor_ckeditor_get_acf_settings($format) {
       // attributes is allowed. However, that may not be the case: the "*"
       // tag may still apply restrictions.
       // Since CKEditor's ACF follows the following principle:
-      //     Once validated, an element or its property cannot be
-      //     invalidated by another rule.
+      // "Once validated, an element or its property cannot be invalidated by
+      // another rule."
       // That means that the most permissive setting wins. Which means that
       // it will still be allowed by CKEditor to e.g. define any style, no
       // matter what the "*" tag's restrictions may be. If there's a setting
@@ -669,4 +719,145 @@ function _editor_ckeditor_theme_css($theme = NULL) {
   }
 
   return $css;
+}
+
+/**
+ * Some common languages with their English and native names.
+ *
+ * Language codes are defined by the W3C language tags document for
+ * interoperability. Language codes typically have a language and, optionally,
+ * a script or regional variant name. See:
+ * http://www.w3.org/International/articles/language-tags/ for more
+ * information.
+ *
+ * @return array
+ *   An array of language code to language name information. Language name
+ *   information itself is an array of English and native names.
+ */
+function editor_ckeditor_standard_language_list() {
+  // This list is based on languages available from localize.drupal.org. See
+  // http://localize.drupal.org/issues for information on how to add languages
+  // there.
+  //
+  // The "Left-to-right marker" comments and the enclosed UTF-8 markers are to
+  // make otherwise strange looking PHP syntax natural (to not be displayed in
+  // right to left). See https://www.drupal.org/node/128866#comment-528929.
+  return array(
+    'af' => array('Afrikaans', 'Afrikaans'),
+    'am' => array('Amharic', 'አማርኛ'),
+    'ar' => array('Arabic', /* Left-to-right marker "‭" */ 'العربية', 'rtl'),
+    'ast' => array('Asturian', 'Asturianu'),
+    'az' => array('Azerbaijani', 'Azərbaycanca'),
+    'be' => array('Belarusian', 'Беларуская'),
+    'bg' => array('Bulgarian', 'Български'),
+    'bn' => array('Bengali', 'বাংলা'),
+    'bo' => array('Tibetan', 'བོད་སྐད་'),
+    'bs' => array('Bosnian', 'Bosanski'),
+    'ca' => array('Catalan', 'Català'),
+    'cs' => array('Czech', 'Čeština'),
+    'cy' => array('Welsh', 'Cymraeg'),
+    'da' => array('Danish', 'Dansk'),
+    'de' => array('German', 'Deutsch'),
+    'dz' => array('Dzongkha', 'རྫོང་ཁ'),
+    'el' => array('Greek', 'Ελληνικά'),
+    'en' => array('English', 'English'),
+    'en-x-simple' => array('Simple English', 'Simple English'),
+    'eo' => array('Esperanto', 'Esperanto'),
+    'es' => array('Spanish', 'Español'),
+    'et' => array('Estonian', 'Eesti'),
+    'eu' => array('Basque', 'Euskera'),
+    'fa' => array('Persian, Farsi', /* Left-to-right marker "‭" */ 'فارسی', 'rtl'),
+    'fi' => array('Finnish', 'Suomi'),
+    'fil' => array('Filipino', 'Filipino'),
+    'fo' => array('Faeroese', 'Føroyskt'),
+    'fr' => array('French', 'Français'),
+    'fy' => array('Frisian, Western', 'Frysk'),
+    'ga' => array('Irish', 'Gaeilge'),
+    'gd' => array('Scots Gaelic', 'Gàidhlig'),
+    'gl' => array('Galician', 'Galego'),
+    'gsw-berne' => array('Swiss German', 'Schwyzerdütsch'),
+    'gu' => array('Gujarati', 'ગુજરાતી'),
+    'he' => array('Hebrew', /* Left-to-right marker "‭" */ 'עברית', 'rtl'),
+    'hi' => array('Hindi', 'हिन्दी'),
+    'hr' => array('Croatian', 'Hrvatski'),
+    'ht' => array('Haitian Creole', 'Kreyòl ayisyen'),
+    'hu' => array('Hungarian', 'Magyar'),
+    'hy' => array('Armenian', 'Հայերեն'),
+    'id' => array('Indonesian', 'Bahasa Indonesia'),
+    'is' => array('Icelandic', 'Íslenska'),
+    'it' => array('Italian', 'Italiano'),
+    'ja' => array('Japanese', '日本語'),
+    'jv' => array('Javanese', 'Basa Java'),
+    'ka' => array('Georgian', 'ქართული ენა'),
+    'kk' => array('Kazakh', 'Қазақ'),
+    'km' => array('Khmer', 'ភាសាខ្មែរ'),
+    'kn' => array('Kannada', 'ಕನ್ನಡ'),
+    'ko' => array('Korean', '한국어'),
+    'ku' => array('Kurdish', 'Kurdî'),
+    'ky' => array('Kyrgyz', 'Кыргызча'),
+    'lo' => array('Lao', 'ພາສາລາວ'),
+    'lt' => array('Lithuanian', 'Lietuvių'),
+    'lv' => array('Latvian', 'Latviešu'),
+    'mg' => array('Malagasy', 'Malagasy'),
+    'mk' => array('Macedonian', 'Македонски'),
+    'ml' => array('Malayalam', 'മലയാളം'),
+    'mn' => array('Mongolian', 'монгол'),
+    'mr' => array('Marathi', 'मराठी'),
+    'ms' => array('Bahasa Malaysia', 'بهاس ملايو'),
+    'my' => array('Burmese', 'ဗမာစကား'),
+    'ne' => array('Nepali', 'नेपाली'),
+    'nl' => array('Dutch', 'Nederlands'),
+    'nb' => array('Norwegian Bokmål', 'Norsk, bokmål'),
+    'nn' => array('Norwegian Nynorsk', 'Norsk, nynorsk'),
+    'oc' => array('Occitan', 'Occitan'),
+    'pa' => array('Punjabi', 'ਪੰਜਾਬੀ'),
+    'pl' => array('Polish', 'Polski'),
+    'pt-pt' => array('Portuguese, Portugal', 'Português, Portugal'),
+    'pt-br' => array('Portuguese, Brazil', 'Português, Brasil'),
+    'ro' => array('Romanian', 'Română'),
+    'ru' => array('Russian', 'Русский'),
+    'sco' => array('Scots', 'Scots'),
+    'se' => array('Northern Sami', 'Sámi'),
+    'si' => array('Sinhala', 'සිංහල'),
+    'sk' => array('Slovak', 'Slovenčina'),
+    'sl' => array('Slovenian', 'Slovenščina'),
+    'sq' => array('Albanian', 'Shqip'),
+    'sr' => array('Serbian', 'Српски'),
+    'sv' => array('Swedish', 'Svenska'),
+    'sw' => array('Swahili', 'Kiswahili'),
+    'ta' => array('Tamil', 'தமிழ்'),
+    'ta-lk' => array('Tamil, Sri Lanka', 'தமிழ், இலங்கை'),
+    'te' => array('Telugu', 'తెలుగు'),
+    'th' => array('Thai', 'ภาษาไทย'),
+    'tr' => array('Turkish', 'Türkçe'),
+    'tyv' => array('Tuvan', 'Тыва дыл'),
+    'ug' => array('Uyghur', 'Уйғур'),
+    'uk' => array('Ukrainian', 'Українська'),
+    'ur' => array('Urdu', /* Left-to-right marker "‭" */ 'اردو', 'rtl'),
+    'vi' => array('Vietnamese', 'Tiếng Việt'),
+    'xx-lolspeak' => array('Lolspeak', 'Lolspeak'),
+    'zh-hans' => array('Chinese, Simplified', '简体中文'),
+    'zh-hant' => array('Chinese, Traditional', '繁體中文'),
+  );
+}
+
+/**
+ * The 6 official languages used at the United Nations.
+ *
+ * This list is based on http://www.un.org/en/aboutun/languages.shtml/ and it
+ * uses the same format as getStandardLanguageList().
+ *
+ * @return array
+ *   An array with language codes as keys, and English and native language
+ *   names as values.
+ */
+function editor_ckeditor_united_nations_language_list() {
+  return array(
+    'ar' => array('Arabic', /* Left-to-right marker "‭" */ 'العربية', 'rtl'),
+    'zh-hans' => array('Chinese, Simplified', '简体中文'),
+    'en' => array('English', 'English'),
+    'fr' => array('French', 'Français'),
+    'ru' => array('Russian', 'Русский'),
+    'es' => array('Spanish', 'Español'),
+  );
 }

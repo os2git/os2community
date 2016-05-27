@@ -2591,3 +2591,12 @@ function file_entity_get_public_and_private_stream_wrapper_names($flag = STREAM_
   }
   return $wrappers;
 }
+
+/**
+ * Implements hook_features_pipe_alter() for the file type component.
+ */
+function file_entity_features_pipe_file_type_alter(&$pipe, $data, $export) {
+  foreach ($data as $file_type) {
+    $pipe['variable'][] = "pathauto_file_{$file_type}_pattern";
+  }
+}

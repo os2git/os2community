@@ -1,7 +1,5 @@
 (function($) {
 
-CKEDITOR.disableAutoInline = true;
-
 Drupal.wysiwyg.editor.init.ckeditor = function(settings) {
   // Plugins must only be loaded once. Only the settings from the first format
   // will be used but they're identical anyway.
@@ -40,10 +38,8 @@ Drupal.wysiwyg.editor.attach.ckeditor = function(context, params, settings) {
   // Apply editor instance settings.
   CKEDITOR.config.customConfig = '';
 
-  var $drupalToolbars = $('#toolbar, #admin-menu', Drupal.overlayChild ? window.parent.document : document);
-  if (!settings.height) {
-    settings.height = $('#' + params.field).height();
-  }
+  var $drupalToolbar = $('#toolbar', Drupal.overlayChild ? window.parent.document : document);
+
   settings.on = {
     instanceReady: function(ev) {
       var editor = ev.editor;
@@ -53,7 +49,7 @@ Drupal.wysiwyg.editor.attach.ckeditor = function(context, params, settings) {
       var tags = CKEDITOR.tools.extend({}, dtd.$block, dtd.$listItem, dtd.$tableContent);
       // Set source formatting rules for each listed tag except <pre>.
       // Linebreaks can be inserted before or after opening and closing tags.
-      if (settings.simple_source_formatting) {
+      if (settings.apply_source_formatting) {
         // Mimic FCKeditor output, by breaking lines between tags.
         for (var tag in tags) {
           if (tag == 'pre') {
@@ -143,10 +139,10 @@ Drupal.wysiwyg.editor.attach.ckeditor = function(context, params, settings) {
         return;
       }
       if (ev.data.command.state == CKEDITOR.TRISTATE_ON) {
-        $drupalToolbars.hide();
+        $drupalToolbar.hide();
       }
       else {
-        $drupalToolbars.show();
+        $drupalToolbar.show();
       }
     }
   };
@@ -188,8 +184,7 @@ Drupal.wysiwyg.editor.instance.ckeditor = {
           editor.on('mode', function(ev) {
             if (ev.editor.mode == 'wysiwyg') {
               // Inject CSS files directly into the editing area head tag.
-              var iframe = $('#cke_contents_' + ev.editor.name + ' iframe, #' + ev.editor.id + '_contents iframe');
-              $('head', iframe.eq(0).contents()).append('<link rel="stylesheet" href="' + settings.css + '" type="text/css" >');
+              $('head', $('#cke_contents_' + ev.editor.name + ' iframe').eq(0).contents()).append('<link rel="stylesheet" href="' + settings.css + '" type="text/css" >');
             }
           });
         }
@@ -204,7 +199,12 @@ Drupal.wysiwyg.editor.instance.ckeditor = {
                   data.node = data.node.$;
                 }
                 if (selection.getType() == CKEDITOR.SELECTION_TEXT) {
-                  data.content = selection.getSelectedText();
+                  if (CKEDITOR.env.ie) {
+                    data.content = selection.getNative().createRange().text;
+                  }
+                  else {
+                    data.content = selection.getNative().toString();
+                  }
                 }
                 else if (data.node) {
                   // content is supposed to contain the "outerHTML".
@@ -233,33 +233,7 @@ Drupal.wysiwyg.editor.instance.ckeditor = {
 
   insert: function(content) {
     content = this.prepareContent(content);
-    if (CKEDITOR.env.webkit || CKEDITOR.env.chrome || CKEDITOR.env.opera || CKEDITOR.env.safari) {
-      // Works around a WebKit bug which removes wrapper elements.
-      // @see https://drupal.org/node/1927968
-      var tmp = new CKEDITOR.dom.element('div'), children, skip = 0, item;
-      tmp.setHtml(content);
-      children = tmp.getChildren();
-      skip = 0;
-      while (children.count() > skip) {
-        item = children.getItem(skip);
-        switch(item.type) {
-          case 1:
-            CKEDITOR.instances[this.field].insertElement(item);
-            break;
-          case 3:
-            CKEDITOR.instances[this.field].insertText(item.getText());
-            skip++;
-            break;
-          case 8:
-            CKEDITOR.instances[this.field].insertHtml(item.getOuterHtml());
-            skip++;
-            break;
-        }
-      }
-    }
-    else {
-      CKEDITOR.instances[this.field].insertHtml(content);
-    }
+    CKEDITOR.instances[this.field].insertHtml(content);
   },
 
   setContent: function (content) {

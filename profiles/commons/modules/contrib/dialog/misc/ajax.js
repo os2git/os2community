@@ -616,6 +616,20 @@ Drupal.ajax.prototype.commands = {
   },
 
   /**
+   * Command to set the window.location, redirecting the browser.
+   */
+  redirect: function (ajax, response, status) {
+    window.location.href = response.url;
+  },
+
+  /**
+   * Command to trigger window.location.reload(), reloading the current page.
+   */
+  reload: function (ajax, response, status) {
+    window.location.reload();
+  },
+
+  /**
    * Command to provide the jQuery css() function.
    */
   css: function (ajax, response, status) {

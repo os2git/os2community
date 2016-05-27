@@ -1,39 +1,24 @@
 <?php
+
 /**
  * @file
- * Sets up the basics for the RRSSB project.
+ * Contains install and update functions.
  */
-
-/**
- * Implements hook_schema().
- */
-function rrssb_schema() {
-
-}
-/**
- * Implements hook_install().
- */
-function rrssb_install() {
-
-}
-
-/**
- * Implements hook_enable().
- */
-function rrssb_enable() {
-
-}
-
-/**
- * Implements hook_disable().
- */
-function rrssb_disable() {
-
-}
 
 /**
  * Implements hook_uninstall().
- */
+*/
 function rrssb_uninstall() {
+  // Remove auto-generated files.
+  file_unmanaged_delete_recursive('public://rrssb');
 
+   // Simple DB query to get the names of our variables.
+  $results = db_select('variable', 'v')
+    ->fields('v', array('name'))
+    ->condition('name', 'rrssb_%', 'LIKE')
+    ->execute();
+  // Loop through and delete each of our variables.
+  foreach ($results as $result) {
+    variable_del($result->name);
+  }
 }

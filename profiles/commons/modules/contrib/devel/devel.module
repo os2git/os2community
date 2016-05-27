@@ -212,7 +212,7 @@ function devel_menu() {
   // Duplicate path in 2 different menus. See http://drupal.org/node/601788.
   $items['devel/settings'] = array(
     'title' => 'Devel settings',
-    'description' => 'Helper functions, pages, and blocks to assist Drupal developers. The devel blocks can be managed via the <a href="' . url('admin/structure/block') . '">block administration</a> page.',
+    'description' => 'Helper functions, pages, and blocks to assist Drupal developers. The devel blocks can be managed via the <a href="/admin/structure/block">block administration</a> page.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('devel_admin_settings'),
     'access arguments' => array('administer site configuration'),
@@ -221,7 +221,7 @@ function devel_menu() {
   );
   $items['admin/config/development/devel'] = array(
     'title' => 'Devel settings',
-    'description' => 'Helper functions, pages, and blocks to assist Drupal developers. The devel blocks can be managed via the <a href="' . url('admin/structure/block') . '">block administration</a> page.',
+    'description' => 'Helper functions, pages, and blocks to assist Drupal developers. The devel blocks can be managed via the <a href="/admin/structure/block">block administration</a> page.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('devel_admin_settings'),
     'file' => 'devel.admin.inc',
@@ -1576,6 +1576,7 @@ function devel_query_table($queries, $counts) {
   $header = array('ms', '#', 'where', 'ops', 'query', 'target');
   $i = 0;
   $api = variable_get('devel_api_url', 'api.drupal.org');
+  $conn = Database::getconnection();
   foreach ($queries as $query) {
     $function = !empty($query['caller']['class']) ? $query['caller']['class'] . '::' : '';
     $function .= $query['caller']['function'];
@@ -1613,8 +1614,19 @@ function devel_query_table($queries, $counts) {
     }
     $cell[$i][] = implode(' ', $ops);
     // 3 divs for each variation of the query. Last 2 are hidden by default.
-    $placeholders = '<div class="dev-placeholders">' . check_plain($query['query']) . "</div>\n";
-    $args = '<div class="dev-arguments" style="display: none;"></div>' . "\n";
+    if (variable_get('devel_show_query_args_first', FALSE)) {
+      $placeholders = '<div class="dev-placeholders" style="display: none;">' . check_plain($query['query']) . "</div>\n";
+      $quoted = array();
+      foreach ($query['args'] as $key => $val) {
+        $quoted[$key] = $conn->quote($val);
+      }
+      $output = strtr($query['query'], $quoted);
+      $args = '<div class="dev-arguments">' . $output . '</div>' . "\n";
+    }
+    else {
+      $placeholders = '<div class="dev-placeholders">' . check_plain($query['query']) . "</div>\n";
+      $args = '<div class="dev-arguments" style="display: none;"></div>' . "\n";
+    }
     $explain = '<div class="dev-explain" style="display: none;"></div>' . "\n";
     $cell[$i][] = array(
       'id' => "devel-query-$i",

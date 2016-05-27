@@ -181,6 +181,12 @@ function dialog_library_alter(&$libraries, $module) {
       $libraries['ui']['dependencies'][] = array('dialog', 'seven.jquery.ui');
     }
 
+    // Remove the default dialog styling.
+    if ($module == 'system' && isset($libraries['ui.dialog'])) {
+      $path = 'misc/ui/jquery.ui.dialog.css';
+      unset($libraries['ui.dialog']['css'][$path]);
+    }
+
     // Replace the default dialog theme CSS with custom CSS for seven.theme.
     if ($module == 'dialog' && isset($libraries['drupal.dialog'])) {
       $path = drupal_get_path('module', 'dialog') . '/js/dialog/dialog.theme.css';
@@ -197,12 +203,22 @@ function dialog_library_alter(&$libraries, $module) {
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Add assets to the Views UI 'edit' page to fix styling issues until Dialog
+ * replaces CTools for modal support.
+ */
+function dialog_form_views_ui_edit_form_alter(&$form, &$form_state, $form_id) {
+  $form['#attached']['library'][] = array('dialog', 'drupal.dialog.ajax');
+}
+
+/**
  * Gets the normalized type of a request.
  *
  * The normalized type is a short, lowercase version of the format, such as
  * 'html', 'json' or 'atom'.
  *
- * @return
+ * @return string|bool
  *   The normalized type of a given request as a string or FALSE if a format
  *   could not be detected.
  */

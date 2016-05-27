@@ -5,11 +5,7 @@ core = 7.x
 
 projects[acquia_connector][type] = "module"
 projects[acquia_connector][subdir] = "contrib"
-projects[acquia_connector][version] = "2.15"
-
-; Fix signup messages displayed during install.
-; https://drupal.org/node/2289903#comment-8899833
-projects[acquia_connector][patch][] = "https://drupal.org/files/issues/move-message-generation-2289903-2.patch"
+projects[acquia_connector][version] = "2.16"
 
 projects[addressfield][type] = "module"
 projects[addressfield][subdir] = "contrib"
@@ -28,7 +24,7 @@ projects[admin_icons][download][revision] = "60d9f28801533fecc92216a60d444d89d80
 
 projects[apachesolr][type] = "module"
 projects[apachesolr][subdir] = "contrib"
-projects[apachesolr][version] = "1.7"
+projects[apachesolr][version] = "1.8"
 
 ; Search pages custom pages title setting does nothing.
 ; https://drupal.org/node/1314664#comment-9220599
@@ -62,7 +58,7 @@ projects[apachesolr_user][patch][] = "https://drupal.org/files/2077281-apache-so
 
 projects[breakpoints][type] = "module"
 projects[breakpoints][subdir] = "contrib"
-projects[breakpoints][version] = "1.3"
+projects[breakpoints][version] = "1.4"
 
 projects[connector][type] = "module"
 projects[connector][subdir] = "contrib"
@@ -70,10 +66,7 @@ projects[connector][version] = "1.0-beta2"
 
 projects[ckeditor][type] = "module"
 projects[ckeditor][subdir] = "contrib"
-projects[ckeditor][download][type] = "git"
-projects[ckeditor][download][url] = "http://git.drupal.org/project/ckeditor.git"
-projects[ckeditor][download][branch] = "7.x-1.x"
-projects[ckeditor][download][revision] = "32f0973"
+projects[ckeditor][version] = "1.17"
 
 ; Fix features rebuilding when CKEditor is disabled.
 ; https://www.drupal.org/node/2456519#comment-9742435
@@ -85,7 +78,7 @@ projects[ctools][version] = "1.9"
 
 projects[custom_search][type] = "module"
 projects[custom_search][subdir] = "contrib"
-projects[custom_search][version] = "1.18"
+projects[custom_search][version] = "1.20"
 
 projects[date][type] = "module"
 projects[date][subdir] = "contrib"
@@ -93,7 +86,7 @@ projects[date][version] = "2.9"
 
 projects[date_facets][type] = "module"
 projects[date_facets][subdir] = "contrib"
-projects[date_facets][version] = "1.0-beta2"
+projects[date_facets][version] = "1.0"
 
 ; Keeping this to the latest version, since it should only be used for development.
 projects[devel][version] = "1.x-dev"
@@ -102,7 +95,7 @@ projects[devel][subdir] = "contrib"
 
 projects[dialog][type] = "module"
 projects[dialog][subdir] = "contrib"
-projects[dialog][version] = "2.0-alpha6"
+projects[dialog][version] = "2.0-alpha9"
 
 projects[diff][type] = "module"
 projects[diff][subdir] = "contrib"
@@ -110,7 +103,7 @@ projects[diff][version] = "3.2"
 
 projects[editor][type] = "module"
 projects[editor][subdir] = "contrib"
-projects[editor][version] = "1.0-alpha4"
+projects[editor][version] = "1.0-alpha7"
 
 ; Profile has no recommended release.
 projects[edit_profile][type] = "module"
@@ -127,21 +120,17 @@ projects[email_registration][version] = "1.3"
 
 projects[entity][type] = "module"
 projects[entity][subdir] = "contrib"
-projects[entity][version] = "1.6"
+projects[entity][version] = "1.7"
 
 projects[entitycache][type] = "module"
 projects[entitycache][subdir] = "contrib"
 projects[entitycache][version] = "1.5"
 
-; Fix core translation support.
-; https://drupal.org/node/1349566#comment-7781063
-projects[entitycache][patch][] = "https://drupal.org/files/add-translation-information-on-each-request-1349566-12.patch"
-
 projects[entity_embed][version] = "3.x-dev"
 projects[entity_embed][type] = "module"
 projects[entity_embed][subdir] = "contrib"
 projects[entity_embed][download][type] = "git"
-projects[entity_embed][download][revision] = "ea69dc8"
+projects[entity_embed][download][revision] = "b7e2a13"
 projects[entity_embed][download][branch] = "7.x-3.x"
 
 projects[entityreference][type] = "module"
@@ -154,7 +143,7 @@ projects[entityreference][patch][] = "https://drupal.org/files/issues/entityrefe
 
 projects[entityreference_prepopulate][type] = "module"
 projects[entityreference_prepopulate][subdir] = "contrib"
-projects[entityreference_prepopulate][version] = "1.5"
+projects[entityreference_prepopulate][version] = "1.6"
 
 ; Entityreference prepopulate overwrites field instance custom default value functions.
 ; https://drupal.org/node/2304301#comment-8973459
@@ -170,14 +159,14 @@ projects[facetapi][version] = "1.5"
 
 projects[features][type] = "module"
 projects[features][subdir] = "contrib"
-projects[features][version] = "2.7"
+projects[features][version] = "2.10"
 
 projects[file_entity][type] = "module"
 projects[file_entity][subdir] = "contrib"
 projects[file_entity][download][type] = "git"
 projects[file_entity][download][url] = "http://git.drupal.org/project/file_entity.git"
 projects[file_entity][download][branch] = "7.x-2.x"
-projects[file_entity][download][revision] = "656f387"
+projects[file_entity][download][revision] = "f74eb9a"
 
 projects[flag][type] = "module"
 projects[flag][subdir] = "contrib"
@@ -212,10 +201,7 @@ projects[i18n][version] = "1.13"
 
 projects[i18nviews][type] = "module"
 projects[i18nviews][subdir] = "contrib"
-projects[i18nviews][download][type] = "git"
-projects[i18nviews][download][url] = "http://git.drupal.org/project/i18nviews.git"
-projects[i18nviews][download][branch] = "7.x-3.x"
-projects[i18nviews][download][revision] = "27e9809"
+projects[i18nviews][version] = "3.0-alpha1"
 
 projects[jquery_update][type] = "module"
 projects[jquery_update][subdir] = "contrib"
@@ -239,7 +225,7 @@ projects[lingotek][version] = "6.02"
 
 projects[link][type] = "module"
 projects[link][subdir] = "contrib"
-projects[link][version] = "1.3"
+projects[link][version] = "1.4"
 
 projects[media][type] = "module"
 projects[media][subdir] = "contrib"
@@ -254,7 +240,7 @@ projects[media][patch][] = "https://drupal.org/files/issues/media-browser_opens_
 
 projects[media_oembed][type] = "module"
 projects[media_oembed][subdir] = "contrib"
-projects[media_oembed][version] = "2.4"
+projects[media_oembed][version] = "2.6"
 
 projects[memcache][type] = "module"
 projects[memcache][subdir] = "contrib"
@@ -262,11 +248,11 @@ projects[memcache][version] = "1.5"
 
 projects[menu_attributes][type] = "module"
 projects[menu_attributes][subdir] = "contrib"
-projects[menu_attributes][version] = "1.0-rc3"
+projects[menu_attributes][version] = "1.0"
 
 projects[message][type] = "module"
 projects[message][subdir] = "contrib"
-projects[message][version] = "1.10"
+projects[message][version] = "1.11"
 
 ; Make message access alterable.
 ; https://drupal.org/node/1920560#comment-7080942
@@ -294,7 +280,7 @@ projects[message_subscribe][patch][] = "https://drupal.org/files/issues/2184567-
 
 projects[metatag][type] = "module"
 projects[metatag][subdir] = "contrib"
-projects[metatag][version] = "1.7"
+projects[metatag][version] = "1.14"
 
 projects[module_filter][type] = "module"
 projects[module_filter][subdir] = "contrib"
@@ -306,7 +292,7 @@ projects[mollom][version] = "2.15"
 
 projects[navbar][type] = "module"
 projects[navbar][subdir] = "contrib"
-projects[navbar][version] = "1.6"
+projects[navbar][version] = "1.7"
 
 projects[oauth][type] = "module"
 projects[oauth][subdir] = "contrib"
@@ -319,20 +305,9 @@ projects[oauthconnector][download][url] = "http://git.drupal.org/project/oauthco
 projects[oauthconnector][download][branch] = "7.x-1.x"
 projects[oauthconnector][download][revision] = "42c6f66"
 
-projects[oembed][type] = "module"
-projects[oembed][subdir] = "contrib"
-projects[oembed][download][type] = "git"
-projects[oembed][download][url] = "http://git.drupal.org/project/oembed.git"
-projects[oembed][download][branch] = "7.x-1.x"
-projects[oembed][download][revision] = "9aa5303"
-
-; Remove the media submodule as it conflicts with the Media: oEmbed module.
-; https://drupal.org/node/2269745#comment-8796261
-projects[oembed][patch][] = "https://drupal.org/files/issues/remove-media-submodule-2269745-2.patch"
-
 projects[og][type] = "module"
 projects[og][subdir] = "contrib"
-projects[og][version] = "2.7"
+projects[og][version] = "2.9"
 
 ; Auto-assign role to group manager broken on groups with overridden roles.
 ; https://drupal.org/node/2005800#comment-7684873
@@ -472,7 +447,7 @@ projects[timeago][patch][] = "https://drupal.org/files/issues/1427226-timeago-da
 
 projects[title][type] = "module"
 projects[title][subdir] = "contrib"
-projects[title][version] = "1.0-alpha7"
+projects[title][version] = "1.0-alpha8"
 
 projects[token][type] = "module"
 projects[token][subdir] = "contrib"
@@ -488,7 +463,7 @@ projects[variable][version] = "2.5"
 
 projects[views][type] = "module"
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.11"
+projects[views][version] = "3.13"
 
 ; Update Views Content access filter per core performance improvements.
 ; https://drupal.org/comment/8516039#comment-8516039

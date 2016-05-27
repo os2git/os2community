@@ -1,0 +1,61 @@
+default:
+  suites:
+    default:
+      paths: 
+        features: 'features'
+      filters:
+        tags: "~@chrome"
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+        - Drupal\DrupalExtension\Context\DrushContext
+  extensions:
+    Behat\MinkExtension:
+      goutte: ~
+      selenium2: ~
+      #base_url: http://mydrupalsite.com
+      #files_path: './profiles/commons/tests'
+    Lakion\Behat\MinkDebugExtension:
+      directory: './profiles/commons/tests/build'
+      screenshot: true
+    Drupal\DrupalExtension:
+      text:
+        username_field: 'E-mail'
+        password_field: 'Password'
+      blackbox: ~
+      #drush:
+      #  root: '/path/to/drupal/root'
+      #drupal:
+      #  drupal_root: '/path/to/drupal/root'
+      api_driver: 'drupal'
+      region_map:
+        # CTools / Panels
+        CTools modal: "#modalContent"
+        # Commons Origins.
+        Header: ".region-header"
+        Menu bar: "#menu-bar"
+        Featured: ".region-featured"
+        Help: ".region-help"
+        Highlighted: ".region-highlighted"
+        Content: "#content"
+        Tabs: ".tabs.primary"
+        Aside: ".region-content-aside"
+        Sidebar first: ".region-sidebar-first"
+        Sidebar second: ".region-sidebar-second"
+        Secondary: ".region-content-aside"
+        Tertiary: ".region-content-tertiary"
+        Footer: ".region-footer"
+
+# Setup for Google Chrome only tests.
+chrome:
+  suites:
+    default:
+      filters:
+        tags: "@chrome"
+  extensions:
+    Behat\MinkExtension:
+      selenium2:
+        browser: chrome
+        capabilities: {"browser": "chrome", "browserName": "chrome", "browserVersion": "ANY", "version": "ANY"}

@@ -13,7 +13,7 @@
  * @param bool $persist
  *   (optional) Whether to persist the dialog in the DOM or not.
  *
- * @return
+ * @return array
  *   An array suitable for use with the ajax_render() function.
  */
 function dialog_command_close_dialog($selector = NULL, $persist = FALSE) {
@@ -30,7 +30,7 @@ function dialog_command_close_dialog($selector = NULL, $persist = FALSE) {
  * @param bool $persist
  *   (optional) Whether to persist the dialog in the DOM or not.
  *
- * @return
+ * @return array
  *   An array suitable for use with the ajax_render() function.
  */
 function dialog_command_close_modal_dialog($persist = FALSE) {
@@ -55,7 +55,7 @@ function dialog_command_close_modal_dialog($persist = FALSE) {
  *   on the content of the dialog. If left empty, the settings will be
  *   populated automatically from the current request.
  *
- * @return
+ * @return array
  *   An array suitable for use with the ajax_render() function.
  */
 function dialog_command_open_dialog($selector, $title, $content, array $dialog_options = array(), $settings = NULL) {
@@ -102,7 +102,7 @@ function dialog_command_open_dialog($selector, $title, $content, array $dialog_o
  *   on the content of the dialog. If left empty, the settings will be
  *   populated automatically from the current request.
  *
- * @return
+ * @return array
  *   An array suitable for use with the ajax_render() function.
  */
 function dialog_command_open_modal_dialog($title, $content, array $dialog_options = array(), $settings = NULL) {
@@ -123,7 +123,7 @@ function dialog_command_open_modal_dialog($title, $content, array $dialog_option
  * @param mixed $option_value
  *   The value of the option to be passed to the dialog.
  *
- * @return
+ * @return array
  *   An array suitable for use with the ajax_render() function.
  */
 function dialog_command_set_dialog_option($selector, $option_name, $option_value) {
@@ -144,9 +144,37 @@ function dialog_command_set_dialog_option($selector, $option_name, $option_value
  * @param string $title
  *   The title that will be set on the dialog.
  *
- * @return
+ * @return array
  *   An array suitable for use with the ajax_render() function.
  */
 function dialog_command_set_dialog_title($selector, $title) {
   return dialog_command_set_dialog_option($selector, 'title', $title);
+}
+
+/**
+ * Provides an AJAX command to redirect the page.
+ *
+ * @param string $url
+ *   The URL that will be loaded into window.location. This should be a full
+ *   URL, one that has already been run through the url() function.
+ * @return array
+ *   An array suitable for use with the ajax_render() function.
+ */
+function dialog_command_redirect($url) {
+  return array(
+    'command' => 'redirect',
+    'url' => $url,
+  );
+}
+
+/**
+ * Provides an AJAX command to reload the page.
+ *
+ * @return array
+ *   An array suitable for use with the ajax_render() function.
+ */
+function dialog_command_reload() {
+  return array(
+    'command' => 'reload',
+  );
 }
