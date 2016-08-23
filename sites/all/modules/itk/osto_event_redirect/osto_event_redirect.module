@@ -1,0 +1,12 @@
+<?php
+/**
+ * Implements hook_node_insert
+ * We need the node id so we cant make the redirect any earlier in the save process.
+ *
+ * @param $node
+ */
+function osto_event_redirect_node_insert($node) {
+  if ($node->type =='event' && $node->field_event_registration['und']['0']['registration_type'] == 'event') {
+    $_GET['destination'] = 'node/' . $node->nid . '/registrations/settings';
+  }
+}

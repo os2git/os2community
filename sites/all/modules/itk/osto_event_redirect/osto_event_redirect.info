@@ -1,0 +1,4 @@
+name = Osto event redirect
+description = Redirect after saving event
+core = 7.x
+package = ITK
