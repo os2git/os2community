@@ -1,19 +1,5 @@
 /*
 ========================================================================== 
-	Mobile Menu
-========================================================================== 
-*/
-.block-superfish {
-	select {
-		width: 100%;
-		margin-bottom: 20px;
-		font-size: $font-size-medium;
-	}
-}
-
-
-/*
-========================================================================== 
 	Tabs
 ========================================================================== 
 */
@@ -59,5 +45,194 @@ div.breadcrumb {
 		display: inline-block;
 		margin: 0 8px;
 		color: $text-color-std;
+	}
+}
+
+
+/*
+==========================================================================
+	Main menu
+==========================================================================
+*/
+
+html,
+body {
+	&.is-locked {
+		overflow: hidden;
+		position: fixed;
+		width: 100%;
+	}
+}
+
+.zone-menu {
+	position: relative;
+}
+
+.region-menu {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.menu-name-main-menu--toggle {
+	cursor: pointer;
+	right: 20px;
+	position: absolute;
+	top: 20px;
+
+	@include breakpoint(1024px) {
+		display: none;
+	}
+}
+
+.menu-name-main-menu {
+	// Level 1
+	> ul > li {
+		border-top:1px solid $gray-lighter;
+		display: block;
+		text-align: center;
+
+		&:first-child {
+			border: 0;
+		}
+
+		> a {
+			font-size: 1.2em;
+		}
+
+		@include breakpoint(1024px) {
+			border: 0;
+			color: #000;
+			float: left;
+			height: 90px;
+			line-height: 70px;
+			margin: 0 3%;
+			overflow: visible;
+			position: relative;
+			text-align: left;
+		}
+	}
+
+	a {
+		display: block;
+		margin: 0.75em 0;
+	}
+
+
+	// Level 2
+	.expanded ul {
+		@include breakpoint(1024px) {
+			background-color: #fff;
+			display: none;
+			position: absolute;
+			top: 60px;
+			margin: 0px -2em;
+			min-width: 170px;
+			padding: 0 2em;
+			line-height: 3em;
+
+			li {
+				border-bottom: 1px solid $gray-lighter;
+
+				&:last-child {
+					border-bottom: 0;
+				}
+			}
+		}
+	}
+	.expanded:hover {
+		@include breakpoint(1024px) {
+			ul {
+				display: block;
+			}
+		}
+	}
+}
+
+/*
+==========================================================================
+	Hamburger menu
+==========================================================================
+*/
+.menu-name-main-menu-wrapper {
+	background-color: $white;
+	bottom: 0;
+	box-sizing: border-box;
+	cursor: auto;
+	font-size: 16px;
+	margin-right: 0;
+	max-width: 90%;
+	overflow: scroll;
+	position: fixed;
+	right: -30em;
+	top: 82px;
+	transition: right .3s;
+	transition-timing-function: ease-in-out;
+	width: 30em;
+	z-index: 50;
+	padding: 6em 2em;
+
+	@include breakpoint(1024px) {
+		transition: initial;
+		position: relative;
+		left: 0;
+		right:	0;
+		padding: 0;
+		background-color: transparent;
+		top: 0;
+		overflow: visible;
+		font-size: inherit;
+		float: left;
+		width: 100%;
+		z-index: 100;
+	}
+
+
+	&.is-open {
+		right: 0;
+	}
+
+	&--overlay {
+		bottom: 0;
+		left: 0;
+		height: 100%;
+		position: fixed;
+		right:0;
+		top: 82px;
+		visibility: hidden;
+		width: 100%;
+		z-index: 100;
+
+		&.is-visible {
+			background-color: rgba(0,0,0, .85);
+			cursor: pointer;
+			transition: background .3s;
+			visibility: visible;
+		}
+
+		@include breakpoint(1024px) {
+			background-color: transparent;
+			cursor: auto;
+			position: relative;
+			visibility: visible;
+			top: 0;
+			transition: initial;
+			width: auto;
+		}
+	}
+
+	li {
+		a {
+			@include strip-link-styles(#3b6fb6, none);
+
+			&:hover {
+				color: #3b6fb6;
+			}
+
+			@include breakpoint(1024px) {
+				@include strip-link-styles(#000, none);
+			}
+		}
 	}
 }

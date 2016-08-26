@@ -71,7 +71,7 @@
 			float: left;
 			margin: 0 10px 0 0;
 			img {
-				@include border-radius(45px);
+				border-radius: 45px;
 			}
 		}
 		.user-name {
@@ -468,7 +468,7 @@
 		}
 		.image {
 			padding: 0 15px;
-			@include box-sizing(border-box);
+			box-sizing: border-box;
 		}
 	}
 }
@@ -510,11 +510,11 @@
 		.image {
 			margin-bottom: 10px;
 			img {
-				@include transition-property(opacity);
-				@include transition-duration(250ms);
+				transition-property: opacity;
+				transition-duration: 250ms;
 			}
 			img:hover {
-				@include opacity(0.85);
+				opacity: 0.85;
 			}
 		}
 		.resume {
@@ -695,8 +695,8 @@
 		margin: 0 0 20px 0;		
 		height: auto;
 		text-align: center;
-		@include border-radius(3px);
-		@include box-sizing(border-box);
+		border-radius: 3px;
+		box-sizing: border-box;
 		a {
 			padding: 20px 30px 25px;
 			display: block;
@@ -779,7 +779,7 @@
 			float: left;
 			margin: 0 10px 0 0;
 			img {
-				@include border-radius(45px);
+				border-radius: 45px;
 			}
 		}
 		.user-name,
@@ -846,8 +846,8 @@
 		color: $white;
 		height: 160px;
 		overflow: hidden;
-		@include border-radius(0);
-		@include box-shadow(none);
+		border-radius: 0;
+		box-shadow: none;
 		.slides {
 			img {
 				width: auto;
@@ -906,11 +906,11 @@
 				padding: 0 10px;
 				position: relative;
 				top: -10px;
-				@include transition-property(top,opacity);
-				@include transition-duration($anim-speed);
-				@include transition-timing-function($anim-ease-type);		
-				@include opacity(0);
-				@include text-shadow(2px 2px 0 rgba(0,0,0,0.20));
+				transition-property: top,opacity;
+				transition-duration: $anim-speed;
+				transition-timing-function: $anim-ease-type;
+				opacity: 0;
+				text-shadow: 2px 2px 0 rgba(0,0,0,0.20);
 			}
 			.slide-body {
 				display: none;
@@ -918,11 +918,11 @@
 			.item-list {
 				position: relative;
 				top: 0;
-				@include transition-property(top,opacity);
-				@include transition-duration($anim-speed*2);
-				@include transition-timing-function($anim-ease-type);
-				@include transition-delay($anim-speed);			
-				@include opacity(0);
+				transition-property: top,opacity;
+				transition-duration: $anim-speed*2;
+				transition-timing-function: $anim-ease-type;
+				transition-delay: $anim-speed;
+				opacity: 0;
 				li {
 					list-style: none;
 					display: inline-block;
@@ -958,26 +958,26 @@
 			position: absolute;
 		}
 		.extra-image {
-			@include transition-property(opacity,top);
-			@include transition-duration($anim-speed*2);
-			@include transition-timing-function($anim-ease-type);
-			@include transition-delay($anim-speed);			
-			@include opacity(0);
+			transition-property: opacity,top;
+			transition-duration: $anim-speed*2;
+			transition-timing-function: $anim-ease-type;
+			transition-delay: $anim-speed;
+			opacity: 0;
 
 			display: none;
 		}
 		li.animated {
 			.slide-title {
 				top: 0;
-				@include opacity(1);
+				opacity: 1;
 			}
 			.slide-body {
 				top: 0;
-				@include opacity(1);
+				opacity: 1;
 			}
 			.item-list {
 				top: 0;
-				@include opacity(1);
+				opacity: 1;
 			}
 			.extra-image {
 				position: absolute;
@@ -987,7 +987,7 @@
 				left: 0;
 
 				top: 0;
-				@include opacity(1);
+				opacity: 1;
 			}
 		}
 		.flex-control-nav {
@@ -998,8 +998,8 @@
 				a {
 					height: 12px; width: 12px;
 					background: #d1d1d1;
-					@include border-radius(12px);
-					@include box-shadow(rgba(0,0,0,.25) 0 0 2px 0);
+					border-radius: 12px;
+					box-shadow: rgba(0,0,0,.25) 0 0 2px 0;
 				}
 				a.flex-active {
 					background: #333;
@@ -1024,8 +1024,8 @@
 		overflow: hidden;
 		background: transparent;
 		height: auto;
-		@include border-radius(0);
-		@include box-shadow(none);
+		border-radius: 0;
+		box-shadow: none;
 		.created {
 			color: $blue-light;
 			font-size: 1.83em;
@@ -1060,8 +1060,8 @@
 				a {
 					height: 9px; width: 9px;
 					background: $gray;
-					@include border-radius(10px);
-					@include box-shadow(none);
+					border-radius: 10px;
+					box-shadow: none;
 				}
 				a.flex-active {
 					background: $blue;
@@ -1082,8 +1082,8 @@
 	padding: 0;
 	border: none;
 	position: relative;
-	@include border-radius(0);
-	@include box-shadow(none);
+	border-radius: 0;
+	box-shadow: none;
 	.views-field-field-quote-body {
 		font-size: $font-size-large;
 		line-height: $line-height-std;
@@ -1106,8 +1106,8 @@
 				width: 8px; height: 8px;
 				display: inline-block;
 				background: #d1d1d1;
-				@include box-shadow(none);
-				@include border-radius(8px);
+				box-shadow: none;
+				border-radius: 8px;
 			}
 			.flex-active {
 				background: $text-color-std;
