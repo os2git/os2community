@@ -140,10 +140,8 @@ body {
 				}
 
 				a:hover {
-					text-decoration: underline;
-
 					@include breakpoint(1024px) {
-						text-decoration: none;
+						text-decoration: underline;
 					}
 				}
 			}
