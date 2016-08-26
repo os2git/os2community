@@ -231,6 +231,7 @@ body {
 	li {
 		a {
 			@include strip-link-styles(#3b6fb6, none);
+			-webkit-tap-highlight-color: rgba(0,0,0,.5);
 
 			&:hover {
 				color: #3b6fb6;
