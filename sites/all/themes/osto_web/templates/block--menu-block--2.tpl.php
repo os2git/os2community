@@ -47,7 +47,7 @@
 <a class="menu-name-main-menu--toggle js-menu-toggle"><img src="/sites/all/themes/osto_web/img/hamburger-menu-icon.png"/></a>
 <div class="js-menu-toggle menu-name-main-menu-wrapper--overlay js-hamburger-menu-overlay">
   <div class="menu-name-main-menu-wrapper js-hamburger-menu">
-    <a class="menu-name-main-menu--toggle js-menu-toggle"><img src="/sites/all/themes/osto_web/img/hamburger-menu-icon.png"/></a>
+    <a class="menu-name-main-menu--toggle js-menu-toggle"><img src="/sites/all/themes/osto_web/img/close.png"/></a>
     <div class="content"<?php print $content_attributes; ?>>
       <?php print $content ?>
     </div>
