@@ -13,7 +13,7 @@ form {
 		background: $white;
 		margin: 0;		
 		max-width: 100%;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}
 	/* Buttons */
 	input[type=submit],
@@ -33,7 +33,7 @@ form {
 		max-width: 100%;
 		padding: 0;
 		margin: 0 0 20px;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		legend {
 			font-size: $font-size-std;
 			text-transform: uppercase;
@@ -209,7 +209,7 @@ div.fancy-select div.trigger {
 	outline: none;
 	font-style: italic;
 	min-width: 225px;
-	@include box-sizing(border-box);
+	box-sizing: border-box;
 }
 
 div.fancy-select div.trigger:after {
@@ -238,8 +238,8 @@ div.fancy-select ul.options {
 	min-width: 225px;
 	border-left: 1px solid $gray-dark;
 	border-right: 1px solid $gray-dark;
-	@include box-shadow(0 2px 2px rgba(0,0,0,0.15));
-	@include box-sizing(border-box);
+	box-shadow: 0 2px 2px rgba(0,0,0,0.15);
+	box-sizing: border-box;
 	transition: opacity 250px ease-out, top 250px ease-out, visibility 250px ease-out;
 	-webkit-transition: opacity 250px ease-out, top 250px ease-out, visibility 250px ease-out;
 	-moz-transition: opacity 250px ease-out, top 250px ease-out, visibility 250px ease-out;
