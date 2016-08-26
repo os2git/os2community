@@ -138,6 +138,14 @@ body {
 				&:last-child {
 					border-bottom: 0;
 				}
+
+				a:hover {
+					text-decoration: underline;
+
+					@include breakpoint(1024px) {
+						text-decoration: none;
+					}
+				}
 			}
 		}
 	}
