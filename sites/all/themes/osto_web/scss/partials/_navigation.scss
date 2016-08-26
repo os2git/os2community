@@ -188,7 +188,6 @@ body {
 		z-index: 100;
 	}
 
-
 	&.is-open {
 		right: 0;
 	}
@@ -234,5 +233,15 @@ body {
 				@include strip-link-styles(#000, none);
 			}
 		}
+	}
+}
+
+
+// Make room for admin menu
+.logged-in .menu-name-main-menu-wrapper,
+.logged-in .menu-name-main-menu-wrapper--overlay {
+	top: 82px;
+	@include breakpoint(1024px) {
+		top: 0;
 	}
 }
