@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ostoweb_slideshow feature.
+ */
+
+include_once 'ostoweb_slideshow.features.inc';

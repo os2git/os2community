@@ -19,7 +19,7 @@ function osto_views_strongarm() {
     'og_extras_nodes' => TRUE,
     'ting_projects' => FALSE,
     'ting_teams' => FALSE,
-    'ting_members' => TRUE,
+    'ting_members' => FALSE,
     'og_extras_groups' => TRUE,
     'advanced_forum_unanswered_topics' => TRUE,
     'advanced_forum_topic_list' => TRUE,

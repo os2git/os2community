@@ -13,52 +13,6 @@ function osto_web_modifications_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
-  $context->name = 'community_blocks';
-  $context->description = '';
-  $context->tag = '';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'community' => 'community',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'views-ting_projects-block_2' => array(
-          'module' => 'views',
-          'delta' => 'ting_projects-block_2',
-          'region' => 'postface',
-          'weight' => '-10',
-        ),
-        'views-251e9a7fb506db7dfbcfc3bbd1ad198c' => array(
-          'module' => 'views',
-          'delta' => '251e9a7fb506db7dfbcfc3bbd1ad198c',
-          'region' => 'postscript_second',
-          'weight' => '-10',
-        ),
-        'views-ting_latest_products-block' => array(
-          'module' => 'views',
-          'delta' => 'ting_latest_products-block',
-          'region' => 'postscript_second',
-          'weight' => '-9',
-        ),
-        'ting_blocks-community_stats' => array(
-          'module' => 'ting_blocks',
-          'delta' => 'community_stats',
-          'region' => 'postscript_third',
-          'weight' => '-7',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-  $export['community_blocks'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
   $context->name = 'event_page_or_overview';
   $context->description = '';
   $context->tag = '';
