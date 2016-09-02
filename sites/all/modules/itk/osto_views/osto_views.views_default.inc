@@ -316,6 +316,14 @@ function osto_views_views_default_views() {
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
   $handler->display->display_options['block_description'] = 'Community Indgange';
+
+  /* Display: Community blok til forsiden */
+  $handler = $view->new_display('block', 'Community blok til forsiden', 'block_1');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['block_description'] = 'Community Indgange til forsiden';
   $translatables['ting_community_entrances'] = array(
     t('Master'),
     t('mere'),
@@ -330,6 +338,8 @@ function osto_views_views_default_views() {
 </a>'),
     t('Block'),
     t('Community Indgange'),
+    t('Community blok til forsiden'),
+    t('Community Indgange til forsiden'),
   );
   $export['ting_community_entrances'] = $view;
 
@@ -615,6 +625,11 @@ function osto_views_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
   );
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sorteringskriterie: Indhold: Dato -  startdato (field_event_date) */
+  $handler->display->display_options['sorts']['field_event_date_value']['id'] = 'field_event_date_value';
+  $handler->display->display_options['sorts']['field_event_date_value']['table'] = 'field_data_field_event_date';
+  $handler->display->display_options['sorts']['field_event_date_value']['field'] = 'field_event_date_value';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
@@ -843,7 +858,8 @@ function osto_views_views_default_views() {
   $handler->display->display_options['css_class'] = 'event-attendees';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
-  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'edit own event content';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -852,20 +868,39 @@ function osto_views_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
   $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Faldende';
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '4';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Antal elementer';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Alle -';
-  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Forskydning';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« første';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ forrige';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'næste ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste »';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+  $handler->display->display_options['style_options']['columns'] = array(
+    'picture' => 'picture',
+    'name' => 'name',
+    'field_tilmelding_navn' => 'field_tilmelding_navn',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'picture' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_tilmelding_navn' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
   /* Forbindelse: Tilmelding: Registration to Indholdselement */
   $handler->display->display_options['relationships']['registration_related_node']['id'] = 'registration_related_node';
   $handler->display->display_options['relationships']['registration_related_node']['table'] = 'registration';
@@ -874,37 +909,50 @@ function osto_views_views_default_views() {
   $handler->display->display_options['relationships']['user_uid']['id'] = 'user_uid';
   $handler->display->display_options['relationships']['user_uid']['table'] = 'registration';
   $handler->display->display_options['relationships']['user_uid']['field'] = 'user_uid';
-  $handler->display->display_options['relationships']['user_uid']['required'] = TRUE;
-  /* Felt: Bruger: Billede */
-  $handler->display->display_options['fields']['picture']['id'] = 'picture';
-  $handler->display->display_options['fields']['picture']['table'] = 'users';
-  $handler->display->display_options['fields']['picture']['field'] = 'picture';
-  $handler->display->display_options['fields']['picture']['relationship'] = 'user_uid';
-  $handler->display->display_options['fields']['picture']['label'] = '';
-  $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['picture']['element_wrapper_class'] = 'picture';
-  $handler->display->display_options['fields']['picture']['element_default_classes'] = FALSE;
-  /* Felt: Bruger: Arbejdsgiver */
-  $handler->display->display_options['fields']['field_user_employer']['id'] = 'field_user_employer';
-  $handler->display->display_options['fields']['field_user_employer']['table'] = 'field_data_field_user_employer';
-  $handler->display->display_options['fields']['field_user_employer']['field'] = 'field_user_employer';
-  $handler->display->display_options['fields']['field_user_employer']['relationship'] = 'user_uid';
-  $handler->display->display_options['fields']['field_user_employer']['label'] = '';
-  $handler->display->display_options['fields']['field_user_employer']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_user_employer']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_user_employer']['type'] = 'text_plain';
   /* Felt: Bruger: Navn */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'user_uid';
   $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['text'] = '[name]
 <div class="employer">[field_user_employer]</div>';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['element_wrapper_class'] = 'name';
   $handler->display->display_options['fields']['name']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['name']['hide_alter_empty'] = FALSE;
+  /* Felt: Tilmelding: Navn */
+  $handler->display->display_options['fields']['field_tilmelding_navn']['id'] = 'field_tilmelding_navn';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['table'] = 'field_data_field_tilmelding_navn';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['field'] = 'field_tilmelding_navn';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['empty'] = '[name]';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['hide_alter_empty'] = FALSE;
+  /* Felt: Tilmelding: Anonymous e-mail */
+  $handler->display->display_options['fields']['anon_mail']['id'] = 'anon_mail';
+  $handler->display->display_options['fields']['anon_mail']['table'] = 'registration';
+  $handler->display->display_options['fields']['anon_mail']['field'] = 'anon_mail';
+  $handler->display->display_options['fields']['anon_mail']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['anon_mail']['hide_empty'] = TRUE;
+  /* Felt: Bruger: E-mail */
+  $handler->display->display_options['fields']['mail']['id'] = 'mail';
+  $handler->display->display_options['fields']['mail']['table'] = 'users';
+  $handler->display->display_options['fields']['mail']['field'] = 'mail';
+  $handler->display->display_options['fields']['mail']['relationship'] = 'user_uid';
+  $handler->display->display_options['fields']['mail']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['mail']['alter']['text'] = '[anon_mail] [mail]';
+  $handler->display->display_options['fields']['mail']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['mail']['link_to_user'] = '0';
+  /* Felt: Tilmelding: Slots consumed */
+  $handler->display->display_options['fields']['count']['id'] = 'count';
+  $handler->display->display_options['fields']['count']['table'] = 'registration';
+  $handler->display->display_options['fields']['count']['field'] = 'count';
+  $handler->display->display_options['fields']['count']['label'] = 'Deltagere';
+  $handler->display->display_options['fields']['count']['separator'] = '';
+  /* Felt: Tilmelding: Vis-link */
+  $handler->display->display_options['fields']['view_registration']['id'] = 'view_registration';
+  $handler->display->display_options['fields']['view_registration']['table'] = 'registration';
+  $handler->display->display_options['fields']['view_registration']['field'] = 'view_registration';
   /* Kontekstuelt filter: Indhold: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
@@ -917,37 +965,247 @@ function osto_views_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
 
+  /* Display: Side */
+  $handler = $view->new_display('page', 'Side', 'page_1');
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'view event registration';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '5';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Antal elementer';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Alle -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Forskydning';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« første';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ forrige';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'næste ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste »';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_tilmelding_navn' => 'field_tilmelding_navn',
+    'name' => 'field_tilmelding_navn',
+    'anon_mail' => 'anon_mail',
+    'mail' => 'anon_mail',
+    'count' => 'count',
+    'view_registration' => 'view_registration',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_tilmelding_navn';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_tilmelding_navn' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '&nbsp;',
+      'empty_column' => 0,
+    ),
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'anon_mail' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'mail' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'count' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'view_registration' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Forbindelse: Tilmelding: Registration to Indholdselement */
+  $handler->display->display_options['relationships']['registration_related_node']['id'] = 'registration_related_node';
+  $handler->display->display_options['relationships']['registration_related_node']['table'] = 'registration';
+  $handler->display->display_options['relationships']['registration_related_node']['field'] = 'registration_related_node';
+  /* Forbindelse: Tilmelding: Bruger */
+  $handler->display->display_options['relationships']['user_uid']['id'] = 'user_uid';
+  $handler->display->display_options['relationships']['user_uid']['table'] = 'registration';
+  $handler->display->display_options['relationships']['user_uid']['field'] = 'user_uid';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Felt: Tilmelding: Navn */
+  $handler->display->display_options['fields']['field_tilmelding_navn']['id'] = 'field_tilmelding_navn';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['table'] = 'field_data_field_tilmelding_navn';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['field'] = 'field_tilmelding_navn';
+  /* Felt: Bruger: Navn */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'user_uid';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['name']['empty_zero'] = TRUE;
+  $handler->display->display_options['fields']['name']['overwrite_anonymous'] = TRUE;
+  /* Felt: Bruger: Billede */
+  $handler->display->display_options['fields']['picture']['id'] = 'picture';
+  $handler->display->display_options['fields']['picture']['table'] = 'users';
+  $handler->display->display_options['fields']['picture']['field'] = 'picture';
+  $handler->display->display_options['fields']['picture']['relationship'] = 'user_uid';
+  $handler->display->display_options['fields']['picture']['label'] = '';
+  $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
+  $handler->display->display_options['path'] = 'tilmeldte_admin';
+
+  /* Display: Blok */
+  $handler = $view->new_display('block', 'Blok', 'block_1');
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['separator'] = ';';
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['newline_token'] = '1';
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 0;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Felt: Bruger: Navn */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'user_uid';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['name']['alter']['text'] = '[name]
+<div class="employer">[field_user_employer]</div>';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_wrapper_class'] = 'name';
+  $handler->display->display_options['fields']['name']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['name']['hide_alter_empty'] = FALSE;
+  /* Felt: Tilmelding: Navn */
+  $handler->display->display_options['fields']['field_tilmelding_navn']['id'] = 'field_tilmelding_navn';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['table'] = 'field_data_field_tilmelding_navn';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['field'] = 'field_tilmelding_navn';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['empty'] = '[name]';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['hide_alter_empty'] = FALSE;
+  /* Felt: Tilmelding: Anonymous e-mail */
+  $handler->display->display_options['fields']['anon_mail']['id'] = 'anon_mail';
+  $handler->display->display_options['fields']['anon_mail']['table'] = 'registration';
+  $handler->display->display_options['fields']['anon_mail']['field'] = 'anon_mail';
+  $handler->display->display_options['fields']['anon_mail']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['anon_mail']['hide_empty'] = TRUE;
+  /* Felt: Bruger: E-mail */
+  $handler->display->display_options['fields']['mail']['id'] = 'mail';
+  $handler->display->display_options['fields']['mail']['table'] = 'users';
+  $handler->display->display_options['fields']['mail']['field'] = 'mail';
+  $handler->display->display_options['fields']['mail']['relationship'] = 'user_uid';
+  $handler->display->display_options['fields']['mail']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['mail']['alter']['text'] = '[anon_mail] [mail]';
+  $handler->display->display_options['fields']['mail']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['mail']['link_to_user'] = '0';
+  /* Felt: Tilmelding: Slots consumed */
+  $handler->display->display_options['fields']['count']['id'] = 'count';
+  $handler->display->display_options['fields']['count']['table'] = 'registration';
+  $handler->display->display_options['fields']['count']['field'] = 'count';
+  $handler->display->display_options['fields']['count']['label'] = 'Deltagere';
+  $handler->display->display_options['fields']['count']['separator'] = '';
+  $handler->display->display_options['path'] = 'node/%/registrations/export/now';
+  $handler->display->display_options['displays'] = array(
+    'panel_pane_1' => 'panel_pane_1',
+    'default' => 0,
+    'page_1' => 0,
+    'block_1' => 0,
+  );
+
   /* Display: Content pane */
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
-  $handler->display->display_options['pane_title'] = 'Ting: Event attendees';
-  $handler->display->display_options['pane_category']['name'] = 'Ting';
-  $handler->display->display_options['pane_category']['weight'] = '0';
-  $handler->display->display_options['allow']['use_pager'] = 'use_pager';
-  $handler->display->display_options['allow']['items_per_page'] = 'items_per_page';
-  $handler->display->display_options['allow']['offset'] = 'offset';
-  $handler->display->display_options['allow']['link_to_view'] = 0;
-  $handler->display->display_options['allow']['more_link'] = 0;
-  $handler->display->display_options['allow']['path_override'] = 0;
-  $handler->display->display_options['allow']['title_override'] = 0;
-  $handler->display->display_options['allow']['exposed_form'] = 0;
-  $handler->display->display_options['allow']['fields_override'] = 0;
   $handler->display->display_options['argument_input'] = array(
-    'null' => array(
-      'type' => 'fixed',
-      'context' => 'entity:comment.author',
-      'context_optional' => 0,
-      'panel' => '0',
-      'fixed' => 'node',
-      'label' => 'Global: Null',
-    ),
     'nid' => array(
-      'type' => 'context',
-      'context' => 'entity:node.nid',
+      'type' => 'panel',
+      'context' => 'entity:bean.field_signup_image_first',
       'context_optional' => 0,
       'panel' => '0',
       'fixed' => '',
-      'label' => 'Content: Nid',
+      'label' => 'Indhold: Nid',
+    ),
+  );
+
+  /* Display: Content pane 2 */
+  $handler = $view->new_display('panel_pane', 'Content pane 2', 'panel_pane_2');
+  $handler->display->display_options['defaults']['use_ajax'] = FALSE;
+  $handler->display->display_options['use_ajax'] = TRUE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'mini';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Antal elementer';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Alle -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Forskydning';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« første';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ forrige';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'næste ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste »';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Felt: Bruger: Billede */
+  $handler->display->display_options['fields']['picture']['id'] = 'picture';
+  $handler->display->display_options['fields']['picture']['table'] = 'users';
+  $handler->display->display_options['fields']['picture']['field'] = 'picture';
+  $handler->display->display_options['fields']['picture']['relationship'] = 'user_uid';
+  $handler->display->display_options['fields']['picture']['label'] = '';
+  $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['picture']['link_photo_to_profile'] = FALSE;
+  /* Felt: Bruger: Navn */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'user_uid';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['name']['alter']['text'] = '[name]
+<div class="employer">[field_user_employer]</div>';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_wrapper_class'] = 'name';
+  $handler->display->display_options['fields']['name']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['name']['hide_alter_empty'] = FALSE;
+  /* Felt: Tilmelding: Navn */
+  $handler->display->display_options['fields']['field_tilmelding_navn']['id'] = 'field_tilmelding_navn';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['table'] = 'field_data_field_tilmelding_navn';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['field'] = 'field_tilmelding_navn';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['label'] = '';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_tilmelding_navn']['empty'] = '[name]';
+  $handler->display->display_options['fields']['field_tilmelding_navn']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['argument_input'] = array(
+    'nid' => array(
+      'type' => 'panel',
+      'context' => 'entity:bean.field_signup_image_first',
+      'context_optional' => 0,
+      'panel' => '0',
+      'fixed' => '',
+      'label' => 'Indhold: Nid',
     ),
   );
   $translatables['ting_event_attendees'] = array(
@@ -959,6 +1217,19 @@ function osto_views_views_default_views() {
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
+    t('node from Registration'),
+    t('Bruger'),
+    t('[name]
+<div class="employer">[field_user_employer]</div>'),
+    t('Navn'),
+    t('[name]'),
+    t('Anonymous e-mail'),
+    t('E-mail'),
+    t('[anon_mail] [mail]'),
+    t('.'),
+    t('Vis-link'),
+    t('Alle'),
+    t('Side'),
     t('Antal elementer'),
     t('- Alle -'),
     t('Forskydning'),
@@ -966,14 +1237,11 @@ function osto_views_views_default_views() {
     t('‹ forrige'),
     t('næste ›'),
     t('sidste »'),
-    t('node from Registration'),
-    t('Bruger'),
-    t('[name]
-<div class="employer">[field_user_employer]</div>'),
-    t('Alle'),
+    t('Blok'),
+    t('Data export'),
     t('Content pane'),
-    t('Ting: Event attendees'),
-    t('Ting'),
+    t('View panes'),
+    t('Content pane 2'),
   );
   $export['ting_event_attendees'] = $view;
 
@@ -1034,7 +1302,7 @@ function osto_views_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
   );
-  /* Felt: Registration Settings: Close Date */
+  /* Felt: Registration Settings: Tilmelding lukker */
   $handler->display->display_options['fields']['close']['id'] = 'close';
   $handler->display->display_options['fields']['close']['table'] = 'registration_entity';
   $handler->display->display_options['fields']['close']['field'] = 'close';
@@ -1225,7 +1493,7 @@ function osto_views_views_default_views() {
     t('sidste »'),
     t('Indstillinger for tilmelding'),
     t('Dato'),
-    t('Close Date'),
+    t('Tilmelding lukker'),
     t('Arrangør'),
     t('Kontaktperson'),
     t('<a href="mailto:[field_event_email]">[field_event_contact_name]</a>'),
@@ -1273,6 +1541,12 @@ function osto_views_views_default_views() {
     'general' => array(
       'allow_secondary' => 0,
       'secondary_label' => 'Avancerede indstillinger',
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
     'field_main_category_tid' => array(
       'bef_format' => 'bef_links',
@@ -1285,13 +1559,52 @@ function osto_views_views_default_views() {
         'tokens' => array(
           'available' => array(
             0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
           ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
         ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
         ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
       ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
+    'secondary_label' => NULL,
+    'collapsible_label' => NULL,
+    'combine_rewrite' => NULL,
+    'reset_label' => NULL,
+    'bef_filter_description' => NULL,
+    'any_label' => NULL,
+    'filter_rewrite_values' => NULL,
   );
   $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
@@ -1389,6 +1702,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['body']['element_wrapper_class'] = 'resume';
   $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_summary_or_trimmed';
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '300',
   );
@@ -1462,6 +1776,8 @@ function osto_views_views_default_views() {
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
+    t('Avancerede indstillinger'),
+    t('Alle'),
     t('Vælg et filter og klik på Anvend for at se resultater'),
     t('Antal elementer'),
     t('- Alle -'),
@@ -1669,7 +1985,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Kontekstuelt filter: OG membership: Group ID */
+  /* Kontekstuelt filter: OG membership: Gruppe ID */
   $handler->display->display_options['arguments']['gid']['id'] = 'gid';
   $handler->display->display_options['arguments']['gid']['table'] = 'og_membership';
   $handler->display->display_options['arguments']['gid']['field'] = 'gid';
@@ -1704,6 +2020,109 @@ function osto_views_views_default_views() {
 
   /* Display: Events */
   $handler = $view->new_display('panel_pane', 'Events', 'panel_pane_2');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'events-overview';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Overskrift: Global: Tekstområde */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<h1 id="page-title" calss="title">Kommende begivenheder</h1>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Felt: Indhold: Dato */
+  $handler->display->display_options['fields']['field_event_date']['id'] = 'field_event_date';
+  $handler->display->display_options['fields']['field_event_date']['table'] = 'field_data_field_event_date';
+  $handler->display->display_options['fields']['field_event_date']['field'] = 'field_event_date';
+  $handler->display->display_options['fields']['field_event_date']['label'] = '';
+  $handler->display->display_options['fields']['field_event_date']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_event_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_event_date']['settings'] = array(
+    'format_type' => 'weekday_long',
+    'fromto' => 'value',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Felt: Indhold: Dato */
+  $handler->display->display_options['fields']['field_event_date_1']['id'] = 'field_event_date_1';
+  $handler->display->display_options['fields']['field_event_date_1']['table'] = 'field_data_field_event_date';
+  $handler->display->display_options['fields']['field_event_date_1']['field'] = 'field_event_date';
+  $handler->display->display_options['fields']['field_event_date_1']['label'] = '';
+  $handler->display->display_options['fields']['field_event_date_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_event_date_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_event_date_1']['settings'] = array(
+    'format_type' => 'day',
+    'fromto' => 'value',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Felt: Indhold: Dato */
+  $handler->display->display_options['fields']['field_event_date_2']['id'] = 'field_event_date_2';
+  $handler->display->display_options['fields']['field_event_date_2']['table'] = 'field_data_field_event_date';
+  $handler->display->display_options['fields']['field_event_date_2']['field'] = 'field_event_date';
+  $handler->display->display_options['fields']['field_event_date_2']['label'] = '';
+  $handler->display->display_options['fields']['field_event_date_2']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_event_date_2']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_event_date_2']['settings'] = array(
+    'format_type' => 'month_short',
+    'fromto' => 'value',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Felt: Global: Tilpasset tekst */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<span class="week-day">[field_event_date]</span>
+<span class="month-day">[field_event_date_1]</span>
+<span class="month">[field_event_date_2]</span>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'date';
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
+  /* Felt: Indhold: Titel */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'title';
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
+  /* Felt: Indhold: Brødtekst */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['alter']['max_length'] = '175';
+  $handler->display->display_options['fields']['body']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['trim'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['element_wrapper_class'] = 'resume';
+  $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_summary_or_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '300',
+  );
+  /* Felt: Indhold: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['element_wrapper_class'] = 'read-more';
+  $handler->display->display_options['fields']['view_node']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['text'] = 'Læs mere &raquo;';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sorteringskriterie: Indhold: Dato -  startdato (field_event_date) */
+  $handler->display->display_options['sorts']['field_event_date_value']['id'] = 'field_event_date_value';
+  $handler->display->display_options['sorts']['field_event_date_value']['table'] = 'field_data_field_event_date';
+  $handler->display->display_options['sorts']['field_event_date_value']['field'] = 'field_event_date_value';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
@@ -1720,6 +2139,14 @@ function osto_views_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'event' => 'event',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filterkriterie: Indhold: Dato -  startdato (field_event_date) */
+  $handler->display->display_options['filters']['field_event_date_value']['id'] = 'field_event_date_value';
+  $handler->display->display_options['filters']['field_event_date_value']['table'] = 'field_data_field_event_date';
+  $handler->display->display_options['filters']['field_event_date_value']['field'] = 'field_event_date_value';
+  $handler->display->display_options['filters']['field_event_date_value']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_event_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_event_date_value']['default_date'] = 'now';
   $handler->display->display_options['pane_title'] = 'Group Events';
   $handler->display->display_options['pane_category']['name'] = 'Ting';
   $handler->display->display_options['pane_category']['weight'] = '0';
@@ -1792,6 +2219,11 @@ function osto_views_views_default_views() {
     t('Group Blog'),
     t('Ting'),
     t('Events'),
+    t('<h1 id="page-title" calss="title">Kommende begivenheder</h1>'),
+    t('<span class="week-day">[field_event_date]</span>
+<span class="month-day">[field_event_date_1]</span>
+<span class="month">[field_event_date_2]</span>'),
+    t('Læs mere &raquo;'),
     t('Group Events'),
     t('Documents'),
     t('Group Documents'),
@@ -1871,7 +2303,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['relationship'] = 'og_membership_rel';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Kontekstuelt filter: OG membership: Group ID */
+  /* Kontekstuelt filter: OG membership: Gruppe ID */
   $handler->display->display_options['arguments']['gid']['id'] = 'gid';
   $handler->display->display_options['arguments']['gid']['table'] = 'og_membership';
   $handler->display->display_options['arguments']['gid']['field'] = 'gid';
@@ -2033,7 +2465,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['sorts']['timestamp']['table'] = 'message';
   $handler->display->display_options['sorts']['timestamp']['field'] = 'timestamp';
   $handler->display->display_options['sorts']['timestamp']['order'] = 'DESC';
-  /* Kontekstuelt filter: OG membership: Group ID */
+  /* Kontekstuelt filter: OG membership: Gruppe ID */
   $handler->display->display_options['arguments']['gid']['id'] = 'gid';
   $handler->display->display_options['arguments']['gid']['table'] = 'og_membership';
   $handler->display->display_options['arguments']['gid']['field'] = 'gid';
@@ -2540,6 +2972,12 @@ function osto_views_views_default_views() {
     'general' => array(
       'allow_secondary' => 0,
       'secondary_label' => 'Avancerede indstillinger',
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
     'field_main_category_tid' => array(
       'bef_format' => 'bef_links',
@@ -2552,13 +2990,52 @@ function osto_views_views_default_views() {
         'tokens' => array(
           'available' => array(
             0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
           ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
         ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
         ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
       ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
+    'secondary_label' => NULL,
+    'collapsible_label' => NULL,
+    'combine_rewrite' => NULL,
+    'reset_label' => NULL,
+    'bef_filter_description' => NULL,
+    'any_label' => NULL,
+    'filter_rewrite_values' => NULL,
   );
   $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
@@ -2725,6 +3202,8 @@ function osto_views_views_default_views() {
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
+    t('Avancerede indstillinger'),
+    t('Alle'),
     t('Vælg et filter og klik på Anvend for at se resultater'),
     t('Antal elementer'),
     t('- Alle -'),
@@ -2943,8 +3422,9 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['field_product_download']['id'] = 'field_product_download';
   $handler->display->display_options['fields']['field_product_download']['table'] = 'field_data_field_product_download';
   $handler->display->display_options['fields']['field_product_download']['field'] = 'field_product_download';
-  $handler->display->display_options['fields']['field_product_download']['label'] = 'Link til produkt';
+  $handler->display->display_options['fields']['field_product_download']['label'] = '';
   $handler->display->display_options['fields']['field_product_download']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_product_download']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_product_download']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_product_download']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_product_download']['click_sort_column'] = 'url';
@@ -3036,6 +3516,11 @@ function osto_views_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['validate_options']['types'] = array(
+    'product' => 'product',
+  );
+  $handler->display->display_options['arguments']['nid']['validate_options']['access'] = TRUE;
   $handler->display->display_options['block_description'] = 'Product links';
 
   /* Display: Blok produkt niveau */
@@ -3061,7 +3546,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Hvad er OS2 produktniveauer?';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing']['alter']['path'] = '/governance';
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = '/node/232/';
   $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'product-level-qa-link';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'product-level-qa';
@@ -3107,7 +3592,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Hvad er OS2 projektniveauer?';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing']['alter']['path'] = '/governance';
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = '/node/232/';
   $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'product-level-qa-link';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'product-level-qa';
@@ -3146,7 +3631,6 @@ function osto_views_views_default_views() {
     t('Programmeringssprog'),
     t('Version'),
     t('Licens'),
-    t('Link til produkt'),
     t('Alle'),
     t('Blok'),
     t('Product metadata'),
@@ -3429,6 +3913,12 @@ function osto_views_views_default_views() {
     'general' => array(
       'allow_secondary' => 0,
       'secondary_label' => 'Avancerede indstillinger',
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
     'combine' => array(
       'bef_format' => 'default',
@@ -3439,12 +3929,44 @@ function osto_views_views_default_views() {
         'tokens' => array(
           'available' => array(
             0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
           ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
         ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
         ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
       ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
     'field_product_category_tid' => array(
       'bef_format' => 'default',
@@ -3457,13 +3979,52 @@ function osto_views_views_default_views() {
         'tokens' => array(
           'available' => array(
             0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
           ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
         ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
         ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
       ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
+    'secondary_label' => NULL,
+    'collapsible_label' => NULL,
+    'combine_rewrite' => NULL,
+    'reset_label' => NULL,
+    'bef_filter_description' => NULL,
+    'any_label' => NULL,
+    'filter_rewrite_values' => NULL,
   );
   $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
@@ -3595,6 +4156,20 @@ function osto_views_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sorteringskriterie: Indhold: Sorteringsvægt (field_weight) */
+  $handler->display->display_options['sorts']['field_weight_value']['id'] = 'field_weight_value';
+  $handler->display->display_options['sorts']['field_weight_value']['table'] = 'field_data_field_weight';
+  $handler->display->display_options['sorts']['field_weight_value']['field'] = 'field_weight_value';
+  /* Sorteringskriterie: Indhold: OS2 Produktniveau (field_os2_produktniveau) */
+  $handler->display->display_options['sorts']['field_os2_produktniveau_tid']['id'] = 'field_os2_produktniveau_tid';
+  $handler->display->display_options['sorts']['field_os2_produktniveau_tid']['table'] = 'field_data_field_os2_produktniveau';
+  $handler->display->display_options['sorts']['field_os2_produktniveau_tid']['field'] = 'field_os2_produktniveau_tid';
+  $handler->display->display_options['sorts']['field_os2_produktniveau_tid']['order'] = 'DESC';
+  /* Sorteringskriterie: Indhold: Titel */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
   $handler->display->display_options['path'] = 'produkter';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Produkter';
@@ -3622,10 +4197,10 @@ function osto_views_views_default_views() {
   $handler->display->display_options['footer']['area']['content'] = '<a href="produkter" class="btn-link">Se alle produkter</a>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sorteringskriterie: Indhold: Titel */
-  $handler->display->display_options['sorts']['title']['id'] = 'title';
-  $handler->display->display_options['sorts']['title']['table'] = 'node';
-  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Sorteringskriterie: Global: Tilfældig */
+  $handler->display->display_options['sorts']['random']['id'] = 'random';
+  $handler->display->display_options['sorts']['random']['table'] = 'views';
+  $handler->display->display_options['sorts']['random']['field'] = 'random';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
@@ -3652,6 +4227,8 @@ function osto_views_views_default_views() {
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
+    t('Avancerede indstillinger'),
+    t('Vælg kategori'),
     t('Vælg et filter og klik på Anvend for at se resultater'),
     t('Antal elementer'),
     t('- Alle -'),
@@ -3969,6 +4546,12 @@ function osto_views_views_default_views() {
     'general' => array(
       'allow_secondary' => 0,
       'secondary_label' => 'Avancerede indstillinger',
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
     'field_project_category_tid' => array(
       'bef_format' => 'default',
@@ -3981,12 +4564,44 @@ function osto_views_views_default_views() {
         'tokens' => array(
           'available' => array(
             0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
           ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
         ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
         ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
       ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
     'combine' => array(
       'bef_format' => 'default',
@@ -3997,13 +4612,52 @@ function osto_views_views_default_views() {
         'tokens' => array(
           'available' => array(
             0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
           ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
         ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
         ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
       ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
+    'secondary_label' => NULL,
+    'collapsible_label' => NULL,
+    'combine_rewrite' => NULL,
+    'reset_label' => NULL,
+    'bef_filter_description' => NULL,
+    'any_label' => NULL,
+    'filter_rewrite_values' => NULL,
   );
   $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
@@ -4212,6 +4866,12 @@ function osto_views_views_default_views() {
     'general' => array(
       'allow_secondary' => 0,
       'secondary_label' => 'Avancerede indstillinger',
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
     'field_project_category_tid' => array(
       'bef_format' => 'default',
@@ -4224,12 +4884,44 @@ function osto_views_views_default_views() {
         'tokens' => array(
           'available' => array(
             0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
           ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
         ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
         ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
       ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
     'combine' => array(
       'bef_format' => 'default',
@@ -4240,13 +4932,52 @@ function osto_views_views_default_views() {
         'tokens' => array(
           'available' => array(
             0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
           ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
         ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
         ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
       ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
+    'secondary_label' => NULL,
+    'collapsible_label' => NULL,
+    'combine_rewrite' => NULL,
+    'reset_label' => NULL,
+    'bef_filter_description' => NULL,
+    'any_label' => NULL,
+    'filter_rewrite_values' => NULL,
   );
   $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
@@ -4264,6 +4995,15 @@ function osto_views_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['next'] = 'næste ›';
   $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste »';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sorteringskriterie: Indhold: Sorteringsvægt (field_weight) */
+  $handler->display->display_options['sorts']['field_weight_value']['id'] = 'field_weight_value';
+  $handler->display->display_options['sorts']['field_weight_value']['table'] = 'field_data_field_weight';
+  $handler->display->display_options['sorts']['field_weight_value']['field'] = 'field_weight_value';
+  /* Sorteringskriterie: Indhold: Projekt niveau (field_projekt_niveau) */
+  $handler->display->display_options['sorts']['field_projekt_niveau_tid']['id'] = 'field_projekt_niveau_tid';
+  $handler->display->display_options['sorts']['field_projekt_niveau_tid']['table'] = 'field_data_field_projekt_niveau';
+  $handler->display->display_options['sorts']['field_projekt_niveau_tid']['field'] = 'field_projekt_niveau_tid';
+  $handler->display->display_options['sorts']['field_projekt_niveau_tid']['order'] = 'DESC';
   /* Sorteringskriterie: Indhold: Titel */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -4296,10 +5036,15 @@ function osto_views_views_default_views() {
   $handler->display->display_options['footer']['area']['content'] = '<p><a href="projekter" class=\'btn-link\'>Se alle projekter</a></p>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sorteringskriterie: Indhold: Titel */
-  $handler->display->display_options['sorts']['title']['id'] = 'title';
-  $handler->display->display_options['sorts']['title']['table'] = 'node';
-  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Sorteringskriterie: Indhold: Klæbrig */
+  $handler->display->display_options['sorts']['sticky']['id'] = 'sticky';
+  $handler->display->display_options['sorts']['sticky']['table'] = 'node';
+  $handler->display->display_options['sorts']['sticky']['field'] = 'sticky';
+  $handler->display->display_options['sorts']['sticky']['order'] = 'DESC';
+  /* Sorteringskriterie: Global: Tilfældig */
+  $handler->display->display_options['sorts']['random']['id'] = 'random';
+  $handler->display->display_options['sorts']['random']['table'] = 'views';
+  $handler->display->display_options['sorts']['random']['field'] = 'random';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
@@ -4438,6 +5183,11 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'meta';
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sorteringskriterie: Global: Tilfældig */
+  $handler->display->display_options['sorts']['random']['id'] = 'random';
+  $handler->display->display_options['sorts']['random']['table'] = 'views';
+  $handler->display->display_options['sorts']['random']['field'] = 'random';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
@@ -4464,6 +5214,8 @@ function osto_views_views_default_views() {
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
+    t('Avancerede indstillinger'),
+    t('Vælg kategori'),
     t('Vælg et filter og klik på Anvend for at se resultater'),
     t('Antal elementer'),
     t('- Alle -'),
@@ -4521,6 +5273,12 @@ function osto_views_views_default_views() {
     'general' => array(
       'allow_secondary' => 0,
       'secondary_label' => 'Avancerede indstillinger',
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
     'combine' => array(
       'bef_format' => 'default',
@@ -4531,12 +5289,44 @@ function osto_views_views_default_views() {
         'tokens' => array(
           'available' => array(
             0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
           ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
         ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
         ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
       ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
     'field_pub_part_cat_tid' => array(
       'bef_format' => 'default',
@@ -4549,13 +5339,52 @@ function osto_views_views_default_views() {
         'tokens' => array(
           'available' => array(
             0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
           ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
         ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
         ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
       ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
+    'secondary_label' => NULL,
+    'collapsible_label' => NULL,
+    'combine_rewrite' => NULL,
+    'reset_label' => NULL,
+    'bef_filter_description' => NULL,
+    'any_label' => NULL,
+    'filter_rewrite_values' => NULL,
   );
   $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
@@ -4730,6 +5559,8 @@ function osto_views_views_default_views() {
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
+    t('Avancerede indstillinger'),
+    t('Vælg kategori'),
     t('Vælg et filter og klik på Anvend for at se resultater'),
     t('Antal elementer'),
     t('- Alle -'),
@@ -5024,6 +5855,24 @@ function osto_views_views_default_views() {
     'image_style' => 'logo_large',
     'image_link' => '',
   );
+  /* Felt: Indhold: Partnerskabsaftale */
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['id'] = 'field_pub_part_partner_contract';
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['table'] = 'field_data_field_pub_part_partner_contract';
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['field'] = 'field_pub_part_partner_contract';
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['label'] = '';
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['alter']['text'] = '<a href="[field_pub_part_partner_contract]">Download Partnerskabsaftale</a>';
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['alter']['path'] = '[field_pub_part_partner_contract]';
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['alter']['alt'] = 'Download PDF';
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['element_wrapper_class'] = 'fact partner-deal';
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['type'] = 'file_url_plain';
+  $handler->display->display_options['fields']['field_pub_part_partner_contract']['settings'] = array(
+    'text' => 'Download PDF',
+  );
   /* Felt: Overskrift */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -5115,24 +5964,6 @@ function osto_views_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
   );
-  /* Felt: Indhold: Partnerskabsaftale */
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['id'] = 'field_pub_part_partner_contract';
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['table'] = 'field_data_field_pub_part_partner_contract';
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['field'] = 'field_pub_part_partner_contract';
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['label'] = '';
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['alter']['text'] = '<span class="label">Partnerskabsaftale:</span><a href="[field_pub_part_partner_contract]">Download PDF</a>';
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['alter']['path'] = '[field_pub_part_partner_contract]';
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['alter']['alt'] = 'Download PDF';
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['element_wrapper_class'] = 'fact partner-deal';
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['type'] = 'file_url_plain';
-  $handler->display->display_options['fields']['field_pub_part_partner_contract']['settings'] = array(
-    'text' => 'Download PDF',
-  );
   /* Felt: Indhold: Adresse */
   $handler->display->display_options['fields']['field_pub_part_address']['id'] = 'field_pub_part_address';
   $handler->display->display_options['fields']['field_pub_part_address']['table'] = 'field_data_field_pub_part_address';
@@ -5198,6 +6029,8 @@ function osto_views_views_default_views() {
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
+    t('<a href="[field_pub_part_partner_contract]">Download Partnerskabsaftale</a>'),
+    t('Download PDF'),
     t('<h2>Fakta</h2>'),
     t('<span class="label">Organisation: </span>[field_pub_part_organisation] '),
     t('<span class="label">Virksomhedsnavn: </span>[field_supp_company]'),
@@ -5205,8 +6038,6 @@ function osto_views_views_default_views() {
     t('<span class="label">Antal ansatte: </span>[field_supp_num_employees]'),
     t('<span class="label">OS2 leverandør siden: </span>[field_supp_supplier_since] '),
     t('<span class="label">Offentlig partner siden: </span>[field_pub_part_partner_since]'),
-    t('<span class="label">Partnerskabsaftale:</span><a href="[field_pub_part_partner_contract]">Download PDF</a>'),
-    t('Download PDF'),
     t('<span class="label">Adresse: </span>[field_pub_part_address-thoroughfare], [field_pub_part_address-postal_code] [field_pub_part_address-locality]'),
     t('Alle'),
     t('Block'),
@@ -5516,172 +6347,6 @@ function osto_views_views_default_views() {
   $export['ting_sidebar_users'] = $view;
 
   $view = new view();
-  $view->name = 'ting_slideshow';
-  $view->description = '';
-  $view->tag = 'default';
-  $view->base_table = 'node';
-  $view->human_name = 'Ting: Slideshow';
-  $view->core = 7;
-  $view->api_version = '3.0';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
-  /* Display: Master */
-  $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['use_more_text'] = 'mere';
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['cache']['type'] = 'none';
-  $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
-  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
-  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
-  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Faldende';
-  $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['style_plugin'] = 'flexslider';
-  $handler->display->display_options['row_plugin'] = 'fields';
-  /* Felt: Indhold: Billede */
-  $handler->display->display_options['fields']['field_slide_image']['id'] = 'field_slide_image';
-  $handler->display->display_options['fields']['field_slide_image']['table'] = 'field_data_field_slide_image';
-  $handler->display->display_options['fields']['field_slide_image']['field'] = 'field_slide_image';
-  $handler->display->display_options['fields']['field_slide_image']['label'] = '';
-  $handler->display->display_options['fields']['field_slide_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_slide_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_slide_image']['settings'] = array(
-    'image_style' => 'slideshow_large',
-    'image_link' => '',
-  );
-  /* Felt: Global: Tilpasset tekst */
-  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
-  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_1']['label'] = '';
-  $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['nothing_1']['element_wrapper_class'] = 'background-overlay';
-  $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = FALSE;
-  /* Felt: Indhold: Titel */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['title']['alter']['text'] = '<div class="slide-title">[title]</div>';
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['title']['empty_zero'] = TRUE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Felt: Indhold: Brødtekst */
-  $handler->display->display_options['fields']['field_slide_body']['id'] = 'field_slide_body';
-  $handler->display->display_options['fields']['field_slide_body']['table'] = 'field_data_field_slide_body';
-  $handler->display->display_options['fields']['field_slide_body']['field'] = 'field_slide_body';
-  $handler->display->display_options['fields']['field_slide_body']['label'] = '';
-  $handler->display->display_options['fields']['field_slide_body']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_slide_body']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_slide_body']['alter']['text'] = '<div class="slide-body">[field_slide_body]</div>';
-  $handler->display->display_options['fields']['field_slide_body']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_slide_body']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['field_slide_body']['empty_zero'] = TRUE;
-  /* Felt: Indhold: Links */
-  $handler->display->display_options['fields']['field_slide_link']['id'] = 'field_slide_link';
-  $handler->display->display_options['fields']['field_slide_link']['table'] = 'field_data_field_slide_link';
-  $handler->display->display_options['fields']['field_slide_link']['field'] = 'field_slide_link';
-  $handler->display->display_options['fields']['field_slide_link']['label'] = '';
-  $handler->display->display_options['fields']['field_slide_link']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_slide_link']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_slide_link']['alter']['text'] = '<div class="slide-link">[field_slide_link]</div>';
-  $handler->display->display_options['fields']['field_slide_link']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_slide_link']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['field_slide_link']['empty_zero'] = TRUE;
-  $handler->display->display_options['fields']['field_slide_link']['click_sort_column'] = 'url';
-  $handler->display->display_options['fields']['field_slide_link']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_slide_link']['multi_type'] = 'ul';
-  /* Felt: Indhold: Layout */
-  $handler->display->display_options['fields']['field_slide_layout']['id'] = 'field_slide_layout';
-  $handler->display->display_options['fields']['field_slide_layout']['table'] = 'field_data_field_slide_layout';
-  $handler->display->display_options['fields']['field_slide_layout']['field'] = 'field_slide_layout';
-  $handler->display->display_options['fields']['field_slide_layout']['label'] = '';
-  $handler->display->display_options['fields']['field_slide_layout']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_slide_layout']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_slide_layout']['type'] = 'list_key';
-  /* Felt: Global: Tilpasset tekst */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class=\'[field_slide_layout]\'>
-[title]
-[field_slide_body]
-[field_slide_link]
-</div>';
-  $handler->display->display_options['fields']['nothing']['element_type'] = 'div';
-  $handler->display->display_options['fields']['nothing']['element_label_type'] = 'div';
-  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = 'div';
-  /* Felt: Indhold: Ekstra billede */
-  $handler->display->display_options['fields']['field_slide_image_extra']['id'] = 'field_slide_image_extra';
-  $handler->display->display_options['fields']['field_slide_image_extra']['table'] = 'field_data_field_slide_image_extra';
-  $handler->display->display_options['fields']['field_slide_image_extra']['field'] = 'field_slide_image_extra';
-  $handler->display->display_options['fields']['field_slide_image_extra']['label'] = '';
-  $handler->display->display_options['fields']['field_slide_image_extra']['alter']['text'] = '<div class="extra-image">[field_slide_image_extra]</div>';
-  $handler->display->display_options['fields']['field_slide_image_extra']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_slide_image_extra']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['field_slide_image_extra']['element_wrapper_class'] = 'extra-image';
-  $handler->display->display_options['fields']['field_slide_image_extra']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_slide_image_extra']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['field_slide_image_extra']['empty_zero'] = TRUE;
-  $handler->display->display_options['fields']['field_slide_image_extra']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_slide_image_extra']['settings'] = array(
-    'image_style' => '',
-    'image_link' => '',
-  );
-  /* Sorteringskriterie: Indhold: Oprettelsesdato */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filterkriterie: Indhold: Udgivet */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filterkriterie: Indhold: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'slide' => 'slide',
-  );
-
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block');
-  $handler->display->display_options['block_description'] = 'Slideshow';
-  $translatables['ting_slideshow'] = array(
-    t('Master'),
-    t('mere'),
-    t('Udfør'),
-    t('Gendan'),
-    t('Sortér efter'),
-    t('Stigende'),
-    t('Faldende'),
-    t('<div class="slide-title">[title]</div>'),
-    t('<div class="slide-body">[field_slide_body]</div>'),
-    t('<div class="slide-link">[field_slide_link]</div>'),
-    t('<div class=\'[field_slide_layout]\'>
-[title]
-[field_slide_body]
-[field_slide_link]
-</div>'),
-    t('<div class="extra-image">[field_slide_image_extra]</div>'),
-    t('Block'),
-    t('Slideshow'),
-  );
-  $export['ting_slideshow'] = $view;
-
-  $view = new view();
   $view->name = 'ting_suppliers';
   $view->description = '';
   $view->tag = 'default';
@@ -5701,57 +6366,17 @@ function osto_views_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Søg';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
-  $handler->display->display_options['exposed_form']['options']['expose_sort_order'] = FALSE;
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
   $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Faldende';
-  $handler->display->display_options['exposed_form']['options']['bef'] = array(
-    'general' => array(
-      'allow_secondary' => 0,
-      'secondary_label' => 'Avancerede indstillinger',
-    ),
-    'combine' => array(
-      'bef_format' => 'default',
-      'more_options' => array(
-        'is_secondary' => 0,
-        'any_label' => '',
-        'bef_filter_description' => '',
-        'tokens' => array(
-          'available' => array(
-            0 => 'global_types',
-          ),
-        ),
-        'rewrite' => array(
-          'filter_rewrite_values' => '',
-        ),
-      ),
-    ),
-    'field_supp_cat_tid' => array(
-      'bef_format' => 'default',
-      'more_options' => array(
-        'bef_select_all_none' => FALSE,
-        'bef_collapsible' => 0,
-        'is_secondary' => 0,
-        'any_label' => 'Vælg kategori',
-        'bef_filter_description' => '',
-        'tokens' => array(
-          'available' => array(
-            0 => 'global_types',
-          ),
-        ),
-        'rewrite' => array(
-          'filter_rewrite_values' => '',
-        ),
-      ),
-    ),
-  );
-  $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
-  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '9';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '15';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Antal elementer';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Alle -';
   $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Forskydning';
@@ -5869,24 +6494,28 @@ function osto_views_views_default_views() {
     'supplier' => 'supplier',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filterkriterie: Indhold: Kategori (field_supp_cat) */
-  $handler->display->display_options['filters']['field_supp_cat_tid']['id'] = 'field_supp_cat_tid';
-  $handler->display->display_options['filters']['field_supp_cat_tid']['table'] = 'field_data_field_supp_cat';
-  $handler->display->display_options['filters']['field_supp_cat_tid']['field'] = 'field_supp_cat_tid';
-  $handler->display->display_options['filters']['field_supp_cat_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_supp_cat_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_supp_cat_tid']['expose']['operator_id'] = 'field_supp_cat_tid_op';
-  $handler->display->display_options['filters']['field_supp_cat_tid']['expose']['label'] = 'Filtrér leverandører:';
-  $handler->display->display_options['filters']['field_supp_cat_tid']['expose']['operator'] = 'field_supp_cat_tid_op';
-  $handler->display->display_options['filters']['field_supp_cat_tid']['expose']['identifier'] = 'field_supp_cat_tid';
-  $handler->display->display_options['filters']['field_supp_cat_tid']['expose']['remember_roles'] = array(
+  /* Filterkriterie: Filtrer på leverandør kategori */
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['id'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['table'] = 'node';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['field'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['ui_name'] = 'Filtrer på leverandør kategori';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['value'] = 'All';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['group'] = 1;
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator_id'] = 'shs_term_node_tid_depth_op';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Filtrer listen:';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator'] = 'shs_term_node_tid_depth_op';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['identifier'] = 'shs_term_node_tid_depth';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     4 => 0,
     3 => 0,
+    5 => 0,
   );
-  $handler->display->display_options['filters']['field_supp_cat_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_supp_cat_tid']['vocabulary'] = 'supplier_categories';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'supplier_categories';
+  $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '1';
   /* Filterkriterie: Global: Kombinér felter filter */
   $handler->display->display_options['filters']['combine']['id'] = 'combine';
   $handler->display->display_options['filters']['combine']['table'] = 'views';
@@ -5920,12 +6549,11 @@ function osto_views_views_default_views() {
     t('Master'),
     t('Leverandører'),
     t('mere'),
-    t('Søg'),
+    t('Udfør'),
     t('Gendan'),
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
-    t('Vælg et filter og klik på Anvend for at se resultater'),
     t('Antal elementer'),
     t('- Alle -'),
     t('Forskydning'),
@@ -5938,7 +6566,7 @@ function osto_views_views_default_views() {
     t('Adresse'),
     t('-'),
     t('<strong>Leverandør siden</strong>: [field_supp_supplier_since]'),
-    t('Filtrér leverandører:'),
+    t('Filtrer listen:'),
     t('Page'),
   );
   $export['ting_suppliers'] = $view;
@@ -5974,6 +6602,12 @@ function osto_views_views_default_views() {
     'general' => array(
       'allow_secondary' => 0,
       'secondary_label' => 'Avancerede indstillinger',
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
     'combine' => array(
       'bef_format' => 'default',
@@ -5984,12 +6618,44 @@ function osto_views_views_default_views() {
         'tokens' => array(
           'available' => array(
             0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
           ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
         ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
         ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
       ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
     'field_team_category_tid' => array(
       'bef_format' => 'default',
@@ -6002,13 +6668,52 @@ function osto_views_views_default_views() {
         'tokens' => array(
           'available' => array(
             0 => 'global_types',
+            'secondary_label' => NULL,
+            'collapsible_label' => NULL,
+            'combine_rewrite' => NULL,
+            'reset_label' => NULL,
+            'bef_filter_description' => NULL,
+            'any_label' => NULL,
+            'filter_rewrite_values' => NULL,
           ),
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
+          'filter_rewrite_values' => NULL,
         ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
+          'secondary_label' => NULL,
+          'collapsible_label' => NULL,
+          'combine_rewrite' => NULL,
+          'reset_label' => NULL,
+          'bef_filter_description' => NULL,
+          'any_label' => NULL,
         ),
+        'secondary_label' => NULL,
+        'collapsible_label' => NULL,
+        'combine_rewrite' => NULL,
+        'reset_label' => NULL,
+        'filter_rewrite_values' => NULL,
       ),
+      'secondary_label' => NULL,
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
+      'bef_filter_description' => NULL,
+      'any_label' => NULL,
+      'filter_rewrite_values' => NULL,
     ),
+    'secondary_label' => NULL,
+    'collapsible_label' => NULL,
+    'combine_rewrite' => NULL,
+    'reset_label' => NULL,
+    'bef_filter_description' => NULL,
+    'any_label' => NULL,
+    'filter_rewrite_values' => NULL,
   );
   $handler->display->display_options['exposed_form']['options']['input_required'] = 0;
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
@@ -6112,10 +6817,15 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'meta';
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
-  /* Sorteringskriterie: Indhold: Titel */
-  $handler->display->display_options['sorts']['title']['id'] = 'title';
-  $handler->display->display_options['sorts']['title']['table'] = 'node';
-  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Sorteringskriterie: Indhold: Klæbrig */
+  $handler->display->display_options['sorts']['sticky']['id'] = 'sticky';
+  $handler->display->display_options['sorts']['sticky']['table'] = 'node';
+  $handler->display->display_options['sorts']['sticky']['field'] = 'sticky';
+  $handler->display->display_options['sorts']['sticky']['order'] = 'DESC';
+  /* Sorteringskriterie: Global: Tilfældig */
+  $handler->display->display_options['sorts']['random']['id'] = 'random';
+  $handler->display->display_options['sorts']['random']['table'] = 'views';
+  $handler->display->display_options['sorts']['random']['field'] = 'random';
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -6336,6 +7046,8 @@ function osto_views_views_default_views() {
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
+    t('Avancerede indstillinger'),
+    t('Vælg kategori'),
     t('Vælg et filter og klik på Anvend for at se resultater'),
     t('Antal elementer'),
     t('- Alle -'),
@@ -6444,7 +7156,7 @@ function osto_views_views_default_views() {
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['element_wrapper_class'] = 'user-name';
   $handler->display->display_options['fields']['name']['element_default_classes'] = FALSE;
-  /* Kontekstuelt filter: Flag: Indholds-ID */
+  /* Kontekstuelt filter: Flag: Entity ID */
   $handler->display->display_options['arguments']['entity_id']['id'] = 'entity_id';
   $handler->display->display_options['arguments']['entity_id']['table'] = 'flagging';
   $handler->display->display_options['arguments']['entity_id']['field'] = 'entity_id';

@@ -56,7 +56,7 @@
 /* Slideshow - Front Page */
 .front {
 	#flexslider-1.flexslider {
-		height: 500px;
+		height: 300px;
 		border-radius: 0;
 		box-shadow: none;
 		.slides {
@@ -74,7 +74,7 @@
 			width: 100%;
 		}
 		.half {
-			width: 50%;
+			width: 60%;
 		}
 		.background-overlay {
 			background: linear-gradient(to right, $blue 0%,$blue 10%,rgba(10,112,227,0.5) 50%,$blue 90%,$blue 100%);
@@ -84,8 +84,8 @@
 		}
 
 		.views-field-nothing {
-			height: 500px;
-			line-height: 500px;
+			height: 300px;
+			line-height: 300px;
 
 			&:after {
 

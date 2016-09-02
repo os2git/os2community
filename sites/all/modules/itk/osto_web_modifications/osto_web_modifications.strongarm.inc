@@ -13,6 +13,97 @@ function osto_web_modifications_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_event_pattern';
+  $strongarm->value = 'begivenhed/[node:title]';
+  $export['pathauto_node_event_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_forum_pattern';
+  $strongarm->value = 'forum/[node:taxonomy-forums:name]/[node:title]';
+  $export['pathauto_node_forum_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_news_article_pattern';
+  $strongarm->value = 'nyhed/[node:title]';
+  $export['pathauto_node_news_article_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_product_pattern';
+  $strongarm->value = 'produkt/[node:title]';
+  $export['pathauto_node_product_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_public_partner_pattern';
+  $strongarm->value = 'offentlig-partner/[node:title]';
+  $export['pathauto_node_public_partner_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_supplier_pattern';
+  $strongarm->value = 'leverandoer/[node:title]';
+  $export['pathauto_node_supplier_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_team_pattern';
+  $strongarm->value = 'gruppe/[node:title]';
+  $export['pathauto_node_team_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_content_categories_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_content_categories_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_partner_categories_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_partner_categories_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_product_categories_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_product_categories_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_produktniveau_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_produktniveau_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_supplier_categories_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_supplier_categories_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_team_categories_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_team_categories_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'upload_default_avatar_fid';
   $strongarm->value = '2';
   $export['upload_default_avatar_fid'] = $strongarm;
@@ -49,7 +140,7 @@ function osto_web_modifications_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_cancel_confirm_body';
-  $strongarm->value = '[user:name],
+  $strongarm->value = 'Hej [user:name]
 
 Vi har modtaget en forespørgsel om at lukke din konto på [site:name].
 
@@ -61,7 +152,11 @@ BEMÆRK: Du kan ikke fortyde lukningen af din konto.
 
 Linket udløber om én dag og der sker ikke noget hvis det ikke bruges.
 
---  [site:name] holdet';
+---
+Med venlig hilsen
+
+OS2 - Offentlig Digitaliseringsfællesskab
+Tilmeld dig nyhedsbrevet på: http://os2.eu/nyhedsbrev';
   $export['user_mail_cancel_confirm_body'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -75,7 +170,7 @@ Linket udløber om én dag og der sker ikke noget hvis det ikke bruges.
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_password_reset_body';
-  $strongarm->value = '[user:name],
+  $strongarm->value = 'Hej [user:name]
 
 Der er lavet en forespørgsel om at nulstille adgangskoden for din konto på [site:name].
 
@@ -85,7 +180,11 @@ Du kan logge ind ved at klikke på linket eller ved at kopiere og indsætte det 
 
 Dette link kan kun bruges til at logge ind én gang, og det sender dig til en side hvor du kan vælge en adgangskode. Linket udløber efter én dag og der sker ikke noget hvis det ikke bruges.
 
---  [site:name] holdet';
+---
+Med venlig hilsen
+
+OS2 - Offentlig Digitaliseringsfællesskab
+Tilmeld dig nyhedsbrevet på: http://os2.eu/nyhedsbrev';
   $export['user_mail_password_reset_body'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -99,7 +198,7 @@ Dette link kan kun bruges til at logge ind én gang, og det sender dig til en si
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_register_admin_created_body';
-  $strongarm->value = '[user:name],
+  $strongarm->value = 'Hej [user:name]
 
 En administrator på [site:name] har oprettet en konto til dig. Du kan logge ind ved at klikke på linket eller ved at kopiere og indsætte det i din browser:
 
@@ -112,7 +211,11 @@ Når du har valgt en adgangskode kan du logge ind på [site:login-url] med:
 Brugernavn: [user:name-raw]
 Adgangskode: Din adgangskode
 
---  [site:name] holdet';
+---
+Med venlig hilsen
+
+OS2 - Offentlig Digitaliseringsfællesskab
+Tilmeld dig nyhedsbrevet på: http://os2.eu/nyhedsbrev';
   $export['user_mail_register_admin_created_body'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -126,11 +229,13 @@ Adgangskode: Din adgangskode
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_register_no_approval_required_body';
-  $strongarm->value = '[user:name],
+  $strongarm->value = 'Hej [user:name]
 
 Tak fordi du har oprettet dig som bruger på [site:name]. Du kan nu logge ind ved at klikke på linket eller ved at kopiere og indsætte det i din browser:
 
 [user:one-time-login-url]
+
+<a href="[user:one-time-login-url]">HTML link til login</a>
 
 Dette link kan kun bruges til at logge ind, og det sender dig til en side hvor du kan vælge en adgangskode.
 
@@ -139,7 +244,11 @@ Når du har valgt en adgangskode kan du logge ind på [site:login-url] med:
 Brugernavn: [user:name-raw]
 Adgangskode: Din adgangskode
 
--- [site:name] holdet';
+---
+Med venlig hilsen
+
+OS2 - Offentlig Digitaliseringsfællesskab
+Tilmeld dig nyhedsbrevet på: http://os2.eu/nyhedsbrev';
   $export['user_mail_register_no_approval_required_body'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -153,12 +262,15 @@ Adgangskode: Din adgangskode
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_register_pending_approval_body';
-  $strongarm->value = '[user:name],
+  $strongarm->value = 'Hej [user:name]
 
 Tak fordi du har oprettet dig på [site:name]. Din ansøgning om en konto afventer godkendelse. Når den er blevet godkendt modtager du en e-mail med information om hvordan du logger ind, vælger en adgangskode og andre detaljer.
 
+---
+Med venlig hilsen
 
---  [site:name] holdet';
+OS2 - Offentlig Digitaliseringsfællesskab
+Tilmeld dig nyhedsbrevet på: http://os2.eu/nyhedsbrev';
   $export['user_mail_register_pending_approval_body'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -172,7 +284,7 @@ Tak fordi du har oprettet dig på [site:name]. Din ansøgning om en konto afvent
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_status_activated_body';
-  $strongarm->value = '[user:name],
+  $strongarm->value = 'Hej [user:name]
 
 Din konto på [site:name] er blevet aktiveret.
 
@@ -187,7 +299,11 @@ Når du har valgt en adgangskode kan du fremover logge ind på [site:login-url] 
 Brugernavn: [user:name-raw]
 Adgangskode: Din adgangskode
 
--- [site:name]';
+---
+Med venlig hilsen
+
+OS2 - Offentlig Digitaliseringsfællesskab
+Tilmeld dig nyhedsbrevet på: http://os2.eu/nyhedsbrev';
   $export['user_mail_status_activated_body'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -286,7 +402,7 @@ Din konto på [site:name] er blevet lukket.
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_picture_file_size';
-  $strongarm->value = '800';
+  $strongarm->value = '1000';
   $export['user_picture_file_size'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -349,7 +465,7 @@ Din konto på [site:name] er blevet lukket.
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_register';
-  $strongarm->value = '2';
+  $strongarm->value = '1';
   $export['user_register'] = $strongarm;
 
   $strongarm = new stdClass();
