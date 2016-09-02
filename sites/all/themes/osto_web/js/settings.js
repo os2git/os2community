@@ -33,12 +33,13 @@ $(function() {
 	/**
 	 * Form Styling 
 	 */
-	$(".views-exposed-form select").fancySelect();
-	//$(".block-superfish select").fancySelect();
+	
+	$(".views-exposed-form .form-type-select select").fancySelect();
+	$(".block-superfish .form-type-select select").fancySelect();
 	
 	Drupal.behaviors.ting = {
   	attach: function (context, settings) {
-			$(".views-exposed-form select").fancySelect();
+			$(".views-exposed-form .form-type-select select").fancySelect();
 	  }
 	};
 	
