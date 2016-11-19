@@ -392,6 +392,90 @@
 
 /*
 ========================================================================== 
+	Front Page
+========================================================================== 
+*/
+
+.front {
+	.region-preface-first-inner {
+		width: 100%;
+		.news-block {
+  		float: left;
+			width: 100%;
+			margin: 0 0 30px 0;
+  		.block-title {
+  			font-size: $font-size-large;
+				text-transform: uppercase;
+				font-weight: $font-weight-normal;
+  			margin: 0 0 20px 0;
+  		}
+			.block-title:before {
+  			@include icon-prepare();
+				color: $blue;
+  			margin: 0 7px 0 0;
+  			font-size: 1.2em;
+  			position: relative;
+  			top: 2px;
+			}
+		}
+		.news-block.latest-news .block-title:before {
+  		content: "\e601";
+		}
+		.news-block.latest-posts .block-title:before {
+  		content: "\e60b";
+		}
+		.news-block.latest-events {
+  		margin-bottom: 0;
+			.block-title:before {
+  			content: "\e602";
+			}
+		}
+	}
+	.latest-activity {
+		.view-content {
+  		overflow: hidden;
+		}
+		.views-row {
+  		margin: 0 0 20px 0;
+			.title {
+  			font-weight: bold;
+  			line-height: $line-height-std;
+  			margin: 0 0 5px 0;
+  			a {
+  				color: $text-color-std;
+  				text-decoration: none;
+				}
+				a:hover {
+  				text-decoration: underline;
+				}
+			}
+		}
+		.date {
+  		font-style: italic;
+  		line-height: $line-height-std;
+  		a {
+  			color: $link-color-std;
+  			text-decoration: none;
+			}
+			a:hover {
+  			text-decoration: underline;
+			}
+		}
+		.view-footer {
+			.btn-link {
+  			color: $link-color-std;
+  			font-weight: bold;
+  			text-decoration: none;
+  		}
+  		.btn-link:hover {
+  			text-decoration: underline;
+			}
+		}
+	}
+}
+
+/*
+========================================================================== 
 	Community Front Page
 ========================================================================== 
 */
