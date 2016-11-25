@@ -11,9 +11,11 @@ function ting_message_events_node_insert($node) {
   $wrapper = entity_metadata_wrapper('message', $message);
   $wrapper->field_target_node->set($node);
 
+  /*
   if (module_exists('message_subscribe')) {
     message_subscribe_send_message('node', $node, $message);
   }
+  */
 }
 
 /**
@@ -42,9 +44,11 @@ function ting_message_events_comment_insert($comment) {
 		
 	$node = node_load($comment->nid);
 
+  /*
   if (module_exists('message_subscribe')) {
     message_subscribe_send_message('node', $node, $message);
-  }		
+  }
+  */
 }
 
 /**
