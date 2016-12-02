@@ -57,7 +57,7 @@ function osto_newsletter_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = '';
+  $display->title = 'OS2 Nyhedsbrev';
   $display->uuid = '314bb2c7-a62b-40ba-bc1d-8f0876536c62';
   $display->content = array();
   $display->panels = array();
@@ -70,7 +70,7 @@ function osto_newsletter_default_page_manager_pages() {
     $pane->access = array();
     $pane->configuration = array(
       'admin_title' => '',
-      'title' => 'Nyhedsbrevsarkiv',
+      'title' => 'Arkiv',
       'body' => '<style type="text/css">
 <!--
 .display_archive {font-family: arial,verdana; font-size: 12px;}

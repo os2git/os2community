@@ -31,6 +31,9 @@ function osto_views_strongarm() {
     'og_members' => TRUE,
     'og_members_admin' => TRUE,
     'og_user_groups' => TRUE,
+    'nodequeue_1' => TRUE,
+    'subscribe_node_email' => TRUE,
+    'subscribe_user_email' => TRUE,
   );
   $export['views_defaults'] = $strongarm;
 
