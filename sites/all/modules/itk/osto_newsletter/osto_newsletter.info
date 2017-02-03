@@ -21,4 +21,3 @@ features[user_permission][] = administer mailchimp
 features[user_permission][] = administer mailchimp signup entities
 features[variable][] = mailchimp_batch_limit
 features[variable][] = mailchimp_cron
-mtime = 1460546313

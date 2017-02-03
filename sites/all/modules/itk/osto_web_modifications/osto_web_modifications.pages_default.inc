@@ -169,36 +169,19 @@ function osto_web_modifications_default_page_manager_handlers() {
     $display->content['new-405e8a5f-755e-46c7-aa19-87618aaffd86'] = $pane;
     $display->panels['left'][0] = 'new-405e8a5f-755e-46c7-aa19-87618aaffd86';
     $pane = new stdClass();
-    $pane->pid = 'new-caa3c3b5-1053-4ece-b157-f67dbd77ac32';
-    $pane->panel = 'left';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'ting_group_messages-panel_pane_1';
+    $pane->pid = 'new-6295beec-e10f-4bdd-a1e8-1a2eff5dd5c4';
+    $pane->panel = 'right';
+    $pane->type = 'token';
+    $pane->subtype = 'node:flag-subscribe-og-link';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'context' => array(
-        0 => 'argument_entity_id:node_1',
-      ),
+      'sanitize' => 1,
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 1,
+      'override_title_text' => '<none>',
+      'override_title_heading' => 'h2',
     );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 1;
-    $pane->locks = array();
-    $pane->uuid = 'caa3c3b5-1053-4ece-b157-f67dbd77ac32';
-    $display->content['new-caa3c3b5-1053-4ece-b157-f67dbd77ac32'] = $pane;
-    $display->panels['left'][1] = 'new-caa3c3b5-1053-4ece-b157-f67dbd77ac32';
-    $pane = new stdClass();
-    $pane->pid = 'new-2c9d21f9-ab45-4592-ac52-982d3deaf0fe';
-    $pane->panel = 'right';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'ting_project_status-panel_pane_1';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array();
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
@@ -207,9 +190,9 @@ function osto_web_modifications_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '2c9d21f9-ab45-4592-ac52-982d3deaf0fe';
-    $display->content['new-2c9d21f9-ab45-4592-ac52-982d3deaf0fe'] = $pane;
-    $display->panels['right'][0] = 'new-2c9d21f9-ab45-4592-ac52-982d3deaf0fe';
+    $pane->uuid = '6295beec-e10f-4bdd-a1e8-1a2eff5dd5c4';
+    $display->content['new-6295beec-e10f-4bdd-a1e8-1a2eff5dd5c4'] = $pane;
+    $display->panels['right'][0] = 'new-6295beec-e10f-4bdd-a1e8-1a2eff5dd5c4';
     $pane = new stdClass();
     $pane->pid = 'new-fc297084-5d35-442f-9c45-06be4e645ada';
     $pane->panel = 'right';
@@ -282,7 +265,8 @@ function osto_web_modifications_default_page_manager_handlers() {
       ),
       'context' => 'argument_entity_id:node_1',
       'override_title' => 1,
-      'override_title_text' => 'Medlemsskab',
+      'override_title_text' => 'Gruppemedlemsskab',
+      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -307,7 +291,8 @@ function osto_web_modifications_default_page_manager_handlers() {
         0 => 'argument_entity_id:node_1',
       ),
       'override_title' => 1,
-      'override_title_text' => 'Projektdeltagere',
+      'override_title_text' => 'Gruppedeltagere',
+      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -343,6 +328,29 @@ function osto_web_modifications_default_page_manager_handlers() {
     $pane->uuid = 'd9ff86d4-4df2-4dc4-bc70-62b7941dc867';
     $display->content['new-d9ff86d4-4df2-4dc4-bc70-62b7941dc867'] = $pane;
     $display->panels['right'][4] = 'new-d9ff86d4-4df2-4dc4-bc70-62b7941dc867';
+    $pane = new stdClass();
+    $pane->pid = 'new-caa3c3b5-1053-4ece-b157-f67dbd77ac32';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'ting_group_messages-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => array(
+        0 => 'argument_entity_id:node_1',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 5;
+    $pane->locks = array();
+    $pane->uuid = 'caa3c3b5-1053-4ece-b157-f67dbd77ac32';
+    $display->content['new-caa3c3b5-1053-4ece-b157-f67dbd77ac32'] = $pane;
+    $display->panels['right'][5] = 'new-caa3c3b5-1053-4ece-b157-f67dbd77ac32';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-405e8a5f-755e-46c7-aa19-87618aaffd86';
   $handler->conf['display'] = $display;
@@ -445,30 +453,22 @@ function osto_web_modifications_default_page_manager_handlers() {
     $display->content['new-a7298e3c-24f9-4325-b554-c0277f65e77b'] = $pane;
     $display->panels['right'][0] = 'new-a7298e3c-24f9-4325-b554-c0277f65e77b';
     $pane = new stdClass();
-    $pane->pid = 'new-593b0c73-16c9-49bb-a99a-9df6397227a6';
+    $pane->pid = 'new-20127d4b-a578-4c58-8c9b-f5721044c6d7';
     $pane->panel = 'right';
     $pane->type = 'views_panes';
-    $pane->subtype = 'ting_event_attendees-panel_pane_1';
+    $pane->subtype = 'ting_event_attendees-panel_pane_2';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array(
-      'use_pager' => 1,
-      'pager_id' => '0',
-      'items_per_page' => '20',
-      'offset' => '0',
-      'context' => array(
-        0 => 'argument_entity_id:node_1',
-      ),
-    );
+    $pane->configuration = array();
     $pane->cache = array();
     $pane->style = array();
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $pane->uuid = '593b0c73-16c9-49bb-a99a-9df6397227a6';
-    $display->content['new-593b0c73-16c9-49bb-a99a-9df6397227a6'] = $pane;
-    $display->panels['right'][1] = 'new-593b0c73-16c9-49bb-a99a-9df6397227a6';
+    $pane->uuid = '20127d4b-a578-4c58-8c9b-f5721044c6d7';
+    $display->content['new-20127d4b-a578-4c58-8c9b-f5721044c6d7'] = $pane;
+    $display->panels['right'][1] = 'new-20127d4b-a578-4c58-8c9b-f5721044c6d7';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-4fbdd8b6-32aa-46b6-be9f-90415be75cb4';
   $handler->conf['display'] = $display;
@@ -550,8 +550,8 @@ function osto_web_modifications_default_page_manager_handlers() {
     $display->content['new-4fbdd8b6-32aa-46b6-be9f-90415be75cb4'] = $pane;
     $display->panels['left'][0] = 'new-4fbdd8b6-32aa-46b6-be9f-90415be75cb4';
     $pane = new stdClass();
-    $pane->pid = 'new-86b014f4-1174-4b0e-8950-e6cde26f679f';
-    $pane->panel = 'right';
+    $pane->pid = 'new-bbd6370b-d696-47fe-8eae-5b8155ff56b2';
+    $pane->panel = 'left';
     $pane->type = 'views';
     $pane->subtype = 'ting_product_metadata';
     $pane->shown = TRUE;
@@ -568,59 +568,12 @@ function osto_web_modifications_default_page_manager_handlers() {
       'link_to_view' => 0,
       'args' => '',
       'url' => '',
-      'display' => 'block_4',
+      'display' => 'block_2',
       'context' => array(
         0 => 'argument_entity_id:node_1.nid',
       ),
       'override_title' => 0,
       'override_title_text' => '',
-      'override_title_heading' => 'h2',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = '86b014f4-1174-4b0e-8950-e6cde26f679f';
-    $display->content['new-86b014f4-1174-4b0e-8950-e6cde26f679f'] = $pane;
-    $display->panels['right'][0] = 'new-86b014f4-1174-4b0e-8950-e6cde26f679f';
-    $pane = new stdClass();
-    $pane->pid = 'new-f71d1919-0d8b-435d-812d-1b7cf93d2bb9';
-    $pane->panel = 'right';
-    $pane->type = 'entity_field';
-    $pane->subtype = 'node:group_group';
-    $pane->shown = TRUE;
-    $pane->access = array(
-      'plugins' => array(
-        0 => array(
-          'name' => 'role',
-          'settings' => array(
-            'rids' => array(
-              0 => 4,
-              1 => 3,
-              2 => 5,
-            ),
-          ),
-          'context' => 'logged-in-user',
-          'not' => FALSE,
-        ),
-      ),
-    );
-    $pane->configuration = array(
-      'label' => 'hidden',
-      'formatter' => 'og_group_subscribe',
-      'delta_limit' => 0,
-      'delta_offset' => '0',
-      'delta_reversed' => FALSE,
-      'formatter_settings' => array(
-        'field_name' => '0',
-      ),
-      'context' => 'argument_entity_id:node_1',
-      'override_title' => 1,
-      'override_title_text' => 'Medlemskab',
       'override_title_heading' => 'h2',
     );
     $pane->cache = array();
@@ -631,35 +584,20 @@ function osto_web_modifications_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $pane->uuid = 'f71d1919-0d8b-435d-812d-1b7cf93d2bb9';
-    $display->content['new-f71d1919-0d8b-435d-812d-1b7cf93d2bb9'] = $pane;
-    $display->panels['right'][1] = 'new-f71d1919-0d8b-435d-812d-1b7cf93d2bb9';
+    $pane->uuid = 'bbd6370b-d696-47fe-8eae-5b8155ff56b2';
+    $display->content['new-bbd6370b-d696-47fe-8eae-5b8155ff56b2'] = $pane;
+    $display->panels['left'][1] = 'new-bbd6370b-d696-47fe-8eae-5b8155ff56b2';
     $pane = new stdClass();
-    $pane->pid = 'new-31ca3d24-a717-42ea-8dc9-70e7b6496987';
-    $pane->panel = 'right';
-    $pane->type = 'views';
-    $pane->subtype = 'ting_product_metadata';
+    $pane->pid = 'new-609a4b95-32a8-4aa7-8a06-4ed7a594b6d9';
+    $pane->panel = 'left';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'ting_group_messages-panel_pane_1';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_pager_settings' => 0,
-      'use_pager' => 0,
-      'nodes_per_page' => '1',
-      'pager_id' => '0',
-      'offset' => '0',
-      'more_link' => 0,
-      'feed_icons' => 0,
-      'panel_args' => 0,
-      'link_to_view' => 0,
-      'args' => '',
-      'url' => '',
-      'display' => 'block_1',
       'context' => array(
-        0 => 'argument_entity_id:node_1.nid',
+        0 => 'argument_entity_id:node_1',
       ),
-      'override_title' => 0,
-      'override_title_text' => '',
-      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -669,9 +607,66 @@ function osto_web_modifications_default_page_manager_handlers() {
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
-    $pane->uuid = '31ca3d24-a717-42ea-8dc9-70e7b6496987';
-    $display->content['new-31ca3d24-a717-42ea-8dc9-70e7b6496987'] = $pane;
-    $display->panels['right'][2] = 'new-31ca3d24-a717-42ea-8dc9-70e7b6496987';
+    $pane->uuid = '609a4b95-32a8-4aa7-8a06-4ed7a594b6d9';
+    $display->content['new-609a4b95-32a8-4aa7-8a06-4ed7a594b6d9'] = $pane;
+    $display->panels['left'][2] = 'new-609a4b95-32a8-4aa7-8a06-4ed7a594b6d9';
+    $pane = new stdClass();
+    $pane->pid = 'new-75195345-e2b4-4e31-a3df-c7a54b515eda';
+    $pane->panel = 'right';
+    $pane->type = 'token';
+    $pane->subtype = 'node:flag-subscribe-og-link';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'sanitize' => 1,
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 1,
+      'override_title_text' => '<none>',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '75195345-e2b4-4e31-a3df-c7a54b515eda';
+    $display->content['new-75195345-e2b4-4e31-a3df-c7a54b515eda'] = $pane;
+    $display->panels['right'][0] = 'new-75195345-e2b4-4e31-a3df-c7a54b515eda';
+    $pane = new stdClass();
+    $pane->pid = 'new-90d422f8-839b-44f7-9899-2e6f2cf5d19f';
+    $pane->panel = 'right';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'node:group_group';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'label' => 'hidden',
+      'formatter' => 'og_group_subscribe',
+      'delta_limit' => 0,
+      'delta_offset' => '0',
+      'delta_reversed' => FALSE,
+      'formatter_settings' => array(
+        'field_name' => 'og_user_node',
+      ),
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 1,
+      'override_title_text' => 'Medlemsskab',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '90d422f8-839b-44f7-9899-2e6f2cf5d19f';
+    $display->content['new-90d422f8-839b-44f7-9899-2e6f2cf5d19f'] = $pane;
+    $display->panels['right'][1] = 'new-90d422f8-839b-44f7-9899-2e6f2cf5d19f';
     $pane = new stdClass();
     $pane->pid = 'new-9de2623e-f50f-4fac-b1b9-b9e8ce25b1da';
     $pane->panel = 'right';
@@ -705,11 +700,87 @@ function osto_web_modifications_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 3;
+    $pane->position = 2;
     $pane->locks = array();
     $pane->uuid = '9de2623e-f50f-4fac-b1b9-b9e8ce25b1da';
     $display->content['new-9de2623e-f50f-4fac-b1b9-b9e8ce25b1da'] = $pane;
-    $display->panels['right'][3] = 'new-9de2623e-f50f-4fac-b1b9-b9e8ce25b1da';
+    $display->panels['right'][2] = 'new-9de2623e-f50f-4fac-b1b9-b9e8ce25b1da';
+    $pane = new stdClass();
+    $pane->pid = 'new-86b014f4-1174-4b0e-8950-e6cde26f679f';
+    $pane->panel = 'right';
+    $pane->type = 'views';
+    $pane->subtype = 'ting_product_metadata';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '1',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'block_4',
+      'context' => array(
+        0 => 'argument_entity_id:node_1.nid',
+      ),
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = '86b014f4-1174-4b0e-8950-e6cde26f679f';
+    $display->content['new-86b014f4-1174-4b0e-8950-e6cde26f679f'] = $pane;
+    $display->panels['right'][3] = 'new-86b014f4-1174-4b0e-8950-e6cde26f679f';
+    $pane = new stdClass();
+    $pane->pid = 'new-31ca3d24-a717-42ea-8dc9-70e7b6496987';
+    $pane->panel = 'right';
+    $pane->type = 'views';
+    $pane->subtype = 'ting_product_metadata';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '1',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'block_1',
+      'context' => array(
+        0 => 'argument_entity_id:node_1.nid',
+      ),
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 4;
+    $pane->locks = array();
+    $pane->uuid = '31ca3d24-a717-42ea-8dc9-70e7b6496987';
+    $display->content['new-31ca3d24-a717-42ea-8dc9-70e7b6496987'] = $pane;
+    $display->panels['right'][4] = 'new-31ca3d24-a717-42ea-8dc9-70e7b6496987';
     $pane = new stdClass();
     $pane->pid = 'new-d07d0405-a7fd-45b5-84f4-ab05c126c1f4';
     $pane->panel = 'right';
@@ -743,49 +814,11 @@ function osto_web_modifications_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 4;
+    $pane->position = 5;
     $pane->locks = array();
     $pane->uuid = 'd07d0405-a7fd-45b5-84f4-ab05c126c1f4';
     $display->content['new-d07d0405-a7fd-45b5-84f4-ab05c126c1f4'] = $pane;
-    $display->panels['right'][4] = 'new-d07d0405-a7fd-45b5-84f4-ab05c126c1f4';
-    $pane = new stdClass();
-    $pane->pid = 'new-bbd6370b-d696-47fe-8eae-5b8155ff56b2';
-    $pane->panel = 'right';
-    $pane->type = 'views';
-    $pane->subtype = 'ting_product_metadata';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'override_pager_settings' => 0,
-      'use_pager' => 0,
-      'nodes_per_page' => '1',
-      'pager_id' => '0',
-      'offset' => '0',
-      'more_link' => 0,
-      'feed_icons' => 0,
-      'panel_args' => 0,
-      'link_to_view' => 0,
-      'args' => '',
-      'url' => '',
-      'display' => 'block_2',
-      'context' => array(
-        0 => 'argument_entity_id:node_1.nid',
-      ),
-      'override_title' => 0,
-      'override_title_text' => '',
-      'override_title_heading' => 'h2',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 5;
-    $pane->locks = array();
-    $pane->uuid = 'bbd6370b-d696-47fe-8eae-5b8155ff56b2';
-    $display->content['new-bbd6370b-d696-47fe-8eae-5b8155ff56b2'] = $pane;
-    $display->panels['right'][5] = 'new-bbd6370b-d696-47fe-8eae-5b8155ff56b2';
+    $display->panels['right'][5] = 'new-d07d0405-a7fd-45b5-84f4-ab05c126c1f4';
     $pane = new stdClass();
     $pane->pid = 'new-513c03cc-1454-4426-a533-7df1d2b2602c';
     $pane->panel = 'right';
@@ -999,7 +1032,7 @@ function osto_web_modifications_default_page_manager_pages() {
   $page->api_version = 1;
   $page->name = 'group_blog';
   $page->task = 'page';
-  $page->admin_title = 'Group Blog';
+  $page->admin_title = 'Group nyheder';
   $page->admin_description = '';
   $page->path = 'node/%node/blog';
   $page->access = array(
@@ -1015,7 +1048,7 @@ function osto_web_modifications_default_page_manager_pages() {
   );
   $page->menu = array(
     'type' => 'tab',
-    'title' => 'Blog',
+    'title' => 'Nyheder',
     'name' => 'navigation',
     'weight' => '1',
     'parent' => array(
@@ -1080,7 +1113,7 @@ function osto_web_modifications_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = '%node:title: Blog';
+  $display->title = '%node:title: nyheder';
   $display->uuid = '5f0df6c4-87b7-44ca-9e7e-892ceedcdb67';
   $display->content = array();
   $display->panels = array();
@@ -1133,7 +1166,8 @@ function osto_web_modifications_default_page_manager_pages() {
       'field_name' => 'og_group_ref',
       'context' => 'argument_entity_id:node_1',
       'override_title' => 1,
-      'override_title_text' => '<none>',
+      'override_title_text' => 'Opret indhold',
+      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -1184,7 +1218,9 @@ function osto_web_modifications_default_page_manager_pages() {
       ),
     );
     $pane->cache = array();
-    $pane->style = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 2;
@@ -1337,7 +1373,8 @@ function osto_web_modifications_default_page_manager_pages() {
       'field_name' => 'og_group_ref',
       'context' => 'argument_entity_id:node_1',
       'override_title' => 1,
-      'override_title_text' => '<none>',
+      'override_title_text' => 'Opret indhold',
+      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -1388,7 +1425,9 @@ function osto_web_modifications_default_page_manager_pages() {
       ),
     );
     $pane->cache = array();
-    $pane->style = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 2;
@@ -1541,7 +1580,8 @@ function osto_web_modifications_default_page_manager_pages() {
       'field_name' => 'og_group_ref',
       'context' => 'argument_entity_id:node_1',
       'override_title' => 1,
-      'override_title_text' => '<none>',
+      'override_title_text' => 'Opret indhold',
+      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -1628,7 +1668,7 @@ function osto_web_modifications_default_page_manager_pages() {
     ),
   );
   $page->menu = array(
-    'type' => 'tab',
+    'type' => 'none',
     'title' => 'Wiki',
     'name' => 'navigation',
     'weight' => '4',
@@ -1747,7 +1787,8 @@ function osto_web_modifications_default_page_manager_pages() {
       'field_name' => 'og_group_ref',
       'context' => 'argument_entity_id:node_1',
       'override_title' => 1,
-      'override_title_text' => '<none>',
+      'override_title_text' => 'Opret indhold',
+      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -1798,7 +1839,9 @@ function osto_web_modifications_default_page_manager_pages() {
       ),
     );
     $pane->cache = array();
-    $pane->style = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 2;
