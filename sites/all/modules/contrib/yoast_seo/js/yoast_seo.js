@@ -1,6 +1,7 @@
 /**
  * JavaScript file that handles initializing and firing the Yoast
  * js-text-analysis library.
+ * Support YoastSEO.js v1.2.2.
  */
 (function ($) {
   Drupal.yoast_seo = Drupal.yoast_seo || {};
@@ -27,12 +28,12 @@
               snippet: settings.yoast_seo.targets.snippet
             },
             snippetFields: {
-              title: "snippet_title",
-              url: "snippet_cite",
-              meta: "snippet_meta"
+              title: "snippet-editor-title",
+              url: "snippet-editor-slug",
+              meta: "snippet-editor-meta-description"
             },
             sampleText: {
-              url: settings.yoast_seo.defaultText.url,
+              baseUrl: settings.yoast_seo.baseRoot + '/',
               title: settings.yoast_seo.defaultText.title,
               keyword: settings.yoast_seo.defaultText.keyword,
               meta: settings.yoast_seo.defaultText.meta,
@@ -63,9 +64,8 @@
             // Declaring the callback functions, for now we bind DrupalSource.
             YoastSEO.analyzerArgs.callbacks = {
               getData: DrupalSource.getData.bind(DrupalSource),
-              getAnalyzerInput: DrupalSource.getAnalyzerInput.bind(DrupalSource),
               bindElementEvents: DrupalSource.bindElementEvents.bind(DrupalSource),
-              updateSnippetValues: DrupalSource.updateSnippetValues.bind(DrupalSource),
+              saveSnippetData: DrupalSource.saveSnippetData.bind(DrupalSource),
               saveScores: DrupalSource.saveScores.bind(DrupalSource)
             };
 
@@ -87,15 +87,18 @@
             if (typeof CKEDITOR !== "undefined") {
               CKEDITOR.on('instanceReady', function( ev ) {
                 var editor = ev.editor;
-                
-                // Check if this the instance we want to track.
-                if (editor.name == YoastSEO.analyzerArgs.fields.text) {
-                  editor.on('change', function() {
-                    // Let CKEditor handle updating the linked text element.
-                    editor.updateElement();
-                    // Dispatch input event so Yoast SEO knows something changed!
-                    DrupalSource.triggerEvent(editor.name);
-                  });
+                for (var text_field in YoastSEO.analyzerArgs.fields.text) {
+                  // Check if this the instance we want to track.
+                  if (typeof YoastSEO.analyzerArgs.fields.text[text_field] != 'undefined') {
+                    if (editor.name == YoastSEO.analyzerArgs.fields.text[text_field]) {
+                      editor.on('change', function() {
+                        // Let CKEditor handle updating the linked text element.
+                        editor.updateElement();
+                        // Dispatch input event so Yoast SEO knows something changed!
+                        DrupalSource.triggerEvent(editor.name);
+                      });
+                    }
+                  }
                 }
               });
             }
@@ -119,7 +122,6 @@ YoastSEO_DrupalSource = function(args) {
   this.config = args;
   this.refObj = {};
   this.analyzerData = {};
-  this.formattedData = {};
 };
 
 /**
@@ -135,7 +137,7 @@ YoastSEO_DrupalSource.prototype.triggerEvent = function(field) {
   else {
     document.getElementById(field).fireEvent("input");
   }
-}
+};
 
 /**
  * Parses the input in snippet preview fields on input evt to data in the metatag and path fields
@@ -146,11 +148,11 @@ YoastSEO_DrupalSource.prototype.parseSnippetData = function(source, target) {
   var listener = function ( ev ) {
     // textContent support for FF and if both innerText and textContent are
     // undefined we use an empty string.
-    document.getElementById(target).value = (ev.target.innerText || ev.target.textContent || "");
+    document.getElementById(target).value = (ev.target.value || "");
     this.triggerEvent(target);
   }.bind(this);
   document.getElementById(source).addEventListener("blur", listener);
-}
+};
 
 
 /**
@@ -164,8 +166,8 @@ YoastSEO_DrupalSource.prototype.getData = function() {
     meta: this.getDataFromInput( "meta" ),
     snippetMeta: this.getDataFromInput( "meta" ),
     text: this.getDataFromInput( "text" ),
-    snippetTitle: this.getDataFromInput( "title" ),
     pageTitle: this.getDataFromInput( "title" ),
+    snippetTitle: this.getDataFromInput( "title" ),
     baseUrl: this.config.baseRoot + '/',
     url: this.config.baseRoot + '/' + this.getDataFromInput( "url" ),
     snippetCite: this.getDataFromInput( "url" )
@@ -185,37 +187,38 @@ YoastSEO_DrupalSource.prototype.getData = function() {
   return data;
 };
 
-/**
- * Initializes the snippetPreview if it isn't there.
- * If it is already initialized, it get's new values from the inputs and rerenders snippet.
- */
-YoastSEO_DrupalSource.prototype.getAnalyzerInput = function() {
-  if (typeof YoastSEO.app.snippetPreview === "undefined") {
-    YoastSEO.app.init();
-  }
-  else {
-    this.updateRawData();
-    YoastSEO.app.reloadSnippetText();
-  }
-  YoastSEO.app.runAnalyzerCallback();
-};
-
 YoastSEO_DrupalSource.prototype.getDataFromInput = function( field ) {
-  return document.getElementById(this.config.fields[field]).value;
-}
+  // If this is an array of id's
+  if (this.config.fields[field] instanceof Array) {
+    var output = [];
+    for (var text_field in this.config.fields[field]) {
+      if (
+        typeof this.config.fields[field][text_field] != 'undefined'
+        && document.getElementById(this.config.fields[field][text_field])
+        && document.getElementById(this.config.fields[field][text_field]).value != ''
+      ) {
+        output.push(document.getElementById(this.config.fields[field][text_field]).value);
+      }
+    }
+
+    return output.join("\n");
+  }else{
+    var fieldElem = document.getElementById(this.config.fields[field]);
+    return (fieldElem !== null) ? fieldElem.value : '';
+  }
+};
 
 /**
  * Grabs data from the refObj and returns populated analyzerData
  * @returns analyzerData
  */
 YoastSEO_DrupalSource.prototype.updateRawData = function() {
-  data = {
+  var data = {
     keyword: this.getDataFromInput( "keyword" ),
     meta: this.getDataFromInput( "meta" ),
     snippetMeta: this.getDataFromInput( "meta" ),
     text: this.getDataFromInput( "text" ),
     nodeTitle: this.getDataFromInput( "nodeTitle" ),
-    snippetTitle: this.getDataFromInput( "title" ),
     pageTitle: this.getDataFromInput( "title" ),
     baseUrl: this.config.baseRoot + '/',
     url: this.config.baseRoot + '/' + this.getDataFromInput( "url" ),
@@ -244,28 +247,6 @@ YoastSEO_DrupalSource.prototype.updateRawData = function() {
 };
 
 /**
- * when the snippet is updated, set this data in rawData.
- * @param {string} value
- * @param {string} type
- */
-YoastSEO_DrupalSource.prototype.setRawData = function( value, type ) {
-  switch ( type ) {
-    case 'snippet_meta':
-      this.parseSnippetData(type, this.config.fields.meta);
-      YoastSEO.app.rawData.snippetMeta = value;
-      break;
-    case 'snippet_cite':
-      YoastSEO.app.rawData.snippetCite = value;
-      break;
-    case 'snippet_title':
-      YoastSEO.app.rawData.snippetTitle = value;
-      break;
-    default:
-      break;
-  }
-};
-
-/**
  * Calls the eventbinders.
  */
 YoastSEO_DrupalSource.prototype.bindElementEvents = function() {
@@ -277,6 +258,14 @@ YoastSEO_DrupalSource.prototype.bindElementEvents = function() {
  */
 YoastSEO_DrupalSource.prototype.inputElementEventBinder = function() {
   for (field in this.config.fields) {
+    if (this.config.fields[field] instanceof Array) {
+      for (var text_field in this.config.fields[field]) {
+        if (typeof this.config.fields[field][text_field] != 'undefined' && document.getElementById(this.config.fields[field][text_field])) {
+          document.getElementById(this.config.fields[field][text_field]).__refObj = this;
+          document.getElementById(this.config.fields[field][text_field]).addEventListener("input", this.renewData.bind(this));
+        }
+      }
+    }
     if (typeof this.config.fields[field] != 'undefined' && document.getElementById(this.config.fields[field])) {
       document.getElementById(this.config.fields[field]).__refObj = this;
       document.getElementById(this.config.fields[field]).addEventListener("input", this.renewData.bind(this));
@@ -285,31 +274,45 @@ YoastSEO_DrupalSource.prototype.inputElementEventBinder = function() {
 };
 
 /**
- * calls getAnalyzerinput function on change event from element
+ * Calls getAnalyzerinput function on change event from element
  * @param event
  */
 YoastSEO_DrupalSource.prototype.renewData = function ( ev ) {
-  if (!this.config.SEOTitleOverwritten && (ev.target.id == this.config.fields.title || ev.target.id == this.config.snippetFields.title)) {
-    this.config.SEOTitleOverwritten = true;
+  // @TODO: implement snippetPreview rebuild
+  if (!this.config.SEOTitleOverwritten && (ev.target.id == this.config.fields.nodeTitle || ev.target.id == this.config.snippetFields.title)) {
+    var $this = this;
+    setTimeout(function(){
+      $this.config.SEOTitleOverwritten = true;
+      document.getElementById(YoastSEO.app.config.fields.title).value = ev.target.value;
+      document.getElementById($this.config.snippetFields.title).value = ev.target.value;
+      $this.triggerEvent(YoastSEO.app.config.snippetFields.title);
+    }, 3000);
   }
 
-  YoastSEO.app.analyzeTimer(ev);
+  if (ev.target.id == this.config.fields.title) {
+    document.getElementById(this.config.snippetFields.title).value = ev.target.value;
+    this.triggerEvent(this.config.snippetFields.title);
+  }
+
+  if (ev.target.id == this.config.fields.meta) {
+    document.getElementById(this.config.snippetFields.meta).value = ev.target.value;
+    this.triggerEvent(this.config.snippetFields.meta);
+  }
+
+  if (ev.target.id == this.config.fields.url) {
+    document.getElementById(this.config.snippetFields.url).value = ev.target.value;
+    this.triggerEvent(this.config.snippetFields.url);
+  }
+
+  YoastSEO.app.refresh();
 };
 
 /**
- * Updates the snippet values, but in reality we ignore this.
+ * Save the snippet values, but in reality we ignore this.
  *
  * @param {Object} ev
  */
-YoastSEO_DrupalSource.prototype.updateSnippetValues = function( ev ) {
-};
-
-/**
- * calles getAnalyzerinput function on focus of the snippet elements;
- * @param event
- */
-YoastSEO_DrupalSource.prototype.snippetCallback = function( ev ) {
-  this.getAnalyzerInput();
+YoastSEO_DrupalSource.prototype.saveSnippetData = function (ev) {
 };
 
 /**
@@ -317,33 +320,26 @@ YoastSEO_DrupalSource.prototype.snippetCallback = function( ev ) {
  * @param score
  * @returns output
  */
-YoastSEO_DrupalSource.prototype.scoreRating = function( score ) {
+YoastSEO_DrupalSource.prototype.scoreRating = function (rating) {
   var scoreRate;
-  switch ( score ) {
-    case 0:
-      scoreRate = "na";
-      break;
-    case 4:
-    case 5:
-      scoreRate = "poor";
-      break;
-    case 6:
-    case 7:
-      scoreRate = "ok";
-      break;
-    case 8:
-    case 9:
-    case 10:
-      scoreRate = "good";
-      break;
-    default:
-      scoreRate = "bad";
-      break;
+
+  if (rating <= 4) {
+    scoreRate = "bad";
   }
 
-  var output = Drupal.t("SEO: <strong>" + scoreRate + "</strong>");
+  if (rating > 4 && rating <= 7) {
+    scoreRate = "ok";
+  }
 
-  return output;
+  if (rating > 7) {
+    scoreRate = "good";
+  }
+
+  if (rating == 0) {
+    scoreRate = "na";
+  }
+
+  return Drupal.t("SEO: <strong>" + scoreRate + "</strong>");
 };
 
 /**
@@ -351,6 +347,11 @@ YoastSEO_DrupalSource.prototype.scoreRating = function( score ) {
  * @param score
  */
 YoastSEO_DrupalSource.prototype.saveScores = function ( score ) {
-  document.getElementById(this.config.targets.overall).getElementsByClassName("score_title")[0].innerHTML = this.scoreRating( score );
-  document.getElementById(this.config.scoreElement).value = score;
+  var rating = 0;
+  if (typeof score == "number" && score > 0) {
+    rating = ( score / 10 );
+  }
+
+  document.getElementById(this.config.targets.overall).getElementsByClassName("score_title")[0].innerHTML = this.scoreRating( rating );
+  document.getElementById(this.config.scoreElement).value = rating;
 };
