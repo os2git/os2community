@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Install, update, and uninstall functions for the Yoast SEO for Drupal module.
@@ -46,12 +47,12 @@ function yoast_seo_schema() {
       ),
       'seo_status' => array(
         'description' => 'The SEO status in points.',
-        'type' => 'int',
+        'type' => 'float',
         'unsigned' => FALSE,
       ),
     ),
     'indexes' => array(
-      'type_revision' => array('entity_type','revision_id'),
+      'type_revision' => array('entity_type', 'revision_id'),
     ),
     'primary key' => array(
       'entity_type',
@@ -107,6 +108,19 @@ function yoast_seo_uninstall() {
   if (!empty($entity_info['bundles'])) {
     foreach ($entity_info['bundles'] as $bundle_name => $bundle_info) {
       variable_del('yoast_seo_enable_' . $entity_type . '__' . $bundle_name);
+      variable_del('yoast_seo_body_fields_' . $bundle_name);
     }
   }
+}
+
+/**
+ * Change yoast_seo field scheme type from 'int' to 'float'.
+ */
+function yoast_seo_update_7000() {
+  db_drop_primary_key('yoast_seo');
+  db_change_field('yoast_seo', 'seo_status', 'seo_status',
+    array(
+      'type' => 'float',
+      'unsigned' => FALSE,
+    ));
 }

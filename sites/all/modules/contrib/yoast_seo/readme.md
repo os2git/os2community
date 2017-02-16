@@ -1,8 +1,8 @@
-Yoast SEO for Drupal
+Real-time SEo for Drupal
 ---------------------------
-Improve your Drupal SEO: Write better content and have a fully optimized Drupal content using Yoast SEO for Drupal module.
+Improve your Drupal SEO: Write better content and have a fully optimized Drupal content using Realtime SEO for Drupal module.
 
-This module is written from the ground up by joined forces from [Yoast](http://www.yoast.com) and [GoalGorilla](http://www.goalgorilla.com) to improve your site's SEO on *all* needed aspects. The [Yoast SEO for Drupal module](http://drupal.org/project/yoast_seo/) is heavily dependending on the [Metatag](http://drupal.org/project/metatag) module. Together they go the extra mile to take care of a lot technical optimization, more on that below, but it first and foremost helps you write better content. Yoast SEO forces you to choose a focus keyword when you're writing your articles, and then makes sure you use that focus keyword everywhere.
+This module is written from the ground up by [GoalGorilla](http://www.goalgorilla.com) to improve your site's SEO on *all* needed aspects. The [Real-time SEO for Drupal module](http://drupal.org/project/yoast_seo/) is heavily dependending on the [Yoast](http://www.yoast.com) library and [Metatag](http://drupal.org/project/metatag) module . Together they go the extra mile to take care of a lot technical optimization, more on that below, but it first and foremost helps you write better content. Realtime SEO forces you to choose a focus keyword when you're writing your articles, and then makes sure you use that focus keyword everywhere.
 
 
 
@@ -29,7 +29,7 @@ Step by step guide on how to install and use the Yoast SEO module:
 
 Credits / Contact
 ------------------------------------------------------------------------------
-First of all we want to give credit to the Metatag team! We decided to make this module a dependency for the Yoast SEO for Drupal module and not rebuild all of their excellent work.
+First of all we want to give credit to the Metatag team! We decided to make this module a dependency for the Realtime SEO for Drupal module and not rebuild all of their excellent work.
 
 Secondly we want to thank the Yoast team for giving us the opportunity to develop a great Drupal module in combination with their real-time page analysis solution.
 
@@ -39,14 +39,14 @@ Please use the Drupal issue lists to report bugs or discuss ideas on improving t
 
 References
 ------------------------------------------------------------------------------
-Yoast SEO for Drupal module
-* [Yoast SEO for Drupal](http://drupal.org/project/yoast_seo)
+Realtime SEO for Drupal module
+* [Real-time SEO for Drupal](http://drupal.org/project/yoast_seo)
 
-Yoast SEO for Drupal module dependencies:
+Realtime SEO for Drupal module dependencies:
 * [Metatag](http://drupal.org/project/metatag) - requires v7.x-1.7 or newer.
 * Node (Core)
 * Path (Core)
 
-Yoast SEO for Drupal module libraries:
+Realtime SEO for Drupal module libraries:
 * [js-text-analysis](https://github.com/Yoast/js-text-analysis)
 * [Jed](https://github.com/SlexAxton/Jed)

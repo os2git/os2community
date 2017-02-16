@@ -130,7 +130,16 @@ function message_subscribe_send_message($entity_type, $entity, Message $message,
   if ($subscribe_options['uids']) {
     // We got a list of user IDs directly from the implementing module,
     // However we need to adhere to the range.
-    $uids = $subscribe_options['range'] ? array_slice($subscribe_options['uids'], 0, $subscribe_options['range'], TRUE) : $subscribe_options['uids'];
+    // If 'last uid' is provided, we need to start from next 'uid' key in array.
+    if (!empty($subscribe_options['last uid'])) {
+      $index = array_search($subscribe_options['last uid'], array_keys($subscribe_options['uids'])) + 1;
+    }
+    // Otherwise we start from the very beginning.
+    else {
+      $index = 0;
+    }
+
+    $uids = $subscribe_options['range'] ? array_slice($subscribe_options['uids'], $index, $subscribe_options['range'], TRUE) : $subscribe_options['uids'];
   }
 
   if (empty($uids) && !$uids = message_subscribe_get_subscribers($entity_type, $entity, $message, $subscribe_options, $context)) {
@@ -249,15 +258,16 @@ function message_subscribe_get_subscribers($entity_type, $entity, Message $messa
     }
   }
 
-  foreach ($uids as $uid => $values) {
-    // See if the author of the entity gets notified.
-    if (!$notify_message_owner && $entity->uid == $uid) {
-      unset($uids[$uid]);
-    }
+  // See if the author of the entity gets notified.
+  if (!$notify_message_owner && array_key_exists ($entity->uid , $uids)) {
+    unset($uids[$entity->uid]);
+  }
 
+  $accounts = user_load_multiple(array_keys($uids));
+
+  foreach ($uids as $uid => $values) {
     if (!empty($subscribe_options['entity access'])) {
-      $account = user_load($uid);
-      if (!entity_access('view', $entity_type, $entity, $account)) {
+      if (!entity_access('view', $entity_type, $entity, $accounts[$uid])) {
         // User doesn't have access to view the entity.
         unset($uids[$uid]);
       }
