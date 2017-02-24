@@ -44,12 +44,14 @@ function osto_contact_default_page_manager_pages() {
     'name' => 'panel',
   );
   $display = new panels_display();
-  $display->layout = 'onecol';
+  $display->layout = 'omega_12_twocol_9_3';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'middle' => NULL,
+      'left' => NULL,
+      'right' => NULL,
     ),
   );
   $display->cache = array();
@@ -59,13 +61,13 @@ function osto_contact_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-b349d080-2873-4ec3-85b4-4fe2becbe352';
-    $pane->panel = 'middle';
+    $pane->panel = 'left';
     $pane->type = 'contact';
     $pane->subtype = 'contact';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 0,
+      'override_title' => 1,
       'override_title_text' => '',
       'override_title_heading' => 'h2',
     );
@@ -79,7 +81,32 @@ function osto_contact_default_page_manager_pages() {
     $pane->locks = array();
     $pane->uuid = 'b349d080-2873-4ec3-85b4-4fe2becbe352';
     $display->content['new-b349d080-2873-4ec3-85b4-4fe2becbe352'] = $pane;
-    $display->panels['middle'][0] = 'new-b349d080-2873-4ec3-85b4-4fe2becbe352';
+    $display->panels['left'][0] = 'new-b349d080-2873-4ec3-85b4-4fe2becbe352';
+    $pane = new stdClass();
+    $pane->pid = 'new-229cf7f5-4516-4554-8042-146683c7a6b3';
+    $pane->panel = 'right';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'OS2 kontaktinformationer',
+      'title' => 'Forretningsledelsen',
+      'body' => '<div style="line-height:1.5em"><p>Du er også velkommen til at kontakte OS2s forretningsleder direkte. Eller sende os et brev, det er så hyggeligt.</p><p>&nbsp;</p><p>Rasmus Frey<br />Forretningsleder<br />Email: rafr@aarhus.dk<br />Telefon: +45 31154525</p><p>&nbsp;</p><p>OS2 - Offentligt digitaliseringsfællesskab<br />c/o Aarhus Kommune<br />Dokk1<br />Hack Kampmanns Plads 2<br />8000 Aarhus C<br />CVR: 55133018</p><p>&nbsp;</p><p>Email: os2@os2.eu<br />Telefon: +45 29 20 84 27</p></div>',
+      'format' => 'full_html',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '229cf7f5-4516-4554-8042-146683c7a6b3';
+    $display->content['new-229cf7f5-4516-4554-8042-146683c7a6b3'] = $pane;
+    $display->panels['right'][0] = 'new-229cf7f5-4516-4554-8042-146683c7a6b3';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-b349d080-2873-4ec3-85b4-4fe2becbe352';
   $handler->conf['display'] = $display;

@@ -156,7 +156,7 @@
 			width: 50%;
 			float: left;
 			padding-right: 10px;
-			@include box-sizing(border-box);
+			box-sizing: border-box;
 			> a {
 				color: $white;
 				font-size: 1.5em;
@@ -258,8 +258,8 @@
 #block-bean-forside-signup-partner {
 	background: $white;
 	padding: 45px;
-	@include box-sizing(border-box);
-	@include border-radius(3px);
+	box-sizing: border-box;
+	border-radius: 3px;
 	.field-name-field-signup-body {
 		margin: 0 0 35px;
 		text-align: center;
@@ -284,7 +284,7 @@
 		text-align: center;
 		margin: 0 0 35px 0;
 		max-width: 100%;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		.field {
 			display: inline-block;
 			margin: 0 0 18px 0;
@@ -296,7 +296,7 @@
 		float: left;
 		text-align: center;
 		max-width: 100%;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		.field {
 			display: inline-block;
 			margin: 0 0 15px 0;
@@ -327,8 +327,8 @@
 ========================================================================== 
 */
 #block-bean-forside-signup-partner-0 {
-	@include box-sizing(border-box);
-	@include border-radius(3px);
+	box-sizing: border-box;
+	border-radius: 3px;
 	.field-name-field-signup-body {
 		margin: 0 0 35px;
 		text-align: center;
@@ -386,6 +386,90 @@
 			@include btn-link($blue-light);
 			color: white;
 			width: 100%;
+		}
+	}
+}
+
+/*
+========================================================================== 
+	Front Page
+========================================================================== 
+*/
+
+.front {
+	.region-preface-first-inner {
+		width: 100%;
+		.news-block {
+  		float: left;
+			width: 100%;
+			margin: 0 0 30px 0;
+  		.block-title {
+  			font-size: $font-size-large;
+				text-transform: uppercase;
+				font-weight: $font-weight-normal;
+  			margin: 0 0 20px 0;
+  		}
+			.block-title:before {
+  			@include icon-prepare();
+				color: $blue;
+  			margin: 0 7px 0 0;
+  			font-size: 1.2em;
+  			position: relative;
+  			top: 2px;
+			}
+		}
+		.news-block.latest-news .block-title:before {
+  		content: "\e601";
+		}
+		.news-block.latest-posts .block-title:before {
+  		content: "\e60b";
+		}
+		.news-block.latest-events {
+  		margin-bottom: 0;
+			.block-title:before {
+  			content: "\e602";
+			}
+		}
+	}
+	.latest-activity {
+		.view-content {
+  		overflow: hidden;
+		}
+		.views-row {
+  		margin: 0 0 20px 0;
+			.title {
+  			font-weight: bold;
+  			line-height: $line-height-std;
+  			margin: 0 0 5px 0;
+  			a {
+  				color: $text-color-std;
+  				text-decoration: none;
+				}
+				a:hover {
+  				text-decoration: underline;
+				}
+			}
+		}
+		.date {
+  		font-style: italic;
+  		line-height: $line-height-std;
+  		a {
+  			color: $link-color-std;
+  			text-decoration: none;
+			}
+			a:hover {
+  			text-decoration: underline;
+			}
+		}
+		.view-footer {
+			.btn-link {
+  			color: $link-color-std;
+  			font-weight: bold;
+  			text-decoration: none;
+  		}
+  		.btn-link:hover {
+  			text-decoration: underline;
+			}
 		}
 	}
 }
@@ -639,7 +723,7 @@
 				float: left;
 				background: $blue;
 				color: $white;
-				@include box-sizing(border-box);
+				box-sizing: border-box;
 				h3 {
 					text-transform: uppercase;
 					font-weight: $font-weight-normal;
@@ -689,7 +773,7 @@
 .block-community-stats {
 	overflow: hidden;
 	padding: 25px 0;
-	@include box-sizing(border-box);
+	box-sizing: border-box;
 	div.text {
 		width: 100%;
 		text-align: center;
@@ -708,7 +792,7 @@
 		width: 100%;
 		padding: 0;
 		text-align: center;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		> div {
 			display: inline-block;
 			text-align: center;
@@ -767,15 +851,15 @@
 		height: $line-height-std;
 		padding-left: 30px;
 		*/
-		@include border-top-left-radius(2px);
-		@include border-bottom-left-radius(2px);
-		@include background(linear-gradient($white, $gray-lightest));
+		border-top-left-radius: 2px;
+		border-bottom-left-radius: 2px;
+		background: linear-gradient($white, $gray-lightest);
 	}
 	.rate-button:hover {
 		text-decoration: none;
 	}
 	.rate-button:active {
-		@include background(linear-gradient($white, $gray-lightest));
+		background: linear-gradient($white, $gray-lightest);
 	}
 	.rate-button:before {
 		@include icon-prepare();
@@ -793,7 +877,7 @@
 		border: 1px solid $gray-dark;
 		margin-left: -1px;
 		height: $line-height-std;
-		@include border-top-right-radius(2px);
-		@include border-bottom-right-radius(2px);
+		border-top-right-radius:2px;
+		border-bottom-right-radius: 2px;
 	}
 }

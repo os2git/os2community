@@ -100,7 +100,7 @@ article.node {
 				float: left;
 				margin: 0 6px 0 0;
 				img {
-					@include border-radius(45px);
+					border-radius: 45px;
 				}
 			}
 			.author-name {
@@ -293,7 +293,7 @@ article.comment {
 				float: left;
 				margin: 0 6px 0 0;
 				img {
-					@include border-radius(45px);
+					border-radius: 45px;
 				}
 			}
 			.author-name {

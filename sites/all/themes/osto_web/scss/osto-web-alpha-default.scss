@@ -28,12 +28,9 @@
 
 /* Menu - Header alignment */
 #zone-menu-wrapper #zone-menu {
+	position: relative;
 	width: 100%;
 	min-height: 90px;
-	.block-superfish {
-		width: 100%;
-		float: left;
-	}
 }
 #region-branding {
 	margin: 0;
@@ -49,71 +46,6 @@
 	float: left;
 }
 
-/*
-========================================================================== 
-	Main Menu
-========================================================================== 
-*/
-#superfish-1 {
-	/* Level 1 */
-	li.sf-depth-1 {
-		font-size: 14px;
-		margin: 0;
-		padding: 0;
-		display: inline-block;
-		width: 16%;
-		font-weight: $font-weight-semibold;
-		a.sf-depth-1 {
-			color: $text-color-std;
-			text-decoration: none;
-			display: inline-block;
-			height: 90px;
-			line-height: 90px;
-			vertical-align: middle;
-			text-align: center;
-			width: 100%;
-		}
-		a.sf-depth-1.active {
-			
-		}
-		a.sf-depth-1.active:after {
-			position: absolute;
-			bottom: 0px;
-			left: 18px;
-			right: 18px;
-			content: '';
-			display: block;
-			height: 3px;
-			background-color: $blue;
-		}
-		/* Level 2 */
-		ul {
-			background: white;
-			top: 90px;
-			width: 18em !important;
-			font-size: $font-size-small;
-			display: none;
-			@include box-shadow(0 2px 2px rgba(0,0,0,0.15));
-			li {
-				a {
-					padding: 20px 25px;
-					text-decoration: none;
-					color: $text-color-std;
-					border-top: 1px solid #f8f8f8;
-					
-				}
-				a:hover {
-					background: #f8f8f8;
-				}
-			}
-		}
-	}
-	li.sfHover {
-		> a {
-			background: white;
-		}
-	}
-}
 
 /*
 ========================================================================== 
@@ -124,9 +56,9 @@
 /* Slideshow - Front Page */
 .front {
 	#flexslider-1.flexslider {
-		height: 500px;
-		@include border-radius(0);
-		@include box-shadow(none);
+		height: 300px;
+		border-radius: 0;
+		box-shadow: none;
 		.slides {
 			.views-field-field-slide-image {
 				img {
@@ -134,7 +66,7 @@
 					width: 1920px;
 					margin-left: -960px;
 
-					@include filter(grayscale(100%));
+					filter: grayscale(100%);
 				}
 			}
 		}
@@ -142,7 +74,7 @@
 			width: 100%;
 		}
 		.half {
-			width: 50%;
+			width: 60%;
 		}
 		.background-overlay {
 			background: linear-gradient(to right, $blue 0%,$blue 10%,rgba(10,112,227,0.5) 50%,$blue 90%,$blue 100%);
@@ -152,8 +84,8 @@
 		}
 
 		.views-field-nothing {
-			height: 500px;
-			line-height: 500px;
+			height: 300px;
+			line-height: 300px;
 
 			&:after {
 
@@ -183,12 +115,12 @@
 				margin: 0 0 35px 0;
 				position: relative;
 				top: 0;	
-				@include transition-property(top,opacity);
-				@include transition-duration($anim-speed);
-				@include transition-timing-function($anim-ease-type);	
-				@include transition-delay($anim-speed);	
-				@include opacity(0);
-				@include text-shadow(2px 2px 0 rgba(0,0,0,0.20));
+				transition-property: top,opacity;
+				transition-duration: $anim-speed;
+				transition-timing-function: $anim-ease-type;
+				transition-delay: $anim-speed;
+				opacity: 0;
+				text-shadow: 2px 2px 0 rgba(0,0,0,0.20);
 			}
 			.item-list {
 				li {
@@ -262,7 +194,7 @@
 		border-right: 1px solid #d1d1d1;	
 		min-height: 220px;
 		margin-bottom: 0;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}
 	.col-second {
 		float: left;
@@ -270,7 +202,7 @@
 		padding: 0 0 0 35px;
 		min-height: 220px;
 		margin-bottom: 0;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 	}
 }
 

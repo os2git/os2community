@@ -1,0 +1,4 @@
+name = Osto views access
+description = Changes access rights for specific paths
+core = 7.x
+package = ITK

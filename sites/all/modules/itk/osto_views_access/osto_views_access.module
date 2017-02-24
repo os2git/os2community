@@ -1,0 +1,15 @@
+<?php
+
+function osto_views_access_init() {
+  if (arg(0) == 'node' && arg(2) == 'registrations' && arg(3) == 'export') {
+    global $user;
+    $node = node_load(arg(1));
+    if (user_access("administer event registration") || $user->uid == $node->uid) {
+
+    }
+    else {
+      drupal_access_denied();
+      drupal_exit();
+    }
+  }
+}

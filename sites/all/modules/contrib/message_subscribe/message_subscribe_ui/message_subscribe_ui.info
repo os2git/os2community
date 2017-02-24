@@ -14,9 +14,9 @@ features[views_view][] = subscribe_node
 features[views_view][] = subscribe_taxonomy_term
 features[views_view][] = subscribe_user
 
-; Information added by Drupal.org packaging script on 2015-03-09
-version = "7.x-1.0-rc2+14-dev"
+; Information added by Drupal.org packaging script on 2016-09-20
+version = "7.x-1.0-rc2+16-dev"
 core = "7.x"
 project = "message_subscribe"
-datestamp = "1425885782"
+datestamp = "1474347541"
 
