@@ -9,9 +9,6 @@
  * Implements hook_uninstall().
 */
 function rrssb_uninstall() {
-  // Remove auto-generated files.
-  file_unmanaged_delete_recursive('public://rrssb');
-
    // Simple DB query to get the names of our variables.
   $results = db_select('variable', 'v')
     ->fields('v', array('name'))

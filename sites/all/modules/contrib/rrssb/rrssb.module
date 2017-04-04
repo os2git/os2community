@@ -9,13 +9,13 @@ require('rrssb.config.inc');
 /**
  * Define the RRSSB library location.
  */
-define('RRSSB_LIBRARY_VERSION', '1.8.1');
+define('RRSSB_LIBRARY_VERSION', '1.10.0');
 define('RRSSB_LIBRARY_URI', 'https://github.com/kni-labs/rrssb/archive/' . RRSSB_LIBRARY_VERSION . '.zip');
 
 /**
  * Default value for variable rrssb_image_tokens
  */
-define('RRSSB_IMAGE_TOKENS_DEFAULT', '[node:field_image]|[site:logo-url]');
+define('RRSSB_IMAGE_TOKENS_DEFAULT', '[node:field_image]|[rrssbsite:logo-url]');
 
 /**
  * Implements hook_menu().
@@ -63,7 +63,9 @@ function rrssb_tokens($type, $tokens, array $data = array(), array $options = ar
     }
   }
 
-  if ($type == 'site') {
+  // This issue https://www.drupal.org/node/823780 has a patch to add site:logo.
+  // In the meantime, add our own version.
+  if ($type == 'rrssbsite') {
     foreach ($tokens as $name => $original) {
       switch ($name) {
         case 'logo-url':
@@ -221,6 +223,7 @@ function rrssb_form() {
   // Drupal handles all the storing to the rrssb_chosen variable automatically, serialising the array.
   // The table layout comes from the theme function.
   $form['rrssb_chosen'] = array(
+    '#type' => 'fieldset',
     '#tree' => TRUE,
     '#title' => t('Configure buttons'),
     '#theme' => 'rrssb_config_buttons',
@@ -312,12 +315,6 @@ function rrssb_form_validate($form, &$form_state) {
 function rrssb_form_submit() {
   // Clear cache.
   cache_clear_all('rrssb_buttons', 'cache');
-
-  // Delete auto-generated CSS.
-  if ($old = variable_get('rrssb_css_file')) {
-    file_unmanaged_delete($old);
-  }
-  variable_del('rrssb_css_file');
 }
 
 /**
@@ -327,7 +324,7 @@ function rrssb_libraries_info() {
   $libraries['rrssb'] = array(
     'name' => 'Ridiculously Responsive Social Share Buttons',
     'vendor url' => 'http://kurtnoble.com/labs/rrssb/',
-    'download url' => 'https://github.com/kni-labs/rrssb/archive/1.8.1.zip',
+    'download url' => RRSSB_LIBRARY_URI,
     'version arguments' => array(
       'file' => 'package.json',
       'pattern' => '/"version": "([\d\.]+)"/',
@@ -336,7 +333,9 @@ function rrssb_libraries_info() {
       'js' => array(
         'js/rrssb.min.js',
       ),
-      // Don't list the CSS file here.  This module generates a new file based on the original one and uses that.
+      'css' => array(
+        'css/rrssb.css',
+      ),
     ),
   );
 
@@ -360,12 +359,13 @@ function rrssb_requirements($phase) {
     }
     else {
       $requirements['rrssb']['value'] = $library['version'];
+      $compare = version_compare($library['version'], RRSSB_LIBRARY_VERSION);
 
-      if ($library['version'] < RRSSB_LIBRARY_VERSION) {
+      if ($compare < 0) {
         $requirements['rrssb']['severity'] = REQUIREMENT_ERROR;
         $requirements['rrssb']['description'] = t('Library version is too old.  ');
       }
-      else if ($library['version'] > RRSSB_LIBRARY_VERSION) {
+      else if ($compare > 0) {
         $requirements['rrssb']['severity'] = REQUIREMENT_WARNING;
         $requirements['rrssb']['description'] = t('Library version is newer than has been tested.  ');
       }
@@ -460,13 +460,7 @@ function rrssb_get_buttons($node = NULL) {
 
   // Add css and js.
   // Use #attached rather than adding directly else block caching is broken.
-  $css = variable_get('rrssb_css_file');
-  if (!$css) {
-    $css = rrssb_gen_css();
-  }
-
   $items['#attached']['libraries_load'][] = array('rrssb');
-  $items['#attached']['css'] = array($css);
 
   return $items;
 }
@@ -498,6 +492,7 @@ function rrssb_settings($all = FALSE) {
   $defaults = array('enabled' => FALSE, 'weight' => 0, 'username' => '', 'popup' => TRUE);
   $buttons = module_invoke_all('rrssb_buttons');
   drupal_alter('rrssb_buttons', $buttons);
+  $iconsDir = libraries_get_path('rrssb') . '/icons';
 
   // Set some defaults.
   foreach ($buttons as $name => &$button) {
@@ -507,6 +502,13 @@ function rrssb_settings($all = FALSE) {
     }
     $button += $defaults;
     $button['username'] = check_plain($button['username']);
+
+    if (!isset($button['svg'])) {
+      // Read SVG from file.
+      $svgfile = isset($button['svgfile']) ? $button['svgfile'] : "<icons>/$name.min.svg";
+      $svgfile = str_replace('<icons>', $iconsDir, $svgfile);
+      $button['svg'] = file_get_contents($svgfile);
+    }
 
     // Default text to name.
     if (!isset($button['text'])) {
@@ -525,51 +527,6 @@ function rrssb_settings($all = FALSE) {
   }
 
   return $buttons;
-}
-
-/**
- * Auto-generate CSS for buttons.
- *
- * The RRSSB library CSS is static.  This function takes account the results of hook_rrssb_buttons and hook_rrssb_buttons_alter
- * to create dynamic, site-specific CSS.  It optimises by only including buttons that are enabled.
- *
- * The fact that this module is not relying on library CSS for buttons means that there is greater compatibility to work
- * with older library versions that are missing CSS for newer buttons.
- */
-function rrssb_gen_css() {
-  $css = "/* Auto-generated RRSSB CSS file. */\n";
-  $settings = rrssb_settings();
-  foreach ($settings as $name => $button) {
-    // NB RRSSB library version 1.8.1 has a bug that tiny-format hover doesn't work - fixed here.
-    $css .= <<<EOM
-.rrssb-buttons li.rrssb-$name a { background-color: $button[color]; }
-.rrssb-buttons li.rrssb-$name a:hover { background-color: $button[color_hover]; }
-.rrssb-buttons.tiny-format li.rrssb-$name a .rrssb-icon svg path { fill:$button[color]; }
-.rrssb-buttons.tiny-format li.rrssb-$name a .rrssb-icon:hover svg path { fill:$button[color_hover]; }
-
-EOM;
-  }
-
-  // Add CSS from the library, excluding any buttons.
-  $orig_file = libraries_get_path('rrssb') . '/css/rrssb.css';
-  if ($orig_css = file_get_contents($orig_file)) {
-    $orig_css = preg_replace('/.rrssb-buttons li.rrssb-[\w]+ a(:hover)?{background-color:#[\w]+}/', '', $orig_css);
-    $css .= preg_replace('/.rrssb-buttons.tiny-format li.rrssb-[\w]+ a .rrssb-icon[^{]*{fill:#[\w]+}/', '', $orig_css);
-  }
-
-  // Save to a unique filename.
-  $id = substr(hash('sha256', serialize($settings) . microtime()), 0, 8);
-  $dir = 'public://rrssb';
-  $file = "$dir/rrssb.$id.css";
-  file_prepare_directory($dir, FILE_CREATE_DIRECTORY);
-  file_unmanaged_save_data($css, $file, FILE_EXISTS_REPLACE);
-
-  // Delete the old file and record the new location.
-  if ($old = variable_get('rrssb_css_file')) {
-    file_unmanaged_delete($old);
-  }
-  variable_set('rrssb_css_file', $file);
-  return $file;
 }
 
 /**

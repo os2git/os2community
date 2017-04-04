@@ -1,5 +1,5 @@
 {
-  "name": "Yoast SEO for Drupal",
+  "name": "Real-time SEO for Drupal",
   "homepage": "https://drupal.org/project/yoast_seo",
   "authors": [
     "GoalGorilla"
@@ -17,7 +17,7 @@
       ]
     }
   },
-  "description": "Yoast SEO for Drupal",
+  "description": "Real-time SEO for Drupal",
   "keywords": [
     "SEO",
     "Drupal",

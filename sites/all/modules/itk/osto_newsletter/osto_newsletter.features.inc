@@ -32,51 +32,13 @@ function osto_newsletter_default_mailchimp_signup() {
       "confirmation_message" : "Du er nu oprettet som abonnent.",
       "destination" : "node\\/247",
       "mergefields" : {
-        "EMAIL" : {
-          "name" : "Email",
-          "req" : true,
-          "field_type" : "email",
-          "public" : true,
-          "show" : true,
-          "order" : "1",
-          "default" : "",
-          "helptext" : "",
-          "size" : "25",
-          "tag" : "EMAIL",
-          "id" : 0
-        },
-        "NAME" : {
-          "name" : "Navn",
-          "req" : false,
-          "field_type" : "text",
-          "public" : true,
-          "show" : true,
-          "order" : "2",
-          "default" : "",
-          "helptext" : "",
-          "size" : "25",
-          "tag" : "NAME",
-          "id" : 1
-        },
-        "TYPE" : {
-          "name" : "Jeg repr\\u00e6senterer en:",
-          "req" : false,
-          "field_type" : "dropdown",
-          "public" : true,
-          "show" : true,
-          "order" : "3",
-          "default" : "",
-          "helptext" : "",
-          "size" : "25",
-          "choices" : [ "", "Kommune", "Anden offentlig myndighed", "Leverand\\u00f8r", "Anden" ],
-          "tag" : "TYPE",
-          "id" : 2
-        }
+        "EMAIL" : {"tag":"EMAIL","name":"Email Address","type":"email","required":true,"default_value":"","public":true,"display_order":1,"options":{"size":25}},
+        "NAME" : {"merge_id":1,"tag":"NAME","name":"Navn","type":"text","required":false,"default_value":"","public":true,"display_order":2,"options":{"size":25},"help_text":"","list_id":"971cbdb77b","_links":[{"rel":"self","href":"https:\\/\\/us13.api.mailchimp.com\\/3.0\\/lists\\/971cbdb77b\\/merge-fields\\/1","method":"GET","targetSchema":"https:\\/\\/us13.api.mailchimp.com\\/schema\\/3.0\\/Definitions\\/Lists\\/Merge-Fields\\/Response.json"},{"rel":"parent","href":"https:\\/\\/us13.api.mailchimp.com\\/3.0\\/lists\\/971cbdb77b\\/merge-fields","method":"GET","targetSchema":"https:\\/\\/us13.api.mailchimp.com\\/schema\\/3.0\\/Definitions\\/Lists\\/Merge-Fields\\/CollectionResponse.json","schema":"https:\\/\\/us13.api.mailchimp.com\\/schema\\/3.0\\/CollectionLinks\\/Lists\\/MergeFields.json"},{"rel":"update","href":"https:\\/\\/us13.api.mailchimp.com\\/3.0\\/lists\\/971cbdb77b\\/merge-fields\\/1","method":"PATCH","targetSchema":"https:\\/\\/us13.api.mailchimp.com\\/schema\\/3.0\\/Definitions\\/Lists\\/Merge-Fields\\/Response.json","schema":"https:\\/\\/us13.api.mailchimp.com\\/schema\\/3.0\\/Definitions\\/Lists\\/Merge-Fields\\/PATCH.json"},{"rel":"delete","href":"https:\\/\\/us13.api.mailchimp.com\\/3.0\\/lists\\/971cbdb77b\\/merge-fields\\/1","method":"DELETE"}]},
+        "TYPE" : {"merge_id":2,"tag":"TYPE","name":"Jeg repr\\u00e6senterer en:","type":"dropdown","required":false,"default_value":"","public":true,"display_order":3,"options":{"choices":["","Kommune","Anden offentlig myndighed","Leverand\\u00f8r","Anden"]},"help_text":"","list_id":"971cbdb77b","_links":[{"rel":"self","href":"https:\\/\\/us13.api.mailchimp.com\\/3.0\\/lists\\/971cbdb77b\\/merge-fields\\/2","method":"GET","targetSchema":"https:\\/\\/us13.api.mailchimp.com\\/schema\\/3.0\\/Definitions\\/Lists\\/Merge-Fields\\/Response.json"},{"rel":"parent","href":"https:\\/\\/us13.api.mailchimp.com\\/3.0\\/lists\\/971cbdb77b\\/merge-fields","method":"GET","targetSchema":"https:\\/\\/us13.api.mailchimp.com\\/schema\\/3.0\\/Definitions\\/Lists\\/Merge-Fields\\/CollectionResponse.json","schema":"https:\\/\\/us13.api.mailchimp.com\\/schema\\/3.0\\/CollectionLinks\\/Lists\\/MergeFields.json"},{"rel":"update","href":"https:\\/\\/us13.api.mailchimp.com\\/3.0\\/lists\\/971cbdb77b\\/merge-fields\\/2","method":"PATCH","targetSchema":"https:\\/\\/us13.api.mailchimp.com\\/schema\\/3.0\\/Definitions\\/Lists\\/Merge-Fields\\/Response.json","schema":"https:\\/\\/us13.api.mailchimp.com\\/schema\\/3.0\\/Definitions\\/Lists\\/Merge-Fields\\/PATCH.json"},{"rel":"delete","href":"https:\\/\\/us13.api.mailchimp.com\\/3.0\\/lists\\/971cbdb77b\\/merge-fields\\/2","method":"DELETE"}]}
       },
       "description" : "",
       "doublein" : 0,
-      "send_welcome" : 0,
-      "include_interest_groups" : 1
+      "include_interest_groups" : 0
     },
     "rdf_mapping" : []
   }');
@@ -90,23 +52,7 @@ function osto_newsletter_default_mailchimp_signup() {
       "submit_button" : "Tilmeld",
       "confirmation_message" : "Du er nu oprettet som abonnent.",
       "destination" : "node\\/247",
-      "mergefields" : {
-        "EMAIL" : {
-          "name" : "Email",
-          "req" : true,
-          "field_type" : "email",
-          "public" : true,
-          "show" : true,
-          "order" : "1",
-          "default" : "",
-          "helptext" : "",
-          "size" : "25",
-          "tag" : "EMAIL",
-          "id" : 0
-        },
-        "NAME" : 0,
-        "TYPE" : 0
-      },
+      "mergefields" : { "EMAIL" : {"tag":"EMAIL","name":"Email","type":"email","required":true,"default_value":"","public":true,"display_order":"1","options":{"size":"25"}} },
       "description" : "",
       "doublein" : 0,
       "send_welcome" : 0,
