@@ -65,8 +65,11 @@ img {
 	background: $gray-lightest;
 }
 #zone-header-wrapper {
-	background: linear-gradient(to right, $blue 0%,$blue 35%,rgba(10,112,227,0.7) 50%,$blue 65%,$blue 100%),url("../img/header-bg.png");
-	background-size: auto 293px;
+	//background: linear-gradient(to right, $blue 0%,$blue 35%,rgba(10,112,227,0.7) 50%,$blue 65%,$blue 100%),url("../img/header-bg.png");
+	background: url("../img/header-bg_2.png");
+	background-color: $gray-light;
+	//background-size: auto 293px;
+	background-size: auto 100%;
 	background-repeat: no-repeat;
 	background-position-y: center;
 	background-position-x: center;

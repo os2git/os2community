@@ -863,6 +863,8 @@
 				position: absolute;
 				left: 50%;
 				margin-left: -400px;
+
+				filter: grayscale(100%);
 			}
 		}
 		.full {
@@ -911,6 +913,7 @@
 				transition-timing-function: $anim-ease-type;
 				opacity: 0;
 				text-shadow: 2px 2px 0 rgba(0,0,0,0.20);
+				background-color: $black;
 			}
 			.slide-body {
 				display: none;
@@ -937,22 +940,22 @@
 				}
 				li.last {
 					a {
-						background: transparent;
+						background: $gray-darker;
 						border: 1px solid white;
 						color: white;
 					}
 				}	
 				li.first {
 					a {
-						background: white;
-						border: none;
-						color: $blue;
+						background: $white;
+						border: 1px solid $gray-darker;
+						color: $gray-darker;
 					}
 				}
 			}
 		}
 		.background-overlay {
-			background: linear-gradient(to right, $blue 0%,$blue 10%,rgba(10,112,227,0.5) 50%,$blue 90%,$blue 100%);
+			//background: linear-gradient(to right, $blue 0%,$blue 10%,rgba(10,112,227,0.5) 50%,$blue 90%,$blue 100%);
 			height: 100%;
 			width: 100%;
 			position: absolute;
