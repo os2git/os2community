@@ -43,7 +43,7 @@
 ========================================================================== 
 */
 #zone-header {
-	padding: 65px 0;
+	padding: 35px 0;
 }
 .region-header-first,
 .region-header-second {
@@ -59,7 +59,12 @@
 			font-size: 1.85em;
 			margin-bottom: 10px;
 			font-weight: $font-weight-bold;
-			color: $blue-light;
+			color: $blue;
+		}
+		.field-item {
+			display: inline-block;
+			background-color: $black;
+			padding: 5px;
 		}
 	}
 }
