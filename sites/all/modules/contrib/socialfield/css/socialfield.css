@@ -3,21 +3,43 @@
   overflow: auto;
   padding: 0 !important;
 }
+
 .social-links ul li {
   float: left;
   margin: 5px !important;
   padding: 0 !important;
 }
+
 .social-links .icon {
   color: #FFF;
   font-size: 24px;
   padding: 8px 4px;
-
   background-color: #4a6ea9;
 }
 
 .social-links.circle-icons .icon {
   border-radius: 50%;
+}
+
+#socialfield-instance-settings-services-table span.instance-settings-table-service-name {
+  position: relative;
+  top: -3px;
+}
+
+#socialfield-instance-settings-services-table tr {
+  height: 55px;
+}
+
+#socialfield-instance-settings-services-table tr .social-links-instance-settings span {
+  margin-right: 5px;
+}
+
+#socialfield-instance-settings-services-table tr .social-links-instance-settings {
+  float: left;
+}
+
+#socialfield-table tr .social-links {
+  float: left;
 }
 
 /* Service-specific style */
@@ -71,4 +93,7 @@
 }
 .social-links .service-stumbleupon .icon {
   background-color: #f74425;
+}
+.social-links .service-instagram .icon {
+  background-color: #3f729b;
 }
