@@ -100,10 +100,10 @@ function _yoast_seo_process_node_settings_form(&$form) {
      * '#multiple' => TRUE,
      */
     if (empty($body_fields)) {
-      $description = t('There is no filed that can be used as additional field.');
+      $description = t('There are no other text fields that could be used instead of the Body field.');
     }
     else {
-      $description = t('Select fields to use instead or in addition to body for Real-time SEO. Access to all fields must be allowed.');
+      $description = t('Select fields to use instead, or in addition to body for Real-time SEO. Access to all fields must be allowed.');
     }
 
     $form['yoast_seo']['yoast_seo_body']['yoast_seo_body_fields'] = array(

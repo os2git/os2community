@@ -16,9 +16,9 @@ configure = admin/config/search/yoast
 ; Views Handlers.
 files[] = views/yoast_seo_handler_rating.inc
 
-; Information added by Drupal.org packaging script on 2016-12-05
-version = "7.x-1.1"
+; Information added by Drupal.org packaging script on 2017-04-05
+version = "7.x-1.2"
 core = "7.x"
 project = "yoast_seo"
-datestamp = "1480952305"
+datestamp = "1491409085"
 

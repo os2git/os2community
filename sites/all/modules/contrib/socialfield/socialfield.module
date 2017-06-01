@@ -122,7 +122,7 @@ function socialfield_add_service($form, $form_state) {
   );
   $form['service_validation_pattern'] = array(
     '#type' => 'textarea',
-    '#description' => t('Enter the list of allowed urls separated by new line.<br />Leave empty to allow user input any urls.<br />The "*" character is a wildcard.<br />Example: facebook.com/* for any page on Facebook site.'),
+    '#description' => t('Enter the list of allowed urls separated by new line.<br />Leave empty to allow user input any urls.<br />The "*" character is a wildcard.<br />Example: *facebook.com/* for any page on Facebook site.'),
     '#title' => t('Url validation pattern'),
   );
   $form['submit'] = array(
@@ -197,7 +197,7 @@ function socialfield_edit_service($form, $form_state, $service = NULL) {
   );
   $form['service_validation_pattern'] = array(
     '#type' => 'textarea',
-    '#description' => t('Enter the list of allowed urls separated by new line.<br />Leave empty to allow user input any urls.<br />The "*" character is a wildcard.<br />Example: facebook.com/* for any page on Facebook site.'),
+    '#description' => t('Enter the list of allowed urls separated by new line.<br />Leave empty to allow user input any urls.<br />The "*" character is a wildcard.<br />Example: *facebook.com/* for any page on Facebook site.'),
     '#title' => t('Url validation pattern'),
     '#default_value' => $services[$service]['validation_pattern'],
   );
@@ -278,6 +278,9 @@ function socialfield_field_info() {
   $displayed_services = array('twitter', 'googleplus', 'facebook');
   $displayed_services = array_combine($displayed_services, $displayed_services);
 
+  $weight_values = range(-10, count($used_services) - 11);
+  $weights = array_combine($used_services, $weight_values);
+
   return array(
     'social_links_field' => array(
       'label' => t('Social links'),
@@ -289,6 +292,7 @@ function socialfield_field_info() {
       'instance_settings' => array(
         'used_services' => $used_services,
         'services' => $displayed_services,
+        'weights' => $weights,
       ),
     ),
   );
@@ -316,6 +320,11 @@ function socialfield_field_instance_settings_form($field, $instance) {
   foreach ($social_services as $name => $service) {
     $options[$name] = $service['name'];
   }
+
+  // Removing services from instance settings that were deleted from module settings.
+  $used_services = &$instance['settings']['used_services'];
+  $used_services = array_intersect($used_services, array_keys($social_services));
+
   $form = array(
     '#type' => 'container',
     '#process' => array(
@@ -334,14 +343,35 @@ function socialfield_field_instance_settings_form($field, $instance) {
 function _socialfield_field_instance_settings_form($form, &$form_state) {
   $form_state['#used_services'] = $form['#instance']['settings']['used_services'];
   $form_state['#services'] = $form['#instance']['settings']['services'];
+  $form_state['#weights'] = $form['#instance']['settings']['weights'];
+
+  asort($form_state['#weights']);
+  $services = variable_get('socialfield_services');
 
   $rows = array();
-  foreach ($form['#options'] as $service_name => $s_name) {
+  foreach ($form_state['#weights'] as $service_name => $weight) {
+    // Checking if service was deleted from module configuration.
+    if (!isset($services[$service_name])) {
+      unset($form_state['#services'][$service_name]);
+      unset($form_state['#weights'][$service_name]);
+      continue;
+    }
     $use_service = in_array($service_name, $form_state['#used_services']);
     $display_service = in_array($service_name, $form_state['#services']);
+
+    $service_markup = '<div class="social-links social-links-instance-settings">' .
+        '<span class="service-' . $service_name . '">' .
+          '<i class="icon ' . $services[$service_name]['icon'] . '"></i></span>' .
+        '<span class="instance-settings-table-service-name">' . ucfirst($service_name) . '</span>' .
+      '</div>';
+
     $row = array(
       'service_name' => array(
-        '#markup' => $service_name,
+        '#type' => 'hidden',
+        '#value' => $service_name,
+      ),
+      'name' => array(
+        '#markup' => $service_markup,
       ),
       'used_services' => array(
         '#type' => 'checkbox',
@@ -353,6 +383,13 @@ function _socialfield_field_instance_settings_form($form, &$form_state) {
         '#default_value' => $display_service,
         '#attributes' => array('class' => array('socialfield-table-displayed-service-checkbox')),
       ),
+      'weight' => array(
+        '#type' => 'weight',
+        '#title' => t('Weight'),
+        '#title_display' => 'invisible',
+        '#default_value' => $weight,
+        '#attributes' => array('class' => array('services-order-weight')),
+      ),
     );
 
     if ($display_service) {
@@ -362,17 +399,20 @@ function _socialfield_field_instance_settings_form($form, &$form_state) {
     $rows[] = $row;
   }
 
+  $module_path = drupal_get_path('module', 'socialfield');
+
   // Theme this part of the form as a table.
   $form['table'] = array(
     '#theme' => 'socialfield_form_table',
-    '#header' => array(t('Service'), t('Used services'), t('Displayed services')),
+    '#header' => array(t('Service'), t('Used services'), t('Displayed services'), t('Weight')),
     'rows' => $rows,
     '#attributes' => array('id' => 'socialfield-instance-settings-services-table'),
     '#element_validate' => array('_socialfield_validate_services'),
+    '#attached' => array(
+      'js' => array($module_path . '/js/socialfield.js'),
+      'css' => array($module_path . '/css/socialfield.css'),
+    ),
   );
-
-  $path = drupal_get_path('module', 'socialfield');
-  $form['#attached']['js'][] = $path . '/js/socialfield.js';
 
   return $form;
 }
@@ -383,6 +423,7 @@ function _socialfield_field_instance_settings_form($form, &$form_state) {
 function _socialfield_validate_services($form, &$form_state) {
   $used_services = $form_state['#used_services'];
   $displayed_services = $form_state['#services'];
+  $weights = $form_state['#weights'];
 
   // Getting new instance settings.
   foreach ($form['rows'] as $key => &$row) {
@@ -390,7 +431,7 @@ function _socialfield_validate_services($form, &$form_state) {
       continue;
     }
 
-    $service_name = $row['service_name']['#markup'];
+    $service_name = $row['service_name']['#value'];
 
     // Service checked, wanted to be used.
     if ($row['used_services']['#value']) {
@@ -408,6 +449,8 @@ function _socialfield_validate_services($form, &$form_state) {
     else {
       unset($displayed_services[$service_name]);
     }
+
+    $weights[$service_name] = $row['weight']['#value'];
   }
 
   if (!count($displayed_services)) {
@@ -417,6 +460,7 @@ function _socialfield_validate_services($form, &$form_state) {
   // Setting new instance settings.
   $form_state['values']['instance']['settings']['used_services'] = $used_services;
   $form_state['values']['instance']['settings']['services'] = $displayed_services;
+  $form_state['values']['instance']['settings']['weights'] = $weights;
   unset($form_state['values']['instance']['settings']['table']);
 }
 
@@ -426,28 +470,37 @@ function _socialfield_validate_services($form, &$form_state) {
 function theme_socialfield_form_table(&$variables) {
   // Getting the userful values.
   $form = $variables['form'];
-  $rows = $form['rows'];
+  $data = $form['rows'];
   $header = $form['#header'];
   $attributes = $form['#attributes'];
 
-  // Setup the structure to be rendered and returned.
-  $content = array(
-    '#theme' => 'table',
-    '#header' => $header,
-    '#rows' => array(),
-    '#attributes' => $attributes,
-  );
-
   // Traverse each row and each column in each row.
-  foreach (element_children($rows) as $row_index) {
+  $rows = array();
+  foreach (element_children($data) as $row_index) {
     $row = array();
-    foreach (element_children($rows[$row_index]) as $col_index) {
-      $row[] = drupal_render($rows[$row_index][$col_index]);
+    foreach (element_children($data[$row_index]) as $col_index) {
+      $element = $data[$row_index][$col_index];
+      if (isset($element['#type']) && $element['#type'] == 'hidden') {
+        continue;
+      }
+      $row[] = drupal_render($data[$row_index][$col_index]);
     }
-    $content['#rows'][] = $row;
+
+    $rows[] = array(
+      'data' => $row,
+      'class' => array('draggable'),
+    );
   }
 
-  return drupal_render($content);
+  $output = theme('table', array(
+    'header' => $header,
+    'rows' => $rows,
+    'attributes' => $attributes
+  ));
+
+  drupal_add_tabledrag($attributes['id'], 'order', 'sibling', 'services-order-weight');
+
+  return $output;
 }
 
 /**
@@ -549,13 +602,13 @@ function theme_socialfield_drag_components($vars) {
   $header = array(t('Social links'), '', '', '');
   $rows = array();
   $index = 0;
+
   for ($i=0; $i<$element['#num_elements']; $i++) {
     while (!isset($element['element_' . $index])) {
       // There is no element with this index. Moving on to the next possible element.
       $index++;
     }
     $current_element = $element['element_' . $index];
-    $index++;
 
     $rows[] = array(
       'data' => array(
@@ -571,6 +624,8 @@ function theme_socialfield_drag_components($vars) {
       'class' => array('draggable'),
       'weight' => $current_element['weight']['#value'],
     );
+
+    $index++;
   }
 
   // Sorting elements by their weight.
@@ -582,7 +637,7 @@ function theme_socialfield_drag_components($vars) {
     'attributes' => array(
       'id' => 'socialfield-table'
     ),
-  )) . drupal_render($element['add_one_social']);
+  )) . drupal_render($element['add_one_social']) . '<div class="description">' . drupal_render($element['description']) . '</div>';
 }
 
 /**
@@ -591,9 +646,12 @@ function theme_socialfield_drag_components($vars) {
 function socialfield_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
   $value_key = key($field['columns']);
 
+  $all_services = variable_get('socialfield_services');
+
   // Settings to be accessed from ajax callback.
   $form_state['socialfield']['field_data'] = array(
     'field_name' => $field['field_name'],
+    'parents' => $element['#field_parents'],
     'langcode' => $langcode,
   );
 
@@ -606,7 +664,8 @@ function socialfield_field_widget_form(&$form, &$form_state, $field, $instance, 
 
   // Remove button was pressed.
   if (isset($form_state['clicked_button']['#name']) && isset($form_state['clicked_button']['#socialfield_delete'])) {
-    $remove_element = (int)end(explode('_', $form_state['clicked_button']['#name']));
+    $element_array = explode('_', $form_state['clicked_button']['#name']);
+    $remove_element = (int)end($element_array);
     unset($form_state['values'][$field['field_name']][$langcode][$remove_element]);
     unset($form_state['services'][$remove_element]);
   }
@@ -614,7 +673,7 @@ function socialfield_field_widget_form(&$form, &$form_state, $field, $instance, 
   // Setting number of form elements.
   if (!isset($form_state['services'])) {
     if (count($items)) {
-      // Edit page. Showing all saved elements, not only the default ones.
+      // Edit page. Showing all saved elements.
       $form_state['num_elements'] = count($items) - 1;
       $form_state['services'] = array();
       foreach ($items as $item) {
@@ -628,7 +687,8 @@ function socialfield_field_widget_form(&$form, &$form_state, $field, $instance, 
     }
   }
 
-  $element['#num_elements'] = $form_state['num_elements'] = count($form_state['services']);
+  // Setting the number of services on widget.
+  $form_state['num_elements'] = count($form_state['services']);
 
   // Creating wrapper and setting theme (table) on it.
   $element['social_buttons'] = array(
@@ -639,8 +699,8 @@ function socialfield_field_widget_form(&$form, &$form_state, $field, $instance, 
     '#num_elements' => $form_state['num_elements'],
   );
 
+  // Getting maximum weight from existing services.
   $weights = array(-11);
-  // If there are items saved in database, get the maximum weight.
   if (!empty($items)) {
     foreach ($items as $item) {
       $weights[] = $item['weight'];
@@ -651,6 +711,13 @@ function socialfield_field_widget_form(&$form, &$form_state, $field, $instance, 
 
   // Creating form.
   foreach ($form_state['services'] as $i => $service) {
+    // Checking if service was deleted from module settings.
+    if (!isset($all_services[$service])) {
+      $form_state['num_elements']--;
+      $element['social_buttons']['#num_elements']--;
+      continue;
+    }
+
     $element['social_buttons']['element_' . $i] = array(
       'url' => array(
         '#type' => 'textfield',
@@ -684,10 +751,10 @@ function socialfield_field_widget_form(&$form, &$form_state, $field, $instance, 
   $element['#element_validate'] = array('socialfield_service_validate');
 
   // Getting services for the select list.
-  $options = array_keys(variable_get('socialfield_services'));
+  $options = array_keys($all_services);
   $options = array_combine($options, $options);
   if (isset($instance['settings']['used_services'])) {
-    $options = $instance['settings']['used_services'];
+    $options = array_intersect($options, $instance['settings']['used_services']);
   }
   $options = array_diff($options, $form_state['services']);
   $options = array_map('ucfirst', $options);
@@ -707,6 +774,11 @@ function socialfield_field_widget_form(&$form, &$form_state, $field, $instance, 
     ),
   );
 
+  // Add help description.
+  $element['social_buttons']['description'] = array(
+    '#markup' => $instance['description'],
+  );
+
   // Attaching css and js files.
   $path = drupal_get_path('module', 'socialfield');
   $element['#attached']['js'][] = $path . '/js/socialfield.js';
@@ -721,8 +793,10 @@ function socialfield_field_widget_form(&$form, &$form_state, $field, $instance, 
 function socialfield_remove_one_element_callback($form, $form_state) {
   $field_name = $form_state['socialfield']['field_data']['field_name'];
   $langcode = $form_state['socialfield']['field_data']['langcode'];
+  $parents = $form_state['socialfield']['field_data']['parents'];
 
-  return $form[$field_name][$langcode]['social_buttons'];
+  $return_form = drupal_array_get_nested_value($form, $parents);
+  return $return_form[$field_name][$langcode]['social_buttons'];
 }
 
 /**
@@ -734,8 +808,10 @@ function socialfield_add_one_element_callback($form, $form_state) {
   }
   $field_name = $form_state['socialfield']['field_data']['field_name'];
   $langcode = $form_state['socialfield']['field_data']['langcode'];
+  $parents = $form_state['socialfield']['field_data']['parents'];
 
-  return $form[$field_name][$langcode]['social_buttons'];
+  $return_form = drupal_array_get_nested_value($form, $parents);
+  return $return_form[$field_name][$langcode]['social_buttons'];
 }
 
 /**
@@ -751,7 +827,7 @@ function socialfield_service_validate($element, &$form_state) {
     $items['validate_link'] = FALSE;
   }
 
-  for ($i=0; $i<$element['#num_elements']; $i++) {
+  for ($i=0; $i < $element['social_buttons']['#num_elements']; $i++) {
     while (!isset($element['social_buttons']['element_' . $index])) {
       // There is no element with this index. Moving on to the next possible element.
       $index++;
@@ -838,8 +914,13 @@ function socialfield_field_formatter_view($entity_type, $entity, $field, $instan
   switch ($display['type']) {
     case 'socialfield_formatter':
       uasort($items, 'drupal_sort_weight');
-      $servicess = variable_get('socialfield_services');
+      $services = variable_get('socialfield_services');
       foreach ($items as $item) {
+        // Checking if the service was deleted.
+        if (!isset($services[$item['service']])) {
+          continue;
+        }
+
         // Social link.
         $hidden_text = '';
         if (isset($display['settings']['link_text']) && $display['settings']['link_text']) {
@@ -847,7 +928,7 @@ function socialfield_field_formatter_view($entity_type, $entity, $field, $instan
           $hidden_text = '<span class="element-invisible">' . check_plain($item['service']) . '</span>';
         }
         $link = l(
-          '<i class="icon ' . $servicess[$item['service']]['icon'] . '">' . $hidden_text . '</i>',
+          '<i class="icon ' . $services[$item['service']]['icon'] . '">' . $hidden_text . '</i>',
           $item['url'],
           array(
             'html' => TRUE,
@@ -863,21 +944,21 @@ function socialfield_field_formatter_view($entity_type, $entity, $field, $instan
         );
       }
 
-      // Label.
-      $label = array(
-        'label' => $instance['label'],
-        'mode' => $display['label'],
-      );
+      // Checking if there are links to display.
+      if (!$list_items) {
+        return;
+      }
 
       // Make list from items.
-      $element = array(
+      $element[] = array(
         '#theme' => 'socialfield_formatter',
         '#items' => $list_items,
         '#field' => $field,
-        '#label' => $label,
+        '#attached' => array(
+          'css' => array(drupal_get_path('module', 'socialfield') . '/css/socialfield.css'),
+        ),
       );
 
-      $element['#attached']['css'][] = drupal_get_path('module', 'socialfield') . '/css/socialfield.css';
       break;
   }
 
@@ -933,8 +1014,11 @@ function theme_socialfield_formatter($variables) {
  */
 function socialfield_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
   if ($form['#field']['type'] == 'social_links_field') {
-    // Hide the cardinality setting on the field settings for social_links_field fields.
+    // Hide the cardinality setting on field instance settings for social_links_field fields.
     $form['field']['cardinality']['#default_value'] = FIELD_CARDINALITY_UNLIMITED;
     $form['field']['cardinality']['#disabled'] = TRUE;
+
+    // Hide default value on field instance settings.
+    $form['instance']['default_value_widget']['#access'] = FALSE;
   }
 }
