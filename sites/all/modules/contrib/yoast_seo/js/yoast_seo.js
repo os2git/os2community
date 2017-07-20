@@ -151,7 +151,9 @@ YoastSEO_DrupalSource.prototype.parseSnippetData = function(source, target) {
     document.getElementById(target).value = (ev.target.value || "");
     this.triggerEvent(target);
   }.bind(this);
-  document.getElementById(source).addEventListener("blur", listener);
+  if (document.getElementById(source) !== null) {
+    document.getElementById(source).addEventListener('blur', listener);
+  }
 };
 
 

@@ -338,11 +338,11 @@ function yoast_seo_configuration_form_after_build($form, &$form_state) {
     'fields' => array(
       'focusKeyword' => $form['yoast_seo'][$langcode]['focus_keyword']['#id'],
       'seoStatus' => $form['yoast_seo'][$langcode]['seo_status']['#attributes']['id'],
-      'pageTitle' => $form['metatags'][$langcode]['basic']['title']['value']['#id'],
+      'pageTitle' => (module_exists('seo_ui')) ? $form['seo_vtab']['metatags_title']['title']['value']['#id'] : $form['metatags'][$langcode]['basic']['title']['value']['#id'],
       'nodeTitle' => $form['title']['#id'],
-      'description' => $form['metatags'][$langcode]['basic']['description']['value']['#id'],
+      'description' => (module_exists('seo_ui')) ? $form['seo_vtab']['metatags'][$langcode]['basic']['description']['value']['#id'] : $form['metatags'][$langcode]['basic']['description']['value']['#id'],
       'bodyText' => array_keys($text_content),
-      'url' => $form['path']['alias']['#id'],
+      'url' => (module_exists('seo_ui')) ? $form['seo_vtab']['path']['alias']['#id'] : $form['path']['alias']['#id'],
     ),
     'placeholderText' => array(
       'title' => t('Please click here to alter your page meta title'),
