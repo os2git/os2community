@@ -107,6 +107,11 @@ function socialfield_install() {
       'icon' => 'icon-stumbleupon',
       'validation_pattern' => '*stumbleupon.com/*',
     ),
+    'instagram' => array(
+      'name' => 'Instagram',
+      'icon' => 'icon-instagram',
+      'validation_pattern' => '*instagram.com/*',
+    ),
   );
 
   variable_set('socialfield_services', $base_services);
