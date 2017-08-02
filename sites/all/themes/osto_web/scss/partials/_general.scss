@@ -88,3 +88,50 @@ div.messages {
 		top: 3.25em;
 	}
 }
+
+/*
+========================================================================== 
+	Labels
+========================================================================== 
+*/
+
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 100%;
+  font-weight: normal;
+  line-height: 1;
+  color: $label-color;
+  background-color: $label-default-bg;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+
+  // Add hover effects, but only for links
+  a {
+    color: $label-color;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      color: $label-link-hover-color;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+
+  // Empty labels collapse automatically (not available in IE8)
+  &:empty {
+    display: none;
+  }
+
+  // Quick fix for labels in buttons
+  .btn & {
+    position: relative;
+    top: -1px;
+  }
+}
+
+.label-spacing {
+	margin-right: .6em;
+}
