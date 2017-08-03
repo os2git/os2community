@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the OS2 - OSS projekter feature.
+ */
+
+include_once 'os2_oss_projekter.features.inc';
