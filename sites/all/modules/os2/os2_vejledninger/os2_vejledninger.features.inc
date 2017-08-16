@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * os2_oss_projekter.features.inc
+ * os2_vejledninger.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function os2_oss_projekter_ctools_plugin_api($module = NULL, $api = NULL) {
+function os2_vejledninger_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "context" && $api == "context") {
     return array("version" => "3");
   }
@@ -22,21 +22,21 @@ function os2_oss_projekter_ctools_plugin_api($module = NULL, $api = NULL) {
 /**
  * Implements hook_views_api().
  */
-function os2_oss_projekter_views_api($module = NULL, $api = NULL) {
+function os2_vejledninger_views_api($module = NULL, $api = NULL) {
   return array("api" => "3.0");
 }
 
 /**
  * Implements hook_node_info().
  */
-function os2_oss_projekter_node_info() {
+function os2_vejledninger_node_info() {
   $items = array(
-    'oss_projekt' => array(
-      'name' => t('OSS projekt'),
+    'vejledning' => array(
+      'name' => t('Vejledning'),
       'base' => 'node_content',
-      'description' => t('En indholdstype til at oprette en beskrivelse og henvisning til et 3. parts open source projekt.'),
+      'description' => t('En indholdstype til at oprette vejledninger'),
       'has_title' => '1',
-      'title_label' => t('Titel'),
+      'title_label' => t('Title'),
       'help' => '',
     ),
   );
