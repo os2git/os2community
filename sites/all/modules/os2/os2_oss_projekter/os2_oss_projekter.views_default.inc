@@ -240,7 +240,7 @@ function os2_oss_projekter_views_default_views() {
     'image_style' => 'medium',
     'image_link' => 'content',
   );
-  /* Felt: Indhold: Brødtekst */
+  /* Felt: Indhold: Beskrivelse */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -282,6 +282,14 @@ function os2_oss_projekter_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Sidefod: Global: Tekstområde */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['label'] = 'Sidefod OSS projekter';
+  $handler->display->display_options['footer']['area']['content'] = '<div style="clear:both; text-align:center;">Mangler der noget på listen <a href="/registrering-af-open-source-projekt">så send os et tip</a>.</div>';
+  $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sorteringskriterie: Indhold: Titel */
@@ -420,6 +428,8 @@ function os2_oss_projekter_views_default_views() {
     t('<span class=\'ting-icon-file-xml\'></span> <span class=\'text\'>[title]</span>'),
     t('Page'),
     t('mere'),
+    t('Sidefod OSS projekter'),
+    t('<div style="clear:both; text-align:center;">Mangler der noget på listen <a href="/registrering-af-open-source-projekt">så send os et tip</a>.</div>'),
     t('Filtrer listen efter søgeord:'),
     t('Tags'),
     t('Forside blok'),

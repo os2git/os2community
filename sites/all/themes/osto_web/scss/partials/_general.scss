@@ -135,3 +135,41 @@ div.messages {
 .label-spacing {
 	margin-right: .6em;
 }
+
+.region-sidebar-first,
+.panel-right {
+  .label {
+    float: left;
+    margin-bottom: .6em;
+    a {
+      color: $label-color!important;
+      &:hover,
+      &:focus {
+        color: $label-link-hover-color!important;
+    }
+    }
+  }
+
+  .view {
+    span.label {
+      background-color: transparent;
+      padding: 0;
+      color: #000;
+      text-align: left;
+      margin: 0;
+      margin-right: .5em;
+      float: none;
+    }
+  }
+}
+
+/*
+========================================================================== 
+  Links and buttons
+========================================================================== 
+*/
+
+.link-button {
+  @include btn-link($link-color-std);
+  color: $white!important;
+}
