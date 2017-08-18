@@ -305,7 +305,8 @@
 	#views-exposed-form-ting-public-partners-page,
 	#views-exposed-form-ting-suppliers-page,
 	#views-exposed-form-ting-members-page,
-	#views-exposed-form-ting-oss-projects-page  {
+	#views-exposed-form-ting-oss-projects-page,
+	#views-exposed-form-ting-vejledninger-page  {
 		border-bottom: 1px solid #d8d8d8;
 		margin-bottom: 25px;
 		.views-exposed-widgets {
@@ -346,7 +347,20 @@
 			border-right: 0;
 		}
 	}	
+
+	/* Modifications for product overview on specific pages */
+	&.view-ting-vejledninger {
+		.title{
+			a {
+				padding-left: 0!important;
+			}	
+			span.text {
+				display: block!important;
+			}
+		}
+	}
 }
+
 
 .page-community {
 	.block-ting-projects-block-2 {

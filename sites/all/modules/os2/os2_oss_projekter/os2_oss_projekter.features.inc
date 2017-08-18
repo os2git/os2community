@@ -8,6 +8,9 @@
  * Implements hook_ctools_plugin_api().
  */
 function os2_oss_projekter_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "context" && $api == "context") {
+    return array("version" => "3");
+  }
   if ($module == "page_manager" && $api == "pages_default") {
     return array("version" => "1");
   }
