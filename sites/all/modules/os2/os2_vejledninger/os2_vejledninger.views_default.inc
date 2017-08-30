@@ -22,7 +22,7 @@ function os2_vejledninger_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Vejledninger';
+  $handler->display->display_options['title'] = 'Vejledninger og skabeloner';
   $handler->display->display_options['css_class'] = 'product-overview';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = TRUE;
@@ -193,14 +193,14 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'vejledningstags';
   $handler->display->display_options['path'] = 'vejledninger';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Vejledninger';
+  $handler->display->display_options['menu']['title'] = 'Vejledninger og Skabeloner';
   $handler->display->display_options['menu']['weight'] = '-49';
   $handler->display->display_options['menu']['name'] = 'main-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['ting_vejledninger'] = array(
     t('Master'),
-    t('Vejledninger'),
+    t('Vejledninger og skabeloner'),
     t('Se alle produkter'),
     t('Udfør'),
     t('Gendan'),
