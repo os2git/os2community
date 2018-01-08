@@ -1,0 +1,4 @@
+name = Osto html mails
+description = Set default mail header to html mails
+core = 7.x
+package = ITK
