@@ -22,7 +22,7 @@ function os2_vejledninger_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Vejledninger';
+  $handler->display->display_options['title'] = 'Vejledninger og skabeloner';
   $handler->display->display_options['css_class'] = 'product-overview';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = TRUE;
@@ -51,14 +51,14 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste »';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Opførsel ved ingen resultater: Global: Tekstområde */
+  /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = '<p><em>Ingen resultater.</em></p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
-  /* Felt: Indhold: Titel */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
@@ -72,7 +72,7 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'h3';
   $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'title';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Felt: Indhold: Billede */
+  /* Field: Indholdselement: Billede */
   $handler->display->display_options['fields']['field_guides_picture']['id'] = 'field_guides_picture';
   $handler->display->display_options['fields']['field_guides_picture']['table'] = 'field_data_field_guides_picture';
   $handler->display->display_options['fields']['field_guides_picture']['field'] = 'field_guides_picture';
@@ -85,7 +85,7 @@ function os2_vejledninger_views_default_views() {
     'image_style' => 'medium',
     'image_link' => 'content',
   );
-  /* Felt: Indhold: Beskrivelse */
+  /* Field: Indholdselement: Beskrivelse */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -96,18 +96,18 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '200',
   );
-  /* Sorteringskriterie: Indhold: Titel */
+  /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
-  /* Filterkriterie: Indhold: Udgivet */
+  /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filterkriterie: Indhold: Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -119,7 +119,7 @@ function os2_vejledninger_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['footer'] = FALSE;
-  /* Sidefod: Global: Tekstområde */
+  /* Footer: Global: Text area */
   $handler->display->display_options['footer']['area']['id'] = 'area';
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
@@ -128,20 +128,20 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sorteringskriterie: Indhold: Titel */
+  /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filterkriterie: Indhold: Udgivet */
+  /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filterkriterie: Indhold: Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -149,7 +149,7 @@ function os2_vejledninger_views_default_views() {
     'vejledning' => 'vejledning',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filterkriterie: Global: Kombinér felter filter */
+  /* Filter criterion: Global: Combine fields filter */
   $handler->display->display_options['filters']['combine']['id'] = 'combine';
   $handler->display->display_options['filters']['combine']['table'] = 'views';
   $handler->display->display_options['filters']['combine']['field'] = 'combine';
@@ -171,7 +171,7 @@ function os2_vejledninger_views_default_views() {
     'title' => 'title',
     'body' => 'body',
   );
-  /* Filterkriterie: Indhold: Har taksonomiterm */
+  /* Filter criterion: Content: Has taxonomy term */
   $handler->display->display_options['filters']['tid']['id'] = 'tid';
   $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
   $handler->display->display_options['filters']['tid']['field'] = 'tid';
@@ -193,14 +193,14 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'vejledningstags';
   $handler->display->display_options['path'] = 'vejledninger';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Vejledninger';
+  $handler->display->display_options['menu']['title'] = 'Vejledninger og Skabeloner';
   $handler->display->display_options['menu']['weight'] = '-49';
   $handler->display->display_options['menu']['name'] = 'main-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['ting_vejledninger'] = array(
     t('Master'),
-    t('Vejledninger'),
+    t('Vejledninger og skabeloner'),
     t('Se alle produkter'),
     t('Udfør'),
     t('Gendan'),
@@ -217,7 +217,7 @@ function os2_vejledninger_views_default_views() {
     t('<p><em>Ingen resultater.</em></p>'),
     t('<span class="icon-tutorial"></span> <span class=\'text\'>[title]</span>'),
     t('Page'),
-    t('mere'),
+    t('more'),
     t('Sidefod vejledninger'),
     t('<div style="clear:both; text-align:center;"><a class="link-button" href="https://faq.os2.eu">Der er også hjælp på OS2viden</a><p style="margin-top:1em;">Har du en vejledning du gerne vil dele så <a href="/kontakt">kontakt OS2s sekretariat</a></p></div>'),
     t('Filtrer listen efter søgeord:'),
@@ -256,13 +256,13 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['hide_empty'] = TRUE;
-  /* Felt: Indhold: Kategori */
+  /* Field: Indholdselement: Kategori */
   $handler->display->display_options['fields']['field_guides_category']['id'] = 'field_guides_category';
   $handler->display->display_options['fields']['field_guides_category']['table'] = 'field_data_field_guides_category';
   $handler->display->display_options['fields']['field_guides_category']['field'] = 'field_guides_category';
   $handler->display->display_options['fields']['field_guides_category']['element_type'] = 'span';
   $handler->display->display_options['fields']['field_guides_category']['element_label_type'] = 'strong';
-  /* Felt: Indhold: Filer */
+  /* Field: Indholdselement: Filer */
   $handler->display->display_options['fields']['field_guides_files']['id'] = 'field_guides_files';
   $handler->display->display_options['fields']['field_guides_files']['table'] = 'field_data_field_guides_files';
   $handler->display->display_options['fields']['field_guides_files']['field'] = 'field_guides_files';
@@ -274,7 +274,7 @@ function os2_vejledninger_views_default_views() {
   );
   $handler->display->display_options['fields']['field_guides_files']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_guides_files']['multi_type'] = 'ul';
-  /* Kontekstuelt filter: Indhold: Nid */
+  /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -284,14 +284,14 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-  /* Filterkriterie: Indhold: Udgivet */
+  /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filterkriterie: Indhold: Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -320,7 +320,7 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['row_options']['hide_empty'] = TRUE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Felt: Indhold: Tags */
+  /* Field: Indholdselement: Tags */
   $handler->display->display_options['fields']['field_guides_tags']['id'] = 'field_guides_tags';
   $handler->display->display_options['fields']['field_guides_tags']['table'] = 'field_data_field_guides_tags';
   $handler->display->display_options['fields']['field_guides_tags']['field'] = 'field_guides_tags';
@@ -348,6 +348,7 @@ function os2_vejledninger_views_default_views() {
     t('Filer'),
     t('Alle'),
     t('Vejledninger metadata'),
+    t('more'),
     t('Blok: Vejledninger tags'),
     t('<h4 class="label label-spacing">[field_guides_tags]</h4>'),
     t('OSS project tags'),
