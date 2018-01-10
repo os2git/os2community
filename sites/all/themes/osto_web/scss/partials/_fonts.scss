@@ -121,6 +121,8 @@
 }
 
 .icon-tutorial {
+	position: absolute;
+	z-index: 1;
 	width: 3em;
 	height: 3em;
 	display: block;
@@ -128,5 +130,40 @@
 	background:url('../img/icon-tutorial.svg');
 	background-size: 3em;
   background-repeat: no-repeat;
-  background-position: top left;
+  background-position: 3px 3px;
+}
+
+.views-field-read-time span {
+	@extend %read-time;
+}
+
+%read-time {
+	height: 1em;
+	position: relative;
+	z-index: 1;
+	padding-left: 1.2em;
+
+	&:before {
+		@include icon-prepare();
+		content: "\e608";
+		position: absolute;
+		font-size: 1em;
+		left: 0;
+	}
+}
+
+.news-icon {
+	@include icon-prepare();
+
+	position: relative;
+	z-index: 1;
+
+	&:before {
+		content: "\e60b";
+		color: #fff;
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		font-size: 2em;
+	}
 }
