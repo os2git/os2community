@@ -41,13 +41,13 @@ function os2_oss_projekter_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['hide_empty'] = TRUE;
-  /* Field: Indholdselement: Kategori */
+  /* Field: Content: Kategori */
   $handler->display->display_options['fields']['field_product_category']['id'] = 'field_product_category';
   $handler->display->display_options['fields']['field_product_category']['table'] = 'field_data_field_product_category';
   $handler->display->display_options['fields']['field_product_category']['field'] = 'field_product_category';
   $handler->display->display_options['fields']['field_product_category']['element_type'] = 'span';
   $handler->display->display_options['fields']['field_product_category']['element_label_type'] = 'strong';
-  /* Field: Indholdselement: Licens */
+  /* Field: Content: Licens */
   $handler->display->display_options['fields']['field_product_license']['id'] = 'field_product_license';
   $handler->display->display_options['fields']['field_product_license']['table'] = 'field_data_field_product_license';
   $handler->display->display_options['fields']['field_product_license']['field'] = 'field_product_license';
@@ -55,7 +55,7 @@ function os2_oss_projekter_views_default_views() {
   $handler->display->display_options['fields']['field_product_license']['element_label_type'] = 'strong';
   $handler->display->display_options['fields']['field_product_license']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_product_license']['empty_zero'] = TRUE;
-  /* Field: Indholdselement: Download */
+  /* Field: Content: Download */
   $handler->display->display_options['fields']['field_product_download']['id'] = 'field_product_download';
   $handler->display->display_options['fields']['field_product_download']['table'] = 'field_data_field_product_download';
   $handler->display->display_options['fields']['field_product_download']['field'] = 'field_product_download';
@@ -99,7 +99,7 @@ function os2_oss_projekter_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Andre links';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Indholdselement: Links */
+  /* Field: Content: Links */
   $handler->display->display_options['fields']['field_links']['id'] = 'field_links';
   $handler->display->display_options['fields']['field_links']['table'] = 'field_data_field_links';
   $handler->display->display_options['fields']['field_links']['field'] = 'field_links';
@@ -128,7 +128,7 @@ function os2_oss_projekter_views_default_views() {
   $handler->display->display_options['row_options']['hide_empty'] = TRUE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Indholdselement: Nøgleord */
+  /* Field: Content: Nøgleord */
   $handler->display->display_options['fields']['field_n_gleord']['id'] = 'field_n_gleord';
   $handler->display->display_options['fields']['field_n_gleord']['table'] = 'field_data_field_n_gleord';
   $handler->display->display_options['fields']['field_n_gleord']['field'] = 'field_n_gleord';
@@ -180,7 +180,7 @@ function os2_oss_projekter_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Andre Open Source projekter';
-  $handler->display->display_options['css_class'] = 'product-overview';
+  $handler->display->display_options['css_class'] = 'product-overview logo-list';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = TRUE;
   $handler->display->display_options['use_more_text'] = 'Se alle produkter';
@@ -220,7 +220,6 @@ function os2_oss_projekter_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['text'] = '<span class=\'ting-icon-file-xml\'></span> <span class=\'text\'>[title]</span>';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '90';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
@@ -229,7 +228,7 @@ function os2_oss_projekter_views_default_views() {
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'h3';
   $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'title';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Indholdselement: Logo */
+  /* Field: Content: Logo */
   $handler->display->display_options['fields']['field_ossproject_logo']['id'] = 'field_ossproject_logo';
   $handler->display->display_options['fields']['field_ossproject_logo']['table'] = 'field_data_field_ossproject_logo';
   $handler->display->display_options['fields']['field_ossproject_logo']['field'] = 'field_ossproject_logo';
@@ -241,7 +240,7 @@ function os2_oss_projekter_views_default_views() {
     'image_style' => 'logo_large',
     'image_link' => 'content',
   );
-  /* Field: Indholdselement: Beskrivelse */
+  /* Field: Content: Beskrivelse */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';

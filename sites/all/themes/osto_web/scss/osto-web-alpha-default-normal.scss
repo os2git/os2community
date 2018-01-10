@@ -44,31 +44,6 @@
 	}
 }
 
-/* Projects + Products */
-.project-overview,
-.product-overview,
-.team-overview,
-.partner-overview,
-.supplier-overview {
-	.views-row {
-		.image {
-			height: 200px;
-			line-height: 200px;
-		}
-	}
-}
-.page-community {
-	.project-overview {
-		.views-row {
-			min-height: inherit;
-			margin-bottom: 0;
-			.image {
-				height: 200px;
-			}
-		}	
-	}
-}
-
 /* Members */
 .view-ting-members {
 	.views-row {

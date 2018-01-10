@@ -123,7 +123,18 @@ function os2_vejledninger_strongarm() {
           'weight' => '6',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'read_time' => array(
+          'default' => array(
+            'weight' => '2',
+            'visible' => FALSE,
+          ),
+          'teaser' => array(
+            'weight' => '1',
+            'visible' => TRUE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__vejledning'] = $strongarm;

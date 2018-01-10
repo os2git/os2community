@@ -65,25 +65,14 @@
  
 /*
 ========================================================================== 
-	Views
+	Views pages
 ========================================================================== 
 */
-
-/* Projects + Products */
-.project-overview,
-.product-overview,
-.team-overview,
-.partner-overview,
-.supplier-overview {
-	.view-content {
-		width: 103%;
-	}
+.image-filter-list,
+.logo-list {
 	.views-row {
-		width: 31%;
-		margin: 0 2% 15px 0;
+		flex: 0 0 31%;
 		.image {
-			height: 150px;
-			line-height: 150px;
 			> div {
 				vertical-align: middle;
 				display: inline-block;
@@ -91,17 +80,6 @@
 				max-width: 100%;
 			}
 		}
-	}
-}
-.page-community {
-	.project-overview {
-		.views-row {
-			min-height: inherit;
-			margin-bottom: 0;
-			.image {
-				height: 150px;
-			}
-		}	
 	}
 }
 

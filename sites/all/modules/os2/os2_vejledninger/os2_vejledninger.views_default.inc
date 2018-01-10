@@ -23,7 +23,7 @@ function os2_vejledninger_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Vejledninger og skabeloner';
-  $handler->display->display_options['css_class'] = 'product-overview';
+  $handler->display->display_options['css_class'] = 'product-overview image-filter-list';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = TRUE;
   $handler->display->display_options['use_more_text'] = 'Se alle produkter';
@@ -63,8 +63,7 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['title']['alter']['text'] = '<span class="icon-tutorial"></span> <span class=\'text\'>[title]</span>';
+  $handler->display->display_options['fields']['title']['alter']['text'] = '<span class=\'text\'>[title]</span>';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '150';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
@@ -72,20 +71,24 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'h3';
   $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'title';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Indholdselement: Billede */
+  /* Field: Content: Billede */
   $handler->display->display_options['fields']['field_guides_picture']['id'] = 'field_guides_picture';
   $handler->display->display_options['fields']['field_guides_picture']['table'] = 'field_data_field_guides_picture';
   $handler->display->display_options['fields']['field_guides_picture']['field'] = 'field_guides_picture';
   $handler->display->display_options['fields']['field_guides_picture']['label'] = '';
-  $handler->display->display_options['fields']['field_guides_picture']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_guides_picture']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_guides_picture']['alter']['text'] = '<span class="icon-tutorial"></span>
+[field_guides_picture]';
   $handler->display->display_options['fields']['field_guides_picture']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_guides_picture']['element_wrapper_class'] = 'image';
+  $handler->display->display_options['fields']['field_guides_picture']['empty'] = '<span class="icon-tutorial"></span>
+<img class="is-placeholder" src="/sites/all/themes/osto_web/img/os2logo.png">';
   $handler->display->display_options['fields']['field_guides_picture']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_guides_picture']['settings'] = array(
-    'image_style' => 'medium',
+    'image_style' => 'node_banner_small',
     'image_link' => 'content',
   );
-  /* Field: Indholdselement: Beskrivelse */
+  /* Field: Content: Beskrivelse */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -96,6 +99,17 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '200',
   );
+  /* Field: Broken/missing handler */
+  $handler->display->display_options['fields']['read_time']['id'] = 'read_time';
+  $handler->display->display_options['fields']['read_time']['table'] = 'read_time';
+  $handler->display->display_options['fields']['read_time']['field'] = 'read_time';
+  $handler->display->display_options['fields']['read_time']['label'] = '';
+  $handler->display->display_options['fields']['read_time']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['read_time']['alter']['text'] = '<div class="meta-first">[read_time]</div>';
+  $handler->display->display_options['fields']['read_time']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['read_time']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['read_time']['element_wrapper_class'] = 'meta';
+  $handler->display->display_options['fields']['read_time']['element_default_classes'] = FALSE;
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -215,7 +229,12 @@ function os2_vejledninger_views_default_views() {
     t('næste ›'),
     t('sidste »'),
     t('<p><em>Ingen resultater.</em></p>'),
-    t('<span class="icon-tutorial"></span> <span class=\'text\'>[title]</span>'),
+    t('<span class=\'text\'>[title]</span>'),
+    t('<span class="icon-tutorial"></span>
+[field_guides_picture]'),
+    t('<span class="icon-tutorial"></span>
+<img class="is-placeholder" src="/sites/all/themes/osto_web/img/os2logo.png">'),
+    t('<div class="meta-first">[read_time]</div>'),
     t('Page'),
     t('more'),
     t('Sidefod vejledninger'),
@@ -256,13 +275,13 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['hide_empty'] = TRUE;
-  /* Field: Indholdselement: Kategori */
+  /* Field: Content: Kategori */
   $handler->display->display_options['fields']['field_guides_category']['id'] = 'field_guides_category';
   $handler->display->display_options['fields']['field_guides_category']['table'] = 'field_data_field_guides_category';
   $handler->display->display_options['fields']['field_guides_category']['field'] = 'field_guides_category';
   $handler->display->display_options['fields']['field_guides_category']['element_type'] = 'span';
   $handler->display->display_options['fields']['field_guides_category']['element_label_type'] = 'strong';
-  /* Field: Indholdselement: Filer */
+  /* Field: Content: Filer */
   $handler->display->display_options['fields']['field_guides_files']['id'] = 'field_guides_files';
   $handler->display->display_options['fields']['field_guides_files']['table'] = 'field_data_field_guides_files';
   $handler->display->display_options['fields']['field_guides_files']['field'] = 'field_guides_files';
@@ -320,7 +339,7 @@ function os2_vejledninger_views_default_views() {
   $handler->display->display_options['row_options']['hide_empty'] = TRUE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Indholdselement: Tags */
+  /* Field: Content: Tags */
   $handler->display->display_options['fields']['field_guides_tags']['id'] = 'field_guides_tags';
   $handler->display->display_options['fields']['field_guides_tags']['table'] = 'field_data_field_guides_tags';
   $handler->display->display_options['fields']['field_guides_tags']['field'] = 'field_guides_tags';
