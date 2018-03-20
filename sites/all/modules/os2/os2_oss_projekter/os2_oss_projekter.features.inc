@@ -27,6 +27,31 @@ function os2_oss_projekter_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function os2_oss_projekter_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: oss_logo_display.
+  $styles['oss_logo_display'] = array(
+    'label' => 'OSS logo display',
+    'effects' => array(
+      23 => array(
+        'name' => 'imagefield_focus_scale_and_crop',
+        'data' => array(
+          'width' => 300,
+          'height' => 200,
+          'strength' => 'high',
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function os2_oss_projekter_node_info() {
