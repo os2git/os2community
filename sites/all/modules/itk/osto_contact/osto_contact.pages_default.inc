@@ -93,8 +93,8 @@ function osto_contact_default_page_manager_pages() {
   $pane->access = array();
   $pane->configuration = array(
     'admin_title' => 'OS2 kontaktinformationer',
-    'title' => 'Forretningsledelsen',
-    'body' => '<div style="line-height:1.5em"><p>Du er også velkommen til at kontakte OS2s forretningsleder direkte. Eller sende os et brev, det er så hyggeligt.</p><p>&nbsp;</p><p>Rasmus Frey<br />Forretningsleder<br />Email: rafr@aarhus.dk<br />Telefon: +45 31154525</p><p>&nbsp;</p><p>OS2 - Offentligt digitaliseringsfællesskab<br />c/o Aarhus Kommune<br />Dokk1<br />Hack Kampmanns Plads 2<br />8000 Aarhus C<br />CVR: 55133018</p><p>&nbsp;</p><p>Email: os2@os2.eu</p></div>',
+    'title' => 'Sekretariatet',
+    'body' => '<div style="line-height:1.5em"><p>Du er også velkommen til at kontakte OS2s sekretariat direkte. Eller sende os et brev, det er så hyggeligt.</p><p>&nbsp;</p><p>Rasmus Frey<br>Sekretariatschef<br>Email: rafr@aarhus.dk<br>Mobil: +45 3115 4525</p><p>&nbsp;</p><p>Terese Svinth Lorentzen<br>Kommunikations- og koordinationsmedarbejder<br>Email: lzte@aarhus.dk<br>Mobil: +45 25 39 91 85</p><p>&nbsp;</p><p>OS2 - Offentligt digitaliseringsfællesskab<br>c/o Aarhus Kommune<br>Dokk1<br>Hack Kampmanns Plads 2<br>8000 Aarhus C<br>CVR: 55133018</p><p>&nbsp;</p><p>Email: os2@os2.eu<br>Kontor: +45 2920 8427</p></div>',
     'format' => 'full_html',
     'substitute' => TRUE,
     'title_heading' => 'h2',

@@ -95,11 +95,3 @@ function osto_web_form_alter($form, $form_state) {
 		}
 	}
 }
-
-
-/**
- * Form Alter
- */
-function osto_web_preprocess_block(&$variables) {
-  $a = 1;
-}

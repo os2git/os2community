@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the OS2 Content types feature.
+ */
+
+include_once 'osto_content_types.features.inc';
