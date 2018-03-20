@@ -6,7 +6,6 @@ version = 7.x-1.0
 dependencies[] = context
 dependencies[] = features
 dependencies[] = image
-dependencies[] = node
 dependencies[] = page_manager
 dependencies[] = shs
 dependencies[] = strongarm
