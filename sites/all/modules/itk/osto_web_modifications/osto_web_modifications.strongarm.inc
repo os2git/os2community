@@ -256,8 +256,6 @@ Tak fordi du har oprettet dig som bruger på [site:name]. Du kan nu logge ind ve
 
 [user:one-time-login-url]
 
-<a href="[user:one-time-login-url]">HTML link til login</a>
-
 Dette link kan kun bruges til at logge ind, og det sender dig til en side hvor du kan vælge en adgangskode.
 
 Når du har valgt en adgangskode kan du logge ind på [site:login-url] med:
