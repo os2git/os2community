@@ -237,7 +237,7 @@ function os2_oss_projekter_views_default_views() {
   $handler->display->display_options['fields']['field_ossproject_logo']['element_wrapper_class'] = 'image';
   $handler->display->display_options['fields']['field_ossproject_logo']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_ossproject_logo']['settings'] = array(
-    'image_style' => 'logo_large',
+    'image_style' => 'oss_logo_display',
     'image_link' => 'content',
   );
   /* Field: Content: Beskrivelse */
