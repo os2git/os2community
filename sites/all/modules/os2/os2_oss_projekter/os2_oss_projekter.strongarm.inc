@@ -123,7 +123,18 @@ function os2_oss_projekter_strongarm() {
           'weight' => '8',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'read_time' => array(
+          'default' => array(
+            'weight' => '1',
+            'visible' => FALSE,
+          ),
+          'teaser' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__oss_projekt'] = $strongarm;
