@@ -135,12 +135,14 @@ function os2_oss_projekter_default_page_manager_handlers() {
   $pane->access = array();
   $pane->configuration = array(
     'label' => 'hidden',
-    'formatter' => 'file_rendered',
+    'formatter' => 'image',
     'delta_limit' => 0,
     'delta_offset' => '0',
     'delta_reversed' => FALSE,
     'formatter_settings' => array(
       'file_view_mode' => 'default',
+      'image_style' => 'oss_logo_display',
+      'image_link' => '',
     ),
     'context' => 'argument_entity_id:node_1',
     'override_title' => 1,
