@@ -12,6 +12,7 @@ function read_time_form_node_type_form_alter(&$form, &$form_state, $form_id) {
   $defaults = read_time_defaults();
 
   // Get text fields in this bundle.
+  $fields = array();
   $field_instances = field_info_instances('node', $type->type);
   foreach ($field_instances as $field => $field_instance) {
     $field_info = field_info_field($field);
