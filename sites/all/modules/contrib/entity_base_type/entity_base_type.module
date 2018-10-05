@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * Implements hook_entity_load().
+ */
+function entity_base_type_entity_load($entities, $type) {
+  // Add an additional property to entities as they are loaded so we know what the heck it actually is.
+  // This has spawned out of Drupal.org issue #1042822.
+  foreach ($entities as $entity) {
+    $entity->base_type = $type;
+  }
+}
