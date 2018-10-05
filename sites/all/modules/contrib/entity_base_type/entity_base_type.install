@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function entity_base_type_install() {
+  // Set our module's weight to be -1 as most modules seem to be 0 or higher.
+  db_update('system')
+    ->fields(array('weight' => -1))
+    ->condition('name', 'entity_base_type', '=')
+    ->execute();
+}

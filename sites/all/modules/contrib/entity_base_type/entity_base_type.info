@@ -1,0 +1,10 @@
+name = "Entity Base Type"
+description = "Entity objects are missing their actual types in the object (ie.: node). This module adds that on load."
+core = 7.x
+
+; Information added by Drupal.org packaging script on 2015-02-16
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "entity_base_type"
+datestamp = "1424097182"
+
