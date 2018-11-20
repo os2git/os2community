@@ -1,0 +1,106 @@
+@import "assets/mixins";
+
+/*
+==========================================================================
+  os2_klassifikationer related styling
+==========================================================================
+*/
+
+.view-os2klassifikationer {
+  .view-footer,
+  .view-header {
+    background: #f2f2f2;
+    padding: 1em;
+    margin-bottom: 2em;
+    line-height: 1.5em;
+    font-size: 1.1em;
+    overflow: hidden;
+  }
+
+  #views-exposed-form-os2klassifikationer-page {
+    border-bottom: 1px solid #d8d8d8;
+    margin-bottom: 25px;
+    padding-bottom: 1em;
+
+    input[type=text] {
+      padding: 0 1em !important;
+      font-style: italic;
+      font-size: 12px;
+      height: 25px;
+    }
+
+    .views-submit-button,
+    .views-reset-button {
+      width: 40%;
+      @include breakpoint(509px) {
+        width: auto;
+      }
+    }
+
+    #edit-reset,
+    #edit-submit-os2klassifikationer {
+      margin: 0;
+      margin-top: 10px;
+      height: 25px;
+      padding: 0 1.5em;
+      font-size: 10px;
+      background: #868686;
+
+    }
+  }
+}
+
+
+
+.node-os2klassifikation {
+
+  &.node-teaser {
+    border-bottom: 1px solid $gray-dark;
+    margin-bottom: 25px;
+  }
+
+  .teaser-content {
+    min-height: 4em;
+  }
+
+  .group-os2klass-meta {
+    margin: 1em 0;
+
+    .field {
+      padding: .2em .6em .3em;
+      color: #fff;
+      background-color: #868686;
+      border-radius: .25em;
+      display: inline-block;
+      margin: 0 .5em 0 0;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+  }
+  .changed {
+    float: right;
+    margin-top: 0;
+
+    .field-label {
+      display: inline;
+      font-weight: bold;
+    }
+  }
+  .read-more {
+    float: right;
+    margin-top: -28px;
+  }
+
+  .meta-inline {
+    border-top: 1px solid $gray-dark;
+    margin-top: 25px;
+
+    .description {
+      font-size: 1.2em;
+      margin: 2em 0 1em;
+    }
+  }
+}
