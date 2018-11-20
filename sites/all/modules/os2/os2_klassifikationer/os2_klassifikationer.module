@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the OS2 - Klassifikationer feature.
+ */
+
+include_once 'os2_klassifikationer.features.inc';
