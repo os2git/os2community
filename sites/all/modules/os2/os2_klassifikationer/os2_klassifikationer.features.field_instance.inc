@@ -169,7 +169,7 @@ function os2_klassifikationer_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'autocomplete_deluxe_taxonomy',
-      'weight' => 16,
+      'weight' => 13,
     ),
   );
 
@@ -301,7 +301,7 @@ function os2_klassifikationer_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 17,
+      'weight' => 18,
     ),
   );
 
@@ -493,7 +493,7 @@ function os2_klassifikationer_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -720,7 +720,7 @@ function os2_klassifikationer_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -791,6 +791,55 @@ function os2_klassifikationer_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
+      'weight' => 17,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-os2klassifikation-field_os2klass_senest_opdateret'.
+  $field_instances['node-os2klassifikation-field_os2klass_senest_opdateret'] = array(
+    'bundle' => 'os2klassifikation',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_os2klass_senest_opdateret',
+    'label' => 'Senest opdateret',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 15,
+        'input_format' => 'd/m/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
       'weight' => 15,
     ),
   );
@@ -905,7 +954,7 @@ function os2_klassifikationer_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 16,
     ),
   );
 
@@ -926,6 +975,7 @@ function os2_klassifikationer_field_default_field_instances() {
   t('Licens');
   t('Opdateringsfrekvens');
   t('Retskilde');
+  t('Senest opdateret');
   t('Version');
 
   return $field_instances;

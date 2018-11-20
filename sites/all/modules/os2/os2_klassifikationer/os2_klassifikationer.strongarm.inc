@@ -126,7 +126,7 @@ function os2_klassifikationer_strongarm() {
       'display' => array(
         'read_time' => array(
           'default' => array(
-            'weight' => '10',
+            'weight' => '7',
             'visible' => FALSE,
           ),
           'teaser' => array(

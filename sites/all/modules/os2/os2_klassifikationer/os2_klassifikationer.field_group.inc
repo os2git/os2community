@@ -76,6 +76,7 @@ function os2_klassifikationer_field_group_info() {
       8 => 'field_os2klass_retskilde',
       9 => 'field_os2klass_standard',
       10 => 'field_os2klass_version',
+      11 => 'field_os2klass_senest_opdateret',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

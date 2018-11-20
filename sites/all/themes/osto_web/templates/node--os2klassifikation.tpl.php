@@ -83,7 +83,10 @@
 <?php hide($content['links']); ?>
 <article<?php print $attributes; ?>>
   <div<?php print $content_attributes; ?>>
-    <div class="changed"><div class="field-label"><?php print t('Changed')?>: </div><?php print format_date($changed, $type = 'custom', $format = 'd. F Y', $timezone = NULL, $langcode = NULL); ?></div>
+    <?php if (!empty($node->field_os2klass_senest_opdateret)) : ?>
+      <?php $timestamp = DateTime::createFromFormat("Y-m-d H:i:s", $node->field_os2klass_senest_opdateret['und'][0]['value']); ?>
+      <div class="changed"><div class="field-label"><?php print t('Changed')?>: </div><?php print format_date($timestamp->getTimestamp(), $type = 'custom', $format = 'd. F Y'); ?></div>
+    <?php endif; ?>
     <?php print render($content);?>
   </div>
 </article>
