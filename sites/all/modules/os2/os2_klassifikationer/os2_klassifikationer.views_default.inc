@@ -55,25 +55,20 @@ function os2_klassifikationer_views_default_views() {
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
-  /* Overskrift: Global: Tekstområde */
+  /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'Fælleskommunale klassifikationer
-
-Denne side indeholder det foreløbige resultat af projektet Fælleskommunale Klassifikationer (læs mere på <a href="https://os2.eu/projekt/os2klassifikation">https://os2.eu/projekt/os2klassifikation</a>).
-
-Siden er en prototype på et indeks over fælleskommunale klassifikationer og tjener til inspiration.
-Bemærk: Indekset er ikke fuldstændigt og bruges på eget ansvar.';
+  $handler->display->display_options['header']['area']['content'] = 'Herunder kan der søges i et indeks med klassifikationer. Det rummer eksempler, der allerede bruges fælleskommunalt eller fællesoffentligt i it-systemer. Der optræder også klassifikationer, som har potentiale til at kunne bruges fælles.';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
-  /* Opførsel ved ingen resultater: Global: Tekstområde */
+  /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = '<p><em>Ingen resultater.</em></p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
-  /* Felt: Indhold: Titel */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
@@ -87,12 +82,12 @@ Bemærk: Indekset er ikke fuldstændigt og bruges på eget ansvar.';
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'title';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Felt: Indhold: Beskrivelse */
+  /* Field: Indholdselement: Beskrivelse */
   $handler->display->display_options['fields']['field_os2klass_beskrivelse']['id'] = 'field_os2klass_beskrivelse';
   $handler->display->display_options['fields']['field_os2klass_beskrivelse']['table'] = 'field_data_field_os2klass_beskrivelse';
   $handler->display->display_options['fields']['field_os2klass_beskrivelse']['field'] = 'field_os2klass_beskrivelse';
   $handler->display->display_options['fields']['field_os2klass_beskrivelse']['exclude'] = TRUE;
-  /* Felt: Indhold: Rendered Indholdselement */
+  /* Field: Content: Rendered Indholdselement */
   $handler->display->display_options['fields']['rendered_entity']['id'] = 'rendered_entity';
   $handler->display->display_options['fields']['rendered_entity']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['rendered_entity']['field'] = 'rendered_entity';
@@ -102,18 +97,18 @@ Bemærk: Indekset er ikke fuldstændigt og bruges på eget ansvar.';
   $handler->display->display_options['fields']['rendered_entity']['display'] = 'view';
   $handler->display->display_options['fields']['rendered_entity']['view_mode'] = 'teaser';
   $handler->display->display_options['fields']['rendered_entity']['bypass_access'] = 0;
-  /* Sorteringskriterie: Indhold: Titel */
+  /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
-  /* Filterkriterie: Indhold: Udgivet */
+  /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filterkriterie: Indhold: Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -121,7 +116,7 @@ Bemærk: Indekset er ikke fuldstændigt og bruges på eget ansvar.';
     'os2klassifikation' => 'os2klassifikation',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filterkriterie: Indhold: Anvendes i system (field_os2klass_anvendes_i_system) */
+  /* Filter criterion: Indholdselement: Anvendes i system (field_os2klass_anvendes_i_system) */
   $handler->display->display_options['filters']['field_os2klass_anvendes_i_system_tid']['id'] = 'field_os2klass_anvendes_i_system_tid';
   $handler->display->display_options['filters']['field_os2klass_anvendes_i_system_tid']['table'] = 'field_data_field_os2klass_anvendes_i_system';
   $handler->display->display_options['filters']['field_os2klass_anvendes_i_system_tid']['field'] = 'field_os2klass_anvendes_i_system_tid';
@@ -139,7 +134,7 @@ Bemærk: Indekset er ikke fuldstændigt og bruges på eget ansvar.';
   );
   $handler->display->display_options['filters']['field_os2klass_anvendes_i_system_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_os2klass_anvendes_i_system_tid']['vocabulary'] = 'os2klassifikation_system';
-  /* Filterkriterie: Indhold: Ejer (field_os2klass_ejer) */
+  /* Filter criterion: Indholdselement: Ejer (field_os2klass_ejer) */
   $handler->display->display_options['filters']['field_os2klass_ejer_tid']['id'] = 'field_os2klass_ejer_tid';
   $handler->display->display_options['filters']['field_os2klass_ejer_tid']['table'] = 'field_data_field_os2klass_ejer';
   $handler->display->display_options['filters']['field_os2klass_ejer_tid']['field'] = 'field_os2klass_ejer_tid';
@@ -157,7 +152,7 @@ Bemærk: Indekset er ikke fuldstændigt og bruges på eget ansvar.';
   );
   $handler->display->display_options['filters']['field_os2klass_ejer_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_os2klass_ejer_tid']['vocabulary'] = 'os2klassifikation_ejer';
-  /* Filterkriterie: Indhold: Anvendelsesområde (field_os2klass_anvendelsesomr_de) */
+  /* Filter criterion: Indholdselement: Anvendelsesområde (field_os2klass_anvendelsesomr_de) */
   $handler->display->display_options['filters']['field_os2klass_anvendelsesomr_de_tid']['id'] = 'field_os2klass_anvendelsesomr_de_tid';
   $handler->display->display_options['filters']['field_os2klass_anvendelsesomr_de_tid']['table'] = 'field_data_field_os2klass_anvendelsesomr_de';
   $handler->display->display_options['filters']['field_os2klass_anvendelsesomr_de_tid']['field'] = 'field_os2klass_anvendelsesomr_de_tid';
@@ -175,7 +170,7 @@ Bemærk: Indekset er ikke fuldstændigt og bruges på eget ansvar.';
   );
   $handler->display->display_options['filters']['field_os2klass_anvendelsesomr_de_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_os2klass_anvendelsesomr_de_tid']['vocabulary'] = 'os2klassifikation_anvendelsesomr_de';
-  /* Filterkriterie: Indhold: FORM Hovedniveau (field_os2klass_form_hovedniveau) */
+  /* Filter criterion: Indholdselement: FORM Hovedniveau (field_os2klass_form_hovedniveau) */
   $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['id'] = 'field_os2klass_form_hovedniveau_tid';
   $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['table'] = 'field_data_field_os2klass_form_hovedniveau';
   $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['field'] = 'field_os2klass_form_hovedniveau_tid';
@@ -193,7 +188,7 @@ Bemærk: Indekset er ikke fuldstændigt og bruges på eget ansvar.';
   );
   $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['vocabulary'] = 'os2klassifikation_form_hovedniveau';
-  /* Filterkriterie: Indhold: KLE domænemodel (field_os2klass_kle_dom_nemodel) */
+  /* Filter criterion: Indholdselement: KLE domænemodel (field_os2klass_kle_dom_nemodel) */
   $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['id'] = 'field_os2klass_kle_dom_nemodel_tid';
   $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['table'] = 'field_data_field_os2klass_kle_dom_nemodel';
   $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['field'] = 'field_os2klass_kle_dom_nemodel_tid';
@@ -211,7 +206,7 @@ Bemærk: Indekset er ikke fuldstændigt og bruges på eget ansvar.';
   );
   $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['vocabulary'] = 'os2klassifikation_kle_dom_nemodel';
-  /* Filterkriterie: Global: Kombinér felter filter */
+  /* Filter criterion: Global: Combine fields filter */
   $handler->display->display_options['filters']['combine']['id'] = 'combine';
   $handler->display->display_options['filters']['combine']['table'] = 'views';
   $handler->display->display_options['filters']['combine']['field'] = 'combine';
@@ -236,30 +231,29 @@ Bemærk: Indekset er ikke fuldstændigt og bruges på eget ansvar.';
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['footer'] = FALSE;
-  /* Sidefod: Global: Tekstområde */
+  /* Footer: Global: Text area */
   $handler->display->display_options['footer']['area']['id'] = 'area';
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['label'] = 'Sidefod OS2klassifikatiner';
-  $handler->display->display_options['footer']['area']['content'] = 'Hvis du har en klassifikation som du gerne vil dele med andre kommuner, er du meget velkommen til at sende en mail til os på <a href="mailto:os2klassifikation@os2.eu">os2klassifikation@os2.eu</a>.
-Det er fuldstændigt uforpligtigende at gøre os opmærksom på nye klassifikationer.';
+  $handler->display->display_options['footer']['area']['content'] = 'Har I en klassifikation, som andre bør kende til, kan den tilføjes. Send en mail til heboj@syddjurs.dk og få nærmere instruktion fra redaktionen.';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sorteringskriterie: Indhold: Titel */
+  /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filterkriterie: Indhold: Udgivet */
+  /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filterkriterie: Indhold: Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -267,7 +261,7 @@ Det er fuldstændigt uforpligtigende at gøre os opmærksom på nye klassifikati
     'os2klassifikation' => 'os2klassifikation',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filterkriterie: Indhold: Anvendelsesområde (field_os2klass_anvendelsesomr_de) */
+  /* Filter criterion: Indholdselement: Anvendelsesområde (field_os2klass_anvendelsesomr_de) */
   $handler->display->display_options['filters']['field_os2klass_anvendelsesomr_de_tid']['id'] = 'field_os2klass_anvendelsesomr_de_tid';
   $handler->display->display_options['filters']['field_os2klass_anvendelsesomr_de_tid']['table'] = 'field_data_field_os2klass_anvendelsesomr_de';
   $handler->display->display_options['filters']['field_os2klass_anvendelsesomr_de_tid']['field'] = 'field_os2klass_anvendelsesomr_de_tid';
@@ -286,7 +280,7 @@ Det er fuldstændigt uforpligtigende at gøre os opmærksom på nye klassifikati
   );
   $handler->display->display_options['filters']['field_os2klass_anvendelsesomr_de_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_os2klass_anvendelsesomr_de_tid']['vocabulary'] = 'os2klassifikation_anvendelsesomr_de';
-  /* Filterkriterie: Indhold: Licens (field_os2klass_licens) */
+  /* Filter criterion: Indholdselement: Licens (field_os2klass_licens) */
   $handler->display->display_options['filters']['field_os2klass_licens_tid']['id'] = 'field_os2klass_licens_tid';
   $handler->display->display_options['filters']['field_os2klass_licens_tid']['table'] = 'field_data_field_os2klass_licens';
   $handler->display->display_options['filters']['field_os2klass_licens_tid']['field'] = 'field_os2klass_licens_tid';
@@ -305,7 +299,7 @@ Det er fuldstændigt uforpligtigende at gøre os opmærksom på nye klassifikati
   );
   $handler->display->display_options['filters']['field_os2klass_licens_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_os2klass_licens_tid']['vocabulary'] = 'os2klassifikation_licens';
-  /* Filterkriterie: Indhold: Anvendes i system (field_os2klass_anvendes_i_system) */
+  /* Filter criterion: Indholdselement: Anvendes i system (field_os2klass_anvendes_i_system) */
   $handler->display->display_options['filters']['field_os2klass_anvendes_i_system_tid']['id'] = 'field_os2klass_anvendes_i_system_tid';
   $handler->display->display_options['filters']['field_os2klass_anvendes_i_system_tid']['table'] = 'field_data_field_os2klass_anvendes_i_system';
   $handler->display->display_options['filters']['field_os2klass_anvendes_i_system_tid']['field'] = 'field_os2klass_anvendes_i_system_tid';
@@ -325,7 +319,7 @@ Det er fuldstændigt uforpligtigende at gøre os opmærksom på nye klassifikati
   );
   $handler->display->display_options['filters']['field_os2klass_anvendes_i_system_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_os2klass_anvendes_i_system_tid']['vocabulary'] = 'os2klassifikation_system';
-  /* Filterkriterie: Indhold: Ejer (field_os2klass_ejer) */
+  /* Filter criterion: Indholdselement: Ejer (field_os2klass_ejer) */
   $handler->display->display_options['filters']['field_os2klass_ejer_tid']['id'] = 'field_os2klass_ejer_tid';
   $handler->display->display_options['filters']['field_os2klass_ejer_tid']['table'] = 'field_data_field_os2klass_ejer';
   $handler->display->display_options['filters']['field_os2klass_ejer_tid']['field'] = 'field_os2klass_ejer_tid';
@@ -345,47 +339,7 @@ Det er fuldstændigt uforpligtigende at gøre os opmærksom på nye klassifikati
   );
   $handler->display->display_options['filters']['field_os2klass_ejer_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_os2klass_ejer_tid']['vocabulary'] = 'os2klassifikation_ejer';
-  /* Filterkriterie: Indhold: FORM Hovedniveau (field_os2klass_form_hovedniveau) */
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['id'] = 'field_os2klass_form_hovedniveau_tid';
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['table'] = 'field_data_field_os2klass_form_hovedniveau';
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['field'] = 'field_os2klass_form_hovedniveau_tid';
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['value'] = '';
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['expose']['operator_id'] = 'field_os2klass_form_hovedniveau_tid_op';
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['expose']['label'] = 'FORM Hovedniveau';
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['expose']['operator'] = 'field_os2klass_form_hovedniveau_tid_op';
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['expose']['identifier'] = 'field_os2klass_form_hovedniveau_tid';
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    4 => 0,
-    3 => 0,
-    5 => 0,
-  );
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_os2klass_form_hovedniveau_tid']['vocabulary'] = 'os2klassifikation_form_hovedniveau';
-  /* Filterkriterie: Indhold: KLE domænemodel (field_os2klass_kle_dom_nemodel) */
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['id'] = 'field_os2klass_kle_dom_nemodel_tid';
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['table'] = 'field_data_field_os2klass_kle_dom_nemodel';
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['field'] = 'field_os2klass_kle_dom_nemodel_tid';
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['value'] = '';
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['expose']['operator_id'] = 'field_os2klass_kle_dom_nemodel_tid_op';
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['expose']['label'] = 'KLE domænemodel';
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['expose']['operator'] = 'field_os2klass_kle_dom_nemodel_tid_op';
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['expose']['identifier'] = 'field_os2klass_kle_dom_nemodel_tid';
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    4 => 0,
-    3 => 0,
-    5 => 0,
-  );
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_os2klass_kle_dom_nemodel_tid']['vocabulary'] = 'os2klassifikation_kle_dom_nemodel';
-  /* Filterkriterie: Global: Kombinér felter filter */
+  /* Filter criterion: Global: Combine fields filter */
   $handler->display->display_options['filters']['combine']['id'] = 'combine';
   $handler->display->display_options['filters']['combine']['table'] = 'views';
   $handler->display->display_options['filters']['combine']['field'] = 'combine';
@@ -431,27 +385,27 @@ Det er fuldstændigt uforpligtigende at gøre os opmærksom på nye klassifikati
   $handler->display->display_options['pager']['options']['tags']['next'] = 'næste ›';
   $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste »';
   $handler->display->display_options['defaults']['footer'] = FALSE;
-  /* Sidefod: Global: Tekstområde */
+  /* Footer: Global: Text area */
   $handler->display->display_options['footer']['area']['id'] = 'area';
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['content'] = '<a href="oss-projekter" class="btn-link">Se hele listen</a>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sorteringskriterie: Indhold: Titel */
+  /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filterkriterie: Indhold: Udgivet */
+  /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filterkriterie: Indhold: Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -475,12 +429,7 @@ Det er fuldstændigt uforpligtigende at gøre os opmærksom på nye klassifikati
     t('‹ forrige'),
     t('næste ›'),
     t('sidste »'),
-    t('Fælleskommunale klassifikationer
-
-Denne side indeholder det foreløbige resultat af projektet Fælleskommunale Klassifikationer (læs mere på <a href="https://os2.eu/projekt/os2klassifikation">https://os2.eu/projekt/os2klassifikation</a>).
-
-Siden er en prototype på et indeks over fælleskommunale klassifikationer og tjener til inspiration.
-Bemærk: Indekset er ikke fuldstændigt og bruges på eget ansvar.'),
+    t('Herunder kan der søges i et indeks med klassifikationer. Det rummer eksempler, der allerede bruges fælleskommunalt eller fællesoffentligt i it-systemer. Der optræder også klassifikationer, som har potentiale til at kunne bruges fælles.'),
     t('<p><em>Ingen resultater.</em></p>'),
     t('<span class=\'ting-icon-file-xml\'></span> <span class=\'text\'>[title]</span>'),
     t('Beskrivelse'),
@@ -490,10 +439,9 @@ Bemærk: Indekset er ikke fuldstændigt og bruges på eget ansvar.'),
     t('FORM Hovedniveau'),
     t('KLE domænemodel'),
     t('Page'),
-    t('mere'),
+    t('more'),
     t('Sidefod OS2klassifikatiner'),
-    t('Hvis du har en klassifikation som du gerne vil dele med andre kommuner, er du meget velkommen til at sende en mail til os på <a href="mailto:os2klassifikation@os2.eu">os2klassifikation@os2.eu</a>.
-Det er fuldstændigt uforpligtigende at gøre os opmærksom på nye klassifikationer.'),
+    t('Har I en klassifikation, som andre bør kende til, kan den tilføjes. Send en mail til heboj@syddjurs.dk og få nærmere instruktion fra redaktionen.'),
     t('Licens'),
     t('Fritekstsøgning'),
     t('Forside blok'),
