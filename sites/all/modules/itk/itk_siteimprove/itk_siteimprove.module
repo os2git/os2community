@@ -1,0 +1,147 @@
+<?php
+
+/**
+ * @file
+ * Add Siteimprove functionality and js.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function itk_siteimprove_menu() {
+  $items = array();
+
+  $items['admin/config/system/itk-siteimprove'] = array(
+    'title' => 'ITK Siteimprove',
+    'description' => 'Manage ITK Siteimprove settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itk_siteimprove_form'),
+    'access arguments' => array('administer itk siteimprove'),
+  );
+
+  return $items;
+}
+
+/**
+ * Add new permission.
+ *
+ * @return array
+ *   An array defining a permission.
+ */
+function itk_siteimprove_permission() {
+  return array(
+    'administer itk siteimprove' => array(
+      'title' => t('Administer ITK Siteimprove module'),
+      'description' => t('Perform administration tasks related to ITK Siteimprove.'),
+    ),
+  );
+}
+
+/**
+ * Custom form for configuring ITK Siteimprove.
+ *
+ * @param array $form
+ *   Custom configuration form.
+ * @param array $form_state
+ *   Form state of custom form.
+ *
+ * @return mixed
+ *   The complete form.
+ */
+function itk_siteimprove_form(array $form, array &$form_state) {
+  $form['tabs'] = [
+    '#type' => 'vertical_tabs',
+    '#weight' => 99,
+  ];
+  $form['general'] = [
+    '#type' => 'details',
+    '#title' => t('General settings'),
+    '#group' => 'tabs',
+  ];
+  $form['general']['itk_siteimprove_key'] = [
+    '#type' => 'textfield',
+    '#title' => t('Siteimprove key'),
+    '#required' => TRUE,
+    '#default_value' => variable_get('itk_siteimprove_key'),
+  ];
+  $form['general']['itk_siteimprove_exclude_admin'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Exclude admin pages'),
+    '#required' => FALSE,
+    '#default_value' => variable_get('itk_siteimprove_exclude_admin'),
+  ];
+  $form['general']['itk_siteimprove_excludes'] = [
+    '#type' => 'textarea',
+    '#title' => t('Path excludes'),
+    '#description' => t(
+      'Regular expressions of paths to exclude. One per line. For example (to exclude admin pages): /^\/admin(.)*/'),
+    '#required' => FALSE,
+    '#default_value' => variable_get('itk_siteimprove_excludes'),
+  ];
+
+  $form['#submit'] = array('_merge_exclude_admin_submit');
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * Add script if all conditions pass.
+ */
+function itk_siteimprove_preprocess_page(&$variables) {
+  $key = variable_get('itk_siteimprove_key');
+
+  // Ignore if key is not set.
+  if (!$key) {
+    return;
+  }
+
+  // Check for excludes.
+  $excludes = variable_get('itk_siteimprove_exclude_patterns');
+  $excludePatterns = $excludes ? $excludes : [];
+
+  $trackPath = TRUE;
+  $currentPath = '/' . current_path();
+
+  // Check each exclude pattern.
+  foreach ($excludePatterns as $pattern) {
+    if (preg_match($pattern, $currentPath)) {
+      $trackPath = FALSE;
+      break;
+    }
+  }
+
+  // Inject script if allowed path.
+  if ($trackPath) {
+    drupal_add_js(drupal_get_path('module', 'itk_siteimprove') . '/js/itk-siteimprove.js', 'file');
+    drupal_add_js(array(
+      'itk_siteimprove' => array(
+        'key' => $key,
+      ),
+    ), 'setting');
+  }
+}
+
+/**
+ * Custom submit handler for merging exclude admin into excludes.
+ *
+ * @param array $form
+ *   Custom siteimprove settings form.
+ * @param array $form_state
+ *   The form state of the siteimprove settings form.
+ */
+function _merge_exclude_admin_submit(array $form, array &$form_state) {
+  $formStateExcludes = variable_get('itk_siteimprove_excludes');
+  $excludePatterns = $formStateExcludes ? explode("\r\n",
+    $formStateExcludes) : [];
+
+  // Check for admin path checkbox.
+  if ($form_state['values']['itk_siteimprove_exclude_admin'] == 1 &&
+    !in_array('/^\/admin(.)*/', $excludePatterns)
+  ) {
+    $excludePatterns[] = '/^\/admin(.)*/';
+  }
+  // Create new variable holding all excludes.
+  variable_set('itk_siteimprove_exclude_patterns', $excludePatterns);
+}
