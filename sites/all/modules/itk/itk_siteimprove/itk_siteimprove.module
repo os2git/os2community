@@ -79,6 +79,14 @@ function itk_siteimprove_form(array $form, array &$form_state) {
     '#default_value' => variable_get('itk_siteimprove_excludes'),
   ];
 
+  $form['general']['itk_siteimprove_exclude_roles'] = [
+    '#type' => 'checkboxes',
+    '#title' => t('Exclude roles'),
+    '#required' => FALSE,
+    '#default_value' => variable_get('itk_siteimprove_exclude_roles'),
+    '#options' => user_roles(),
+  ];
+
   $form['#submit'] = array('_merge_exclude_admin_submit');
 
   return system_settings_form($form);
@@ -90,8 +98,14 @@ function itk_siteimprove_form(array $form, array &$form_state) {
  * Add script if all conditions pass.
  */
 function itk_siteimprove_preprocess_page(&$variables) {
+  global $user;
   $key = variable_get('itk_siteimprove_key');
-
+  $excluded_roles = variable_get('itk_siteimprove_exclude_roles', array());
+  foreach ($user->roles as $id => $role) {
+    if (in_array($id, $excluded_roles)) {
+      return;
+    }
+  }
   // Ignore if key is not set.
   if (!$key) {
     return;
