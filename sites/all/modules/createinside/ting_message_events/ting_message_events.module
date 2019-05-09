@@ -1,21 +1,35 @@
 <?php
 
 /**
- * New Content
+ * New Content being published.
  *
  * Implements hook_node_insert().
  */
 function ting_message_events_node_insert($node) {
-	
 	$message = message_create('activity_node_insert', array('uid' => $node->uid));
   $wrapper = entity_metadata_wrapper('message', $message);
   $wrapper->field_target_node->set($node);
 
-  if (module_exists('message_subscribe')) {
+  if (module_exists('message_subscribe') && $node->status == 1) {
     message_subscribe_send_message('node', $node, $message);
   }
-
 }
+
+/**
+ * Existing content being published.
+ *
+ * Implements hook_node_update().
+ */
+function ting_message_events_node_update($node) {
+  $message = message_create('activity_node_insert', array('uid' => $node->uid));
+  $wrapper = entity_metadata_wrapper('message', $message);
+  $wrapper->field_target_node->set($node);
+
+  if (module_exists('message_subscribe') && $node->status == 1 && $node->original->status == '0') {
+    message_subscribe_send_message('node', $node, $message);
+  }
+}
+
 
 /**
  * New User

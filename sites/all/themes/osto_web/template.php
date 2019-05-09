@@ -96,10 +96,9 @@ function osto_web_form_alter($form, $form_state) {
 	}
 }
 
-
-/**
- * Form Alter
- */
-function osto_web_preprocess_block(&$variables) {
-  $a = 1;
+function osto_web_preprocess_node(&$variables) {
+  // Set default node teaser template.
+  if ($variables['view_mode'] == 'teaser') {
+    $variables['theme_hook_suggestions'][] = 'node__' . $variables['type'] .'__teaser';
+  }
 }

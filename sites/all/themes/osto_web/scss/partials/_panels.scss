@@ -46,6 +46,11 @@
 			}
 		}
 	}
+
+	.inside {
+		float: left;
+		width: 100%;
+	}
 }
 
 /* Project status */
@@ -179,7 +184,7 @@
 	.price,
 	.spots,
 	.spots-used,
-	.address, {
+	.address {
 		margin-bottom: 15px;
 	}
 	span.label {
