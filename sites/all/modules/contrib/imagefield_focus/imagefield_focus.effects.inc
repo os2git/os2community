@@ -125,7 +125,9 @@ function imagefield_focus_scale_and_crop_effect(&$image, $data) {
       }
 
       foreach ($rect as $key => $value) {
-        $rect[$key] = $value * $scale;
+        if (is_numeric($value)) {
+          $rect[$key] = $value * $scale;
+        }
       }
       $width = min($width0, $data['width']);
       $height = min($height0, $data['height']);

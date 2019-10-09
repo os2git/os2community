@@ -27,11 +27,12 @@ function views_php_check_access($php_access, $view_name, $display_id, $account =
   }
 
   if (!isset($function[$view_name . ':' . $display_id])) {
-    $function[$view_name . ':' . $display_id] = create_function('$view_name, $display_id, $account', $php_access . ';');
+    $function[$view_name . ':' . $display_id] = views_php_create_function('$view_name, $display_id, $account', $php_access . ';');
   }
 
   ob_start();
-  $access = (bool) $function[$view_name . ':' . $display_id]($view_name, $display_id, $account);
+  $closure = $function[$view_name . ':' . $display_id]->getClosure();
+  $access = (bool) $closure($view_name, $display_id, $account);
   ob_end_clean();
   return $access;
 }
@@ -47,8 +48,8 @@ function views_php_form_element($handler, $checkbox = FALSE, $input, $variables 
       '$handler' => t('The handler object.'),
       '$plugin'  => t('The plugin object.'),
       '$static'  => t('A variable that can be used to store reusable data per row.'),
-      '$row'     => t('Contains the retrieved record from the database (e.g. $data->nid).'),
-      '$data'    => t('Contains the retrieved record from the database (e.g. $data->nid).'),
+      '$row'     => t('Contains the retrieved record from the database per row.'),
+      '$data'    => t('Contains the retrieved record from the database for all rows.'),
       '$results' => t('Array containing the view\'s result.'),
       '$cache'   => t('The cache object.'),
     );
@@ -102,7 +103,16 @@ function views_php_form_element($handler, $checkbox = FALSE, $input, $variables 
     $items[] = l($variable_name, '', array('fragment' => $container[$name]['#id'], 'external' => TRUE)) . ': ' . $description;
 
     if (strpos($variable_name, '$row') === 0) {
+      $php_value = ($input[0] == 'php_value') ? true : false;
+
       foreach ($handler->view->display_handler->get_handlers('field') as $field => $field_handler) {
+        // Do not add fields that will not have data when evaluating the value code. This occurs because
+        // the value code is evaluated in hook_views_post_execute(), but field data is made available in hook_views_pre_render(),
+        // which is called after hook_views_post_execute().
+        if ($php_value && $field_handler->table != $field_handler->view->base_table) {
+          continue;
+        }
+
         $items[] = l($variable_name . '->' . $field, '', array('fragment' => $container[$name]['#id'], 'external' => TRUE)) . ': ' . $field_handler->ui_name();
       }
     }
@@ -142,7 +152,7 @@ function views_php_views_pre_execute($view) {
 /**
  * Implements hook_views_post_execute().
  */
-function views_php_views_post_execute($view) {
+function views_php_views_post_render($view) {
   // Restore original query plugin if it was wrapped.
   if ($view->query instanceof views_php_plugin_wrapper) {
     $view->query->php_unwrap();
@@ -157,4 +167,35 @@ function views_php_views_post_build($view) {
   if (!empty($view->views_php) && !empty($view->build_info['query']) && is_object($view->build_info['query'])) {
     $view->build_info['query']->range();
   }
+}
+
+/**
+ * Implements hook_libraries_info().
+ */
+function views_php_libraries_info() {
+  return array(
+    'closure' => array(
+      'name' => 'Opis Closure',
+      'vendor url' => 'https://opis.io/closure',
+      'download url' => 'https://opis.io/closure',
+      'version arguments' => array(
+        'file' => 'CHANGELOG.md',
+        'pattern' => '/### v([\d\.]+)/',
+        'lines' => 5,
+      ),
+      'files' => array(
+        'php' => array('autoload.php'),
+      ),
+    ),
+  );
+}
+
+/**
+ * Internal support: create_function() emulation using an anonymous function with a serializable wrapper.
+ */
+function views_php_create_function($args, $code) {
+  libraries_load('closure');
+  $plain = \Opis\Closure\SerializableClosure::createClosure($args, $code);
+  $serializable = \Opis\Closure\SerializableClosure::from($plain);
+  return $serializable;
 }
