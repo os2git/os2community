@@ -63,9 +63,10 @@ class views_php_plugin_cache extends views_plugin_cache {
         $cache = cache_get($this->get_results_key(), $this->table);
         $fresh = !empty($cache);
         if ($fresh && !empty($this->options['php_cache_results'])) {
-          $function = create_function('$view, $plugin, $cache', $this->options['php_cache_results'] . ';');
+          $function = views_php_create_function('$view, $plugin, $cache', $this->options['php_cache_results'] . ';');
           ob_start();
-          $fresh = $function($this->view, $this, $cache);
+          $closure = $function->getClosure();
+          $fresh = $closure($this->view, $this, $cache);
           ob_end_clean();
         }
         // Values to set: $view->result, $view->total_rows, $view->execute_time,
@@ -84,9 +85,10 @@ class views_php_plugin_cache extends views_plugin_cache {
         $cache = cache_get($this->get_output_key(), $this->table);
         $fresh = !empty($cache);
         if ($fresh && !empty($this->options['php_cache_output'])) {
-          $function = create_function('$view, $plugin, $cache', $this->options['php_cache_output'] . ';');
+          $function = views_php_create_function('$view, $plugin, $cache', $this->options['php_cache_output'] . ';');
           ob_start();
-          $fresh = $function($this->view, $this, $cache);
+          $closure = $function->getClosure();
+          $fresh = $closure($this->view, $this, $cache);
           ob_end_clean();
         }
         if ($fresh) {
