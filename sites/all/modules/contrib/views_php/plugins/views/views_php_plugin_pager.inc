@@ -36,7 +36,22 @@ class views_php_plugin_pager extends views_php_plugin_wrapper  {
         }
       }
     }
+    $this->wrapped->post_execute($result);
+  }
 
+  public function pre_render() {
+    foreach (array(/*'argument',*/ 'field', 'filter', 'sort', /*'relationship'*/) as $type) {
+      foreach ($this->wrapped->view->$type as $id => $handler) {
+        if (is_callable(array($handler, 'php_pre_render'))) {
+          $handler->php_pre_render();
+        }
+      }
+    }
+    $this->update_wrapped_pager();
+    $this->php_unwrap();
+  }
+
+  protected function update_wrapped_pager() {
     $this->wrapped->total_items = count($this->wrapped->view->result);
     $this->wrapped->update_page_info();
 
@@ -45,9 +60,7 @@ class views_php_plugin_pager extends views_php_plugin_wrapper  {
       $offset = $this->wrapped->get_current_page() * $item_per_page + $this->wrapped->get_offset();
       $this->wrapped->view->result = array_slice($this->wrapped->view->result, $offset, $item_per_page);
     }
-    $this->wrapped->post_execute($result);
   }
-
 
   /**
    * Execute the count query, which will be done just prior to the query
