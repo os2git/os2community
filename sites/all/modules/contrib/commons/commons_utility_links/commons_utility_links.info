@@ -5,9 +5,8 @@ core = 7.x
 
 dependencies[] = block
 
-; Information added by Drupal.org packaging script on 2017-02-27
-version = "7.x-3.43"
+; Information added by Drupal.org packaging script on 2018-05-09
+version = "7.x-3.50"
 core = "7.x"
 project = "commons"
-datestamp = "1488210216"
-
+datestamp = "1525879535"
