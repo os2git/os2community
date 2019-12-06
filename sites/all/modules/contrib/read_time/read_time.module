@@ -181,8 +181,10 @@ function read_time_calculate($node) {
   $field_words = '';
   foreach ($fields as $field) {
     $field_items = field_get_items('node', $node, $field);
-    foreach ($field_items as $field_item) {
-      $field_words .= strip_tags($field_item['value']);
+    if($field_items) {
+      foreach ($field_items as $field_item) {
+        $field_words .= strip_tags($field_item['value']);
+      }
     }
   }
 
