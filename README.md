@@ -7,5 +7,4 @@ Built on:
 Drupal 7, http://drupal.org
 using Drupal Commons as a base, https://www.drupal.org/project/commons
 
---- Feel free  
-En opdatering
+--- Feel free
