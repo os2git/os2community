@@ -8,17 +8,20 @@
 
   Drupal.behaviors.itkSiteimprove = {
     attach: function (context, settings) {
-      var key = settings.itk_siteimprove.key;
-
+      let key = settings.itk_siteimprove.key;
       if (key) {
-        (function () {
-          var sz = document.createElement('script');
-          sz.type = 'text/javascript';
-          sz.async = true;
-          sz.src = '//ssl.siteimprove.com/js/siteanalyze_' + key + '.js';
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(sz, s);
-        })();
+        window.addEventListener('CookieInformationConsentGiven', function (event) {
+          if (CookieInformation.getConsentGivenFor('cookie_cat_statistic')) {
+            (function () {
+              let sz = document.createElement('script');
+              sz.type = 'text/javascript';
+              sz.async = true;
+              sz.src = '//ssl.siteimprove.com/js/siteanalyze_' + key + '.js';
+              let s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(sz, s);
+            })();
+          }
+        }, false);
       }
     }
   };
