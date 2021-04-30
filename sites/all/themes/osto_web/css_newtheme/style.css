@@ -85,6 +85,10 @@ Fullwidth
     padding: 0 1rem;
   }
 
+  .page .menu-name-main-menu .expanded ul{
+    min-width: 300px;
+  }
+
   .page .menu-name-main-menu-wrapper .menu-block-wrapper > ul > li.expanded > a {
     font-weight: bold;
   }
@@ -438,6 +442,7 @@ Footer
 .page .region-footer-second .menu-block-wrapper li.expanded>a,
 .page .region-bottom .block {
   font-size: var(--size-small);
+  line-height: 1.4;
   color: var(--color-black);
 }
 
