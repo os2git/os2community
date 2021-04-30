@@ -62,8 +62,6 @@ body.html a,
 
 .page .region-content-inner {
   background: url(img/colors-small.jpg) no-repeat right -2rem;
-
-
 }
 
 /* -----------------------------------------------------------------------------
@@ -213,6 +211,11 @@ Fullwidth
 
   .page .grid-12.region-content {
     max-width: 100%;
+  }
+
+  .page .container-12 .grid-6 {
+    width: 50%;
+    margin: 0;
   }
 
   /* ---------------------------------------------------------------------------
@@ -430,6 +433,11 @@ Footer
   background: var(--color-gradient);
 }
 
+.page .region-footer-first, .page .region-footer-second {
+  color: var(--color-black);
+}
+
+
 .page .region-footer-first .menu-block-wrapper li.expanded>ul li,
 .page .region-footer-second .menu-block-wrapper li.expanded>ul li {
   line-height: 1;
@@ -441,10 +449,17 @@ Footer
 .page .region-footer-first .menu-block-wrapper li.expanded>a,
 .page .region-footer-second .menu-block-wrapper li.expanded>a,
 .page .region-bottom .block {
-  font-size: var(--size-small);
-  line-height: 1.4;
+  font-size: var(--size-base);
+  line-height: 2;
   color: var(--color-black);
 }
+
+.page .region-footer-first .expanded li.leaf a:hover {
+  background-color: transparent;
+  text-decoration: none;
+  color: var(--color-orange);
+}
+
 
 
 
