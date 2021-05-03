@@ -33,7 +33,6 @@ Fonts
   display: none;
 }
 
-
 /* Body  */
 body.html {
   font-family: var(--font-base);
@@ -238,7 +237,8 @@ Fullwidth
 
   .page ul.tabs li {
     text-transform: none;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    display: block;
   }
 
   .page ul.tabs {
@@ -328,14 +328,49 @@ buttons
 Form
 --------------------------------------------------------------------------- */
 /* Button */
-
-.page .block-ting-products-block-1 .view-footer a,
-.page .node a.link-button {
-  display: inlineblock;
+.page .block-ting-products-block-1 .view-footer a {
+  display: inline-block;
   background-color: var(--color-orange);
   border-radius: 0;
   text-decoration: none;
 }
+/* .page .node a.link-button */
+
+/*
+Shadow for buttons and cards
+clearfix ... is really strange right here
+disable it so the shade function works.
+*/
+.clearfix:after {
+  display: none;
+}
+
+.shade {
+  display: inline-block;
+  padding: 1rem 2rem;
+  position: relative;
+  background: var(--color-white);
+}
+
+.shade:hover {
+}
+
+.shade:after {
+  position: absolute;
+  z-index: -1;
+  top: 10%;
+  left: 10%;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: transparent;
+}
+
+.shade:hover:after {
+  background: url(img/shade.png) no-repeat left center;
+  background-size: cover;
+}
+
 
 .page form input[type=submit], .page form button {
   background-color: var(--color-orange);
@@ -432,6 +467,11 @@ Footer
   border-top: 1px solid var(--color-gray);
   background: var(--color-gradient);
 }
+.page .region-bottom {
+  background: url(img/colors.png) no-repeat left center;
+  background-size: contain;
+}
+
 
 .page .region-footer-first, .page .region-footer-second {
   color: var(--color-black);
@@ -447,8 +487,7 @@ Footer
 .page .region-footer-first .menu-block-wrapper li.expanded>ul li a,
 .page .region-footer-second .menu-block-wrapper li.expanded>ul li a,
 .page .region-footer-first .menu-block-wrapper li.expanded>a,
-.page .region-footer-second .menu-block-wrapper li.expanded>a,
-.page .region-bottom .block {
+.page .region-footer-second .menu-block-wrapper li.expanded>a {
   font-size: var(--size-base);
   line-height: 2;
   color: var(--color-black);
@@ -461,8 +500,6 @@ Footer
 }
 
 
-
-
 .page .region-footer-first .menu-block-wrapper li.expanded>a {
   margin-bottom: 0;
 }
@@ -473,7 +510,8 @@ Footer
   }
 
 /* adress in footer  */
-.page .region-bottom-inner {
-  font-size: var(--size-small);
-  line-height: 1.2;
+.page .region-bottom .block {
+  font-size: var(--size-base);
+  line-height: 1.5;
+  color: var(--color-black);
 }
