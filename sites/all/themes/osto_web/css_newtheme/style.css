@@ -33,6 +33,10 @@ Fonts
   display: none;
 }
 
+#zone-user-wrapper {
+  padding: 30px 0
+}
+
 /* Body  */
 body.html {
   font-family: var(--font-base);
@@ -45,7 +49,7 @@ body.html {
 body.html a,
 .page .profile .field a,
 .page .messages-user .views-row>.message a {
-  color: var(--color-orange);
+  color: var(--color-black);
 }
 
 .page #page-title {
@@ -60,7 +64,7 @@ body.html a,
 }
 
 .page .region-content-inner {
-  background: url(img/colors-small.jpg) no-repeat right -2rem;
+  /* background: url(img/colors-small.jpg) no-repeat right -2rem; */
 }
 
 /* -----------------------------------------------------------------------------
@@ -184,6 +188,10 @@ Fullwidth
   /* ---------------------------------------------------------------------------
   page layout
   --------------------------------------------------------------------------- */
+  .page #zone-menu-wrapper #zone-menu {
+    width: 80%;
+    margin: 0 auto;
+  }
   .page .container-12 {
     width: 80%;
   }
@@ -227,7 +235,7 @@ Fullwidth
 
   /*  tabs sidebar  long live flex  */
   .page .tabs.clearfix {
-    flex: 1 0 20%;
+    flex: 0 0 20%;
   }
 
   .page ul.tabs li a.active {
@@ -264,25 +272,34 @@ Fullwidth
   /* ---------------------------------------------------------------------------
   Sidebar panes
   --------------------------------------------------------------------------- */
+  #panels-ipe-regionid-right {
+    border-left: 1px solid var(--color-gray);
+    padding: 0 1rem;
+  }
 
   .page .panel-right .panel-pane {
-    padding: 2rem;
-    background: var(--color-verdigris);
+    padding: 2rem 1rem;
     line-height: 1.3rem;
+    border-bottom: 1px solid var(--color-orange);
   }
   .page .panel-right .panel-pane .pane-title {
     font-size: var(--size-large);
   }
   .page .panel-right .panel-pane .pane-content a {
-    color: var(--color-black);
-    text-decoration: underline;
+    /* color: var(--color-black); */
+    /* text-decoration: underline; */
   }
   .page .panel-right .panel-pane .pane-content a:hover {
-    color: var(--color-green);
+    /* color: var(--color-green); */
   }
   .page .node-footer {
+    display: flex;
     background: var(--color-verdigris);
     padding: 1rem;
+  }
+
+  .pane-ting-group-members-panel-pane-1 {
+    background: var(--color-verdigris);
   }
 
   /* ---------------------------------------------------------------------------
@@ -334,58 +351,134 @@ Form
   border-radius: 0;
   text-decoration: none;
 }
-/* .page .node a.link-button */
 
+
+/* ---------------------------------------------------------------------------
+Shade Buttons
+--------------------------------------------------------------------------- */
 /*
 Shadow for buttons and cards
-clearfix ... is really strange right here
-disable it so the shade function works.
-*/
-.clearfix:after {
-  display: none;
+warning
+#zone-content-wrapper {
+  padding: 0 0 50px;
+  background: #fff;
 }
+from global css with .clearfix will overwrite this ...
+not fun...
+*/
 
-.shade {
+
+.shade,
+.page a.group,
+.page form input[type=submit],
+.page form button,
+.product-metadata .views-field-field-product-download a {
+  border-radius: 0;
+  border: none;
+  font-size: var(--size-base);
+  width: auto;
   display: inline-block;
   padding: 1rem 2rem;
+  /* margin: 0 1rem; */
   position: relative;
-  background: var(--color-white);
+  clear:inherit;
+  background: var(--color-orange);
+  color:var(--color-white);
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.shade:hover {
+/* secondary */
+.shade-secondary,
+.page .node a.link-button,
+.page a.flag {
+  width: auto;
+  display: inline-block;
+  padding: 1rem 2rem;
+  /* margin: 0 1rem; */
+  position: relative;
+  clear:inherit;
+  text-decoration: none;
+  border-radius: 0;
+  color: var(--color-orange) !important;
+  background: white;
+  border: 1px solid var(--color-orange);
 }
 
-.shade:after {
+.shade:hover,
+.page .node a.link-button:hover,
+.page a.flag:hover,
+.page .btn-link:hover {
+  text-decoration: none;
+}
+
+.shade:after,
+.link-button:after,
+.page a.flag:after,
+.page a.group:after,
+.product-metadata .views-field-field-product-download a:after {
+  clear:inherit;
   position: absolute;
   z-index: -1;
-  top: 10%;
-  left: 10%;
+  top: 15%;
+  left: 5%;
   width: 100%;
   height: 100%;
   content: "";
   background: transparent;
 }
 
-.shade:hover:after {
+.shade:hover:after,
+.link-button:hover:after,
+.page .flag:hover:after,
+.page a.group:hover:after,
+.product-metadata .views-field-field-product-download a:hover:after {
+  background: url(img/shade.png) no-repeat left center;
+  background-size: cover;
+}
+
+/* views list */
+.page .logo-list .views-row {
+  flex: 0 0 20%;
+  transition-duration: 0.5s;
+  transition-property: all;
+  border: 1px solid transparent;
+  margin: 0 5% 5% 0;
+}
+
+.page .logo-list .views-row:after {
+  clear:inherit;
+  position: absolute;
+  z-index: -1;
+  top: 3%;
+  left: 3%;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: transparent;
+}
+
+.page .logo-list .views-row:hover {
+  border: 1px solid var(--color-darkgray);
+}
+
+.page .logo-list .views-row:hover:after {
   background: url(img/shade.png) no-repeat left center;
   background-size: cover;
 }
 
 
-.page form input[type=submit], .page form button {
-  background-color: var(--color-orange);
-  border-radius: 0;
-  text-transform: none;
-}
-
 /* ---------------------------------------------------------------------------
 Node
 --------------------------------------------------------------------------- */
 .page .node a {
-  color: var(--color-orange);
+  color: var(--color-black);
   text-decoration: underline;
 }
 
+.page .node a:hover {
+  color: var(--color-orange);
+}
 .page article.node footer .node-author .author-name a {
   color: var(--color-black);
   text-decoration: underline;
@@ -427,7 +520,7 @@ partners
 
 /* sidebar partner page  */
 .page .region-sidebar-first .block {
-  background: var(--color-verdigris);
+  border-bottom: 1px solid var(--color-orange);
 }
 
 .page .view-ting-product-partners,
@@ -451,12 +544,12 @@ partners
 }
 .page .product-cooperators .item-list ul li a,
 .page .view-ting-product-partners a {
-  display: inline-block;
+  /* display: inline-block;
   font-weight: bold;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--color-orange);
-  color: var(--color-orange);
-  background: var(--color-white);
+  padding: 0.5rem 1rem; */
+  /* border: 1px solid var(--color-orange); */
+  /* color: var(--color-orange); */
+  /* background: var(--color-white); */
 }
 
 
@@ -464,6 +557,7 @@ partners
 Footer
 --------------------------------------------------------------------------- */
 .page #zone-footer-wrapper {
+
   border-top: 1px solid var(--color-gray);
   background: var(--color-gradient);
 }
