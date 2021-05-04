@@ -311,8 +311,7 @@ Fullwidth
 
   /* pager */
   .page .view .pager li {
-    border: 1px solid var(--color-darkgray);
-    padding: 0.6rem 1rem;
+      padding: 0.6rem 1rem;
   }
   .page .view .pager li:hover,
   .page .view .pager li.pager-current {
@@ -633,6 +632,45 @@ Footer
   margin: 0 auto;
   display: block;
 }
+.front .page .container-12 .grid-12.front-videos {
+  width: 50%;
+}
+
+.front .page .container-12 .grid-12.region-postscript-second {
+  width: 70%;
+  float: none;
+  margin: 0 auto;
+  display: block;
+}
+.front .page .container-12 .grid-12.region-postscript-second .views-row {
+  flex: 0 0 32%;
+  margin: 0 1% 1% 0;
+}
+
+.front .page .container-12 .grid-12.region-postscript-second .block-title {
+  text-align: center;
+  color: var(--color-blue);
+}
+
+.page .block-ting-products-block-1 .item-list .pager-next a,
+.page  .block-ting-projects-block-1 .item-list .pager-next a{
+  background: url(img/arrow-right.svg) no-repeat;
+  background-position: center center;
+}
+.page .block-ting-products-block-1 .item-list .pager-previous a,
+.page .block-ting-projects-block-1 .item-list .pager-previous a {
+  background: url(img/arrow-left.svg) no-repeat;
+  background-position: center center;
+}
+
+
+.page .block-ting-products-block-1 .item-list .pager-next,
+.page .block-ting-projects-block-1 .item-list .pager-next,
+.page .block-ting-products-block-1 .item-list .pager-previous,
+.page .block-ting-projects-block-1 .item-list .pager-previous {
+  background: transparent;
+}
+
 
 /* dk kort */
 #zone-postscript-top-wrapper {
