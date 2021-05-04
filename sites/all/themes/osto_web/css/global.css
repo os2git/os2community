@@ -1027,7 +1027,7 @@ article.comment footer .comment-links ul li.comment-reply a {
   box-sizing: border-box;
   margin: 0 1% 40px;
   padding-bottom: 60px;
-  background: #fff;
+  /* background: #fff; */
 }
 .image-filter-list .views-row .title,
 .logo-list .views-row .title {
@@ -4546,7 +4546,7 @@ img {
 #zone-postscript-middle-wrapper {
   padding: 75px 0;
 
-  background: #f2f2f2;
+  /* background: #f2f2f2; */
 }
 #zone-postscript-bottom-wrapper {
   overflow: hidden;

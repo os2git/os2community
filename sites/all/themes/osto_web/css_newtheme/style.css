@@ -311,12 +311,11 @@ Fullwidth
 
   /* pager */
   .page .view .pager li {
-    border: 1px solid var(--color-verdigris-dark);
+    border: 1px solid var(--color-darkgray);
     padding: 0.6rem 1rem;
   }
   .page .view .pager li:hover,
   .page .view .pager li.pager-current {
-    background-color: var(--color-verdigris);
     cursor: pointer;
   }
 
@@ -370,9 +369,11 @@ not fun...
 
 .shade,
 .page a.group,
+.page a.btn-link,
 .page form input[type=submit],
 .page form button,
-.product-metadata .views-field-field-product-download a {
+.product-metadata .views-field-field-product-download a,
+.page .view-ting-sidebar-fact .fact.partner-deal a {
   border-radius: 0;
   border: none;
   font-size: var(--size-base);
@@ -408,15 +409,18 @@ not fun...
 .shade:hover,
 .page .node a.link-button:hover,
 .page a.flag:hover,
-.page .btn-link:hover {
+.page .btn-link:hover,
+.page a.btn-link:hover {
   text-decoration: none;
 }
 
 .shade:after,
 .link-button:after,
+.page a.btn-link:after,
 .page a.flag:after,
 .page a.group:after,
-.product-metadata .views-field-field-product-download a:after {
+.product-metadata .views-field-field-product-download a:after,
+.page .view-ting-sidebar-fact .fact.partner-deal a:after {
   clear:inherit;
   position: absolute;
   z-index: -1;
@@ -430,23 +434,28 @@ not fun...
 
 .shade:hover:after,
 .link-button:hover:after,
+.page a.btn-link:hover:after,
 .page .flag:hover:after,
 .page a.group:hover:after,
-.product-metadata .views-field-field-product-download a:hover:after {
+.product-metadata .views-field-field-product-download a:hover:after,
+.page .view-ting-sidebar-fact .fact.partner-deal a:hover:after {
   background: url(img/shade.png) no-repeat left center;
   background-size: cover;
 }
 
 /* views list */
-.page .logo-list .views-row {
+.page .logo-list .views-row,
+.page .view-id-ting_news .views-row {
   flex: 0 0 20%;
   transition-duration: 0.5s;
   transition-property: all;
   border: 1px solid transparent;
   margin: 0 5% 5% 0;
+  background-color: var(--color-white);
 }
 
-.page .logo-list .views-row:after {
+.page .logo-list .views-row:after,
+.page .view-id-ting_news .views-row:after {
   clear:inherit;
   position: absolute;
   z-index: -1;
@@ -458,11 +467,13 @@ not fun...
   background: transparent;
 }
 
-.page .logo-list .views-row:hover {
+.page .logo-list .views-row:hover,
+.page .view-id-ting_news .views-row:hover {
   border: 1px solid var(--color-darkgray);
 }
 
-.page .logo-list .views-row:hover:after {
+.page .logo-list .views-row:hover:after,
+.page .view-id-ting_news .views-row:hover:after  {
   background: url(img/shade.png) no-repeat left center;
   background-size: cover;
 }
@@ -521,6 +532,8 @@ partners
 /* sidebar partner page  */
 .page .region-sidebar-first .block {
   border-bottom: 1px solid var(--color-orange);
+  padding: 1rem;
+  margin: 1rem;
 }
 
 .page .view-ting-product-partners,
@@ -608,4 +621,54 @@ Footer
   font-size: var(--size-base);
   line-height: 1.5;
   color: var(--color-black);
+}
+
+
+/* Frontpage corrections */
+
+.front .page .container-12 .grid-12.front-videos,
+.front .page .container-12 .grid-12.region-preface-first {
+  width: 80%;
+  float: none;
+  margin: 0 auto;
+  display: block;
+}
+
+/* dk kort */
+#zone-postscript-top-wrapper {
+  background: url(img/colors.png) no-repeat;
+  padding:15rem 0;
+  background-size: contain;
+  background-position: center center;
+}
+
+#zone-postscript-top {
+  overflow: hidden;
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+  height: 20rem;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray);
+  box-shadow:  0px 0px 15px 1px var(--color-verdigris-dark);
+}
+
+#zone-postscript-top .content {
+  display: grid;
+  grid-template-columns:  1fr 4fr;
+}
+
+#zone-postscript-top .image {
+  position: relative;
+}
+
+#zone-postscript-top .text {
+  width: 100%;
+  float:none;
+  font-size: var(--size-xl)
+}
+
+#zone-postscript-top .stats {
+  grid-column-start: 2;
+    width: 100%;
 }
