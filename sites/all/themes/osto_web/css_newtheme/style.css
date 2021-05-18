@@ -1,7 +1,12 @@
 /* -----------------------------------------------------------------------------
 Fonts
 ----------------------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap'); */
 
 /* Variables */
 :root {
@@ -16,35 +21,54 @@ Fonts
   --color-blue: #3B6FB6;
   --color-gradient: linear-gradient(180deg, #FFFFFF 0%, #F5FFFF 27.17%, #F5FFFF 65.9%, #FFFFFF 101.82%);
 
-  --size-small:   0.75rem;
+  --size-small:   0.8rem;
   --size-base:    1rem;
   --size-large:   1.2rem;
   --size-xl:      1.5rem;
   --size-xxl:     3.125rem;
 
-  --font-base: Montserrat;
-
+  --font-base: "Open Sans";
+  --font-header: Montserrat;
   --weight-regular: 400;
+}
+
+/* dragons-dirty tricks */
+#zone-header-wrapper {
+  display: none;
+}
+
+#zone-user-wrapper {
+  padding: 30px 0
 }
 
 /* Body  */
 body.html {
   font-family: var(--font-base);
-  font-weight: var(--weight-regular);
   font-size: var(--size-base);
+  font-style: normal;
+  line-height: 1.5;
 }
 
 /* links  */
 body.html a,
 .page .profile .field a,
 .page .messages-user .views-row>.message a {
-  color: var(--color-orange);
+  color: var(--color-black);
 }
 
 .page #page-title {
-  font-family: (var-font-base);
+  font-family: var(--font-header);
   font-size: var(--size-xxl);
   font-weight: var(weight-regular);
+}
+
+.page em,
+.page i{
+  font-style: normal;
+}
+
+.page .region-content-inner {
+  /* background: url(img/colors-small.jpg) no-repeat right -2rem; */
 }
 
 /* -----------------------------------------------------------------------------
@@ -61,10 +85,19 @@ Fullwidth
 
   .page .menu-name-main-menu-wrapper li a:visited,
   .page .menu-name-main-menu-wrapper li a:link {
-    font-size: 0.75rem;
+    font-size: var(--size-base);
     color: var(--color-black);
     padding: 0 1rem;
   }
+
+  .page .menu-name-main-menu .expanded ul{
+    min-width: 300px;
+  }
+
+  .page .menu-name-main-menu-wrapper .menu-block-wrapper > ul > li.expanded > a {
+    font-weight: bold;
+  }
+
 
   /* menu dropdown */
   .page .menu-name-main-menu-wrapper .menu-block-wrapper > ul > li.expanded > a:after {
@@ -121,25 +154,6 @@ Fullwidth
     color: var(--color-orange);
   }
 
-  /* ---------------------------------------------------------------------------
-   Top image
-  --------------------------------------------------------------------------- */
-  .html.front #flexslider-1.flexslider,
-  .page #zone-header-wrapper {
-    height: 400px;
-  }
-
-  .page .region-header-first .block .field-item,
-  .page .region-header-second .block .field-item {
-    background-color: var(--color-black);
-  }
-
-  .page .region-header-first .block h3,
-  .page .region-header-first .block .field-name-field-header-subtitle, .region-header-second .block h3,
-  .page .region-header-second .block .field-name-field-header-subtitle {
-    color: var(--color-orange);
-  }
-
   /* front slider */
 
   .html.front #flexslider-1.flexslider .views-field-nothing .item-list ul {
@@ -152,6 +166,15 @@ Fullwidth
     background-color: var(--color-orange);
     border-radius: 0;
     border: none;
+  }
+
+  .html.front .page .latest-activity .date {
+    font-style: normal;
+
+  }
+
+  .page .view-ting-communiy-latest-activity {
+
   }
 
   /* ---------------------------------------------------------------------------
@@ -169,6 +192,10 @@ Fullwidth
   /* ---------------------------------------------------------------------------
   page layout
   --------------------------------------------------------------------------- */
+  .page #zone-menu-wrapper #zone-menu {
+    width: 80%;
+    margin: 0 auto;
+  }
   .page .container-12 {
     width: 80%;
   }
@@ -197,6 +224,11 @@ Fullwidth
     max-width: 100%;
   }
 
+  .page .container-12 .grid-6 {
+    width: 50%;
+    margin: 0;
+  }
+
   /* ---------------------------------------------------------------------------
   Tabs aka left sidebar
   --------------------------------------------------------------------------- */
@@ -207,7 +239,7 @@ Fullwidth
 
   /*  tabs sidebar  long live flex  */
   .page .tabs.clearfix {
-    flex: 1 0 20%;
+    flex: 0 0 20%;
   }
 
   .page ul.tabs li a.active {
@@ -217,7 +249,8 @@ Fullwidth
 
   .page ul.tabs li {
     text-transform: none;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    display: block;
   }
 
   .page ul.tabs {
@@ -229,7 +262,7 @@ Fullwidth
     display: block;
     position: relative;
     padding-left: 4rem;
-    font-size: var(--size-small);
+    font-size: var(--size-bas);
   }
 
   .page ul.tabs li a:after {
@@ -243,25 +276,34 @@ Fullwidth
   /* ---------------------------------------------------------------------------
   Sidebar panes
   --------------------------------------------------------------------------- */
+  #panels-ipe-regionid-right {
+    border-left: 1px solid var(--color-gray);
+    padding: 0 1rem;
+  }
 
   .page .panel-right .panel-pane {
-    padding: 2rem;
-    background: var(--color-verdigris);
+    padding: 2rem 1rem;
     line-height: 1.3rem;
+    border-bottom: 1px solid var(--color-orange);
   }
   .page .panel-right .panel-pane .pane-title {
     font-size: var(--size-large);
   }
   .page .panel-right .panel-pane .pane-content a {
-    color: var(--color-black);
-    text-decoration: underline;
+    /* color: var(--color-black); */
+    /* text-decoration: underline; */
   }
   .page .panel-right .panel-pane .pane-content a:hover {
-    color: var(--color-green);
+    /* color: var(--color-green); */
   }
   .page .node-footer {
+    display: flex;
     background: var(--color-verdigris);
     padding: 1rem;
+  }
+
+  .pane-ting-group-members-panel-pane-1 {
+    background: var(--color-verdigris);
   }
 
   /* ---------------------------------------------------------------------------
@@ -273,12 +315,10 @@ Fullwidth
 
   /* pager */
   .page .view .pager li {
-    border: 1px solid var(--color-verdigris-dark);
-    padding: 0.6rem 1rem;
+      padding: 0.6rem 1rem;
   }
   .page .view .pager li:hover,
   .page .view .pager li.pager-current {
-    background-color: var(--color-verdigris);
     cursor: pointer;
   }
 
@@ -307,29 +347,152 @@ buttons
 Form
 --------------------------------------------------------------------------- */
 /* Button */
-
-.page .block-ting-products-block-1 .view-footer a,
-.page .node a.link-button {
-  display: inlineblock;
+.page .block-ting-products-block-1 .view-footer a {
+  display: inline-block;
   background-color: var(--color-orange);
   border-radius: 0;
   text-decoration: none;
 }
 
-.page form input[type=submit], .page form button {
-  background-color: var(--color-orange);
-  border-radius: 0;
-  text-transform: none;
+
+/* ---------------------------------------------------------------------------
+Shade Buttons
+--------------------------------------------------------------------------- */
+/*
+Shadow for buttons and cards
+warning
+#zone-content-wrapper {
+  padding: 0 0 50px;
+  background: #fff;
 }
+from global css with .clearfix will overwrite this ...
+not fun...
+*/
+
+
+.shade,
+.page a.group,
+.page a.btn-link,
+.page form input[type=submit],
+.page form button,
+.product-metadata .views-field-field-product-download a,
+.page .view-ting-sidebar-fact .fact.partner-deal a {
+  border-radius: 0;
+  border: none;
+  font-size: var(--size-base);
+  width: auto;
+  display: inline-block;
+  padding: 1rem 2rem;
+  /* margin: 0 1rem; */
+  position: relative;
+  clear:inherit;
+  background: var(--color-orange);
+  color:var(--color-white);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* secondary */
+.shade-secondary,
+.page .node a.link-button,
+.page a.flag {
+  width: auto;
+  display: inline-block;
+  padding: 1rem 2rem;
+  /* margin: 0 1rem; */
+  position: relative;
+  clear:inherit;
+  text-decoration: none;
+  border-radius: 0;
+  color: var(--color-orange) !important;
+  background: white;
+  border: 1px solid var(--color-orange);
+}
+
+.shade:hover,
+.page .node a.link-button:hover,
+.page a.flag:hover,
+.page .btn-link:hover,
+.page a.btn-link:hover {
+  text-decoration: none;
+}
+
+.shade:after,
+.link-button:after,
+.page a.btn-link:after,
+.page a.flag:after,
+.page a.group:after,
+.product-metadata .views-field-field-product-download a:after,
+.page .view-ting-sidebar-fact .fact.partner-deal a:after {
+  clear:inherit;
+  position: absolute;
+  z-index: -1;
+  top: 15%;
+  left: 5%;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: transparent;
+}
+
+.shade:hover:after,
+.link-button:hover:after,
+.page a.btn-link:hover:after,
+.page .flag:hover:after,
+.page a.group:hover:after,
+.product-metadata .views-field-field-product-download a:hover:after,
+.page .view-ting-sidebar-fact .fact.partner-deal a:hover:after {
+  background: url(img/shade.png) no-repeat left center;
+  background-size: cover;
+}
+
+/* views list */
+.page .logo-list .views-row,
+.page .view-id-ting_news .views-row {
+  flex: 0 0 20%;
+  transition-duration: 0.5s;
+  transition-property: all;
+  border: 1px solid transparent;
+  margin: 0 5% 5% 0;
+  background-color: var(--color-white);
+}
+
+.page .logo-list .views-row:after,
+.page .view-id-ting_news .views-row:after {
+  clear:inherit;
+  position: absolute;
+  z-index: -1;
+  top: 3%;
+  left: 3%;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: transparent;
+}
+
+.page .logo-list .views-row:hover,
+.page .view-id-ting_news .views-row:hover {
+  border: 1px solid var(--color-darkgray);
+}
+
+.page .logo-list .views-row:hover:after,
+.page .view-id-ting_news .views-row:hover:after  {
+  background: url(img/shade.png) no-repeat left center;
+  background-size: cover;
+}
+
 
 /* ---------------------------------------------------------------------------
 Node
 --------------------------------------------------------------------------- */
 .page .node a {
-  color: var(--color-orange);
+  color: var(--color-black);
   text-decoration: underline;
 }
 
+.page .node a:hover {
+  color: var(--color-orange);
+}
 .page article.node footer .node-author .author-name a {
   color: var(--color-black);
   text-decoration: underline;
@@ -371,7 +534,9 @@ partners
 
 /* sidebar partner page  */
 .page .region-sidebar-first .block {
-  background: var(--color-verdigris);
+  border-bottom: 1px solid var(--color-orange);
+  padding: 1rem;
+  margin: 1rem;
 }
 
 .page .view-ting-product-partners,
@@ -395,12 +560,12 @@ partners
 }
 .page .product-cooperators .item-list ul li a,
 .page .view-ting-product-partners a {
-  display: inline-block;
+  /* display: inline-block;
   font-weight: bold;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--color-orange);
-  color: var(--color-orange);
-  background: var(--color-white);
+  padding: 0.5rem 1rem; */
+  /* border: 1px solid var(--color-orange); */
+  /* color: var(--color-orange); */
+  /* background: var(--color-white); */
 }
 
 
@@ -408,19 +573,144 @@ partners
 Footer
 --------------------------------------------------------------------------- */
 .page #zone-footer-wrapper {
+
   border-top: 1px solid var(--color-gray);
   background: var(--color-gradient);
 }
-.page .region-footer-first .menu-block-wrapper li.expanded>ul li a,
-.page .region-footer-second .menu-block-wrapper li.expanded>ul li a,
-.page .region-footer-first .menu-block-wrapper li.expanded>a,
-.page .region-footer-second .menu-block-wrapper li.expanded>a,
-.page .region-bottom .block {
-  font-size: var(--size-small);
+.page .region-bottom {
+  background: url(img/colors.png) no-repeat left center;
+  background-size: contain;
+}
+
+
+.page .region-footer-first, .page .region-footer-second {
   color: var(--color-black);
 }
 
-.page .region-footer-first,
-.page .region-footer-second {
+
+.page .region-footer-first .menu-block-wrapper li.expanded>ul li,
+.page .region-footer-second .menu-block-wrapper li.expanded>ul li {
+  line-height: 1;
+  margin-bottom: 0
+}
+
+.page .region-footer-first .menu-block-wrapper li.expanded>ul li a,
+.page .region-footer-second .menu-block-wrapper li.expanded>ul li a,
+.page .region-footer-first .menu-block-wrapper li.expanded>a,
+.page .region-footer-second .menu-block-wrapper li.expanded>a {
+  font-size: var(--size-base);
+  line-height: 2;
   color: var(--color-black);
+}
+
+.page .region-footer-first .expanded li.leaf a:hover {
+  background-color: transparent;
+  text-decoration: none;
+  color: var(--color-orange);
+}
+
+
+.page .region-footer-first .menu-block-wrapper li.expanded>a {
+  margin-bottom: 0;
+}
+
+.page .region-footer-first .menu-block-wrapper > .menu > li > a {
+  font-family: var(--font-header);
+  font-weight: 600;
+  }
+
+/* adress in footer  */
+.page .region-bottom .block {
+  font-size: var(--size-base);
+  line-height: 1.5;
+  color: var(--color-black);
+}
+
+
+/* Frontpage corrections */
+
+.front .page .container-12 .grid-12.front-videos,
+.front .page .container-12 .grid-12.region-preface-first {
+  width: 80%;
+  float: none;
+  margin: 0 auto;
+  display: block;
+}
+.front .page .container-12 .grid-12.front-videos {
+  width: 50%;
+}
+
+.front .page .container-12 .grid-12.region-postscript-second {
+  width: 70%;
+  float: none;
+  margin: 0 auto;
+  display: block;
+}
+.front .page .container-12 .grid-12.region-postscript-second .views-row {
+  flex: 0 0 32%;
+  margin: 0 1% 1% 0;
+}
+
+.front .page .container-12 .grid-12.region-postscript-second .block-title {
+  text-align: center;
+  color: var(--color-blue);
+}
+
+.page .block-ting-products-block-1 .item-list .pager-next a,
+.page  .block-ting-projects-block-1 .item-list .pager-next a{
+  background: url(img/arrow-right.svg) no-repeat;
+  background-position: center center;
+}
+.page .block-ting-products-block-1 .item-list .pager-previous a,
+.page .block-ting-projects-block-1 .item-list .pager-previous a {
+  background: url(img/arrow-left.svg) no-repeat;
+  background-position: center center;
+}
+
+
+.page .block-ting-products-block-1 .item-list .pager-next,
+.page .block-ting-projects-block-1 .item-list .pager-next,
+.page .block-ting-products-block-1 .item-list .pager-previous,
+.page .block-ting-projects-block-1 .item-list .pager-previous {
+  background: transparent;
+}
+
+
+/* dk kort */
+#zone-postscript-top-wrapper {
+  background: url(img/colors.png) no-repeat;
+  padding:15rem 0;
+  background-size: contain;
+  background-position: center center;
+}
+
+#zone-postscript-top {
+  overflow: hidden;
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+  height: 20rem;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray);
+  box-shadow:  0px 0px 15px 1px var(--color-verdigris-dark);
+}
+
+#zone-postscript-top .content {
+  display: grid;
+  grid-template-columns:  1fr 4fr;
+}
+
+#zone-postscript-top .image {
+  position: relative;
+}
+
+#zone-postscript-top .text {
+  width: 100%;
+  float:none;
+  font-size: var(--size-xl)
+}
+
+#zone-postscript-top .stats {
+  grid-column-start: 2;
+    width: 100%;
 }
