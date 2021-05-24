@@ -639,11 +639,11 @@ Footer
   display: block;
 }
 .front .page .container-12 .grid-12.front-videos {
-  width: 50%;
+  width: 80%;
 }
 
 .front .page .container-12 .grid-12.region-postscript-second {
-  width: 70%;
+  width: 100%;
   float: none;
   margin: 0 auto;
   display: block;
@@ -688,7 +688,7 @@ Footer
 
 #zone-postscript-top {
   overflow: hidden;
-  width: 50%;
+  width: 80%;
   display: block;
   margin: 0 auto;
   height: 20rem;
@@ -696,6 +696,8 @@ Footer
   border: 1px solid var(--color-gray);
   box-shadow:  0px 0px 15px 1px var(--color-verdigris-dark);
 }
+
+
 
 #zone-postscript-top .content {
   display: grid;
