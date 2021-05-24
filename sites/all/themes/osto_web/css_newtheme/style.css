@@ -98,6 +98,9 @@ Fullwidth
     font-weight: bold;
   }
 
+  .page .menu-name-main-menu > ul > li {
+    margin: 0 1.5%;
+  }
 
   /* menu dropdown */
   .page .menu-name-main-menu-wrapper .menu-block-wrapper > ul > li.expanded > a:after {
@@ -193,7 +196,7 @@ Fullwidth
   page layout
   --------------------------------------------------------------------------- */
   .page #zone-menu-wrapper #zone-menu {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
   }
   .page .container-12 {
@@ -326,7 +329,6 @@ Fullwidth
   .page .region-sidebar-first .views-row {
 
   }
-
 
 }
 /* min-width: 1024px */
