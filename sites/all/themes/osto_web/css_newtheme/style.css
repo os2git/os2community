@@ -53,6 +53,8 @@ body.html .page {
   font-size: var(--size-base);
 }
 
+
+
 /* links  */
 body.html a,
 .page .profile .field a,
@@ -68,7 +70,7 @@ body.html a,
 
 .page em,
 .page i{
-  font-style: normal;
+  font-style: italic;
 }
 
 .page .region-content-inner {
