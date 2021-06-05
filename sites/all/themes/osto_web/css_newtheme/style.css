@@ -226,7 +226,7 @@ Fullwidth
   }
 
   .page #zone-title-wrapper {
-    padding: 0
+    padding: 1rem 0;
   }
 
   .page .grid-12.region-content {
