@@ -42,11 +42,15 @@ Fonts
 }
 
 /* Body  */
-body.html {
+body.html .page {
   font-family: var(--font-base);
   font-size: var(--size-base);
   font-style: normal;
   line-height: 1.5;
+}
+
+.page article.node p {
+  font-size: var(--size-base);
 }
 
 /* links  */
